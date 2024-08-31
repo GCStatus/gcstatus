@@ -3,6 +3,8 @@ import { Outlet } from 'react-router-dom'
 
 import { Footer, Header } from '@/components'
 
+import { ScrollToTop } from './modules'
+
 function DefaultLayout() {
   const array: string[] = []
 
@@ -19,6 +21,7 @@ function DefaultLayout() {
       <Box component="main">
         <Outlet />
       </Box>
+      <ScrollToTop />
       <Footer />
     </Box>
   )

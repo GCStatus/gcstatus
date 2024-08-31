@@ -13,7 +13,8 @@
   - [x] Configure ESLint and Prettier for code quality and consistency
   - [x] Install Material UI for UI components
 - [x] Basic UI layout
-  - [ ] Replace all tags by mui
+  - [x] Replace all tags by mui
+  - [x] Add a scroll to top button
   - [x] Implement header, footer, and navigation components
     - [x] Header
     - [x] Navbar
