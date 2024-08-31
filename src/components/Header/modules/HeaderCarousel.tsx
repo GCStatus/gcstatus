@@ -14,9 +14,7 @@ function HeaderCarousel(props: HeaderCarouselProps) {
     <Carousel
       autoPlay
       infiniteLoop
-      showThumbs={false}
       showStatus={false}
-      showIndicators={false}
       className="h-screen carousel"
       interval={4000}
       transitionTime={800}

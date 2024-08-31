@@ -50,7 +50,7 @@
   - [ ] Set up end-to-end testing with Cypress or Playwright
   - [ ] Perform accessibility testing
 - [ ] Deployment
-  - [ ] Configure Netlify for continuous deployment
+  - [x] Configure Netlify for continuous deployment
   - [ ] Set up custom domain and SSL certificate
   - [ ] Optimize performance for production build
 - [ ] Documentation

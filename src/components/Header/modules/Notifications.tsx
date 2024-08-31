@@ -44,7 +44,7 @@ function Notifications(props: NotificationsProps) {
       <Backdrop open={open} toggleBackdrop={toggleNotification} />
 
       <Box
-        className={`fixed top-0 right-0 h-full md:w-1/3 w-full bg-zinc-900 shadow-lg z-50 transform transition-transform duration-300 opacity-90 p-8 ${
+        className={`fixed top-0 right-0 h-full md:w-1/3 w-full bg-zinc-900 shadow-lg z-50 transform transition-transform duration-300 opacity-90 p-8 overflow-auto ${
           open ? 'translate-x-0' : 'translate-x-full'
         }`}>
         <Box className="flex items-center justify-between">

@@ -2,7 +2,7 @@ import { Box, IconButton, Link, Stack } from '@mui/material'
 import { Fragment, useEffect, useState } from 'react'
 import { IoClose, IoMenu, IoSearch } from 'react-icons/io5'
 
-import { Backdrop } from '@/components'
+import { Backdrop, Logo } from '@/components'
 import { Notification } from '@/types'
 
 import { Notifications } from '.'
@@ -45,7 +45,7 @@ function Navbar(props: NavbarProps) {
         }`}>
         <Box className="container mx-auto px-4 py-8 flex items-center justify-between">
           <Link href="/" className="text-white text-2xl font-bold">
-            GCStatus
+            <Logo />
           </Link>
 
           <Box className="hidden md:flex items-center relative w-full max-w-[40rem]">
@@ -77,7 +77,7 @@ function Navbar(props: NavbarProps) {
           <Link
             href="/"
             className="focus:outline-none text-2xl font-semibold leading-6 text-gray-300">
-            GCStatus
+            <Logo height="40" />
           </Link>
           <IconButton onClick={toggleMenu}>
             <IoClose className="text-gray-400" />
