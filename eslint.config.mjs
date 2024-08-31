@@ -112,7 +112,7 @@ export default [
       '@typescript-eslint/explicit-function-return-type': 'off',
       'simple-import-sort/imports': 'error',
       'linebreak-style': ['error', 'unix'],
-      quotes: ['error', 'single'],
+      quotes: ['error', 'single', { avoidEscape: true }],
       semi: ['error', 'never'],
     },
   },

@@ -1,13 +1,13 @@
-import { useDispatch } from 'react-redux'
-
-import { useSidebar } from '@/hooks'
-import { toggle } from '@/store/sidebarSlice'
 import {
   FormControl,
   FormControlLabel,
   FormGroup,
   Switch,
 } from '@mui/material'
+import { useDispatch } from 'react-redux'
+
+import { useSidebar } from '@/hooks'
+import { toggle } from '@/store/sidebarSlice'
 
 function SwitchSidebar() {
   const enabled = useSidebar()

@@ -1,11 +1,4 @@
-import {
-  Badge,
-  IconButton,
-  Typography,
-  Box,
-  Chip,
-  Stack,
-} from '@mui/material'
+import { Box, Chip, IconButton, Stack, Typography } from '@mui/material'
 import { IoHeartOutline, IoNotificationsOutline } from 'react-icons/io5'
 
 interface GameCardProps {

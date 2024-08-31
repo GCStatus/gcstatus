@@ -1,10 +1,4 @@
 import {
-  IoLogoGithub,
-  IoLogoLinkedin,
-  IoLogoWhatsapp,
-  IoPlayCircleOutline,
-} from 'react-icons/io5'
-import {
   Box,
   Divider,
   Grid2,
@@ -13,6 +7,12 @@ import {
   Stack,
   Typography,
 } from '@mui/material'
+import {
+  IoLogoGithub,
+  IoLogoLinkedin,
+  IoLogoWhatsapp,
+  IoPlayCircleOutline,
+} from 'react-icons/io5'
 
 import { Logo } from '..'
 

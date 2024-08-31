@@ -1,6 +1,5 @@
-import { useState, useEffect } from 'react'
 import { Fab } from '@mui/material'
-import { IoArrowUp } from 'react-icons/io5'
+import { useEffect, useState } from 'react'
 import { MdKeyboardDoubleArrowUp } from 'react-icons/md'
 
 function ScrollToTop() {

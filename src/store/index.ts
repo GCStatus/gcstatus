@@ -5,10 +5,10 @@ import { setupListeners } from '@reduxjs/toolkit/query/react'
 import api from '@/services/api'
 import { rtkQueryErrorLogger } from '@/services/lib/error'
 
+import account from './accountSlice'
+import sidebar from './sidebarSlice'
 // Slices
 import theme from './themeSlice'
-import sidebar from './sidebarSlice'
-import account from './accountSlice'
 
 const store = configureStore({
   reducer: {

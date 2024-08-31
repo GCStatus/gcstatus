@@ -1,8 +1,8 @@
 import { Box } from '@mui/material'
 import { Outlet } from 'react-router-dom'
 
-import { useSidebar } from '@/hooks'
 import { Footer, Header } from '@/components'
+import { useSidebar } from '@/hooks'
 
 import { ScrollToTop, Sidebar } from './modules'
 
