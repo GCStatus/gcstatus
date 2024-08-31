@@ -1,5 +1,18 @@
-import { IoPlayCircleOutline } from 'react-icons/io5'
-import { Box, Divider, Link, Stack, Typography } from '@mui/material'
+import {
+  IoLogoGithub,
+  IoLogoLinkedin,
+  IoLogoWhatsapp,
+  IoPlayCircleOutline,
+} from 'react-icons/io5'
+import {
+  Box,
+  Divider,
+  Grid2,
+  IconButton,
+  Link,
+  Stack,
+  Typography,
+} from '@mui/material'
 
 import { Logo } from '..'
 
@@ -29,6 +42,24 @@ function Footer() {
               Lorem ipsum
             </button>
           </Box>
+
+          <Grid2 spacing={1} className="mt-4">
+            <IconButton
+              href="https://github.com/felipebrsk/"
+              target="_blank"
+              className="animate-pulse">
+              <IoLogoGithub />
+            </IconButton>
+            <IconButton
+              href="https://linkedin.com/in/felipe-luz-oliveira/"
+              target="_blank"
+              className="animate-pulse">
+              <IoLogoLinkedin />
+            </IconButton>
+            <IconButton href="#" target="_blank" className="animate-pulse">
+              <IoLogoWhatsapp />
+            </IconButton>
+          </Grid2>
         </Box>
 
         <Divider className="my-8 border-gray-200 dark:border-gray-700" />
@@ -36,11 +67,11 @@ function Footer() {
         <Box className="flex flex-col items-center sm:flex-row sm:justify-between">
           <Typography
             variant="subtitle1"
-            className="text-sm text-gray-500">
+            className="text-sm text-gray-500 sm:text-left text-center">
             © Copyright 2024. All Rights Reserved.
           </Typography>
 
-          <Box className="flex mt-3 -mx-2 sm:mt-0">
+          <Box className="flex mt-3 -mx-2 sm:mt-0 sm:flex-row flex-col sm:text-left text-center">
             <Link
               href="#"
               className="mx-2 text-sm text-gray-500 transition-colors duration-300 hover:text-gray-500 dark:hover:text-gray-300">

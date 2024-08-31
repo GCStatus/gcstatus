@@ -44,15 +44,15 @@ function Notifications(props: NotificationsProps) {
       <Backdrop open={open} toggleBackdrop={toggleNotification} />
 
       <Box
-        className={`fixed top-0 right-0 h-full md:w-1/3 w-full bg-zinc-900 shadow-lg z-50 transform transition-transform duration-300 opacity-90 p-8 overflow-auto ${
+        className={`fixed top-0 right-0 h-full md:w-1/3 w-full dark:bg-zinc-900 bg-white shadow-lg z-50 transform transition-transform duration-300 opacity-90 p-8 overflow-auto ${
           open ? 'translate-x-0' : 'translate-x-full'
         }`}>
         <Box className="flex items-center justify-between">
-          <Typography className="text-2xl font-semibold leading-6 text-gray-300">
+          <Typography className="text-2xl font-semibold leading-6 dark:text-gray-300 text-gray-800">
             Notifications
           </Typography>
           <IconButton onClick={toggleNotification}>
-            <IoClose className="text-gray-400" />
+            <IoClose className="dark:text-gray-400 text-gray-600" />
           </IconButton>
         </Box>
 
@@ -60,17 +60,17 @@ function Notifications(props: NotificationsProps) {
           <Box key={date.toISOString()}>
             <Typography
               component="h2"
-              className="text-sm leading-normal pt-8 border-b pb-2 border-gray-600 text-gray-300">
+              className="text-sm leading-normal pt-8 border-b pb-2 dark:border-gray-600 border-gray-800 dark:text-gray-300 text-gray-900">
               {f(date, new Date())}
             </Typography>
             {notifications.map((notification) => (
               <Box
-                className="w-full p-4 mt-4 bg-theme-dark-900 rounded flex items-center"
+                className="w-full p-4 mt-4 dark:bg-theme-dark-900 bg-gray-100 rounded flex items-center"
                 key={notification.id}>
-                <Box className="focus:outline-none w-8 h-8 border rounded-full border-gray-200 flex items-center flex-shrink-0 justify-center">
+                <Box className="focus:outline-none w-8 h-8 border rounded-full dark:border-gray-200 border-gray-700 flex items-center flex-shrink-0 justify-center">
                   <Icon
                     name={notification.icon as keyof typeof Icons}
-                    className="text-gray-400"
+                    className="dark:text-gray-400 text-gray-900"
                   />
                 </Box>
                 <Box className="pl-3 w-full flex items-center justify-between">
@@ -80,19 +80,19 @@ function Notifications(props: NotificationsProps) {
                     <Tooltip title={notification.title}>
                       <Link
                         href={notification.actionUrl}
-                        className="text-gray-300 hover:text-yellow-400 transition-colors duration-300 hover:animate-pulse">
+                        className="dark:text-gray-300 text-gray-900 hover:text-yellow-400 transition-colors duration-300 hover:animate-pulse">
                         {s(notification.title, 80)}
                       </Link>
                     </Tooltip>
                     <Typography
                       variant="subtitle2"
                       component="span"
-                      className="text-gray-400 text-xs">
+                      className="dark:text-gray-400 text-gray-600 text-xs">
                       {formatRelative(notification.created_at, new Date())}
                     </Typography>
                   </Box>
                   <IconButton>
-                    <IoClose className="text-gray-400" />
+                    <IoClose className="dark:text-gray-400 text-gray-600" />
                   </IconButton>
                 </Box>
               </Box>
