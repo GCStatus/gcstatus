@@ -2,7 +2,7 @@ import { Box, IconButton, Link, Stack } from '@mui/material'
 import { Fragment, useEffect, useState } from 'react'
 import { IoClose, IoMenu, IoSearch } from 'react-icons/io5'
 
-import { Backdrop, Logo } from '@/components'
+import { Backdrop, Logo, SwitchTheme } from '@/components'
 import { Notification } from '@/types'
 
 import { Notifications } from '.'
@@ -70,25 +70,27 @@ function Navbar(props: NavbarProps) {
       </Box>
 
       <Stack
-        className={`fixed top-0 right-0 h-full md:w-1/3 w-full bg-zinc-900 shadow-lg z-50 transform transition-transform duration-300 opacity-90 p-8 ${
+        className={`fixed top-0 right-0 h-full md:w-1/3 w-full dark:bg-zinc-900 bg-white shadow-lg z-50 transform transition-transform duration-300 opacity-90 p-8 ${
           open ? 'translate-x-0' : 'translate-x-full'
         }`}>
         <Box className="flex items-center justify-between">
           <Link
             href="/"
-            className="focus:outline-none text-2xl font-semibold leading-6 text-gray-300">
-            <Logo height="40" />
+            className="focus:outline-none text-2xl font-semibold leading-6 dark:text-gray-300 text-gray-800">
+            <Logo height="max-h-12" />
           </Link>
           <IconButton onClick={toggleMenu}>
-            <IoClose className="text-gray-400" />
+            <IoClose className="dark:text-gray-400 text-gray-800" />
           </IconButton>
         </Box>
 
-        <Stack className="text-white py-6" spacing={0.5}>
+        <Stack
+          className="dark:text-white text-gray-800 py-6"
+          spacing={0.5}>
           <Box className="hidden md:flex items-center relative w-full mb-3">
             <input
               type="text"
-              className="w-full p-2 px-4 border-2 border-zinc-600 bg-transparent text-white rounded-full focus:outline-none focus:ring-2 focus:ring-yellow-500 transition-all outline-none duration-300"
+              className="w-full p-2 px-4 border-2 dark:border-zinc-600 border-zinc-900 bg-transparent dark:text-white text-black rounded-full focus:outline-none focus:ring-2 focus:ring-yellow-500 transition-all outline-none duration-300"
               placeholder="Search..."
             />
             <IconButton className="absolute right-2">
@@ -97,24 +99,25 @@ function Navbar(props: NavbarProps) {
           </Box>
           <Link
             href="#"
-            className="block py-2 px-4 hover:bg-zinc-800 rounded-lg transition duration-200">
+            className="block py-2 px-4 dark:hover:bg-zinc-800 hover:bg-gray-100 rounded-lg transition duration-200 dark:text-gray-300 text-zinc-800">
             Home
           </Link>
           <Link
             href="#"
-            className="block py-2 px-4 hover:bg-zinc-800 rounded-lg transition duration-200">
+            className="block py-2 px-4 dark:hover:bg-zinc-800 hover:bg-gray-100 rounded-lg transition duration-200 dark:text-gray-300 text-zinc-800">
             Profile
           </Link>
           <Link
             href="#"
-            className="block py-2 px-4 hover:bg-zinc-800 rounded-lg transition duration-200">
+            className="block py-2 px-4 dark:hover:bg-zinc-800 hover:bg-gray-100 rounded-lg transition duration-200 dark:text-gray-300 text-zinc-800">
             Settings
           </Link>
           <Link
             href="#"
-            className="block py-2 px-4 hover:bg-zinc-800 rounded-lg transition duration-200">
+            className="block py-2 px-4 dark:hover:bg-zinc-800 hover:bg-gray-100 rounded-lg transition duration-200 dark:text-gray-300 text-zinc-800">
             Logout
           </Link>
+          <SwitchTheme />
         </Stack>
       </Stack>
 

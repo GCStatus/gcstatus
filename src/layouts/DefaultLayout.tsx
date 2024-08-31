@@ -1,4 +1,7 @@
-import { Header } from '@/components'
+import { Box } from '@mui/material'
+import { Outlet } from 'react-router-dom'
+
+import { Footer, Header } from '@/components'
 
 function DefaultLayout() {
   const array: string[] = []
@@ -8,12 +11,16 @@ function DefaultLayout() {
   }
 
   return (
-    <>
+    <Box>
       <Header />
       {array.map((string, i) => (
         <p key={i}>{string}</p>
       ))}
-    </>
+      <Box component="main">
+        <Outlet />
+      </Box>
+      <Footer />
+    </Box>
   )
 }
 

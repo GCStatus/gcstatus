@@ -14,10 +14,10 @@
   - [x] Install Material UI for UI components
 - [x] Basic UI layout
   - [ ] Replace all tags by mui
-  - [ ] Implement header, footer, and navigation components
+  - [x] Implement header, footer, and navigation components
     - [x] Header
     - [x] Navbar
-    - [ ] Footer
+    - [x] Footer
   - [x] Set up routing with React Router
   - [ ] Create a homepage with a basic layout
 - [ ] Game news and reviews section
@@ -41,7 +41,7 @@
 ### Post-MVP
 
 - [ ] Advanced features
-  - [ ] Add dark mode toggle
+  - [x] Add dark mode toggle
   - [ ] Implement game recommendations based on user activity
   - [ ] Create a personalized dashboard for logged-in users
   - [ ] Integrate a game release calendar

@@ -5,13 +5,18 @@ interface LogoProps {
 }
 
 function Logo(props: LogoProps) {
-  const { width = '200', height = '60', color = 'fill-gray-400' } = props
+  const {
+    width = 'max-w-48 w-full',
+    height = 'max-h-14 h-full',
+    color = 'fill-gray-400',
+  } = props
+
+  const classes = `${width} ${height}`
 
   return (
     <svg
-      width={width}
-      height={height}
-      viewBox="0 0 369.66666666666663 80.44791006498106">
+      viewBox="0 0 369.66666666666663 80.44791006498106"
+      className={classes}>
       <g
         transform="matrix(0.9682989365289326,0,0,0.9682989365289326,-6.336396478521822,-7.746702692126948)"
         className={color}>
