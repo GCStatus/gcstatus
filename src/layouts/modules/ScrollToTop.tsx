@@ -8,7 +8,7 @@ function ScrollToTop() {
   const [topPosition, setTopPosition] = useState<string>('-50px')
 
   const toggleVisibility = () => {
-    if (window.scrollY > 200) {
+    if (window.scrollY > 500) {
       setIsVisible(true)
       setTopPosition('calc(100vh - 4rem)')
       return
@@ -35,7 +35,7 @@ function ScrollToTop() {
   return (
     <div
       className={`fixed right-4 z-40 transition-all duration-500 ease-in-out ${
-        isVisible ? 'opacity-100' : 'opacity-0'
+        isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'
       }`}
       style={{ top: topPosition }}>
       <Fab

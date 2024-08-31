@@ -15,10 +15,14 @@
 - [x] Basic UI layout
   - [x] Replace all tags by mui
   - [x] Add a scroll to top button
+  - [x] Add float sidebar
+    - [x] Enable button to enable and disable sidebar
+    - [x] Add float sidebar with website socials and theme toggle
   - [x] Implement header, footer, and navigation components
     - [x] Header
     - [x] Navbar
     - [x] Footer
+  - [x] Create game card component
   - [x] Set up routing with React Router
   - [ ] Create a homepage with a basic layout
 - [ ] Game news and reviews section
@@ -42,7 +46,9 @@
 ### Post-MVP
 
 - [ ] Advanced features
-  - [x] Add dark mode toggle
+  - [ ] Add dark mode toggle
+    - [x] Add theme switcher
+    - [ ] Adjust all site with light mode
   - [ ] Implement game recommendations based on user activity
   - [ ] Create a personalized dashboard for logged-in users
   - [ ] Integrate a game release calendar
@@ -64,3 +70,5 @@
 - [ ] Integration with external APIs
   - [ ] Pull in live data from gaming APIs like Twitch or Steam
   - [ ] Display trending streams or game stats
+- [ ] Add some games on the website
+- [ ] Floating card for socials and theme switcher

@@ -18,7 +18,7 @@ import { Logo } from '..'
 
 function Footer() {
   return (
-    <Box component="footer" className="bg-white dark:bg-theme-dark-900">
+    <Box component="footer" className="bg-gray-50 dark:bg-theme-dark-900">
       <Stack className="container px-6 py-8 mx-auto">
         <Box className="flex flex-col items-center text-center">
           <Link href="#">

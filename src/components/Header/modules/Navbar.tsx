@@ -2,7 +2,7 @@ import { Box, IconButton, Link, Stack } from '@mui/material'
 import { Fragment, useEffect, useState } from 'react'
 import { IoClose, IoMenu, IoSearch } from 'react-icons/io5'
 
-import { Backdrop, Logo, SwitchTheme } from '@/components'
+import { Backdrop, Logo, SwitchSidebar, SwitchTheme } from '@/components'
 import { Notification } from '@/types'
 
 import { Notifications } from '.'
@@ -118,6 +118,7 @@ function Navbar(props: NavbarProps) {
             Logout
           </Link>
           <SwitchTheme />
+          <SwitchSidebar />
         </Stack>
       </Stack>
 

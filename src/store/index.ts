@@ -6,13 +6,15 @@ import api from '@/services/api'
 import { rtkQueryErrorLogger } from '@/services/lib/error'
 
 // Slices
-import account from './accountSlice'
 import theme from './themeSlice'
+import sidebar from './sidebarSlice'
+import account from './accountSlice'
 
 const store = configureStore({
   reducer: {
-    account,
     theme,
+    sidebar,
+    account,
     [api.reducerPath]: api.reducer,
   },
   middleware: (getDefaultMiddleware) =>

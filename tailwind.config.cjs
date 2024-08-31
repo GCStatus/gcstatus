@@ -8,6 +8,7 @@ export default {
     extend: {
       colors: {
         'theme-dark-900': 'rgb(13, 13, 13)',
+        'theme-red-900': '#ff4d4d',
       },
     },
   },

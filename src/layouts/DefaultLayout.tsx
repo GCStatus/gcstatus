@@ -1,24 +1,19 @@
 import { Box } from '@mui/material'
 import { Outlet } from 'react-router-dom'
 
+import { useSidebar } from '@/hooks'
 import { Footer, Header } from '@/components'
 
-import { ScrollToTop } from './modules'
+import { ScrollToTop, Sidebar } from './modules'
 
 function DefaultLayout() {
-  const array: string[] = []
-
-  for (let index = 0; index < 200; index++) {
-    array[index] = 'Home'
-  }
+  const enabled = useSidebar()
 
   return (
     <Box>
       <Header />
-      {array.map((string, i) => (
-        <p key={i}>{string}</p>
-      ))}
-      <Box component="main">
+      {enabled === 'yes' && <Sidebar />}
+      <Box component="main" className="py-8 dark:bg-zinc-900 bg-white">
         <Outlet />
       </Box>
       <ScrollToTop />
