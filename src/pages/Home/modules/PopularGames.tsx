@@ -31,11 +31,11 @@ function PopularGames(props: PopularGamesProps) {
     <Stack
       component="section"
       spacing={1}
-      className="container mx-auto p-6">
+      className="relative container mx-auto p-6">
       <Box component="section">
         <Box className="absolute inset-0 pointer-events-none">
-          <Box className="absolute top-0 left-0 w-40 h-40 bg-gradient-to-r from-yellow-500 to-transparent rounded-full blur-2xl opacity-50 animate-pulse" />
-          <Box className="absolute bottom-0 right-0 w-32 h-32 bg-gradient-to-l from-green-500 to-transparent rounded-full blur-2xl opacity-50 animate-pulse" />
+          <Box className="absolute top-0 left-0 w-40 h-40 bg-gradient-to-r from-theme-red-900 to-transparent rounded-full blur-2xl opacity-50 animate-pulse" />
+          <Box className="absolute bottom-0 right-0 w-32 h-32 bg-gradient-to-l from-yellow-500 to-transparent rounded-full blur-2xl opacity-50 animate-pulse" />
         </Box>
 
         <Box className="relative z-10 w-full flex justify-between items-center mb-10 md:flex-row flex-col md:gap-0 gap-8">
