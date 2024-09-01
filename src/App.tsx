@@ -1,4 +1,5 @@
 import './styles/global.css'
+import 'swiper/swiper-bundle.css'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 
 import { CssBaseline, ThemeProvider } from '@mui/material'

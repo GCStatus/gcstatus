@@ -1,0 +1,6 @@
+export * from './helper'
+export { default as HotGames } from './HotGames'
+export { default as LikedGames } from './LikedGames'
+export { default as PopularGames } from './PopularGames'
+export { default as UpcomingGames } from './UpcomingGames'
+export { default as HomeNextRelease } from './HomeNextRelease'

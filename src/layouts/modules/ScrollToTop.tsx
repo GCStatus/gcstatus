@@ -33,7 +33,7 @@ function ScrollToTop() {
 
   return (
     <div
-      className={`fixed right-4 z-40 transition-all duration-500 ease-in-out ${
+      className={`fixed right-4 z-30 transition-all duration-500 ease-in-out ${
         isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'
       }`}
       style={{ top: topPosition }}>

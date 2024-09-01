@@ -1,14 +1,17 @@
 import { Box } from '@mui/material'
 
-import { MOCK_BANNERS, MOCK_NOTIFICATIONS } from './mocks'
+import { MOCK_HOME } from '@/mocks'
+
 import { HeaderCarousel, Navbar } from './modules'
 
 function Header() {
+  const home = MOCK_HOME
+
   return (
     <Box component="header">
-      <Navbar notifications={MOCK_NOTIFICATIONS} />
+      <Navbar notifications={home.notifications} />
 
-      <HeaderCarousel banners={MOCK_BANNERS} />
+      <HeaderCarousel banners={home.banners} />
     </Box>
   )
 }

@@ -17,8 +17,8 @@ function HeaderCarousel(props: HeaderCarouselProps) {
       showThumbs={false}
       showStatus={false}
       className="h-screen carousel"
-      interval={4000}
-      transitionTime={800}
+      interval={8000}
+      transitionTime={1400}
       emulateTouch
       preventMovementUntilSwipeScrollTolerance={true}
       swipeScrollTolerance={50}>

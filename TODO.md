@@ -24,7 +24,12 @@
     - [x] Footer
   - [x] Create game card component
   - [x] Set up routing with React Router
-  - [ ] Create a homepage with a basic layout
+  - [x] Create a homepage with a basic layout
+    - [x] Create the hot games section
+    - [x] Create the parallax effect for most exciting next game release - countdown
+    - [x] Create section for popular games
+    - [x] Create section for most liked games
+    - [x] Create section for future games
 - [ ] Game news and reviews section
   - [ ] Fetch and display the latest gaming news
   - [ ] Add reviews section with filtering options
@@ -72,3 +77,5 @@
   - [ ] Display trending streams or game stats
 - [ ] Add some games on the website
 - [ ] Floating card for socials and theme switcher
+- [ ] Quiz & polls: about the most exciting game release on future or something else
+- [ ] Integrate with social medias

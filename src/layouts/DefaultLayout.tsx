@@ -13,7 +13,7 @@ function DefaultLayout() {
     <Box>
       <Header />
       {enabled === 'yes' && <Sidebar />}
-      <Box component="main" className="py-8 dark:bg-zinc-900 bg-white">
+      <Box component="main" className="dark:bg-zinc-900 bg-white">
         <Outlet />
       </Box>
       <ScrollToTop />
