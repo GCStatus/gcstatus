@@ -1,3 +1,4 @@
+export * from './game'
 export * from './tags'
 export * from './games'
 export * from './genres'

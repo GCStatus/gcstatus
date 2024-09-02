@@ -4,5 +4,7 @@ export interface Company {
   slug: string
   name: string
   logo: string
+  price: number
   country: string
+  company_game_id: string
 }

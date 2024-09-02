@@ -6,6 +6,7 @@ import { DefaultLayout } from './layouts'
 
 export const Routes = () => {
   const Home = L(lazy(() => import('./pages/Home')))
+  const GameDetails = L(lazy(() => import('./pages/Game/Details')))
 
   return useRoutes([
     {
@@ -14,6 +15,13 @@ export const Routes = () => {
         {
           path: '/',
           element: <Home />,
+        },
+        {
+          path: '/games',
+          children: [
+            { index: true, element: <>Games</> },
+            { path: ':slug', element: <GameDetails /> },
+          ],
         },
       ],
     },

@@ -1,4 +1,10 @@
-import { Box, IconButton, Link, Stack, Typography } from '@mui/material'
+import {
+  Box,
+  Container,
+  IconButton,
+  Link,
+  Typography,
+} from '@mui/material'
 import { useState } from 'react'
 import { MdViewList, MdViewModule } from 'react-icons/md'
 
@@ -28,10 +34,7 @@ function HotGames(props: HotGamesProps) {
   const filteres = filteredGamesFn(games, search)
 
   return (
-    <Stack
-      component="section"
-      spacing={1}
-      className="relative container mx-auto p-6">
+    <Container maxWidth="xl" className="relative p-6" component="section">
       <Box component="section">
         <Box className="absolute inset-0 pointer-events-none">
           <Box className="absolute top-0 left-0 w-40 h-40 bg-gradient-to-r from-theme-red-900 to-transparent rounded-full blur-2xl opacity-50 animate-pulse" />
@@ -91,7 +94,7 @@ function HotGames(props: HotGamesProps) {
         className="flex justify-center p-4 mt-6 border border-theme-red-900 sm:max-w-48 w-full mx-auto rounded-lg hover:bg-theme-red-900 transition duration-500 dark:text-white text-black hover:text-white">
         See more...
       </Link>
-    </Stack>
+    </Container>
   )
 }
 

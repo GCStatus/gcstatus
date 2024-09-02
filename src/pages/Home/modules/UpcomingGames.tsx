@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material'
+import { Box, Container, Typography } from '@mui/material'
 import { Autoplay, EffectCoverflow } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
@@ -12,7 +12,7 @@ function UpcomingGames(props: UpcomingGamesProps) {
   const { games } = props
 
   return (
-    <Box className="container mx-auto p-6 pb-12 mt-16 relative">
+    <Container maxWidth="xl" className="relative p-6" component="section">
       <Box className="absolute inset-0 pointer-events-none">
         <Box className="absolute top-0 left-0 w-full h-48 bg-gradient-to-r from-theme-red-900 via-yellow-900 to-theme-dark-900 rounded-full blur-3xl opacity-20 animate-pulse" />
       </Box>
@@ -94,7 +94,7 @@ function UpcomingGames(props: UpcomingGamesProps) {
           </SwiperSlide>
         ))}
       </Swiper>
-    </Box>
+    </Container>
   )
 }
 

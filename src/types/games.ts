@@ -11,7 +11,6 @@ import {
 export interface Price {
   id: number
   price: number
-  company: Company
 }
 
 export interface Crackers {
@@ -20,13 +19,18 @@ export interface Crackers {
   acting: boolean
 }
 
+export interface Protection {
+  id: number
+  name: string
+}
+
 export interface Crack {
   id: number
-  by: Crackers
   status: string
-  torrent?: string
-  protection: string
-  created_at: string
+  torrent: string | null
+  cracked_at: string | null
+  by: Crackers | null
+  protection: Protection
 }
 
 export interface Developer {
@@ -43,6 +47,12 @@ export interface Publisher {
   created_at: string
 }
 
+export interface RequirementType {
+  id: number
+  name: 'minimum' | 'recommended' | 'maximum'
+  type: 'windows' | 'mac' | 'linux'
+}
+
 export interface Requirement {
   id: number
   so: string
@@ -53,7 +63,8 @@ export interface Requirement {
   rom: string
   bits: number
   obs?: string
-  network: string
+  network?: string
+  type: RequirementType
 }
 
 export interface GameList {
@@ -75,16 +86,23 @@ export interface Language {
   id: number
   iso: string
   name: string
+  menu: boolean
+  dubs: boolean
+  subtitles: boolean
 }
 
 export interface DLC {
   id: number
   name: string
+  cover: string
+  release: string
   game?: {
     id: number
     title: string
   }
   genres: Genre[]
+  galleries: Gallery[]
+  companies: Company[]
   platforms: Platform[]
   categories: Category[]
 }
@@ -92,9 +110,23 @@ export interface DLC {
 export interface Critic {
   id: number
   url: string
+  logo: string
   name: string
-  since: string
+  rate: number
   created_at: string
+}
+
+export interface TorrentProvider {
+  id: number
+  url: string
+  name: string
+}
+
+export interface Torrent {
+  id: number
+  url: string
+  posted_in: string
+  provider: TorrentProvider
 }
 
 export interface GameDetails {
@@ -107,22 +139,24 @@ export interface GameDetails {
   badge?: string
   release: string
   website?: string
-  description: string
+  description?: string
   hearts_count: number
+  short_description?: string
   tags: Tag[]
   dlcs: DLC[]
   genres: Genre[]
-  prices: Price[]
   reviews: Review[]
   companies: Company[]
   galleries: Gallery[]
-  language: Language[]
+  languages: Language[]
   platforms: Platform[]
   categories: Category[]
   developers: Developer[]
   publishers: Publisher[]
   requirements: Requirement[]
-  critics: Critic & { rate: number }[]
+  critics: Critic[]
+  torrents: Torrent[]
+  crack: Crack
 }
 
 export interface NextRelease {

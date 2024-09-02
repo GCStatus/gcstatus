@@ -4,8 +4,13 @@ import { Tag } from './tags'
 export interface Banner {
   id: number
   banner: string
-  title: string
-  description: string
-  platforms: Platform[]
-  tags: Tag[]
+  related: {
+    id: number
+    slug: string
+    title: string
+    best_price: number
+    short_description: string
+    tags: Tag[]
+    platforms: Platform[]
+  }
 }
