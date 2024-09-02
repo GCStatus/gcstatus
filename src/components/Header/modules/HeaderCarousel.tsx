@@ -53,7 +53,7 @@ function HeaderCarousel(props: HeaderCarouselProps) {
                   {related.short_description}
                 </Typography>
                 <Typography className="mb-2">Available on:</Typography>
-                <Box className="flex md:justify-end justify-center gap-2 mb-4">
+                <Box className="flex md:justify-end justify-center gap-2 mb-4 sm:flex-row flex-col sm:px-0 px-8">
                   {related.platforms.map(({ id, name }) => (
                     <Box
                       component="span"
@@ -63,7 +63,7 @@ function HeaderCarousel(props: HeaderCarouselProps) {
                     </Box>
                   ))}
                 </Box>
-                <Box className="flex flex-wrap md:justify-end justify-center gap-2">
+                <Box className="flex flex-wrap md:justify-end justify-center gap-2 sm:flex-row flex-col sm:px-0 px-8">
                   {related.tags.map(({ id, name }) => (
                     <Box
                       component="span"
