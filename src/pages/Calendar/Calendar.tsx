@@ -5,7 +5,7 @@ import {
   Typography,
   useMediaQuery,
 } from '@mui/material'
-import { format, isSameDay } from 'date-fns'
+import { format, isSameDay, parseISO } from 'date-fns'
 import { useNavigate } from 'react-router-dom'
 
 import { useTheme } from '@/hooks'
@@ -30,7 +30,7 @@ function Calendar() {
 
   const getTileContent = ({ date, view }: CalendarTileProperties) => {
     const appointment = games.filter((game) =>
-      isSameDay(new Date(game.release), date),
+      isSameDay(parseISO(game.release), date),
     )
 
     if (!appointment || view !== 'month') return null
@@ -39,7 +39,7 @@ function Calendar() {
       <Box sx={{ padding: isMobile ? '0.25rem' : '0.5rem' }}>
         {appointment.map((item) => (
           <Tooltip
-            title={`${item.title} - ${format(item.release, 'yyyy-MM-dd')}`}
+            title={`${item.title} - ${format(parseISO(item.release), 'yyyy-MM-dd')}`}
             sx={{ display: 'block' }}
             disableInteractive
             key={item.id}>

@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material'
+import { Box, Rating, Typography } from '@mui/material'
 
 import { Review } from '@/types'
 
@@ -10,8 +10,8 @@ function ReviewCard(props: ReviewCardProps) {
   const { review } = props
 
   const rateColor = () => {
-    if (review.rate < 5) return 'text-theme-red-900'
-    else if (review.rate === 5) return 'text-yellow-500'
+    if (review.rate < 2.5) return 'text-theme-red-900'
+    else if (review.rate === 2.5) return 'text-orange-500'
 
     return 'text-green-500'
   }
@@ -39,16 +39,12 @@ function ReviewCard(props: ReviewCardProps) {
       </Typography>
 
       <Box className="flex sm:justify-end justify-center items-center">
-        <Typography
-          component="span"
-          className={`text-2xl font-bold ${rateColor()}`}>
-          {review.rate}
-        </Typography>
-        <Typography
-          component="span"
-          className="text-lg font-semibold text-gray-700 dark:text-gray-300">
-          /10
-        </Typography>
+        <Rating
+          readOnly
+          value={review.rate}
+          precision={0.5}
+          className={rateColor()}
+        />
       </Box>
       {review.played && (
         <Typography

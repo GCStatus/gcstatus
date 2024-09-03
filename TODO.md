@@ -2,9 +2,18 @@
 
 ## 🚀 Project Roadmap
 
+### Basic Components
+
+- [ ] ...
+
 ### MVP (Minimum Viable Product)
 
-    - [ ] Display the game comments and the possibility to comment in a game
+- [ ] Implement the search on system
+  - [ ] Search should display at least 100 games with no pagination on backend
+  - [ ] Search should have a debounce time on change
+  - [ ] Search should allow the user to filter category, genre, tag or platform
+  - [ ] Search should allow the user to sort by likes quantity, views quantity, release date or title
+  - [ ] Search should allow the user to change the quantities of items per page (pagination should work only on frontend)
 - [ ] Game news and reviews section
   - [ ] Fetch and display the latest gaming news
   - [ ] Add reviews section with filtering options

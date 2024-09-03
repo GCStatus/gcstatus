@@ -29,7 +29,7 @@ function DLCs(props: DLCsProps) {
     <>
       <Box
         component="li"
-        className="p-8 border dark:border-gray-800 border-gray-100 bg-gradient-to-b dark:from-zinc-900 from-gray-200 to-transparent rounded-lg bg-transparent animate-slide-in transition-all duration-500 relative overflow-hidden flex flex-col gap-10 z-10">
+        className="p-8 border dark:border-gray-800 border-gray-100 bg-gradient-to-b dark:from-zinc-900 from-gray-200 to-transparent rounded-lg bg-transparent relative overflow-hidden flex flex-col gap-10 z-10">
         <Box className="absolute inset-0 z-0 bg-gradient-to-br from-transparent to-theme-red-900 opacity-0 hover:opacity-20 transition-opacity duration-500 pointer-events-none" />
 
         <Box className="flex flex-col sm:flex-row items-center gap-4 relative">

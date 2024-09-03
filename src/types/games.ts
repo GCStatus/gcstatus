@@ -6,6 +6,7 @@ import {
   Platform,
   Review,
   Tag,
+  User,
 } from '.'
 
 export interface Price {
@@ -76,6 +77,7 @@ export interface GameList {
   badge?: string
   release: string
   best_price: number
+  views_count: number
   hearts_count: number
   short_description: string
   genres: Genre[]
@@ -129,6 +131,13 @@ export interface Torrent {
   provider: TorrentProvider
 }
 
+export interface Message {
+  id: number
+  message: string
+  by: User
+  replies: Message[]
+}
+
 export interface GameDetails {
   id: number
   age: number
@@ -141,6 +150,7 @@ export interface GameDetails {
   website?: string
   description?: string
   hearts_count: number
+  views_count: number
   short_description?: string
   tags: Tag[]
   dlcs: DLC[]
@@ -156,6 +166,7 @@ export interface GameDetails {
   requirements: Requirement[]
   critics: Critic[]
   torrents: Torrent[]
+  messages: Message[]
   crack: Crack
 }
 

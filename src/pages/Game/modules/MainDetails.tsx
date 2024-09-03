@@ -1,4 +1,13 @@
-import { Box, Chip, Link, List, ListItem, Typography } from '@mui/material'
+import {
+  Box,
+  Chip,
+  Link,
+  List,
+  ListItem,
+  Tooltip,
+  Typography,
+} from '@mui/material'
+import { IoEyeOutline, IoHeartOutline } from 'react-icons/io5'
 
 import { GameDetails } from '@/types'
 
@@ -12,33 +21,9 @@ function MainDetails(props: MainDetailsProps) {
   return (
     <>
       <Box
-        component="section"
-        className="my-4 animate-zoom-in relative group">
-        <img
-          src={game.cover}
-          alt={`${game.title} Cover`}
-          className="w-full h-auto rounded-md shadow-lg duration-500 group-hover:shadow-theme-red-900/50"
-        />
-        <Box className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 group-hover:opacity-50 transition-opacity duration-500 rounded-md" />
-      </Box>
-
-      <Box
-        component="section"
-        className="flex items-center justify-between sm:flex-row flex-col sm:text-left text-center mt-6 mb-8">
-        <Typography
-          variant="h1"
-          className="text-5xl font-extrabold animate-pulse tracking-wider drop-shadow-lg mb-4 sm:mb-0 dark:hot-neon-text dark:text-white text-theme-red-900">
-          {game.title}
-        </Typography>
-        <Typography
-          component="span"
-          className="dark:text-gray-400 text-white bg-gradient-to-r dark:from-zinc-900 dark:via-transparent dark:to-transparent from-theme-red-900 to-theme-dark-900 px-4 py-2 rounded-full shadow-md">
-          Release Date: {game.release}
-        </Typography>
-      </Box>
-
-      <Box className="flex flex-col md:flex-row md:space-x-8 mb-12 mt-4 relative space-y-8 md:space-y-0">
-        <Box className="flex-1 border dark:border-gray-800 border-gray-100 bg-gradient-to-b dark:from-zinc-900 from-gray-200 to-transparent p-6 rounded-lg shadow-lg transition-transform transform hover:scale-105 duration-500 relative">
+        component="span"
+        className="flex flex-col md:flex-row relative sm:gap-4 gap-4 mb-4">
+        <Box className="flex-1 border dark:border-gray-800 border-gray-100 bg-gradient-to-b dark:from-zinc-900 from-gray-200 to-transparent p-6 rounded-lg shadow-lg transition-transform transform hover:scale-[1.02] duration-500 relative">
           <Typography
             variant="h2"
             className="sm:text-2xl text-xl font-bold mb-4 dark:text-white text-black">
@@ -49,11 +34,11 @@ function MainDetails(props: MainDetailsProps) {
           </Typography>
         </Box>
 
-        <Box className="flex-1 border dark:border-gray-800 border-gray-100 bg-gradient-to-b dark:from-zinc-900 from-gray-200 to-transparent p-6 rounded-lg shadow-lg transition-transform transform hover:scale-105 duration-500 relative">
+        <Box className="flex-1 border dark:border-gray-800 border-gray-100 bg-gradient-to-b dark:from-zinc-900 from-gray-200 to-transparent p-6 rounded-lg shadow-lg transition-transform transform hover:scale-[1.02] duration-500 relative">
           <Typography
             variant="h2"
             className="sm:text-2xl text-xl sm:text-left text-center font-bold mb-4 dark:text-white text-black">
-            Game details
+            Info
           </Typography>
           <Box className="flex flex-col gap-4">
             <Box className="flex sm:flex-row flex-col items-center gap-1">
@@ -62,14 +47,16 @@ function MainDetails(props: MainDetailsProps) {
                 className="inline-block font-bold dark:text-white text-black">
                 Website:
               </Typography>
-              <Link
-                href={game.website}
-                target="_blank"
-                rel="noopener noreferrer">
-                <Typography className="text-theme-red-900 underline hover:opacity-70 transition-opacity duration-300 hover:text-red-500 break-all">
-                  {game.website}
-                </Typography>
-              </Link>
+              <Tooltip title="Go to game official website">
+                <Link
+                  href={game.website}
+                  target="_blank"
+                  rel="noopener noreferrer">
+                  <Typography className="text-theme-red-900 underline hover:opacity-70 transition-opacity duration-300 hover:text-red-500 break-all">
+                    {game.website}
+                  </Typography>
+                </Link>
+              </Tooltip>
             </Box>
             <Box className="flex sm:flex-row flex-col items-center gap-1">
               <Typography
@@ -129,14 +116,19 @@ function MainDetails(props: MainDetailsProps) {
               </Box>
             )}
             <Box className="flex sm:flex-row flex-col items-center gap-1">
-              <Typography
-                component="span"
-                className="inline-block font-bold dark:text-white text-black">
-                ❤️:
+              <Typography component="span">
+                <IoHeartOutline
+                  className="text-theme-red-900 animate-pulse"
+                  size={28}
+                />
               </Typography>
-              <Typography component="span" className="text-lg">
-                {game.hearts_count}
+              {game.hearts_count}
+            </Box>
+            <Box className="flex sm:flex-row flex-col items-center gap-1">
+              <Typography component="span">
+                <IoEyeOutline size={28} />
               </Typography>
+              {game.views_count}
             </Box>
           </Box>
         </Box>
@@ -144,8 +136,8 @@ function MainDetails(props: MainDetailsProps) {
 
       <Box
         component="span"
-        className="flex flex-col md:flex-row md:space-x-8 mb-12 mt-4 relative space-y-8 md:space-y-0">
-        <Box className="flex-1 border dark:border-gray-800 border-gray-100 bg-gradient-to-b dark:from-zinc-900 from-gray-200 to-transparent p-6 rounded-lg shadow-lg transition-transform transform hover:scale-105 duration-500 relative">
+        className="flex flex-col md:flex-row relative sm:gap-4 gap-4 mb-4">
+        <Box className="flex-1 border dark:border-gray-800 border-gray-100 bg-gradient-to-b dark:from-zinc-900 from-gray-200 to-transparent p-6 rounded-lg shadow-lg transition-transform transform hover:scale-[1.02] duration-500 relative">
           <Typography
             variant="h2"
             className="sm:text-2xl text-xl font-bold mb-4 dark:text-white text-black">
@@ -174,7 +166,7 @@ function MainDetails(props: MainDetailsProps) {
           </List>
         </Box>
 
-        <Box className="flex-1 border dark:border-gray-800 border-gray-100 bg-gradient-to-b dark:from-zinc-900 from-gray-200 to-transparent p-6 rounded-lg shadow-lg transition-transform transform hover:scale-105 duration-500 relative">
+        <Box className="flex-1 border dark:border-gray-800 border-gray-100 bg-gradient-to-b dark:from-zinc-900 from-gray-200 to-transparent p-6 rounded-lg shadow-lg transition-transform transform hover:scale-[1.02] duration-500 relative">
           <Typography
             variant="h2"
             className="text-2xl font-bold mb-4 dark:text-white text-black">
@@ -206,8 +198,8 @@ function MainDetails(props: MainDetailsProps) {
 
       <Box
         component="span"
-        className="flex flex-col md:flex-row md:space-x-8 mb-12 mt-4 relative space-y-8 md:space-y-0">
-        <Box className="flex-1 border dark:border-gray-800 border-gray-100 bg-gradient-to-b dark:from-zinc-900 from-gray-200 to-transparent p-6 rounded-lg shadow-lg transition-transform transform hover:scale-105 duration-500 relative">
+        className="flex flex-col md:flex-row relative sm:gap-4 gap-4 mb-4">
+        <Box className="flex-1 border dark:border-gray-800 border-gray-100 bg-gradient-to-b dark:from-zinc-900 from-gray-200 to-transparent p-6 rounded-lg shadow-lg transition-transform transform hover:scale-[1.02] duration-500 relative">
           <Typography
             variant="h2"
             className="sm:text-2xl text-xl font-bold mb-4 dark:text-white text-black">
@@ -236,7 +228,7 @@ function MainDetails(props: MainDetailsProps) {
           </List>
         </Box>
 
-        <Box className="flex-1 border dark:border-gray-800 border-gray-100 bg-gradient-to-b dark:from-zinc-900 from-gray-200 to-transparent p-6 rounded-lg shadow-lg transition-transform transform hover:scale-105 duration-500 relative">
+        <Box className="flex-1 border dark:border-gray-800 border-gray-100 bg-gradient-to-b dark:from-zinc-900 from-gray-200 to-transparent p-6 rounded-lg shadow-lg transition-transform transform hover:scale-[1.02] duration-500 relative">
           <Typography
             variant="h2"
             className="text-2xl font-bold mb-4 dark:text-white text-black">
@@ -268,8 +260,8 @@ function MainDetails(props: MainDetailsProps) {
 
       <Box
         component="span"
-        className="flex flex-col md:flex-row md:space-x-8 mb-12 mt-4 relative space-y-8 md:space-y-0">
-        <Box className="flex-1 border dark:border-gray-800 border-gray-100 bg-gradient-to-b dark:from-zinc-900 from-gray-200 to-transparent p-6 rounded-lg shadow-lg transition-transform transform hover:scale-105 duration-500 relative">
+        className="flex flex-col md:flex-row relative sm:gap-4 gap-4 mb-4">
+        <Box className="flex-1 border dark:border-gray-800 border-gray-100 bg-gradient-to-b dark:from-zinc-900 from-gray-200 to-transparent p-6 rounded-lg shadow-lg transition-transform transform hover:scale-[1.02] duration-500 relative">
           <Typography
             variant="h2"
             className="sm:text-2xl text-xl font-bold mb-4 dark:text-white text-black">
@@ -293,7 +285,7 @@ function MainDetails(props: MainDetailsProps) {
           </List>
         </Box>
 
-        <Box className="flex-1 border dark:border-gray-800 border-gray-100 bg-gradient-to-b dark:from-zinc-900 from-gray-200 to-transparent p-6 rounded-lg shadow-lg transition-transform transform hover:scale-105 duration-500 relative">
+        <Box className="flex-1 border dark:border-gray-800 border-gray-100 bg-gradient-to-b dark:from-zinc-900 from-gray-200 to-transparent p-6 rounded-lg shadow-lg transition-transform transform hover:scale-[1.02] duration-500 relative">
           <Typography
             variant="h2"
             className="text-2xl font-bold mb-4 dark:text-white text-black">
@@ -317,6 +309,12 @@ function MainDetails(props: MainDetailsProps) {
           </List>
         </Box>
       </Box>
+
+      <Box
+        component="section"
+        className="text-lg leading-relaxed text-center animate-fade-in w-full flex flex-col items-center gap-2"
+        dangerouslySetInnerHTML={{ __html: game.about }}
+      />
     </>
   )
 }

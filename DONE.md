@@ -1,6 +1,17 @@
-# 📝 TODO List
+# 📝 DONE List
 
 ## 🚀 Project Roadmap
+
+### Basic Components
+
+- [x] Input
+- [x] Backdrop
+- [x] Logo
+- [x] Icon
+- [x] Header
+- [x] Footer
+- [x] Tabs
+- [x] Button
 
 ### MVP (Minimum Viable Product)
 
@@ -61,6 +72,10 @@
       - [x] Display the DLC availability on platforms to be purchased
     - [x] Display the game requirements for each OS and type (minimum, recommended or maximum)
     - [x] Display the game languages availability
+- [x] Features for games
+  - [x] Implement some tabs for the game detauls
+  - [x] Implement the views of a game
+  - [x] Display the game comments and the possibility to comment in a game
 
 ### Post MVP
 

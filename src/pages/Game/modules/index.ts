@@ -1,5 +1,7 @@
 export { default as DLCs } from './DLCs'
+export { default as Tabs } from './Tabs'
 export { default as Critics } from './Critics'
+export { default as GameChat } from './GameChat'
 export { default as Torrents } from './Torrents'
 export { default as DLCsModal } from './DLCsModal'
 export { default as Galleries } from './Galleries'

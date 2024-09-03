@@ -22,7 +22,8 @@ export const MOCK_GAME_DETAILS: GameDetails = {
       mythology. Fight through a richly detailed world inspired
       by ancient Chinese literature.`,
   website: 'https://www.heishenhua.com/',
-  hearts_count: 839123,
+  views_count: 97857,
+  hearts_count: 20492,
   badge: 'hot',
   crack: {
     id: 1,
@@ -35,6 +36,47 @@ export const MOCK_GAME_DETAILS: GameDetails = {
       name: 'Denuvo',
     },
   },
+  messages: [
+    {
+      id: 1,
+      message:
+        'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Libero, recusandae repudiandae quia itaque, animi quasi iste atque porro nisi sit suscipit consequatur autem deserunt vel deleniti quae harum aliquam aliquid?',
+      by: {
+        id: 1,
+        name: 'Player 1',
+        email: 'dev@dev.com',
+        nickname: 'theplayer1',
+        birthdate: '2000-03-25',
+        created_at: '2024-01-01T00:00:00.000Z',
+        updated_at: '2024-01-01T00:00:00.000Z',
+        profile: {
+          photo:
+            'https://wac-cdn.atlassian.com/dam/jcr:ba03a215-2f45-40f5-8540-b2015223c918/Max-R_Headshot%20(1).jpg?cdnVersion=2199',
+          share: true,
+        },
+      },
+      replies: [
+        {
+          id: 1,
+          message:
+            'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Libero, recusandae repudiandae quia itaque, animi quasi iste atque porro nisi sit suscipit consequatur autem deserunt vel deleniti quae harum aliquam aliquid?',
+          by: {
+            id: 1,
+            name: 'Player 2',
+            email: 'dev2@dev.com',
+            nickname: 'theplayer2',
+            birthdate: '2000-03-25',
+            created_at: '2024-01-01T00:00:00.000Z',
+            updated_at: '2024-01-01T00:00:00.000Z',
+            profile: {
+              share: true,
+            },
+          },
+          replies: [],
+        },
+      ],
+    },
+  ],
   galleries: [
     {
       id: 1,
@@ -55,7 +97,7 @@ export const MOCK_GAME_DETAILS: GameDetails = {
     {
       id: 1,
       played: true,
-      rate: 10,
+      rate: 5,
       comment: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat laudantium praesentium architecto quis iusto aut et non facere, incidunt quo corrupti? Quibusdam ipsum voluptate quaerat distinctio ea. Quasi, debitis maiores!
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat laudantium praesentium architecto quis iusto aut et non facere, incidunt quo corrupti? Quibusdam ipsum voluptate quaerat distinctio ea. Quasi, debitis maiores!
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat laudantium praesentium architecto quis iusto aut et non facere, incidunt quo corrupti? Quibusdam ipsum voluptate quaerat distinctio ea. Quasi, debitis maiores!`,
@@ -77,7 +119,7 @@ export const MOCK_GAME_DETAILS: GameDetails = {
     {
       id: 2,
       played: false,
-      rate: 5.8,
+      rate: 3.5,
       comment: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat laudantium praesentium architecto quis iusto aut et non facere, incidunt quo corrupti? Quibusdam ipsum voluptate quaerat distinctio ea. Quasi, debitis maiores!
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat laudantium praesentium architecto quis iusto aut et non facere, incidunt quo corrupti? Quibusdam ipsum voluptate quaerat distinctio ea. Quasi, debitis maiores!
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat laudantium praesentium architecto quis iusto aut et non facere, incidunt quo corrupti? Quibusdam ipsum voluptate quaerat distinctio ea. Quasi, debitis maiores!`,
@@ -99,7 +141,7 @@ export const MOCK_GAME_DETAILS: GameDetails = {
     {
       id: 3,
       played: false,
-      rate: 5,
+      rate: 2.5,
       comment:
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat laudantium praesentium architecto quis iusto aut et non facere, incidunt quo corrupti? Quibusdam ipsum voluptate quaerat distinctio ea. Quasi, debitis maiores!',
       user: {
@@ -120,7 +162,7 @@ export const MOCK_GAME_DETAILS: GameDetails = {
     {
       id: 4,
       played: true,
-      rate: 2.4,
+      rate: 2,
       comment:
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat laudantium praesentium architecto quis iusto aut et non facere, incidunt quo corrupti? Quibusdam ipsum voluptate quaerat distinctio ea. Quasi, debitis maiores!',
       user: {

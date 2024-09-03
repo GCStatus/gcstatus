@@ -16,31 +16,28 @@ function Availables(props: AvailablesProps) {
         alt={company.name}
         className="w-16 h-16 object-contain rounded-full shadow-md"
       />
-      <Box>
-        <Typography
-          variant="h2"
-          className="font-bold sm:text-2xl text-xl ">
-          <Link
-            target="_blank"
-            href={`/companies/${company.slug}`}
-            className="dark:text-white text-black">
-            {company.name}
-          </Link>
-        </Typography>
-        <Typography
-          component="p"
-          className="dark:text-gray-300 text-gray-700">
-          Available in {company.country}
-        </Typography>
-        <Typography
-          component="p"
-          className="dark:text-gray-300 text-gray-700">
-          Price:{' '}
-          {(company.price / 100).toLocaleString('en-US', {
-            currency: 'USD',
-            style: 'currency',
-          })}
-        </Typography>
+      <Box className="flex sm:justify-between justify-center sm:text-left text-center sm:gap-0 gap-4 sm:flex-row flex-col items-center w-full">
+        <Box>
+          <Typography
+            variant="h2"
+            className="font-bold sm:text-2xl text-xl ">
+            <Link
+              target="_blank"
+              href={`/companies/${company.slug}`}
+              className="dark:text-white text-black">
+              {company.name}
+            </Link>
+          </Typography>
+          <Typography
+            component="p"
+            className="dark:text-gray-300 text-gray-700">
+            Price:{' '}
+            {(company.price / 100).toLocaleString('en-US', {
+              currency: 'USD',
+              style: 'currency',
+            })}
+          </Typography>
+        </Box>
         <Link
           href={company.url}
           className="text-theme-red-900 underline hover:opacity-70 transition-opacity duration-300 hover:text-red-500"

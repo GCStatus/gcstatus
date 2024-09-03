@@ -41,72 +41,66 @@ function Requirements(props: RequirementsProps) {
         ))}
       </div>
 
-      <div className="space-y-8 animate-fade-in">
-        {requirements
-          .filter(
-            (req) => `${req.type.name}-${req.type.type}` === activeTab,
-          )
-          .map((req) => (
-            <div
-              key={req.id}
-              className="p-6 border dark:border-gray-800 border-gray-100 bg-gradient-to-b dark:from-zinc-900 from-gray-200 to-transparent rounded-lg shadow-lg relative duration-500 break-words">
-              <div className="absolute inset-0 rounded-lg opacity-10 hover:opacity-30 transition-opacity duration-500 pointer-events-none" />
+      {requirements
+        .filter((req) => `${req.type.name}-${req.type.type}` === activeTab)
+        .map((req) => (
+          <div
+            key={req.id}
+            className="p-6 border dark:border-gray-800 border-gray-100 bg-gradient-to-b dark:from-zinc-900 from-gray-200 to-transparent rounded-lg shadow-lg relative duration-500 break-words animate-fade-in">
+            <div className="absolute inset-0 rounded-lg opacity-10 hover:opacity-30 transition-opacity duration-500 pointer-events-none" />
 
-              <h3 className="sm:text-left text-center text-xl font-bold text-theme-red-900 mb-4">
-                {req.type.name.charAt(0).toUpperCase() +
-                  req.type.name.slice(1)}{' '}
-                Requirements
-              </h3>
+            <h3 className="sm:text-left text-center text-xl font-bold text-theme-red-900 mb-4">
+              {req.type.name.charAt(0).toUpperCase() +
+                req.type.name.slice(1)}{' '}
+              Requirements
+            </h3>
 
-              <ul className="space-y-2 dark:text-gray-300 text-gray-700">
-                <li>
-                  <span className="font-bold dark:text-white text-black">
-                    OS:
-                  </span>{' '}
-                  {req.so}
-                </li>
-                <li>
-                  <span className=" dark:text-white text-black">CPU:</span>{' '}
-                  {req.cpu}
-                </li>
-                <li>
-                  <span className=" dark:text-white text-black">RAM:</span>{' '}
-                  {req.ram}
-                </li>
-                <li>
-                  <span className=" dark:text-white text-black">GPU:</span>{' '}
-                  {req.gpu}
-                </li>
+            <ul className="space-y-2 dark:text-gray-300 text-gray-700">
+              <li>
+                <span className="font-bold dark:text-white text-black">
+                  OS:
+                </span>{' '}
+                {req.so}
+              </li>
+              <li>
+                <span className=" dark:text-white text-black">CPU:</span>{' '}
+                {req.cpu}
+              </li>
+              <li>
+                <span className=" dark:text-white text-black">RAM:</span>{' '}
+                {req.ram}
+              </li>
+              <li>
+                <span className=" dark:text-white text-black">GPU:</span>{' '}
+                {req.gpu}
+              </li>
+              <li>
+                <span className=" dark:text-white text-black">
+                  DirectX:
+                </span>{' '}
+                {req.dx}
+              </li>
+              <li>
+                <span className=" dark:text-white text-black">
+                  Storage:
+                </span>{' '}
+                {req.rom}
+              </li>
+              <li>
+                <span className=" dark:text-white text-black">Bits:</span>{' '}
+                {req.bits}-bit
+              </li>
+              {req.obs && (
                 <li>
                   <span className=" dark:text-white text-black">
-                    DirectX:
+                    Notes:
                   </span>{' '}
-                  {req.dx}
+                  {req.obs}
                 </li>
-                <li>
-                  <span className=" dark:text-white text-black">
-                    Storage:
-                  </span>{' '}
-                  {req.rom}
-                </li>
-                <li>
-                  <span className=" dark:text-white text-black">
-                    Bits:
-                  </span>{' '}
-                  {req.bits}-bit
-                </li>
-                {req.obs && (
-                  <li>
-                    <span className=" dark:text-white text-black">
-                      Notes:
-                    </span>{' '}
-                    {req.obs}
-                  </li>
-                )}
-              </ul>
-            </div>
-          ))}
-      </div>
+              )}
+            </ul>
+          </div>
+        ))}
     </>
   )
 }
