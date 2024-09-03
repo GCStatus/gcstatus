@@ -1,6 +1,6 @@
-import { Box, IconButton, Link, Stack } from '@mui/material'
+import { Box, IconButton, Link, Stack, Tooltip } from '@mui/material'
 import { Fragment, useEffect, useState } from 'react'
-import { IoClose, IoMenu, IoSearch } from 'react-icons/io5'
+import { IoCalendar, IoClose, IoMenu, IoSearch } from 'react-icons/io5'
 
 import { Backdrop, Logo, SwitchSidebar, SwitchTheme } from '@/components'
 import { Notification } from '@/types'
@@ -43,7 +43,7 @@ function Navbar(props: NavbarProps) {
         className={`fixed top-0 left-0 w-full z-40 transition-all duration-300 ${
           navbarSticky ? 'bg-theme-dark-900 shadow-md' : 'bg-transparent'
         }`}>
-        <Box className="container mx-auto px-4 py-8 flex items-center justify-between">
+        <Box className="container mx-auto px-4 py-8 flex items-center sm:justify-between justify-center sm:flex-row flex-col">
           <Link href="/" className="text-white text-2xl font-bold">
             <Logo />
           </Link>
@@ -59,12 +59,20 @@ function Navbar(props: NavbarProps) {
             </IconButton>
           </Box>
 
-          <Box className="flex items-center gap-2">
+          <Box className="flex items-center gap-1">
+            <Tooltip title="Go to calendar">
+              <IconButton href="/releases/calendar" className="group">
+                <IoCalendar className="text-gray-200 group-hover:text-yellow-500 transition-colors duration-300" />
+              </IconButton>
+            </Tooltip>
+
             <Notifications notifications={notifications} />
 
-            <IconButton onClick={toggleMenu} className="group">
-              <IoMenu className="text-gray-200 group-hover:text-yellow-500 transition-colors duration-300" />
-            </IconButton>
+            <Tooltip title="Open menu">
+              <IconButton onClick={toggleMenu} className="group">
+                <IoMenu className="text-gray-200 group-hover:text-yellow-500 transition-colors duration-300" />
+              </IconButton>
+            </Tooltip>
           </Box>
         </Box>
       </Box>
@@ -98,9 +106,14 @@ function Navbar(props: NavbarProps) {
             </IconButton>
           </Box>
           <Link
-            href="#"
+            href="/"
             className="block py-2 px-4 dark:hover:bg-zinc-800 hover:bg-gray-100 rounded-lg transition duration-200 dark:text-gray-300 text-zinc-800">
             Home
+          </Link>
+          <Link
+            href="/releases/calendar"
+            className="block py-2 px-4 dark:hover:bg-zinc-800 hover:bg-gray-100 rounded-lg transition duration-200 dark:text-gray-300 text-zinc-800">
+            Release Calendar
           </Link>
           <Link
             href="#"

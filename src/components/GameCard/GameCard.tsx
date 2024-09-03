@@ -22,7 +22,7 @@ function GameCard(props: GameCardProps) {
     <Stack
       className={`${
         view === 'grid' ? 'w-full' : 'w-full flex flex-col sm:flex-row'
-      } dark:bg-theme-dark-900 bg-gray-50 text-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300 relative group`}
+      } dark:bg-theme-dark-900 bg-gray-50 text-white rounded-lg shadow-lg overflow-hidden transform hover:scale-[1.02] transition-transform duration-300 relative group`}
       style={{
         border: '2px solid #333',
         boxShadow: '0 0 20px rgba(0,0,0,0.8)',

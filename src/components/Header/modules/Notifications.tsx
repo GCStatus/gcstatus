@@ -33,13 +33,15 @@ function Notifications(props: NotificationsProps) {
 
   return (
     <Fragment>
-      <IconButton
-        className="relative bg-transparent group"
-        onClick={toggleNotification}>
-        <Badge badgeContent={notifications.length} color="warning">
-          <IoNotifications className="text-white group-hover:text-yellow-500 transition-colors duration-300" />
-        </Badge>
-      </IconButton>
+      <Tooltip title="Open notifications">
+        <IconButton
+          className="relative bg-transparent group"
+          onClick={toggleNotification}>
+          <Badge badgeContent={notifications.length} color="warning">
+            <IoNotifications className="text-white group-hover:text-yellow-500 transition-colors duration-300" />
+          </Badge>
+        </IconButton>
+      </Tooltip>
 
       <Backdrop open={open} toggleBackdrop={toggleNotification} />
 
