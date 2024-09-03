@@ -43,7 +43,7 @@ function Navbar(props: NavbarProps) {
         className={`fixed top-0 left-0 w-full z-40 transition-all duration-300 ${
           navbarSticky ? 'bg-theme-dark-900 shadow-md' : 'bg-transparent'
         }`}>
-        <Box className="container mx-auto px-4 py-8 flex items-center sm:justify-between justify-center sm:flex-row flex-col">
+        <Box className="container mx-auto px-4 sm:py-8 py-2 flex items-center sm:justify-between justify-center sm:flex-row flex-col">
           <Link href="/" className="text-white text-2xl font-bold">
             <Logo />
           </Link>
