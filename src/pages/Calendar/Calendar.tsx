@@ -26,7 +26,7 @@ function Calendar() {
   const games = MOCK_UPCOMING_GAMES
   const mode = useTheme()
   const go = useNavigate()
-  const isMobile = useMediaQuery('(max-width: 768px)')
+  const isMobile = useMediaQuery('(max-width: 490px)')
 
   const getTileContent = ({ date, view }: CalendarTileProperties) => {
     const appointment = games.filter((game) =>
@@ -36,7 +36,7 @@ function Calendar() {
     if (!appointment || view !== 'month') return null
 
     return (
-      <Box sx={{ padding: '0.5rem' }}>
+      <Box sx={{ padding: isMobile ? '0.25rem' : '0.5rem' }}>
         {appointment.map((item) => (
           <Tooltip
             title={`${item.title} - ${format(item.release, 'yyyy-MM-dd')}`}
@@ -47,7 +47,7 @@ function Calendar() {
               onClick={() => go(`/games/${item.slug}`)}
               sx={{
                 width: 'auto',
-                marginBottom: '0.25rem',
+                marginBottom: isMobile ? '0.15rem' : '0.25rem',
                 backgroundColor: ({ palette }) =>
                   palette.background.default,
                 '&:hover': {

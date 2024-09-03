@@ -17,7 +17,12 @@ export const StyledCalendar = styled(ReactCalendar)(({ theme }) => ({
     padding: theme.spacing(1, 2),
     fontSize: '1.5rem',
     marginBottom: '1rem',
+    '@media (max-width: 768px)': {
+      fontSize: '1.2rem',
+      padding: theme.spacing(0.5, 1.5),
+    },
   },
+
   '& .react-calendar__navigation button': {
     color: '#ff4d4d',
     backgroundColor: 'transparent',
@@ -33,10 +38,7 @@ export const StyledCalendar = styled(ReactCalendar)(({ theme }) => ({
       transition: 'all',
       transitionDuration: '500ms',
     },
-  },
-
-  '@media (max-width: 600px)': {
-    '& .react-calendar__navigation button': {
+    '@media (max-width: 768px)': {
       fontSize: '1rem',
       padding: '6px 10px',
     },
@@ -51,6 +53,9 @@ export const StyledCalendar = styled(ReactCalendar)(({ theme }) => ({
       textDecoration: 'none',
       ...theme.typography.overline,
       color: '#ff4d4d',
+      '@media (max-width: 768px)': {
+        fontSize: '0.75rem',
+      },
     },
   },
 
@@ -76,6 +81,9 @@ export const StyledCalendar = styled(ReactCalendar)(({ theme }) => ({
         borderColor: '#ff4d4d',
         borderRadius: '10px',
       },
+      '@media (max-width: 768px)': {
+        minHeight: '5rem',
+      },
     },
     '& .react-calendar__tile--now': {
       backgroundColor: 'rgba(255, 77, 77, 0.3)',
@@ -130,6 +138,9 @@ export const StyledCalendar = styled(ReactCalendar)(({ theme }) => ({
         duration: theme.transitions.duration.short,
       },
     ),
+    '@media (max-width: 768px)': {
+      fontSize: '0.875rem',
+    },
   },
 }))
 
@@ -149,6 +160,10 @@ export const StyledCalendarLight = styled(ReactCalendar)(({ theme }) => ({
     padding: theme.spacing(1, 2),
     fontSize: '1.5rem',
     marginBottom: '1rem',
+    '@media (max-width: 768px)': {
+      fontSize: '1.2rem',
+      padding: theme.spacing(0.5, 1.5),
+    },
   },
   '& .react-calendar__navigation button': {
     color: '#ff4d4d',
@@ -164,6 +179,10 @@ export const StyledCalendarLight = styled(ReactCalendar)(({ theme }) => ({
       backgroundColor: '#ff4d4d',
       transition: 'all',
       transitionDuration: '500ms',
+    },
+    '@media (max-width: 768px)': {
+      fontSize: '1rem',
+      padding: '6px 10px',
     },
   },
 
@@ -183,6 +202,9 @@ export const StyledCalendarLight = styled(ReactCalendar)(({ theme }) => ({
       textDecoration: 'none',
       ...theme.typography.overline,
       color: '#ff4d4d',
+      '@media (max-width: 768px)': {
+        fontSize: '0.75rem',
+      },
     },
   },
 
@@ -208,6 +230,9 @@ export const StyledCalendarLight = styled(ReactCalendar)(({ theme }) => ({
         borderColor: '#ff4d4d',
         borderRadius: '10px',
       },
+      '@media (max-width: 768px)': {
+        minHeight: '5rem',
+      },
     },
     '& .react-calendar__tile--now': {
       backgroundColor: 'rgba(255, 77, 77, 0.3)',
@@ -262,5 +287,8 @@ export const StyledCalendarLight = styled(ReactCalendar)(({ theme }) => ({
         duration: theme.transitions.duration.short,
       },
     ),
+    '@media (max-width: 768px)': {
+      fontSize: '0.875rem',
+    },
   },
 }))
