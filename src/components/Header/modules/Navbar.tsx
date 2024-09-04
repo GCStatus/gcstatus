@@ -1,6 +1,8 @@
 import { Box, IconButton, Link, Stack, Tooltip } from '@mui/material'
 import { Fragment, useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
 import { IoCalendar, IoClose, IoMenu, IoSearch } from 'react-icons/io5'
+import { useNavigate, useParams } from 'react-router-dom'
 
 import { Backdrop, Logo, SwitchSidebar, SwitchTheme } from '@/components'
 import { Notification } from '@/types'
@@ -13,7 +15,10 @@ interface NavbarProps {
 
 function Navbar(props: NavbarProps) {
   const { notifications } = props
+  const go = useNavigate()
+  const { query = '' } = useParams()
   const [open, setOpen] = useState<boolean>(false)
+  const [search, setSearch] = useState<string>(query)
   const [navbarSticky, setNavbarSticky] = useState<boolean>(false)
 
   const handleScroll = () => {
@@ -36,6 +41,20 @@ function Navbar(props: NavbarProps) {
     setOpen((current) => !current)
   }
 
+  const handleSearch = () => {
+    if (!search.trim() || search.trim() === '') {
+      toast.error('Please, provide any characters to search')
+
+      return
+    }
+
+    go(`/search/${search}`)
+  }
+
+  useEffect(() => {
+    if (query.trim() && query.trim() !== '') setSearch(query)
+  }, [query])
+
   return (
     <Fragment>
       <Box
@@ -51,10 +70,14 @@ function Navbar(props: NavbarProps) {
           <Box className="hidden md:flex items-center relative w-full max-w-[40rem]">
             <input
               type="text"
-              className="w-full p-2 px-4 border-2 border-gray-600 bg-transparent text-white rounded-full focus:outline-none focus:ring-2 focus:ring-yellow-500 transition-all outline-none duration-300"
+              value={search}
+              onChange={({ target }) => setSearch(target.value)}
+              className="w-full p-2 px-4 border-2 border-gray-600 bg-transparent text-white rounded-full focus:outline-none focus:ring-2 focus:ring-theme-red-900 transition-all outline-none duration-300"
               placeholder="Search..."
             />
-            <IconButton className="absolute right-2">
+            <IconButton
+              onClick={handleSearch}
+              className="absolute right-2">
               <IoSearch className="text-gray-400 w-5" />
             </IconButton>
           </Box>
@@ -98,10 +121,14 @@ function Navbar(props: NavbarProps) {
           <Box className="hidden md:flex items-center relative w-full mb-3">
             <input
               type="text"
-              className="w-full p-2 px-4 border-2 dark:border-zinc-600 border-zinc-900 bg-transparent dark:text-white text-black rounded-full focus:outline-none focus:ring-2 focus:ring-yellow-500 transition-all outline-none duration-300"
+              value={search}
+              onChange={({ target }) => setSearch(target.value)}
+              className="w-full p-2 px-4 border-2 dark:border-zinc-600 border-zinc-900 bg-transparent dark:text-white text-black rounded-full focus:outline-none focus:ring-2 focus:ring-theme-red-900 transition-all outline-none duration-300"
               placeholder="Search..."
             />
-            <IconButton className="absolute right-2">
+            <IconButton
+              onClick={handleSearch}
+              className="absolute right-2">
               <IoSearch className="text-gray-400 w-5" />
             </IconButton>
           </Box>

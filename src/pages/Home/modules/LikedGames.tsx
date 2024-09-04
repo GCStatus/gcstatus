@@ -36,7 +36,7 @@ function LikedGames(props: LikedGamesProps) {
               <Box className="absolute sm:bottom-6 bottom-0 sm:left-6 left-0 sm:p-6 px-1 py-4 text-white bg-gradient-to-r from-red-400/80 via-black/60 to-transparent rounded-lg shadow-lg max-w-xl w-full animate-slide-in space-y-3 sm:text-left text-center">
                 <Link
                   className="sm:text-4xl text-2xl font-bold text-white hover:text-opacity-70 transition duration-500"
-                  href={`games/${game.slug}`}>
+                  href={`/games/${game.slug}`}>
                   {game.title}
                 </Link>
                 <Typography className="text-lg mb-4">

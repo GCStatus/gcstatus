@@ -12,6 +12,7 @@
 - [x] Footer
 - [x] Tabs
 - [x] Button
+- [x] Select
 
 ### MVP (Minimum Viable Product)
 
@@ -76,6 +77,11 @@
   - [x] Implement some tabs for the game detauls
   - [x] Implement the views of a game
   - [x] Display the game comments and the possibility to comment in a game
+- [x] Implement the search on system
+  - [x] Search should display at least 100 games with no pagination on backend
+  - [x] Search should allow the user to filter category, genre, tag or platform
+  - [x] Search should allow the user to sort by likes quantity, views quantity, release date or title
+  - [x] Search should allow the user to change the quantities of items per page (pagination should work only on frontend)
 
 ### Post MVP
 

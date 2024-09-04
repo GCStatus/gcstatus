@@ -8,12 +8,7 @@
 
 ### MVP (Minimum Viable Product)
 
-- [ ] Implement the search on system
-  - [ ] Search should display at least 100 games with no pagination on backend
-  - [ ] Search should have a debounce time on change
-  - [ ] Search should allow the user to filter category, genre, tag or platform
-  - [ ] Search should allow the user to sort by likes quantity, views quantity, release date or title
-  - [ ] Search should allow the user to change the quantities of items per page (pagination should work only on frontend)
+- [ ] Implement the game sale - set the price without and with discount
 - [ ] Game news and reviews section
   - [ ] Fetch and display the latest gaming news
   - [ ] Add reviews section with filtering options

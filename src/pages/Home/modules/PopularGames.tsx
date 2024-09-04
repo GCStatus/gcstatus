@@ -42,7 +42,7 @@ function PopularGames(props: PopularGamesProps) {
         </Box>
 
         <Box className="relative z-10 w-full flex justify-between items-center mb-10 md:flex-row flex-col md:gap-0 gap-8">
-          <Link href="games/popular">
+          <Link href="/games/popular">
             <Typography
               variant="h4"
               className="text-white font-extrabold tracking-widest hot-neon-text relative animate-pulse">
@@ -90,7 +90,7 @@ function PopularGames(props: PopularGamesProps) {
       </Box>
 
       <Link
-        href="games/popular"
+        href="/games/popular"
         className="flex justify-center p-4 mt-6 border border-theme-red-900 sm:max-w-48 w-full mx-auto rounded-lg hover:bg-theme-red-900 transition duration-500 dark:text-white text-black hover:text-white">
         See more...
       </Link>

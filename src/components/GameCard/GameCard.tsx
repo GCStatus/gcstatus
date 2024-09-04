@@ -6,7 +6,11 @@ import {
   Stack,
   Typography,
 } from '@mui/material'
-import { IoHeartOutline, IoNotificationsOutline } from 'react-icons/io5'
+import {
+  IoEyeOutline,
+  IoHeartOutline,
+  IoNotificationsOutline,
+} from 'react-icons/io5'
 
 import { GameList } from '@/types'
 
@@ -47,21 +51,32 @@ function GameCard(props: GameCardProps) {
             height={view === 'grid' ? 300 : 200}
             className={`object-cover w-full h-full transform group-hover:scale-110 transition-transform duration-500 ${view === 'grid' ? 'max-h-64' : 'max-h-80'}`}
           />
-          <Box className="absolute bottom-0 left-0 w-full px-4 py-2 flex justify-between items-center backdrop-blur-sm bg-gradient-to-r from-black via-black to-red-400 opacity-85">
-            <Link href={`games/${game.slug}`}>
+          <Box className="absolute bottom-0 left-0 w-full px-4 py-2 flex sm:flex-row flex-col justify-between items-center backdrop-blur-sm bg-gradient-to-r from-black via-black to-red-400 opacity-85">
+            <Link href={`/games/${game.slug}`}>
               <Typography
                 variant="h6"
                 className="text-lg font-bold text-white hover:text-theme-red-900 transition duration-500">
                 {game.title}
               </Typography>
             </Link>
-            <Box display="flex" alignItems="center">
-              <IconButton aria-label="heart" color="primary" size="small">
-                <IoHeartOutline className="text-white" />
-              </IconButton>
-              <Typography variant="caption">
-                {game.hearts_count}
-              </Typography>
+            <Box className="flex items-center sm:flex-row flex-col sm:gap-2 gap-0">
+              <Box display="flex" alignItems="center">
+                <IconButton
+                  aria-label="heart"
+                  color="primary"
+                  size="small">
+                  <IoHeartOutline className="text-white" />
+                </IconButton>
+                <Typography variant="caption">
+                  {game.hearts_count}
+                </Typography>
+              </Box>
+              <Box className="flex items-center gap-1">
+                <IoEyeOutline className="text-white" />
+                <Typography variant="caption">
+                  {game.views_count}
+                </Typography>
+              </Box>
             </Box>
           </Box>
           <IconButton
@@ -100,12 +115,23 @@ function GameCard(props: GameCardProps) {
               {game.sale ? (
                 <div className="flex flex-col">
                   <span className="text-red-500 line-through">
-                    {game.best_price}
+                    {(game.best_price / 100).toLocaleString('en-US', {
+                      currency: 'USD',
+                      style: 'currency',
+                    })}
                   </span>
-                  <span className="text-white">{game.best_price}</span>
+                  <span className="text-white">
+                    {(game.best_price / 100).toLocaleString('en-US', {
+                      currency: 'USD',
+                      style: 'currency',
+                    })}
+                  </span>
                 </div>
               ) : (
-                game.best_price
+                (game.best_price / 100).toLocaleString('en-US', {
+                  currency: 'USD',
+                  style: 'currency',
+                })
               )}
             </Typography>
           </Box>

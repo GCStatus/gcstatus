@@ -80,8 +80,10 @@ export interface GameList {
   views_count: number
   hearts_count: number
   short_description: string
+  tags: Tag[]
   genres: Genre[]
   platforms: Platform[]
+  categories: Category[]
 }
 
 export interface Language {
@@ -134,6 +136,7 @@ export interface Torrent {
 export interface Message {
   id: number
   message: string
+  created_at: string
   by: User
   replies: Message[]
 }

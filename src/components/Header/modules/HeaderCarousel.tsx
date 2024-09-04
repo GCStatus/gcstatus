@@ -37,7 +37,7 @@ function HeaderCarousel(props: HeaderCarouselProps) {
                     title={`Go to ${related.title} details`}
                     disableInteractive>
                     <Link
-                      href={`games/${related.slug}`}
+                      href={`/games/${related.slug}`}
                       className="hover:text-yellow-400 transition duration-300">
                       {related.title}
                     </Link>

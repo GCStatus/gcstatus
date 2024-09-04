@@ -8,6 +8,7 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material'
+import { format } from 'date-fns'
 import { useState } from 'react'
 import { IoChatboxEllipsesOutline, IoSendOutline } from 'react-icons/io5'
 
@@ -32,6 +33,7 @@ function GameChat(props: GameChatProps) {
         {
           id: Date.now(),
           message: newMessage,
+          created_at: new Date().toISOString(),
           by: {
             id: 2,
             name: 'Current User',
@@ -64,6 +66,7 @@ function GameChat(props: GameChatProps) {
                   {
                     id: Date.now(),
                     message: replyMessage,
+                    created_at: new Date().toISOString(),
                     by: {
                       id: 2,
                       name: 'Current User',
@@ -118,14 +121,15 @@ function GameChat(props: GameChatProps) {
               </Avatar>
               <ListItemText
                 primary={msg.message}
-                secondary={`by ${msg.by.nickname}`}
+                secondary={`by ${msg.by.nickname} at ${format(new Date(msg.created_at), 'LLL, dd yyyy')}`}
                 primaryTypographyProps={{
-                  className: 'dark:text-white text-gray-800',
+                  className: 'dark:text-white text-gray-800 break-words',
                   variant: 'body1',
                   fontWeight: 'bold',
                 }}
                 secondaryTypographyProps={{
-                  className: 'dark:text-gray-400 text-gray-600',
+                  className:
+                    'dark:text-gray-400 text-gray-600 break-words',
                   variant: 'body2',
                 }}
               />
@@ -171,10 +175,14 @@ function GameChat(props: GameChatProps) {
                       </Avatar>
                       <ListItemText
                         primary={reply.message}
-                        secondary={`by ${reply.by.nickname}`}
+                        secondary={`by ${reply.by.nickname} - replied to ${msg.by.nickname} at ${format(new Date(reply.created_at), 'LLL, dd yyyy')}`}
                         primaryTypographyProps={{
-                          className: 'dark:text-gray-400 text-gray-600',
+                          className:
+                            'dark:text-gray-400 text-gray-600 break-words',
                           variant: 'body2',
+                        }}
+                        secondaryTypographyProps={{
+                          className: 'break-words',
                         }}
                       />
                     </Box>

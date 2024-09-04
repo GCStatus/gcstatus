@@ -53,7 +53,7 @@ function HomeNextRelease(props: HomeNextReleaseProps) {
           Next great release
         </Typography>
         <Link
-          href={`games/${game.slug}`}
+          href={`/games/${game.slug}`}
           className="text-5xl font-bold mb-4 hover:text-theme-red-900 transition duration-500">
           {game.title}
         </Link>
