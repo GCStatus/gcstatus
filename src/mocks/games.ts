@@ -11,6 +11,7 @@ export const MOCK_HOT_GAMES: GameList[] = [
     slug: 'ghost-of-tsushima',
     short_description: '',
     best_price: 1990,
+    commom_price: 1990,
     release: '2024-09-01',
     platforms: [
       { id: 1, slug: 'ps5', name: 'PS5' },
@@ -47,6 +48,7 @@ export const MOCK_HOT_GAMES: GameList[] = [
     slug: 'black-myth-wukong',
     short_description: '',
     best_price: 1990,
+    commom_price: 1990,
     release: '2024-09-01',
     platforms: [
       { id: 1, slug: 'ps5', name: 'PS5' },
@@ -87,6 +89,7 @@ export const MOCK_HOT_GAMES: GameList[] = [
     slug: 'god-of-war-ragnarok',
     short_description: '',
     best_price: 1990,
+    commom_price: 1990,
     release: '2024-09-01',
     platforms: [
       { id: 1, slug: 'ps5', name: 'PS5' },
@@ -121,6 +124,7 @@ export const MOCK_HOT_GAMES: GameList[] = [
     slug: 'the-callisto-protocol',
     short_description: '',
     best_price: 1990,
+    commom_price: 1990,
     release: '2024-09-01',
     platforms: [
       { id: 1, slug: 'ps5', name: 'PS5' },
@@ -159,6 +163,7 @@ export const MOCK_HOT_GAMES: GameList[] = [
     slug: 'prince-of-persia-the-lost-crown',
     short_description: '',
     best_price: 1990,
+    commom_price: 1990,
     release: '2024-09-01',
     platforms: [
       { id: 1, slug: 'ps5', name: 'PS5' },
@@ -201,6 +206,7 @@ export const MOCK_HOT_GAMES: GameList[] = [
     slug: 'the-last-of-us-part-ii-remastered',
     short_description: '',
     best_price: 1990,
+    commom_price: 1990,
     release: '2024-09-01',
     platforms: [{ id: 1, slug: 'ps5', name: 'PS5' }],
     genres: [
@@ -233,6 +239,7 @@ export const MOCK_HOT_GAMES: GameList[] = [
     slug: 'granblue-fantasy-relink',
     short_description: '',
     best_price: 1990,
+    commom_price: 1990,
     release: '2024-09-01',
     platforms: [
       { id: 1, slug: 'ps5', name: 'PS5' },
@@ -271,6 +278,7 @@ export const MOCK_HOT_GAMES: GameList[] = [
     slug: 'persona-3-reload',
     short_description: '',
     best_price: 1990,
+    commom_price: 1990,
     release: '2024-02-01',
     platforms: [
       { id: 1, slug: 'ps5', name: 'PS5' },
@@ -312,6 +320,7 @@ export const MOCK_HOT_GAMES: GameList[] = [
     slug: 'assassins-creed-shadows',
     short_description: '',
     best_price: 1990,
+    commom_price: 1990,
     release: '2024-11-12',
     platforms: [
       { id: 1, slug: 'ps5', name: 'PS5' },
@@ -354,6 +363,7 @@ export const MOCK_POPULAR_GAMES: GameList[] = [
     slug: 'ghost-of-tsushima',
     short_description: '',
     best_price: 1990,
+    commom_price: 1990,
     release: '2024-09-01',
     platforms: [
       { id: 1, slug: 'ps5', name: 'PS5' },
@@ -390,6 +400,7 @@ export const MOCK_POPULAR_GAMES: GameList[] = [
     slug: 'black-myth-wukong',
     short_description: '',
     best_price: 1990,
+    commom_price: 1990,
     release: '2024-09-01',
     platforms: [
       { id: 1, slug: 'ps5', name: 'PS5' },
@@ -430,6 +441,7 @@ export const MOCK_POPULAR_GAMES: GameList[] = [
     slug: 'god-of-war-ragnarok',
     short_description: '',
     best_price: 1990,
+    commom_price: 1990,
     release: '2024-09-01',
     platforms: [
       { id: 1, slug: 'ps5', name: 'PS5' },
@@ -464,6 +476,7 @@ export const MOCK_POPULAR_GAMES: GameList[] = [
     slug: 'the-callisto-protocol',
     short_description: '',
     best_price: 1990,
+    commom_price: 1990,
     release: '2024-09-01',
     platforms: [
       { id: 1, slug: 'ps5', name: 'PS5' },
@@ -502,6 +515,7 @@ export const MOCK_POPULAR_GAMES: GameList[] = [
     slug: 'prince-of-persia-the-lost-crown',
     short_description: '',
     best_price: 1990,
+    commom_price: 1990,
     release: '2024-09-01',
     platforms: [
       { id: 1, slug: 'ps5', name: 'PS5' },
@@ -544,6 +558,7 @@ export const MOCK_POPULAR_GAMES: GameList[] = [
     slug: 'the-last-of-us-part-ii-remastered',
     short_description: '',
     best_price: 1990,
+    commom_price: 1990,
     release: '2024-09-01',
     platforms: [{ id: 1, slug: 'ps5', name: 'PS5' }],
     genres: [
@@ -576,6 +591,7 @@ export const MOCK_POPULAR_GAMES: GameList[] = [
     slug: 'granblue-fantasy-relink',
     short_description: '',
     best_price: 1990,
+    commom_price: 1990,
     release: '2024-09-01',
     platforms: [
       { id: 1, slug: 'ps5', name: 'PS5' },
@@ -614,6 +630,7 @@ export const MOCK_POPULAR_GAMES: GameList[] = [
     slug: 'persona-3-reload',
     short_description: '',
     best_price: 1990,
+    commom_price: 1990,
     release: '2024-02-01',
     platforms: [
       { id: 1, slug: 'ps5', name: 'PS5' },
@@ -655,6 +672,7 @@ export const MOCK_POPULAR_GAMES: GameList[] = [
     slug: 'assassins-creed-shadows',
     short_description: '',
     best_price: 1990,
+    commom_price: 1990,
     release: '2024-11-12',
     platforms: [
       { id: 1, slug: 'ps5', name: 'PS5' },
@@ -697,6 +715,7 @@ export const MOCK_MOST_LIKED_GAMES: GameList[] = [
     slug: 'ghost-of-tsushima',
     short_description: '',
     best_price: 1990,
+    commom_price: 1990,
     release: '2024-09-01',
     platforms: [
       { id: 1, slug: 'ps5', name: 'PS5' },
@@ -733,6 +752,7 @@ export const MOCK_MOST_LIKED_GAMES: GameList[] = [
     slug: 'black-myth-wukong',
     short_description: '',
     best_price: 1990,
+    commom_price: 1990,
     release: '2024-09-01',
     platforms: [
       { id: 1, slug: 'ps5', name: 'PS5' },
@@ -773,6 +793,7 @@ export const MOCK_MOST_LIKED_GAMES: GameList[] = [
     slug: 'god-of-war-ragnarok',
     short_description: '',
     best_price: 1990,
+    commom_price: 1990,
     release: '2024-09-01',
     platforms: [
       { id: 1, slug: 'ps5', name: 'PS5' },
@@ -807,6 +828,7 @@ export const MOCK_MOST_LIKED_GAMES: GameList[] = [
     slug: 'the-callisto-protocol',
     short_description: '',
     best_price: 1990,
+    commom_price: 1990,
     release: '2024-09-01',
     platforms: [
       { id: 1, slug: 'ps5', name: 'PS5' },
@@ -845,6 +867,7 @@ export const MOCK_MOST_LIKED_GAMES: GameList[] = [
     slug: 'prince-of-persia-the-lost-crown',
     short_description: '',
     best_price: 1990,
+    commom_price: 1990,
     release: '2024-09-01',
     platforms: [
       { id: 1, slug: 'ps5', name: 'PS5' },
@@ -887,6 +910,7 @@ export const MOCK_MOST_LIKED_GAMES: GameList[] = [
     slug: 'the-last-of-us-part-ii-remastered',
     short_description: '',
     best_price: 1990,
+    commom_price: 1990,
     release: '2024-09-01',
     platforms: [{ id: 1, slug: 'ps5', name: 'PS5' }],
     genres: [
@@ -919,6 +943,7 @@ export const MOCK_MOST_LIKED_GAMES: GameList[] = [
     slug: 'granblue-fantasy-relink',
     short_description: '',
     best_price: 1990,
+    commom_price: 1990,
     release: '2024-09-01',
     platforms: [
       { id: 1, slug: 'ps5', name: 'PS5' },
@@ -957,6 +982,7 @@ export const MOCK_MOST_LIKED_GAMES: GameList[] = [
     slug: 'persona-3-reload',
     short_description: '',
     best_price: 1990,
+    commom_price: 1990,
     release: '2024-02-01',
     platforms: [
       { id: 1, slug: 'ps5', name: 'PS5' },
@@ -998,6 +1024,7 @@ export const MOCK_MOST_LIKED_GAMES: GameList[] = [
     slug: 'assassins-creed-shadows',
     short_description: '',
     best_price: 1990,
+    commom_price: 1990,
     release: '2024-11-12',
     platforms: [
       { id: 1, slug: 'ps5', name: 'PS5' },
@@ -1040,6 +1067,7 @@ export const MOCK_UPCOMING_GAMES: GameList[] = [
     slug: 'ghost-of-tsushima',
     short_description: '',
     best_price: 1990,
+    commom_price: 1990,
     release: '2024-09-01',
     platforms: [
       { id: 1, slug: 'ps5', name: 'PS5' },
@@ -1076,6 +1104,7 @@ export const MOCK_UPCOMING_GAMES: GameList[] = [
     slug: 'black-myth-wukong',
     short_description: '',
     best_price: 1990,
+    commom_price: 1990,
     release: '2024-09-01',
     platforms: [
       { id: 1, slug: 'ps5', name: 'PS5' },
@@ -1116,6 +1145,7 @@ export const MOCK_UPCOMING_GAMES: GameList[] = [
     slug: 'god-of-war-ragnarok',
     short_description: '',
     best_price: 1990,
+    commom_price: 1990,
     release: '2024-09-01',
     platforms: [
       { id: 1, slug: 'ps5', name: 'PS5' },
@@ -1150,6 +1180,7 @@ export const MOCK_UPCOMING_GAMES: GameList[] = [
     slug: 'the-callisto-protocol',
     short_description: '',
     best_price: 1990,
+    commom_price: 1990,
     release: '2024-09-01',
     platforms: [
       { id: 1, slug: 'ps5', name: 'PS5' },
@@ -1188,6 +1219,7 @@ export const MOCK_UPCOMING_GAMES: GameList[] = [
     slug: 'prince-of-persia-the-lost-crown',
     short_description: '',
     best_price: 1990,
+    commom_price: 1990,
     release: '2024-09-01',
     platforms: [
       { id: 1, slug: 'ps5', name: 'PS5' },
@@ -1230,6 +1262,7 @@ export const MOCK_UPCOMING_GAMES: GameList[] = [
     slug: 'the-last-of-us-part-ii-remastered',
     short_description: '',
     best_price: 1990,
+    commom_price: 1990,
     release: '2024-09-01',
     platforms: [{ id: 1, slug: 'ps5', name: 'PS5' }],
     genres: [
@@ -1262,6 +1295,7 @@ export const MOCK_UPCOMING_GAMES: GameList[] = [
     slug: 'granblue-fantasy-relink',
     short_description: '',
     best_price: 1990,
+    commom_price: 1990,
     release: '2024-09-01',
     platforms: [
       { id: 1, slug: 'ps5', name: 'PS5' },
@@ -1300,6 +1334,7 @@ export const MOCK_UPCOMING_GAMES: GameList[] = [
     slug: 'persona-3-reload',
     short_description: '',
     best_price: 1990,
+    commom_price: 1990,
     release: '2024-02-01',
     platforms: [
       { id: 1, slug: 'ps5', name: 'PS5' },
@@ -1341,6 +1376,7 @@ export const MOCK_UPCOMING_GAMES: GameList[] = [
     slug: 'assassins-creed-shadows',
     short_description: '',
     best_price: 1990,
+    commom_price: 1990,
     release: '2024-11-12',
     platforms: [
       { id: 1, slug: 'ps5', name: 'PS5' },
@@ -1407,6 +1443,7 @@ for (let i = 0; i < 100; i++) {
     title: faker.lorem.words({ min: 1, max: 3 }),
     slug: faker.lorem.slug(),
     short_description: faker.lorem.text(),
+    commom_price: faker.number.int({ min: 1990, max: 99999 }),
     best_price: faker.number.int({ min: 1990, max: 99999 }),
     release: format(faker.date.anytime(), 'yyyy-MM-dd'),
     platforms: [

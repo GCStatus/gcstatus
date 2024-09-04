@@ -143,7 +143,7 @@ function Navbar(props: NavbarProps) {
             Release Calendar
           </Link>
           <Link
-            href="#"
+            href="/profile"
             className="block py-2 px-4 dark:hover:bg-zinc-800 hover:bg-gray-100 rounded-lg transition duration-200 dark:text-gray-300 text-zinc-800">
             Profile
           </Link>

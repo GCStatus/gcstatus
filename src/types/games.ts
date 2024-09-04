@@ -78,6 +78,7 @@ export interface GameList {
   release: string
   best_price: number
   views_count: number
+  commom_price: number
   hearts_count: number
   short_description: string
   tags: Tag[]

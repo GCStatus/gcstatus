@@ -115,7 +115,7 @@ function GameCard(props: GameCardProps) {
               {game.sale ? (
                 <div className="flex flex-col">
                   <span className="text-red-500 line-through">
-                    {(game.best_price / 100).toLocaleString('en-US', {
+                    {(game.commom_price / 100).toLocaleString('en-US', {
                       currency: 'USD',
                       style: 'currency',
                     })}

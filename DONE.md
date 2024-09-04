@@ -82,6 +82,7 @@
   - [x] Search should allow the user to filter category, genre, tag or platform
   - [x] Search should allow the user to sort by likes quantity, views quantity, release date or title
   - [x] Search should allow the user to change the quantities of items per page (pagination should work only on frontend)
+- [x] Implement the game sale - set the price without and with discount
 
 ### Post MVP
 
