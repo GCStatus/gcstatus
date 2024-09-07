@@ -206,7 +206,19 @@ function Search() {
           count={Math.ceil(totalGames / pageSize)}
           page={currentPage}
           onChange={handlePageChange}
-          className="text-theme-red-900"
+          sx={{
+            '& .MuiPaginationItem-root': {
+              color: '#ff4d4d',
+              '&:hover': {
+                color: '#fff',
+                bgcolor: '#ff4d4d',
+              },
+            },
+            '& .Mui-selected': {
+              color: '#fff',
+              bgcolor: '#ff4d4d',
+            },
+          }}
         />
       </Box>
     </Container>

@@ -16,3 +16,15 @@ export interface User {
   updated_at: string
   profile?: Profile
 }
+
+export interface UpdateUserInterface {
+  email: string
+  nickname: string
+  password: string
+}
+
+export interface UpdatePasswordInterface {
+  old_password: string
+  password: string
+  password_confirmation: string
+}

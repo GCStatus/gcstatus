@@ -7,6 +7,7 @@ import { DefaultLayout } from './layouts'
 export const Routes = () => {
   const Home = L(lazy(() => import('./pages/Home')))
   const Search = L(lazy(() => import('./pages/Search')))
+  const Profile = L(lazy(() => import('./pages/Profile')))
   const Calendar = L(lazy(() => import('./pages/Calendar')))
   const GameDetails = L(lazy(() => import('./pages/Game/Details')))
 
@@ -21,6 +22,10 @@ export const Routes = () => {
         {
           path: '/releases/calendar',
           element: <Calendar />,
+        },
+        {
+          path: '/profile',
+          children: [{ index: true, element: <Profile /> }],
         },
         {
           path: '/search/:query',

@@ -6,6 +6,26 @@ const baseTheme = createTheme({
     fontFamily: 'Audiowide',
   },
   components: {
+    MuiPaper: {
+      styleOverrides: { root: { backgroundImage: 'unset' } },
+    },
+    MuiPagination: {
+      styleOverrides: {
+        root: {
+          '& .MuiPaginationItem-root': {
+            color: '#ff4d4d',
+            '&:hover': {
+              color: '#fff',
+              bgcolor: '#ff4d4d',
+            },
+          },
+          '& .Mui-selected': {
+            color: '#fff',
+            bgcolor: '#ff4d4d',
+          },
+        },
+      },
+    },
     MuiLink: {
       styleOverrides: {
         root: {

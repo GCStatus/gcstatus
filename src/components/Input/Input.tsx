@@ -75,7 +75,7 @@ function Input(
           <button
             type="button"
             onClick={toggleVisibility}
-            className="flex items-center text-gray-500 hover:text-white focus:outline-none p-2">
+            className="flex items-center text-gray-500 dark:hover:text-white hover:text-gray-600 focus:outline-none p-2 transition-colors duration-300">
             {passVisible ? (
               <IoEyeOutline size={20} />
             ) : (
@@ -85,12 +85,14 @@ function Input(
         )}
 
         {icon && (
-          <div className="flex items-center text-gray-500 p-2">{icon}</div>
+          <div className="flex items-center dark:text-white text-gray-500 p-2">
+            {icon}
+          </div>
         )}
       </div>
 
       {error && helperText && (
-        <span className="text-red-500 flex justify-start mt-1 text-sm">
+        <span className="text-red-500 flex justify-start mt-1 text-sm animate-fade-in">
           {helperText}
         </span>
       )}

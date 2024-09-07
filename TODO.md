@@ -8,7 +8,7 @@
 
 ### MVP (Minimum Viable Product)
 
-- [ ] Implement the game sale - set the price without and with discount
+- [ ] Implement the game details sale - display the best price on the platforms
 - [ ] Game news and reviews section
   - [ ] Fetch and display the latest gaming news
   - [ ] Add reviews section with filtering options
@@ -57,3 +57,27 @@
 - [ ] Floating card for socials and theme switcher
 - [ ] Quiz & polls: about the most exciting game release on future or something else
 - [ ] Integrate with social medias
+- [ ] Experience system
+  - [ ] Users must have a level on platform
+- [ ] Missions system
+  - [ ] Create missions for the users
+  - [ ] Add possibility to create missions for specic users
+  - [ ] Missions can have the possibility to reward with coins and experience
+  - [ ] Missions can have the possibility to have a quiz associated
+- [ ] Coin system
+  - [ ] Create missions to earn coins
+  - [ ] Create daily tasks to earn free coins
+  - [ ] Create a system to reward user to do something on platform, like comment in a game
+    - [ ] Block user to earn coins for commenting the same game (or reduce the amount for each task doing)
+  - [ ] Add possibility to buy coins
+  - [ ] Some quizzez can reward with coins
+- [ ] Title system
+  - [ ] Create titles requirements
+  - [ ] Add posibility to purchase some titles by coins
+  - [ ] Some titles could be earned by doing missions/quests
+  - [ ] Some titles could be earned just getting some level
+  - [ ] Some titles could be earned by hitting a percentage of a quiz
+- [ ] User transactions
+  - [ ] Make a system to check user transactions with coins
+- [ ] Orders
+  - [ ] Make an order system to purchase coins
