@@ -96,3 +96,5 @@
 ### Post MVP
 
 - [x] Integrate a game release calendar
+- [x] Floating card for socials and theme switcher
+  - [x] Switcher to enable and disable floating menu

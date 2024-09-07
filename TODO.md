@@ -54,7 +54,6 @@
   - [ ] Pull in live data from gaming APIs like Twitch or Steam
   - [ ] Display trending streams or game stats
 - [ ] Add some games on the website
-- [ ] Floating card for socials and theme switcher
 - [ ] Quiz & polls: about the most exciting game release on future or something else
 - [ ] Integrate with social medias
 - [ ] Experience system
