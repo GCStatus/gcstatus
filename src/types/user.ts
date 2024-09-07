@@ -22,3 +22,9 @@ export interface UpdateUserInterface {
   nickname: string
   password: string
 }
+
+export interface UpdatePasswordInterface {
+  old_password: string
+  password: string
+  password_confirmation: string
+}

@@ -92,7 +92,7 @@ function Input(
       </div>
 
       {error && helperText && (
-        <span className="text-red-500 flex justify-start mt-1 text-sm">
+        <span className="text-red-500 flex justify-start mt-1 text-sm animate-fade-in">
           {helperText}
         </span>
       )}

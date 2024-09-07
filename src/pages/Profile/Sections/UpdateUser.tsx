@@ -4,7 +4,7 @@ import { RegisterOptions, SubmitHandler, useForm } from 'react-hook-form'
 import { Button, Input } from '@/components'
 import { UpdateUserInterface } from '@/types'
 
-import { updateUserValidations } from './validations'
+import { updateUserValidations } from '../validations'
 
 function UpdateUser() {
   const {
@@ -35,7 +35,7 @@ function UpdateUser() {
     <Stack
       component="form"
       onSubmit={handleSubmit(onSubmt)}
-      className="p-6 rounded-lg animate-fade-in">
+      className="md:p-6 p-2 rounded-lg animate-fade-in">
       <Typography
         variant="h2"
         className="text-2xl font-bold mb-6 text-theme-red-900">

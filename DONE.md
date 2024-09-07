@@ -83,6 +83,15 @@
   - [x] Search should allow the user to sort by likes quantity, views quantity, release date or title
   - [x] Search should allow the user to change the quantities of items per page (pagination should work only on frontend)
 - [x] Implement the game sale - set the price without and with discount
+- [x] Profile screen
+  - [x] Titles section
+  - [x] Coins section
+  - [x] Missions section
+  - [x] Change password section
+  - [x] Change nickname and email section
+  - [x] Change picture with crop section
+  - [x] User transactions section
+  - [x] User orders section
 
 ### Post MVP
 
