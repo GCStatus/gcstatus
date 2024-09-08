@@ -35,17 +35,17 @@ function Search() {
   const [games, setGames] = useState<GameList[]>([])
   const [totalGames, setTotalGames] = useState<number>(0)
   const [currentPage, setCurrentPage] = useState<number>(1)
-  const [pageSize, setPageSize] = useState<number>(12)
+  const [pageSize, setPageSize] = useState<number>(5)
   const [view, setView] = useState<'grid' | 'list'>('grid')
   const [isAnimating, setIsAnimating] = useState<boolean>(false)
   const [filters, setFilters] = useState<{
-    category?: string
-    genre?: string
-    platform?: string
+    Category?: string
+    Genre?: string
+    Platform?: string
   }>({
-    genre: '',
-    platform: '',
-    category: '',
+    Genre: '',
+    Platform: '',
+    Category: '',
   })
   const [sort, setSort] = useState<SortState>({
     field: 'title',
@@ -64,12 +64,12 @@ function Search() {
     const filteredGames = MOCK_SEARCH_GAMES.filter(
       ({ categories, platforms, genres }) => {
         return (
-          (!filters.category ||
-            categories.some(({ name }) => name === filters.category)) &&
-          (!filters.genre ||
-            genres.some(({ name }) => name === filters.genre)) &&
-          (!filters.platform ||
-            platforms.some(({ name }) => name === filters.platform))
+          (!filters.Category ||
+            categories.some(({ name }) => name === filters.Category)) &&
+          (!filters.Genre ||
+            genres.some(({ name }) => name === filters.Genre)) &&
+          (!filters.Platform ||
+            platforms.some(({ name }) => name === filters.Platform))
         )
       },
     )
@@ -216,7 +216,7 @@ function Search() {
             },
             '& .Mui-selected': {
               color: '#fff',
-              bgcolor: '#ff4d4d',
+              bgcolor: '#ff4d4d !important',
             },
           }}
         />

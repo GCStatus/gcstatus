@@ -28,6 +28,20 @@ function SwitchSidebar() {
                 handleToggleSidebar(enabled === 'yes' ? 'no' : 'yes')
               }
               name="enabled"
+              sx={{
+                '& .MuiSwitch-switchBase': {
+                  color: '#ff4d4d',
+                },
+                '& .MuiSwitch-switchBase.Mui-checked': {
+                  color: '#ff4d4d',
+                },
+                '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
+                  backgroundColor: '#ff4d4d',
+                },
+                '& .MuiSwitch-track': {
+                  backgroundColor: '#ccc',
+                },
+              }}
             />
           }
           label="Floating sidebar enabled"

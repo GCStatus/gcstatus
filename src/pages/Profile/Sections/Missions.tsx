@@ -48,7 +48,7 @@ function Missions() {
   }
 
   return (
-    <Stack className="md:p-6 p-2 rounded-lg animate-fade-in bg-theme-dark-900 min-h-screen">
+    <Stack className="md:p-6 p-2 rounded-lg animate-fade-in dark:bg-theme-dark-900 bg-transparent min-h-screen">
       <Typography
         variant="h2"
         className="text-3xl font-extrabold mb-8 text-theme-red-900">
@@ -63,7 +63,7 @@ function Missions() {
           return (
             <Card
               key={mission.id}
-              className={`relative bg-theme-dark-900 p-6 rounded-xl border border-theme-red-900 ${
+              className={`relative p-6 dark:bg-theme-dark-900 bg-transparent rounded-xl border border-theme-red-900 ${
                 shouldApplyOpacity
                   ? 'opacity-50'
                   : 'hover:-translate-y-2 shadow-lg duration-500 hover:shadow-2xl hover:border-red-700 transition-transform'
@@ -72,7 +72,7 @@ function Missions() {
                 <Typography className="md:text-2xl text-xl font-bold mb-4 text-theme-red-900">
                   {mission.title}
                 </Typography>
-                <Typography className="text-gray-400 mb-6">
+                <Typography className="dark:text-gray-400 text-gray-500 mb-6">
                   {mission.description}
                 </Typography>
 
@@ -84,12 +84,11 @@ function Missions() {
                   <LinearProgress
                     variant="determinate"
                     value={calculateOverallProgress(mission.requirements)}
-                    className="h-2 rounded-full"
+                    className="h-2 rounded-full dark:bg-zinc-900 bg-gray-300"
                     sx={{
                       '& .MuiLinearProgress-bar': {
                         backgroundColor: '#ff4d4d',
                       },
-                      backgroundColor: '#333',
                     }}
                   />
                   <Box className="absolute right-0 -top-6 text-white text-sm font-bold">
@@ -110,7 +109,7 @@ function Missions() {
                     <Box
                       key={req.id}
                       className="flex justify-between items-center text-gray-200 p-4 rounded-lg border border-zinc-900 my-2">
-                      <Typography className="text-base">
+                      <Typography className="dark:text-gray-400 text-gray-500 text-base">
                         {req.task}
                       </Typography>
                       <Typography className="font-bold text-theme-red-900">
@@ -135,7 +134,7 @@ function Missions() {
                     <Box
                       key={reward.id}
                       className="flex justify-between items-center text-gray-200 p-4 rounded-lg border border-zinc-900 my-2">
-                      <Typography className="text-base capitalize">
+                      <Typography className="dark:text-gray-400 text-gray-500 text-base capitalize">
                         {reward.type}
                       </Typography>
                       <Typography className="font-bold text-theme-red-900">
@@ -205,7 +204,7 @@ function Missions() {
             },
             '& .Mui-selected': {
               color: '#fff',
-              bgcolor: '#ff4d4d',
+              bgcolor: '#ff4d4d !important',
             },
           }}
         />

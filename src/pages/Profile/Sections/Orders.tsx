@@ -143,7 +143,7 @@ function Orders() {
             },
             '& .Mui-selected': {
               color: '#fff',
-              bgcolor: '#ff4d4d',
+              bgcolor: '#ff4d4d !important',
             },
           }}
         />

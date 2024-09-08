@@ -9,7 +9,10 @@ export const Routes = () => {
   const Search = L(lazy(() => import('./pages/Search')))
   const Profile = L(lazy(() => import('./pages/Profile')))
   const Calendar = L(lazy(() => import('./pages/Calendar')))
+  const GameTags = L(lazy(() => import('./pages/Game/Tags')))
+  const GameGenres = L(lazy(() => import('./pages/Game/Genres')))
   const GameDetails = L(lazy(() => import('./pages/Game/Details')))
+  const GameCategories = L(lazy(() => import('./pages/Game/Categories')))
 
   return useRoutes([
     {
@@ -38,6 +41,9 @@ export const Routes = () => {
             { path: ':slug', element: <GameDetails /> },
           ],
         },
+        { path: '/tags/:tag', element: <GameTags /> },
+        { path: '/genres/:genre', element: <GameGenres /> },
+        { path: '/categories/:category', element: <GameCategories /> },
       ],
     },
   ])

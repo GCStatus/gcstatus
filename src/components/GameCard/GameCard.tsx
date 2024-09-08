@@ -37,7 +37,7 @@ function GameCard(props: GameCardProps) {
         {game.badge && (
           <Chip
             label={game.badge}
-            className="absolute top-2 left-2 z-10 bg-gradient-to-r from-theme-red-900 to-yellow-500 text-sm font-bold"
+            className="absolute top-2 left-2 z-10 bg-gradient-to-r from-theme-red-900 to-yellow-500 text-sm font-bold text-white"
             style={{
               boxShadow: '0 0 10px rgba(255, 255, 255, 0.7)',
             }}
@@ -100,10 +100,13 @@ function GameCard(props: GameCardProps) {
           <Box className="grid xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-2 grid-cols-1 items-center my-2 sm:gap-1 gap-2 w-full">
             {game.platforms.map((platform) => (
               <Link
-                href={`platforms/${platform.slug}`}
-                className="bg-gray-800 px-3 py-1 rounded-full sm:w-auto w-full text-center"
+                href={`/platforms/${platform.slug}`}
+                className="dark:bg-gray-800 bg-gray-300 dark:text-white text-black px-3 py-1 rounded-full sm:w-auto w-full text-center"
                 key={platform.id}>
-                <Typography component="span" fontSize={13}>
+                <Typography
+                  component="span"
+                  fontSize={13}
+                  fontWeight="bold">
                   {platform.name}
                 </Typography>
               </Link>
@@ -139,7 +142,7 @@ function GameCard(props: GameCardProps) {
 
         <Box className="flex flex-wrap gap-2 my-2 w-full mt-auto">
           {game.genres.map((genre) => (
-            <Link href={`genres/${genre.slug}`} key={genre.id}>
+            <Link href={`/genres/${genre.slug}`} key={genre.id}>
               <Chip
                 className="font-bold border border-theme-red-900 text-theme-red-900 sm:w-auto w-full"
                 label={genre.name}

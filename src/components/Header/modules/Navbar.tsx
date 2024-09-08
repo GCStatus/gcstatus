@@ -150,11 +150,6 @@ function Navbar(props: NavbarProps) {
           <Link
             href="#"
             className="block py-2 px-4 dark:hover:bg-zinc-800 hover:bg-gray-100 rounded-lg transition duration-200 dark:text-gray-300 text-zinc-800">
-            Settings
-          </Link>
-          <Link
-            href="#"
-            className="block py-2 px-4 dark:hover:bg-zinc-800 hover:bg-gray-100 rounded-lg transition duration-200 dark:text-gray-300 text-zinc-800">
             Logout
           </Link>
           <SwitchTheme />

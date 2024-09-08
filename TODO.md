@@ -14,7 +14,9 @@
   - [ ] Add reviews section with filtering options
   - [ ] Implement search functionality for news and reviews
 - [ ] User authentication
-  - [ ] Set up user registration and login using Firebase or Auth0
+  - [ ] Create login and register page
+  - [ ] Create page to forgot password and reset
+  - [ ] Set up user registration and login
   - [ ] Implement OAuth for Google and Facebook
   - [ ] Create a user profile page with editable settings
 - [ ] Community forum
