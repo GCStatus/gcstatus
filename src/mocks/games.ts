@@ -3,6 +3,8 @@ import { format } from 'date-fns'
 
 import { GameList, NextRelease } from '@/types'
 
+import { MOCK_CATEGORIES, MOCK_GENRES, MOCK_PLATFORMS, MOCK_TAGS } from '.'
+
 export const MOCK_HOT_GAMES: GameList[] = [
   {
     id: 1,
@@ -1446,29 +1448,10 @@ for (let i = 0; i < 100; i++) {
     commom_price: faker.number.int({ min: 1990, max: 99999 }),
     best_price: faker.number.int({ min: 1990, max: 99999 }),
     release: format(faker.date.anytime(), 'yyyy-MM-dd'),
-    platforms: [
-      { id: 1, slug: 'ps5', name: 'PS5' },
-      { id: 2, slug: 'ps4', name: 'PS4' },
-      { id: 3, slug: 'pc', name: 'PC' },
-    ],
-    genres: [
-      { id: 1, slug: 'action', name: 'Action' },
-      { id: 2, slug: 'adventure', name: 'Adventure' },
-      { id: 3, slug: 'single-player', name: 'Single-player' },
-      { id: 10, slug: 'samurai', name: 'Samurai' },
-    ],
-    categories: [{ id: 1, slug: 'action', name: 'Action' }],
-    tags: [
-      { id: 13, slug: 'souls', name: 'Souls' },
-      { id: 12, slug: 'uncracked', name: 'Uncracked' },
-      { id: 9, slug: 'denuvo', name: 'Denuvo' },
-      { id: 8, slug: 'rpg', name: 'RPG' },
-      { id: 1, slug: 'action', name: 'Action' },
-      { id: 2, slug: 'adventure', name: 'Adventure' },
-      { id: 3, slug: 'single-player', name: 'Single-player' },
-      { id: 4, slug: 'fantasy', name: 'Fantasy' },
-      { id: 5, slug: 'mythologic', name: 'Mythologic' },
-    ],
+    platforms: faker.helpers.arrayElements(MOCK_PLATFORMS),
+    genres: faker.helpers.arrayElements(MOCK_GENRES),
+    categories: faker.helpers.arrayElements(MOCK_CATEGORIES),
+    tags: faker.helpers.arrayElements(MOCK_TAGS),
     badge: 'hot',
     views_count: faker.number.int({ min: 1, max: 99999 }),
     hearts_count: faker.number.int({ min: 1, max: 99999 }),

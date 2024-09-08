@@ -93,8 +93,9 @@
   - [x] User transactions section
   - [x] User orders section
 - [x] Create page to filter games by:
-  - [x] Genres
   - [x] Tags
+  - [x] Genres
+  - [x] Platforms
   - [x] Categories
 
 ### Post MVP

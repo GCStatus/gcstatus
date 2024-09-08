@@ -15,6 +15,7 @@ export interface SortState {
 }
 
 function useGames(params: {
+  platform?: string
   category?: string
   genre?: string
   tag?: string
@@ -46,6 +47,12 @@ function useGames(params: {
     if (params.tag) {
       filteredGames = filteredGames.filter((game) =>
         game.tags.some(({ slug }) => slug === params.tag),
+      )
+    }
+
+    if (params.platform) {
+      filteredGames = filteredGames.filter((game) =>
+        game.platforms.some(({ slug }) => slug === params.platform),
       )
     }
 

@@ -12,6 +12,7 @@ export const Routes = () => {
   const GameTags = L(lazy(() => import('./pages/Game/Tags')))
   const GameGenres = L(lazy(() => import('./pages/Game/Genres')))
   const GameDetails = L(lazy(() => import('./pages/Game/Details')))
+  const GamePlatforms = L(lazy(() => import('./pages/Game/Platforms')))
   const GameCategories = L(lazy(() => import('./pages/Game/Categories')))
 
   return useRoutes([
@@ -43,6 +44,7 @@ export const Routes = () => {
         },
         { path: '/tags/:tag', element: <GameTags /> },
         { path: '/genres/:genre', element: <GameGenres /> },
+        { path: '/platforms/:platform', element: <GamePlatforms /> },
         { path: '/categories/:category', element: <GameCategories /> },
       ],
     },
