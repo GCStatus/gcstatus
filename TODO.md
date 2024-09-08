@@ -14,8 +14,8 @@
   - [ ] Add reviews section with filtering options
   - [ ] Implement search functionality for news and reviews
 - [ ] User authentication
-  - [ ] Create login and register page
-  - [ ] Create page to forgot password and reset
+  - [x] Create login and register page
+  - [x] Create page to forgot password and reset
   - [ ] Set up user registration and login
   - [ ] Implement OAuth for Google and Facebook
   - [ ] Create a user profile page with editable settings

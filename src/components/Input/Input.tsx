@@ -3,6 +3,7 @@ import {
   forwardRef,
   InputHTMLAttributes,
   ReactNode,
+  Ref,
   TextareaHTMLAttributes,
   useState,
 } from 'react'
@@ -42,23 +43,25 @@ function Input(
     setPassVisible((prev) => !prev)
   }
 
-  const baseClass = `px-4 py-2 rounded-md bg-transparent dark:text-white text-black placeholder-gray-400 focus:outline-none transition-colors duration-300 ${
+  const baseClass = `px-4 py-2 rounded-md bg-transparent dark:text-white text-black placeholder-gray-400 focus:outline-none transition-colors duration-300 glowing-input ${
     isFull ? 'w-full' : 'w-auto'
-  } ${error ? 'border-red-500' : 'border-zinc-600'} ${customClass}`
+  } ${error ? 'border-red-500 animate-shake' : 'border-zinc-600'} ${customClass} ${
+    type === 'password' ? 'pr-12' : 'pr-4'
+  }`
 
   return (
     <div className={`relative ${isFull ? 'w-full' : 'inline-block'}`}>
       {label && (
-        <label className="block dark:text-white text-gray-600 font-semibold mb-1">
+        <label className="block dark:text-white text-gray-600 font-semibold mb-1 break-words">
           {label}
         </label>
       )}
 
-      <div className="flex items-center border border-zinc-600 rounded-md">
+      <div className="relative flex items-center border border-zinc-600 rounded-md">
         {area ? (
           <textarea
             rows={rows}
-            ref={ref as React.Ref<HTMLTextAreaElement>}
+            ref={ref as Ref<HTMLTextAreaElement>}
             className={`${baseClass} resize-y flex-grow`}
             {...(rest as TextareaHTMLAttributes<HTMLTextAreaElement>)}
           />
@@ -66,7 +69,7 @@ function Input(
           <input
             ref={ref as React.Ref<HTMLInputElement>}
             type={type === 'password' && passVisible ? 'text' : type}
-            className={`${baseClass} pr-12 flex-grow`}
+            className={baseClass}
             {...rest}
           />
         )}
@@ -75,7 +78,7 @@ function Input(
           <button
             type="button"
             onClick={toggleVisibility}
-            className="flex items-center text-gray-500 dark:hover:text-white hover:text-gray-600 focus:outline-none p-2 transition-colors duration-300">
+            className="absolute inset-y-0 right-0 flex items-center text-gray-500 dark:hover:text-white hover:text-gray-600 focus:outline-none p-2 transition-colors duration-300">
             {passVisible ? (
               <IoEyeOutline size={20} />
             ) : (

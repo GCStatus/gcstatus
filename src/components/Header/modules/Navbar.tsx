@@ -1,10 +1,24 @@
-import { Box, IconButton, Link, Stack, Tooltip } from '@mui/material'
+import {
+  Box,
+  IconButton,
+  Link,
+  Stack,
+  Tooltip,
+  Typography,
+} from '@mui/material'
 import { Fragment, useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
-import { IoCalendar, IoClose, IoMenu, IoSearch } from 'react-icons/io5'
+import {
+  IoCalendarOutline,
+  IoClose,
+  IoLogInOutline,
+  IoMenuOutline,
+  IoSearch,
+} from 'react-icons/io5'
 import { useNavigate, useParams } from 'react-router-dom'
 
 import { Backdrop, Logo, SwitchSidebar, SwitchTheme } from '@/components'
+import { useAccount } from '@/hooks'
 import { Notification } from '@/types'
 
 import { Notifications } from '.'
@@ -16,6 +30,7 @@ interface NavbarProps {
 function Navbar(props: NavbarProps) {
   const { notifications } = props
   const go = useNavigate()
+  const { user } = useAccount()
   const { query = '' } = useParams()
   const [open, setOpen] = useState<boolean>(false)
   const [search, setSearch] = useState<string>(query)
@@ -83,9 +98,16 @@ function Navbar(props: NavbarProps) {
           </Box>
 
           <Box className="flex items-center gap-1">
+            {!user && (
+              <Tooltip title="Go to login">
+                <IconButton href="/login" className="group">
+                  <IoLogInOutline className="text-gray-200 group-hover:text-yellow-500 transition-colors duration-300" />
+                </IconButton>
+              </Tooltip>
+            )}
             <Tooltip title="Go to calendar">
               <IconButton href="/releases/calendar" className="group">
-                <IoCalendar className="text-gray-200 group-hover:text-yellow-500 transition-colors duration-300" />
+                <IoCalendarOutline className="text-gray-200 group-hover:text-yellow-500 transition-colors duration-300" />
               </IconButton>
             </Tooltip>
 
@@ -93,7 +115,7 @@ function Navbar(props: NavbarProps) {
 
             <Tooltip title="Open menu">
               <IconButton onClick={toggleMenu} className="group">
-                <IoMenu className="text-gray-200 group-hover:text-yellow-500 transition-colors duration-300" />
+                <IoMenuOutline className="text-gray-200 group-hover:text-yellow-500 transition-colors duration-300" />
               </IconButton>
             </Tooltip>
           </Box>
@@ -118,7 +140,10 @@ function Navbar(props: NavbarProps) {
         <Stack
           className="dark:text-white text-gray-800 py-6"
           spacing={0.5}>
-          <Box className="hidden md:flex items-center relative w-full mb-3">
+          {user && (
+            <Typography variant="h5">Welcome, {user.name}!</Typography>
+          )}
+          <Box className="hidden md:flex items-center relative w-full my-3">
             <input
               type="text"
               value={search}
@@ -137,20 +162,30 @@ function Navbar(props: NavbarProps) {
             className="block py-2 px-4 dark:hover:bg-zinc-800 hover:bg-gray-100 rounded-lg transition duration-200 dark:text-gray-300 text-zinc-800">
             Home
           </Link>
+          {user ? (
+            <>
+              <Link
+                href="/profile"
+                className="block py-2 px-4 dark:hover:bg-zinc-800 hover:bg-gray-100 rounded-lg transition duration-200 dark:text-gray-300 text-zinc-800">
+                Profile
+              </Link>
+              <Link
+                href="#"
+                className="block py-2 px-4 dark:hover:bg-zinc-800 hover:bg-gray-100 rounded-lg transition duration-200 dark:text-gray-300 text-zinc-800">
+                Logout
+              </Link>
+            </>
+          ) : (
+            <Link
+              href="/login"
+              className="block py-2 px-4 dark:hover:bg-zinc-800 hover:bg-gray-100 rounded-lg transition duration-200 dark:text-gray-300 text-zinc-800">
+              Login
+            </Link>
+          )}
           <Link
             href="/releases/calendar"
             className="block py-2 px-4 dark:hover:bg-zinc-800 hover:bg-gray-100 rounded-lg transition duration-200 dark:text-gray-300 text-zinc-800">
             Release Calendar
-          </Link>
-          <Link
-            href="/profile"
-            className="block py-2 px-4 dark:hover:bg-zinc-800 hover:bg-gray-100 rounded-lg transition duration-200 dark:text-gray-300 text-zinc-800">
-            Profile
-          </Link>
-          <Link
-            href="#"
-            className="block py-2 px-4 dark:hover:bg-zinc-800 hover:bg-gray-100 rounded-lg transition duration-200 dark:text-gray-300 text-zinc-800">
-            Logout
           </Link>
           <SwitchTheme />
           <SwitchSidebar />

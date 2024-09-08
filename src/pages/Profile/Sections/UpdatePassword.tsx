@@ -1,7 +1,7 @@
 import { Stack, Typography } from '@mui/material'
 import { RegisterOptions, SubmitHandler, useForm } from 'react-hook-form'
 
-import { Button, Input } from '@/components'
+import { Button, Input, NewPassword } from '@/components'
 import { UpdatePasswordInterface } from '@/types'
 
 import { updatePasswordValidations } from './validations'
@@ -57,12 +57,7 @@ function UpdatePassword() {
           placeholder="Type your old password..."
           {...getProps('old_password')}
         />
-        <Input
-          isFull
-          label="New password"
-          placeholder="Type your new password..."
-          {...getProps('password')}
-        />
+        <NewPassword getProps={getProps} />
         <Input
           isFull
           label="Password confirmation"

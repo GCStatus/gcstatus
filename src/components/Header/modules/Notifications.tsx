@@ -8,7 +8,7 @@ import {
 } from '@mui/material'
 import { formatRelative } from 'date-fns'
 import { Fragment, useState } from 'react'
-import { IoClose, IoNotifications } from 'react-icons/io5'
+import { IoClose, IoNotificationsOutline } from 'react-icons/io5'
 
 import { Backdrop, Icon } from '@/components'
 import { Icons } from '@/components/Icon/Icon'
@@ -38,7 +38,7 @@ function Notifications(props: NotificationsProps) {
           className="relative bg-transparent group"
           onClick={toggleNotification}>
           <Badge badgeContent={notifications.length} color="warning">
-            <IoNotifications className="text-white group-hover:text-yellow-500 transition-colors duration-300" />
+            <IoNotificationsOutline className="text-white group-hover:text-yellow-500 transition-colors duration-300" />
           </Badge>
         </IconButton>
       </Tooltip>

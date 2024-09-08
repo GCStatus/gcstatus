@@ -189,4 +189,34 @@
       box-shadow: 0 0 5px rgba(255, 255, 255, 0.4);
     }
   }
+
+  @keyframes backgroundAnimation {
+    0% {
+      background-position: 50% 0%;
+    }
+    50% {
+      background-position: 50% 100%;
+    }
+    100% {
+      background-position: 50% 0%;
+    }
+  }
+
+  .animate-background {
+    background-size: 200% 200%;
+    animation: backgroundAnimation 5s ease infinite;
+  }
+
+  .glowing-input {
+    border: 1px solid transparent;
+    transition: box-shadow 0.3s ease;
+    width: 100%;
+  }
+
+  .glowing-input:focus {
+    box-shadow:
+      0 0 4px #ff4d4d,
+      0 0 8px #ff4d4d,
+      0 0 12px #ff4d4d;
+  }
 }
