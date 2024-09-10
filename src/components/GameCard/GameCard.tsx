@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Chip,
   IconButton,
   Link,
@@ -63,7 +64,7 @@ function GameCard(props: GameCardProps) {
         }}>
         <Box
           position="relative"
-          className={view === 'list' ? 'sm:w-1/3' : ''}>
+          className={`${view === 'list' ? 'sm:w-1/3' : ''} flex-shrink-0`}>
           {game.badge && (
             <Chip
               label={game.badge}
@@ -73,15 +74,13 @@ function GameCard(props: GameCardProps) {
               }}
             />
           )}
-          <Box position="relative" className="overflow-hidden">
+          <Box className="relative h-full overflow-hidden">
             <img
               src={game.cover}
               alt={game.title}
-              width={view === 'grid' ? 500 : 300}
-              height={view === 'grid' ? 300 : 200}
-              className={`object-cover w-full h-full transform group-hover:scale-110 transition-transform duration-500 ${view === 'grid' ? 'max-h-64' : 'max-h-80'}`}
+              className={`object-cover w-full h-full transform group-hover:scale-110 transition-transform duration-500 ${view === 'grid' ? 'max-h-72' : 'sm:h-full h-auto'}`}
             />
-            <Box className="absolute bottom-0 left-0 w-full px-4 py-2 flex sm:flex-row flex-col justify-between items-center backdrop-blur-sm bg-gradient-to-r from-black via-black to-red-400 opacity-85">
+            <Box className="absolute bottom-0 left-0 w-full px-4 py-2 flex md:flex-row flex-col md:text-left text-center justify-between items-center backdrop-blur-sm bg-gradient-to-r from-black via-black to-red-400 opacity-85">
               <Link href={`/games/${game.slug}`}>
                 <Typography
                   variant="h6"
@@ -125,7 +124,9 @@ function GameCard(props: GameCardProps) {
 
         <Box
           padding={2}
-          className={`flex flex-col justify-between ${view === 'list' ? 'sm:w-2/3' : ''} h-full gap-4`}>
+          className={`flex flex-col justify-between ${
+            view === 'list' ? 'sm:w-2/3' : ''
+          } h-full gap-4`}>
           <Box className="flex flex-col flex-grow">
             <Typography variant="body2" className="text-gray-400">
               Release Date: {game.release}
@@ -184,6 +185,14 @@ function GameCard(props: GameCardProps) {
               </Link>
             ))}
           </Box>
+
+          <Button
+            fullWidth
+            variant="text"
+            className="bg-theme-red-900 bg-opacity-5 hover:bg-opacity-30 text-white transition-all"
+            href={`/games/${game.slug}`}>
+            View more
+          </Button>
         </Box>
 
         <Box

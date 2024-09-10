@@ -6,12 +6,17 @@ import { useSidebar } from '@/hooks'
 
 import { ScrollToTop, Sidebar } from './modules'
 
-function DefaultLayout() {
+interface DefaultLayoutProps {
+  withCarousel: boolean
+}
+
+function DefaultLayout(props: DefaultLayoutProps) {
+  const { withCarousel } = props
   const enabled = useSidebar()
 
   return (
     <Box>
-      <Header />
+      <Header withCarousel={withCarousel} />
       {enabled === 'yes' && <Sidebar />}
       <Box component="main" className="dark:bg-zinc-900 bg-white">
         <Outlet />

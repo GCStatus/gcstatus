@@ -103,6 +103,7 @@
   - [x] Add flickering effect for background image
   - [x] Add flickering effect on text
 - [x] Game news and reviews section
+- [x] Create routes without header carousel
 
 ### Post MVP
 

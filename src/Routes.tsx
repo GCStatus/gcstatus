@@ -29,7 +29,7 @@ export const Routes = () => {
     { path: '/password/forgot', element: <Forgot /> },
     { path: '/password/reset/:token', element: <Reset /> },
     {
-      element: <DefaultLayout />,
+      element: <DefaultLayout withCarousel />,
       children: [
         {
           path: '/',
@@ -49,10 +49,7 @@ export const Routes = () => {
         },
         {
           path: '/games',
-          children: [
-            { index: true, element: <>Games</> },
-            { path: ':slug', element: <GameDetails /> },
-          ],
+          children: [{ index: true, element: <>Games</> }],
         },
         {
           path: 'blogs',
@@ -73,6 +70,10 @@ export const Routes = () => {
         { path: '/platforms/:platform', element: <GamePlatforms /> },
         { path: '/categories/:category', element: <GameCategories /> },
       ],
+    },
+    {
+      element: <DefaultLayout withCarousel={false} />,
+      children: [{ path: '/games/:slug', element: <GameDetails /> }],
     },
     {
       path: '*',

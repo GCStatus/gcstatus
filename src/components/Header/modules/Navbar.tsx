@@ -25,10 +25,11 @@ import { Notifications } from '.'
 
 interface NavbarProps {
   notifications: Notification[]
+  withCarousel: boolean
 }
 
 function Navbar(props: NavbarProps) {
-  const { notifications } = props
+  const { notifications, withCarousel } = props
   const go = useNavigate()
   const { user } = useAccount()
   const { query = '' } = useParams()
@@ -71,11 +72,11 @@ function Navbar(props: NavbarProps) {
   }, [query])
 
   return (
-    <Fragment>
+    <Box>
       <Box
         component="nav"
         className={`fixed top-0 left-0 w-full z-40 transition-all duration-300 ${
-          navbarSticky
+          navbarSticky || !withCarousel
             ? 'backdrop-blur-sm bg-theme-dark-900/50 shadow-md'
             : ''
         }`}>
@@ -205,7 +206,7 @@ function Navbar(props: NavbarProps) {
       </Stack>
 
       <Backdrop open={open} toggleBackdrop={toggleMenu} />
-    </Fragment>
+    </Box>
   )
 }
 
