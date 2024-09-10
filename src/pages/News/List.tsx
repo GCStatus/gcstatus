@@ -79,7 +79,8 @@ function List() {
         Made with GameSpot API:{' '}
         <Link
           href="https://www.gamespot.com/api/documentation"
-          className="underline text-theme-red-900 hover:text-red-400 transition-colors duration-500">
+          className="underline text-theme-red-900 hover:text-red-400 transition-colors duration-500"
+          target="_blank">
           Docs
         </Link>
       </Typography>
@@ -102,7 +103,6 @@ function List() {
             className="relative h-full flex flex-col justify-between rounded-xl overflow-hidden group hover:shadow-[0px_0px_10px_5px_rgba(255,77,77,0.8)] transition-all duration-500 dark:bg-theme-dark-900 bg-white cursor-pointer"
             key={index}
             onClick={() => handleOpen(article)}>
-            {/* Adjusted backdrop gradient for light mode to work with white background */}
             <Box className="absolute inset-0 bg-gradient-to-b from-transparent via-gray-100 to-gray-400/50 dark:via-gray-200/20 dark:to-black/30 transition-all duration-500 opacity-0 group-hover:opacity-100" />
 
             <CardMedia
