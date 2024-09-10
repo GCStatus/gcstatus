@@ -18,7 +18,7 @@
   - [x] Create page to forgot password and reset
   - [ ] Set up user registration and login
   - [ ] Implement OAuth for Google and Facebook
-  - [ ] Create a user profile page with editable settings
+  - [x] Create a user profile page with editable settings
 - [ ] Community forum
   - [ ] Create a basic forum structure with categories and threads
   - [ ] Allow users to create, edit, and delete posts
@@ -32,9 +32,7 @@
 ### Post-MVP
 
 - [ ] Advanced features
-  - [ ] Add dark mode toggle
-    - [x] Add theme switcher
-    - [ ] Adjust all site with light mode
+  - [x] Add dark mode toggle
   - [ ] Implement game recommendations based on user activity
   - [ ] Create a personalized dashboard for logged-in users
 - [ ] Testing & QA
@@ -49,6 +47,9 @@
   - [x] Write detailed README.md with project overview
   - [ ] Document API endpoints
   - [x] Create a contribution guide for open source contributors
+- [ ] Adjust all keyframes to tailwind
+- [ ] Review entire responsivity
+- [ ] Review entire dark and light mode
 
 ### Future Ideas
 

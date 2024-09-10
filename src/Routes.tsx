@@ -9,6 +9,7 @@ export const Routes = () => {
   const Home = L(lazy(() => import('./pages/Home')))
   const Login = L(lazy(() => import('./pages/Login')))
   const Search = L(lazy(() => import('./pages/Search')))
+  const Blog = L(lazy(() => import('./pages/Blog/List')))
   const Profile = L(lazy(() => import('./pages/Profile')))
   const Register = L(lazy(() => import('./pages/Register')))
   const Calendar = L(lazy(() => import('./pages/Calendar')))
@@ -16,6 +17,7 @@ export const Routes = () => {
   const Reset = L(lazy(() => import('./pages/Password/Reset')))
   const Forgot = L(lazy(() => import('./pages/Password/Forgot')))
   const GameGenres = L(lazy(() => import('./pages/Game/Genres')))
+  const BlogDetails = L(lazy(() => import('./pages/Blog/Details')))
   const GameDetails = L(lazy(() => import('./pages/Game/Details')))
   const GamePlatforms = L(lazy(() => import('./pages/Game/Platforms')))
   const GameCategories = L(lazy(() => import('./pages/Game/Categories')))
@@ -49,6 +51,16 @@ export const Routes = () => {
           children: [
             { index: true, element: <>Games</> },
             { path: ':slug', element: <GameDetails /> },
+          ],
+        },
+        {
+          path: 'blogs',
+          children: [
+            { index: true, element: <Blog /> },
+            {
+              path: ':slug',
+              element: <BlogDetails />,
+            },
           ],
         },
         { path: '/tags/:tag', element: <GameTags /> },

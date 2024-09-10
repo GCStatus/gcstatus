@@ -42,6 +42,7 @@ export const MOCK_GAME_DETAILS: GameDetails = {
       message:
         'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Libero, recusandae repudiandae quia itaque, animi quasi iste atque porro nisi sit suscipit consequatur autem deserunt vel deleniti quae harum aliquam aliquid?',
       created_at: '2024-09-01T14:52:00.000Z',
+      updated_at: '2024-09-01T14:52:00.000Z',
       by: {
         id: 1,
         name: 'Player 1',
@@ -62,6 +63,7 @@ export const MOCK_GAME_DETAILS: GameDetails = {
           message:
             'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Libero, recusandae repudiandae quia itaque, animi quasi iste atque porro nisi sit suscipit consequatur autem deserunt vel deleniti quae harum aliquam aliquid?',
           created_at: '2024-09-01T15:00:00.000Z',
+          updated_at: '2024-09-01T15:00:00.000Z',
           by: {
             id: 1,
             name: 'Player 2',

@@ -75,7 +75,9 @@ function Navbar(props: NavbarProps) {
       <Box
         component="nav"
         className={`fixed top-0 left-0 w-full z-40 transition-all duration-300 ${
-          navbarSticky ? 'bg-theme-dark-900 shadow-md' : 'bg-transparent'
+          navbarSticky
+            ? 'backdrop-blur-sm bg-theme-dark-900/50 shadow-md'
+            : ''
         }`}>
         <Box className="container mx-auto px-4 sm:py-8 py-2 flex items-center sm:justify-between justify-center sm:flex-row flex-col">
           <Link href="/" className="text-white text-2xl font-bold">
@@ -161,6 +163,11 @@ function Navbar(props: NavbarProps) {
             href="/"
             className="block py-2 px-4 dark:hover:bg-zinc-800 hover:bg-gray-100 rounded-lg transition duration-200 dark:text-gray-300 text-zinc-800">
             Home
+          </Link>
+          <Link
+            href="/blogs"
+            className="block py-2 px-4 dark:hover:bg-zinc-800 hover:bg-gray-100 rounded-lg transition duration-200 dark:text-gray-300 text-zinc-800">
+            Blog
           </Link>
           {user ? (
             <>

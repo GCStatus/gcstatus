@@ -54,22 +54,22 @@ function HeaderCarousel(props: HeaderCarouselProps) {
                 </Typography>
                 <Typography className="mb-2">Available on:</Typography>
                 <Box className="flex md:justify-end justify-center gap-2 mb-4 sm:flex-row flex-col sm:px-0 px-8">
-                  {related.platforms.map(({ id, name }) => (
+                  {related.platforms.map(({ id, slug, name }) => (
                     <Box
                       component="span"
                       className="bg-gray-800 px-3 py-1 rounded-full text-sm"
                       key={id}>
-                      {name}
+                      <Link href={`/platforms/${slug}`}>{name}</Link>
                     </Box>
                   ))}
                 </Box>
                 <Box className="flex flex-wrap md:justify-end justify-center gap-2 sm:flex-row flex-col sm:px-0 px-8">
-                  {related.tags.map(({ id, name }) => (
+                  {related.tags.map(({ id, slug, name }) => (
                     <Box
                       component="span"
                       className="bg-gray-700 px-3 py-1 rounded-full text-sm"
                       key={id}>
-                      {name}
+                      <Link href={`/tags/${slug}`}>{name}</Link>
                     </Box>
                   ))}
                 </Box>

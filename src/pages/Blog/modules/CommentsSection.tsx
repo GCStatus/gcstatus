@@ -13,15 +13,10 @@ import { useState } from 'react'
 import { IoChatboxEllipsesOutline, IoSendOutline } from 'react-icons/io5'
 
 import { Input } from '@/components'
-import { GameDetails, Message } from '@/types'
+import { Message } from '@/types'
 
-interface GameChatProps {
-  game: GameDetails
-}
-
-function GameChat(props: GameChatProps) {
-  const { game } = props
-  const [messages, setMessages] = useState<Message[]>(game.messages)
+function CommentsSection({ comments }: { comments: Message[] }) {
+  const [messages, setMessages] = useState<Message[]>(comments)
   const [newMessage, setNewMessage] = useState<string>('')
   const [replyMessage, setReplyMessage] = useState<string>('')
   const [replyTo, setReplyTo] = useState<number | null>(null)
@@ -100,19 +95,14 @@ function GameChat(props: GameChatProps) {
   }
 
   return (
-    <Box>
+    <Box component="section">
       <Typography
         variant="h2"
-        className="sm:text-2xl text-xl font-semibold animate-flicker text-theme-red-900 dark:text-white break-words">
-        Chat
+        className="sm:text-2xl text-xl font-semibold text-theme-red-900 dark:text-white">
+        Comments
       </Typography>
 
-      <List
-        sx={{
-          mt: 2,
-          width: '100%',
-          bgcolor: 'background.paper',
-        }}>
+      <List sx={{ mt: 2, width: '100%' }}>
         {messages.map((msg) => (
           <ListItem
             key={msg.id}
@@ -125,19 +115,18 @@ function GameChat(props: GameChatProps) {
                 primary={msg.message}
                 secondary={`by ${msg.by.nickname} at ${format(new Date(msg.created_at), 'LLL, dd yyyy')}`}
                 primaryTypographyProps={{
-                  className: 'dark:text-white text-gray-800 break-words',
+                  className: 'dark:text-white text-gray-800',
                   variant: 'body1',
                   fontWeight: 'bold',
                 }}
                 secondaryTypographyProps={{
-                  className:
-                    'dark:text-gray-400 text-gray-600 break-words',
+                  className: 'dark:text-gray-400 text-gray-600',
                   variant: 'body2',
                 }}
               />
             </Box>
             <Box width="100%" sx={{ display: 'flex', gap: 1 }}>
-              <Tooltip title={`Answer ${msg.by.nickname}`}>
+              <Tooltip title={`Reply to ${msg.by.nickname}`}>
                 <IconButton
                   size="large"
                   onClick={() => toggleReplyInput(msg.id)}
@@ -179,8 +168,7 @@ function GameChat(props: GameChatProps) {
                         primary={reply.message}
                         secondary={`by ${reply.by.nickname} - replied to ${msg.by.nickname} at ${format(new Date(reply.created_at), 'LLL, dd yyyy')}`}
                         primaryTypographyProps={{
-                          className:
-                            'dark:text-gray-400 text-gray-600 break-words',
+                          className: 'dark:text-gray-400 text-gray-600',
                           variant: 'body2',
                         }}
                         secondaryTypographyProps={{
@@ -196,22 +184,23 @@ function GameChat(props: GameChatProps) {
         ))}
       </List>
 
+      {/* New Comment Input */}
       <Box sx={{ display: 'flex', gap: 2, mt: 2 }}>
         <Input
           isFull
           value={newMessage}
           placeholder="Type your message..."
           onChange={({ target }) => setNewMessage(target.value)}
+          customClass="min-h-[3.5rem]"
           icon={
             <IconButton onClick={handleSendMessage}>
               <IoSendOutline className="text-theme-red-900" />
             </IconButton>
           }
-          customClass="min-h-[3.5rem]"
         />
       </Box>
     </Box>
   )
 }
 
-export default GameChat
+export default CommentsSection

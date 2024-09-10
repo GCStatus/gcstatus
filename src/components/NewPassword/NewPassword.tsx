@@ -106,11 +106,9 @@ function PasswordInput(props: PasswordInputProps) {
               <ListItem key={req.label}>
                 <Typography
                   variant="body2"
-                  className={
-                    req.test(passwordValue)
-                      ? 'text-green-500'
-                      : 'text-red-500'
-                  }>
+                  sx={{
+                    color: req.test(passwordValue) ? 'green' : 'red',
+                  }}>
                   {req.label}
                 </Typography>
               </ListItem>
