@@ -102,6 +102,7 @@
   - [x] Add error code
   - [x] Add flickering effect for background image
   - [x] Add flickering effect on text
+- [x] Game news and reviews section
 
 ### Post MVP
 

@@ -9,10 +9,6 @@
 ### MVP (Minimum Viable Product)
 
 - [ ] Implement the game details sale - display the best price on the platforms
-- [ ] Game news and reviews section
-  - [ ] Fetch and display the latest gaming news
-  - [ ] Add reviews section with filtering options
-  - [ ] Implement search functionality for news and reviews
 - [ ] User authentication
   - [x] Create login and register page
   - [x] Create page to forgot password and reset
@@ -20,10 +16,9 @@
   - [ ] Implement OAuth for Google and Facebook
   - [x] Create a user profile page with editable settings
 - [ ] Community forum
-  - [ ] Create a basic forum structure with categories and threads
+  - [x] Create a basic forum structure with categories and threads
   - [ ] Allow users to create, edit, and delete posts
-  - [ ] Implement upvoting and commenting on posts
-  - [ ] Implement likes on posts and comments
+  - [x] Implement likes on posts and comments
 - [ ] Responsive design
   - [ ] Ensure the website is mobile-friendly
   - [ ] Test across different screen sizes and browsers
@@ -39,6 +34,8 @@
   - [ ] Write unit tests for all components
   - [ ] Set up end-to-end testing with Cypress or Playwright
   - [ ] Perform accessibility testing
+- [ ] Storybook
+  - [ ] Add a storybook for every component
 - [ ] Deployment
   - [x] Configure Netlify for continuous deployment
   - [ ] Set up custom domain and SSL certificate

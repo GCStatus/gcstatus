@@ -10,6 +10,7 @@ export const Routes = () => {
   const Login = L(lazy(() => import('./pages/Login')))
   const Search = L(lazy(() => import('./pages/Search')))
   const Blog = L(lazy(() => import('./pages/Blog/List')))
+  const News = L(lazy(() => import('./pages/News/List')))
   const Profile = L(lazy(() => import('./pages/Profile')))
   const Register = L(lazy(() => import('./pages/Register')))
   const Calendar = L(lazy(() => import('./pages/Calendar')))
@@ -62,6 +63,10 @@ export const Routes = () => {
               element: <BlogDetails />,
             },
           ],
+        },
+        {
+          path: 'news',
+          children: [{ index: true, element: <News /> }],
         },
         { path: '/tags/:tag', element: <GameTags /> },
         { path: '/genres/:genre', element: <GameGenres /> },
