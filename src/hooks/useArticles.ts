@@ -2,8 +2,8 @@ import { useSelector } from 'react-redux'
 
 import { articleSelector } from '@/store/articleSlice'
 
-function useAccount() {
+function useArticles() {
   return useSelector(articleSelector)
 }
 
-export default useAccount
+export default useArticles

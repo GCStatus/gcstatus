@@ -33,4 +33,4 @@ export const newsApi = createApi({
   }),
 })
 
-export const { useGetGamingNewsQuery } = newsApi
+export const { useGetGamingNewsQuery, useLazyGetGamingNewsQuery } = newsApi

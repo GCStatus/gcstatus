@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { endOfDay, isAfter } from 'date-fns'
 
-import { ARTICLES_KEY } from '@/constants'
+import { ARTICLES_EXPIRATION_KEY, ARTICLES_KEY } from '@/constants'
 import { newsApi } from '@/services/news'
 
 import { RootState } from '.'
@@ -20,10 +21,27 @@ interface Article {
   }
 }
 
+const isExpired = () => {
+  const expiration = localStorage.getItem(ARTICLES_EXPIRATION_KEY)
+  if (!expiration) return true
+
+  const expirationDate = new Date(expiration)
+  const now = new Date()
+
+  return isAfter(now, expirationDate)
+}
+
 const getArticles = () => {
+  if (isExpired()) {
+    localStorage.removeItem(ARTICLES_KEY)
+    localStorage.removeItem(ARTICLES_EXPIRATION_KEY)
+
+    return []
+  }
+
   const str = localStorage.getItem(ARTICLES_KEY)
-  if (!str) return []
-  return JSON.parse(str) as Article[]
+
+  return str ? (JSON.parse(str) as Article[]) : []
 }
 
 const initialState: {
@@ -57,7 +75,13 @@ const articleSlice = createSlice({
       newsApi.endpoints.getGamingNews.matchFulfilled,
       (state, { payload }) => {
         state.articles = payload
+
         localStorage.setItem(ARTICLES_KEY, JSON.stringify(payload))
+        localStorage.setItem(
+          ARTICLES_EXPIRATION_KEY,
+          endOfDay(new Date()).toString(),
+        )
+
         state.loading = false
         state.error = false
       },

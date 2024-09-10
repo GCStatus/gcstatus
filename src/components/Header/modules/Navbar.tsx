@@ -169,6 +169,11 @@ function Navbar(props: NavbarProps) {
             className="block py-2 px-4 dark:hover:bg-zinc-800 hover:bg-gray-100 rounded-lg transition duration-200 dark:text-gray-300 text-zinc-800">
             Blog
           </Link>
+          <Link
+            href="/news"
+            className="block py-2 px-4 dark:hover:bg-zinc-800 hover:bg-gray-100 rounded-lg transition duration-200 dark:text-gray-300 text-zinc-800">
+            News
+          </Link>
           {user ? (
             <>
               <Link
