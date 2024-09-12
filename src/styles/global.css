@@ -37,7 +37,7 @@
   }
 
   .loader .dash path {
-    stroke: rgb(253, 249, 14);
+    stroke: #ff4d4d;
     stroke-width: 1px;
     stroke-linecap: round;
     animation:
@@ -55,7 +55,7 @@
 
   .loader .dash path.big {
     stroke-width: 2px;
-    filter: drop-shadow(0 0 2px rgb(253, 249, 14));
+    filter: drop-shadow(0 0 2px #ff4d4d);
   }
 
   .hot-neon-text {

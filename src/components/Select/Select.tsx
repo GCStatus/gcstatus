@@ -14,7 +14,7 @@ interface OptionTypes {
   value: any
 }
 
-interface SelectProps {
+export interface SelectProps {
   isFull?: boolean
   label?: string
   options: OptionTypes[]

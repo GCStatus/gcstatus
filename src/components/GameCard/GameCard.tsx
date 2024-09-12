@@ -148,7 +148,9 @@ function GameCard(props: GameCardProps) {
             </Box>
 
             <Box className="flex justify-between items-center">
-              <Typography variant="h6" className="font-bold">
+              <Typography
+                variant="h6"
+                className="dark:text-white text-gray-600 font-bold">
                 {game.sale ? (
                   <div className="flex flex-col">
                     <span className="text-red-500 line-through">
@@ -157,7 +159,7 @@ function GameCard(props: GameCardProps) {
                         style: 'currency',
                       })}
                     </span>
-                    <span className="text-white">
+                    <span className="dark:text-white text-gray-600">
                       {(game.best_price / 100).toLocaleString('en-US', {
                         currency: 'USD',
                         style: 'currency',
@@ -189,7 +191,7 @@ function GameCard(props: GameCardProps) {
           <Button
             fullWidth
             variant="text"
-            className="bg-theme-red-900 bg-opacity-5 hover:bg-opacity-30 text-white transition-all"
+            className="bg-theme-red-900 dark:bg-opacity-10 dark:hover:bg-opacity-40 bg-opacity-60 hover:bg-opacity-80 text-white transition-all"
             href={`/games/${game.slug}`}>
             View more
           </Button>

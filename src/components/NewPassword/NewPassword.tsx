@@ -16,12 +16,14 @@ import {
   passwordRequirements,
 } from '@/utils'
 
-interface PasswordInputProps {
+export interface PasswordInputProps {
+  isFull?: boolean
+  customClass?: string
   getProps: (key: any, options?: RegisterOptions) => any
 }
 
 function PasswordInput(props: PasswordInputProps) {
-  const { getProps } = props
+  const { isFull = true, getProps, customClass = 'text-white' } = props
   const [passwordStrength, setPasswordStrength] = useState<number>(0)
   const [passwordValue, setPasswordValue] = useState<string>('')
   const [showTooltip, setShowTooltip] = useState<boolean>(false)
@@ -118,11 +120,11 @@ function PasswordInput(props: PasswordInputProps) {
       }>
       <Box onFocus={handleFocus} onBlur={handleBlur}>
         <Input
-          isFull
+          isFull={isFull}
           type="password"
           label="Password"
+          customClass={customClass}
           placeholder="Enter your password"
-          customClass="text-white"
           {...getProps('password', {
             onChange: onPasswordChange,
           })}

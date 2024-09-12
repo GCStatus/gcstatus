@@ -2,7 +2,7 @@ import { Box } from '@mui/material'
 import { Dispatch, SetStateAction, useEffect } from 'react'
 import { IoHeart } from 'react-icons/io5'
 
-interface HeartsUpProps {
+export interface HeartsUpProps {
   delay: number
   setHeartPops: Dispatch<SetStateAction<number[]>>
 }

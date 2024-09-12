@@ -34,8 +34,6 @@
   - [ ] Write unit tests for all components
   - [ ] Set up end-to-end testing with Cypress or Playwright
   - [ ] Perform accessibility testing
-- [ ] Storybook
-  - [ ] Add a storybook for every component
 - [ ] Deployment
   - [x] Configure Netlify for continuous deployment
   - [ ] Set up custom domain and SSL certificate
