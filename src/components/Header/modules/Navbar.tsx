@@ -1,27 +1,20 @@
-import {
-  Box,
-  IconButton,
-  Link,
-  Stack,
-  Tooltip,
-  Typography,
-} from '@mui/material'
+import { Badge, Box, IconButton, Link, Tooltip } from '@mui/material'
 import { Fragment, useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import {
   IoCalendarOutline,
-  IoClose,
   IoLogInOutline,
   IoMenuOutline,
+  IoNotificationsOutline,
   IoSearch,
 } from 'react-icons/io5'
 import { useNavigate, useParams } from 'react-router-dom'
 
-import { Backdrop, Logo, SwitchSidebar, SwitchTheme } from '@/components'
+import { Backdrop, Logo } from '@/components'
 import { useAccount } from '@/hooks'
 import { Notification } from '@/types'
 
-import { Notifications } from '.'
+import { Menu, Notifications } from '.'
 
 interface NavbarProps {
   notifications: Notification[]
@@ -33,7 +26,9 @@ function Navbar(props: NavbarProps) {
   const go = useNavigate()
   const { user } = useAccount()
   const { query = '' } = useParams()
-  const [open, setOpen] = useState<boolean>(false)
+  const [menuOpen, setMenuOpen] = useState<boolean>(false)
+  const [notificationsOpen, setNotificationsOpen] =
+    useState<boolean>(false)
   const [search, setSearch] = useState<string>(query)
   const [navbarSticky, setNavbarSticky] = useState<boolean>(false)
 
@@ -54,7 +49,11 @@ function Navbar(props: NavbarProps) {
   }, [])
 
   const toggleMenu = () => {
-    setOpen((current) => !current)
+    setMenuOpen((current) => !current)
+  }
+
+  const toggleNotification = () => {
+    setNotificationsOpen((current) => !current)
   }
 
   const handleSearch = () => {
@@ -72,7 +71,7 @@ function Navbar(props: NavbarProps) {
   }, [query])
 
   return (
-    <Box>
+    <Fragment>
       <Box
         component="nav"
         className={`fixed top-0 left-0 w-full z-40 transition-all duration-300 ${
@@ -82,7 +81,7 @@ function Navbar(props: NavbarProps) {
         }`}>
         <Box className="container mx-auto px-4 sm:py-8 py-2 flex items-center sm:justify-between justify-center sm:flex-row flex-col">
           <Link href="/" className="text-white text-2xl font-bold">
-            <Logo />
+            <Logo color="dark:fill-gray-400 fill-gray-100" />
           </Link>
 
           <Box className="hidden md:flex items-center relative w-full max-w-[40rem]">
@@ -90,13 +89,13 @@ function Navbar(props: NavbarProps) {
               type="text"
               value={search}
               onChange={({ target }) => setSearch(target.value)}
-              className="w-full p-2 px-4 border-2 border-gray-600 bg-transparent text-white rounded-full focus:outline-none focus:ring-2 focus:ring-theme-red-900 transition-all outline-none duration-300"
+              className="w-full p-2 px-4 border-2 dark:border-gray-600 border-gray-300 bg-transparent text-white rounded-full focus:outline-none focus:ring-2 focus:ring-theme-red-900 transition-all outline-none duration-300 dark:placeholder:text-gray-400 placeholder:text-white"
               placeholder="Search..."
             />
             <IconButton
               onClick={handleSearch}
               className="absolute right-2">
-              <IoSearch className="text-gray-400 w-5" />
+              <IoSearch className="dark:text-gray-400 text-gray-100 w-5" />
             </IconButton>
           </Box>
 
@@ -114,7 +113,15 @@ function Navbar(props: NavbarProps) {
               </IconButton>
             </Tooltip>
 
-            <Notifications notifications={notifications} />
+            <Tooltip title="Open notifications">
+              <IconButton
+                className="relative bg-transparent group"
+                onClick={toggleNotification}>
+                <Badge badgeContent={notifications.length} color="warning">
+                  <IoNotificationsOutline className="text-white group-hover:text-yellow-500 transition-colors duration-300" />
+                </Badge>
+              </IconButton>
+            </Tooltip>
 
             <Tooltip title="Open menu">
               <IconButton onClick={toggleMenu} className="group">
@@ -125,88 +132,28 @@ function Navbar(props: NavbarProps) {
         </Box>
       </Box>
 
-      <Stack
-        className={`fixed top-0 right-0 h-full md:w-1/3 w-full dark:bg-zinc-900 bg-white shadow-lg z-50 transform transition-transform duration-300 opacity-90 p-8 ${
-          open ? 'translate-x-0' : 'translate-x-full'
-        }`}>
-        <Box className="flex items-center justify-between">
-          <Link
-            href="/"
-            className="focus:outline-none text-2xl font-semibold leading-6 dark:text-gray-300 text-gray-800">
-            <Logo height="max-h-12" />
-          </Link>
-          <IconButton onClick={toggleMenu}>
-            <IoClose className="dark:text-gray-400 text-gray-800" />
-          </IconButton>
-        </Box>
+      <Notifications
+        open={notificationsOpen}
+        toggle={toggleNotification}
+        notifications={notifications}
+      />
 
-        <Stack
-          className="dark:text-white text-gray-800 py-6"
-          spacing={0.5}>
-          {user && (
-            <Typography variant="h5">Welcome, {user.name}!</Typography>
-          )}
-          <Box className="hidden md:flex items-center relative w-full my-3">
-            <input
-              type="text"
-              value={search}
-              onChange={({ target }) => setSearch(target.value)}
-              className="w-full p-2 px-4 border-2 dark:border-zinc-600 border-zinc-900 bg-transparent dark:text-white text-black rounded-full focus:outline-none focus:ring-2 focus:ring-theme-red-900 transition-all outline-none duration-300"
-              placeholder="Search..."
-            />
-            <IconButton
-              onClick={handleSearch}
-              className="absolute right-2">
-              <IoSearch className="text-gray-400 w-5" />
-            </IconButton>
-          </Box>
-          <Link
-            href="/"
-            className="block py-2 px-4 dark:hover:bg-zinc-800 hover:bg-gray-100 rounded-lg transition duration-200 dark:text-gray-300 text-zinc-800">
-            Home
-          </Link>
-          <Link
-            href="/blogs"
-            className="block py-2 px-4 dark:hover:bg-zinc-800 hover:bg-gray-100 rounded-lg transition duration-200 dark:text-gray-300 text-zinc-800">
-            Blog
-          </Link>
-          <Link
-            href="/news"
-            className="block py-2 px-4 dark:hover:bg-zinc-800 hover:bg-gray-100 rounded-lg transition duration-200 dark:text-gray-300 text-zinc-800">
-            News
-          </Link>
-          {user ? (
-            <>
-              <Link
-                href="/profile"
-                className="block py-2 px-4 dark:hover:bg-zinc-800 hover:bg-gray-100 rounded-lg transition duration-200 dark:text-gray-300 text-zinc-800">
-                Profile
-              </Link>
-              <Link
-                href="#"
-                className="block py-2 px-4 dark:hover:bg-zinc-800 hover:bg-gray-100 rounded-lg transition duration-200 dark:text-gray-300 text-zinc-800">
-                Logout
-              </Link>
-            </>
-          ) : (
-            <Link
-              href="/login"
-              className="block py-2 px-4 dark:hover:bg-zinc-800 hover:bg-gray-100 rounded-lg transition duration-200 dark:text-gray-300 text-zinc-800">
-              Login
-            </Link>
-          )}
-          <Link
-            href="/releases/calendar"
-            className="block py-2 px-4 dark:hover:bg-zinc-800 hover:bg-gray-100 rounded-lg transition duration-200 dark:text-gray-300 text-zinc-800">
-            Release Calendar
-          </Link>
-          <SwitchTheme />
-          <SwitchSidebar />
-        </Stack>
-      </Stack>
+      <Menu
+        user={user}
+        open={menuOpen}
+        search={search}
+        toggle={toggleMenu}
+        setSearch={setSearch}
+        handleSearch={handleSearch}
+      />
 
-      <Backdrop open={open} toggleBackdrop={toggleMenu} />
-    </Box>
+      <Backdrop open={menuOpen} toggleBackdrop={toggleMenu} />
+
+      <Backdrop
+        open={notificationsOpen}
+        toggleBackdrop={toggleNotification}
+      />
+    </Fragment>
   )
 }
 

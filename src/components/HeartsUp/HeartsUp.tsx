@@ -18,7 +18,7 @@ function HeartsUp(props: HeartsUpProps) {
     }, 10000)
 
     return () => clearInterval(interval)
-  }, [])
+  }, [setHeartPops])
 
   return (
     <Box
@@ -28,7 +28,7 @@ function HeartsUp(props: HeartsUpProps) {
         animationDelay: `${delay}ms`,
         left: `${randomLeftPosition}%`,
       }}>
-      <IoHeart className="text-red-500 w-6 h-6 scale-0 opacity-100 animate-heart-scale" />
+      <IoHeart className="text-red-500 w-6 h-6 animate-heart-scale" />
     </Box>
   )
 }

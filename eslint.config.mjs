@@ -23,7 +23,7 @@ const GLOBALS_BROWSER_FIX = Object.assign({}, globals.browser, {
   AudioWorkletGlobalScope: globals.browser['AudioWorkletGlobalScope '],
 })
 
-delete GLOBALS_BROWSER_FIX['AudioWorkletGlobalScope']
+delete GLOBALS_BROWSER_FIX['AudioWorkletGlobalScope ']
 
 export default [
   {

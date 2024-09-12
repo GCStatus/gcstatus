@@ -1,14 +1,17 @@
 import {
   Box,
   Chip,
+  IconButton,
   Link,
   List,
   ListItem,
   Tooltip,
   Typography,
 } from '@mui/material'
+import { useState } from 'react'
 import { IoEyeOutline, IoHeartOutline } from 'react-icons/io5'
 
+import { HeartsUp } from '@/components'
 import { GameDetails } from '@/types'
 
 interface MainDetailsProps {
@@ -17,9 +20,36 @@ interface MainDetailsProps {
 
 function MainDetails(props: MainDetailsProps) {
   const { game } = props
+  const [hearts, setHearts] = useState<number>(game.hearts_count)
+  const [isHearted, setIsHearted] = useState<boolean>(false)
+  const [heartPops, setHeartPops] = useState<number[]>([])
+
+  const handleHeartClick = () => {
+    setIsHearted((prev) => !prev)
+
+    setHearts(hearts + (isHearted ? -1 : 1))
+
+    if (!isHearted) {
+      const newHearts = Array.from({ length: 10 }, (_, i) => i * 10)
+
+      setHeartPops((prev) => [...prev, ...newHearts])
+    }
+  }
+
+  console.log(heartPops)
 
   return (
     <>
+      <Box className="fixed inset-0 pointer-events-none z-50">
+        {heartPops.map((delay, index) => (
+          <HeartsUp
+            key={index}
+            delay={delay}
+            setHeartPops={setHeartPops}
+          />
+        ))}
+      </Box>
+
       <Box
         component="span"
         className="flex flex-col md:flex-row relative sm:gap-4 gap-4 mb-4">
@@ -35,11 +65,19 @@ function MainDetails(props: MainDetailsProps) {
         </Box>
 
         <Box className="flex-1 border dark:border-gray-800 border-gray-100 bg-gradient-to-b dark:from-zinc-900 from-gray-200 to-transparent p-6 rounded-lg shadow-lg transition-transform transform hover:scale-[1.02] duration-500 relative">
-          <Typography
-            variant="h2"
-            className="sm:text-2xl text-xl sm:text-left text-center font-bold mb-4 dark:text-white text-black">
-            Info
-          </Typography>
+          <Box className="flex sm:flex-row flex-col justify-between">
+            <Typography
+              variant="h2"
+              className="sm:text-2xl text-xl sm:text-left text-center font-bold mb-4 dark:text-white text-black">
+              Info
+            </Typography>
+            <Box className="flex sm:flex-row flex-col sm:mb-0 mb-4 items-center gap-1">
+              <Typography component="span">
+                <IoEyeOutline size={24} />
+              </Typography>
+              {game.views_count}
+            </Box>
+          </Box>
           <Box className="flex flex-col gap-4">
             <Box className="flex sm:flex-row flex-col items-center gap-1">
               <Typography
@@ -116,19 +154,17 @@ function MainDetails(props: MainDetailsProps) {
               </Box>
             )}
             <Box className="flex sm:flex-row flex-col items-center gap-1">
-              <Typography component="span">
+              <IconButton sx={{ padding: 0.5 }} onClick={handleHeartClick}>
                 <IoHeartOutline
-                  className="text-theme-red-900 animate-pulse"
+                  className={
+                    isHearted
+                      ? 'text-theme-red-900 animate-pulse'
+                      : 'text-white'
+                  }
                   size={28}
                 />
-              </Typography>
-              {game.hearts_count}
-            </Box>
-            <Box className="flex sm:flex-row flex-col items-center gap-1">
-              <Typography component="span">
-                <IoEyeOutline size={28} />
-              </Typography>
-              {game.views_count}
+              </IconButton>
+              {hearts}
             </Box>
           </Box>
         </Box>
