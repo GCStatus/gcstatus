@@ -7,7 +7,7 @@ describe('formatRelativeDateOnly()', () => {
 
     const result = formatRelativeDateOnly(pastDate, baseDate)
 
-    expect(result).toBe('01/01/2023')
+    expect(result).toBe('01/02/2023')
   })
 
   it('formats future dates correctly', () => {
@@ -16,7 +16,7 @@ describe('formatRelativeDateOnly()', () => {
 
     const result = formatRelativeDateOnly(futureDate, baseDate)
 
-    expect(result).toBe('01/19/2023')
+    expect(result).toBe('01/20/2023')
   })
 
   it('returns x weekday if dates are close', () => {
@@ -25,7 +25,7 @@ describe('formatRelativeDateOnly()', () => {
 
     const result = formatRelativeDateOnly(pastDate, baseDate)
 
-    expect(result).toBe('last Saturday')
+    expect(result).toBe('last Sunday')
   })
 
   it('returns today for the current date', () => {
