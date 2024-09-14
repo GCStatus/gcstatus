@@ -14,7 +14,7 @@
     "lint": "eslint --fix ./src && echo 'Lint complete.'",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:ci": "jest --ci --json --coverage",
+    "test:ci": "jest --ci --json --coverage --updateSnapshot",
     "type-check": "tsc && echo 'Type check complete.'",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
