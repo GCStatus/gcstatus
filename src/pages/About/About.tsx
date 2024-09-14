@@ -86,7 +86,8 @@ function About() {
             rel="noopener noreferrer"
             variant="contained"
             color="primary"
-            className="bg-theme-red-900 text-white px-6 py-3 rounded-lg sm:w-auto w-full">
+            className="bg-theme-red-900 text-white px-6 py-3 rounded-lg sm:w-auto w-full"
+            role="button">
             Contribute to Our Project
           </Button>
         </Box>
@@ -112,7 +113,8 @@ function About() {
             rel="noopener noreferrer"
             variant="contained"
             color="primary"
-            className="bg-theme-red-900 text-white px-6 py-3 rounded-lg sm:w-auto w-full">
+            className="bg-theme-red-900 text-white px-6 py-3 rounded-lg sm:w-auto w-full"
+            role="button">
             Join Our Discord Community
           </Button>
         </Box>

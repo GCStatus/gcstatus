@@ -35,7 +35,7 @@ function Privacy() {
             Here's the simple breakdown of how we handle your data:
           </Typography>
 
-          <List className="flex flex-col items-start text-left space-y-4 mb-8">
+          <List>
             <ListItem>
               <Typography className="text-gray-700 dark:text-gray-300">
                 1. <strong>We Don’t Sell Your Data:</strong> We’re not

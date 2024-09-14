@@ -31,7 +31,8 @@
   - [ ] Implement game recommendations based on user activity
   - [ ] Create a personalized dashboard for logged-in users
 - [ ] Testing & QA
-  - [ ] Write unit tests for all components
+  - [x] Write unit tests for all components
+  - [ ] Write unit tests for all pages
   - [ ] Set up end-to-end testing with Cypress or Playwright
   - [ ] Perform accessibility testing
 - [ ] Deployment

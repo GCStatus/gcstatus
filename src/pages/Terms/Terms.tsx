@@ -85,7 +85,9 @@ function Terms() {
             gaming!
           </Typography>
 
-          <Typography className="text-gray-700 dark:text-gray-300 text-left mt-3.5 mb-8">
+          <Typography
+            variant="body1"
+            className="text-gray-700 dark:text-gray-300 text-left mt-3.5 mb-8">
             <strong>Keep in touch:</strong> If you have any suggestions or
             need to report something, just keep in touch right here and
             make a great community with us! To create a ticket, please,{' '}
