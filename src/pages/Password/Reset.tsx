@@ -67,7 +67,7 @@ function Reset() {
         <Typography
           variant="h2"
           className="text-5xl font-extrabold text-theme-red-900 text-center mb-8 pixel-font animate-pulse">
-          Forgot password
+          Reset password
         </Typography>
 
         <Box className="w-full sm:p-6 p-4 rounded-lg bg-black bg-opacity-80 border border-theme-red-900 shadow-lg animate-pulse">

@@ -91,6 +91,9 @@ function Navbar(props: NavbarProps) {
               onChange={({ target }) => setSearch(target.value)}
               className="w-full p-2 px-4 border-2 dark:border-gray-600 border-gray-300 bg-transparent text-white rounded-full focus:outline-none focus:ring-2 focus:ring-theme-red-900 transition-all outline-none duration-300 dark:placeholder:text-gray-400 placeholder:text-white"
               placeholder="Search..."
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') handleSearch()
+              }}
             />
             <IconButton
               onClick={handleSearch}

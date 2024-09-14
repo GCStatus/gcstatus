@@ -7,6 +7,7 @@ import Error from './pages/Error'
 
 export const Routes = () => {
   const Home = L(lazy(() => import('./pages/Home')))
+  const Team = L(lazy(() => import('./pages/Team')))
   const Login = L(lazy(() => import('./pages/Login')))
   const Search = L(lazy(() => import('./pages/Search')))
   const Blog = L(lazy(() => import('./pages/Blog/List')))
@@ -40,26 +41,8 @@ export const Routes = () => {
           element: <Calendar />,
         },
         {
-          path: '/profile',
-          children: [{ index: true, element: <Profile /> }],
-        },
-        {
-          path: '/search/:query',
-          element: <Search />,
-        },
-        {
           path: '/games',
           children: [{ index: true, element: <>Games</> }],
-        },
-        {
-          path: 'blogs',
-          children: [
-            { index: true, element: <Blog /> },
-            {
-              path: ':slug',
-              element: <BlogDetails />,
-            },
-          ],
         },
         {
           path: 'news',
@@ -73,7 +56,31 @@ export const Routes = () => {
     },
     {
       element: <DefaultLayout withCarousel={false} />,
-      children: [{ path: '/games/:slug', element: <GameDetails /> }],
+      children: [
+        { path: '/games/:slug', element: <GameDetails /> },
+        {
+          path: '/profile',
+          children: [{ index: true, element: <Profile /> }],
+        },
+        {
+          path: '/search/:query',
+          element: <Search />,
+        },
+        {
+          path: 'blogs',
+          children: [
+            { index: true, element: <Blog /> },
+            {
+              path: ':slug',
+              element: <BlogDetails />,
+            },
+          ],
+        },
+        {
+          path: '/team',
+          element: <Team />,
+        },
+      ],
     },
     {
       path: '*',

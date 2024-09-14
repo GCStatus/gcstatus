@@ -12,7 +12,7 @@ const Icons = {
   ...CiIcons,
 }
 
-interface IconProps extends React.ComponentProps<'svg'> {
+export interface IconProps extends React.ComponentProps<'svg'> {
   name: keyof typeof Icons
 }
 
@@ -22,7 +22,12 @@ function Icon(props: IconProps) {
   const IconComponent = Icons[name]
 
   if (!IconComponent) {
-    return <Icons.IoNotificationsOutline {...rest} />
+    return (
+      <Icons.IoNotificationsOutline
+        data-icon="IoNotificationsOutline"
+        {...rest}
+      />
+    )
   }
 
   return <IconComponent {...rest} />

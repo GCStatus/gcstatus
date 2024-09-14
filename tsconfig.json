@@ -16,6 +16,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
+    "types": ["jest", "node"],
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
@@ -24,7 +25,12 @@
       "@/*": ["src/*"]
     }
   },
-  "exclude": ["node_modules"],
-  "include": ["src", ".storybook/*.tsx"],
+  "exclude": ["node_modules", "**/*.spec.*"],
+  "include": [
+    "src",
+    ".storybook/*.tsx",
+    "test/setup-test-framework.ts",
+    "test/style-mock.cjs"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

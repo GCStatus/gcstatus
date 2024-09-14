@@ -59,7 +59,7 @@ function Filters(props: FiltersProps) {
           defaultValue={filters.Category}
           onChange={handleFilterChange}
           options={[
-            { label: 'All', value: '' },
+            { label: 'All', value: 'all' },
             { label: 'Action', value: 'Action' },
             { label: 'Adventure', value: 'Adventure' },
           ]}
@@ -71,7 +71,7 @@ function Filters(props: FiltersProps) {
           defaultValue={filters.Genre}
           onChange={handleFilterChange}
           options={[
-            { label: 'All', value: '' },
+            { label: 'All', value: 'all' },
             { label: 'RPG', value: 'RPG' },
             { label: 'FPS', value: 'FPS' },
           ]}
@@ -83,7 +83,7 @@ function Filters(props: FiltersProps) {
           defaultValue={filters.Platform}
           onChange={handleFilterChange}
           options={[
-            { label: 'All', value: '' },
+            { label: 'All', value: 'all' },
             { label: 'PS4', value: 'PS4' },
             { label: 'PC', value: 'PC' },
           ]}

@@ -15,7 +15,7 @@ import { GameDetails, ReviewStore } from '@/types'
 
 import { validations } from './validations'
 
-interface ReviewFormProps {
+export interface ReviewFormProps {
   game: GameDetails
 }
 
@@ -45,7 +45,7 @@ function ReviewForm(props: ReviewFormProps) {
 
   const onSubmit: SubmitHandler<ReviewStore> = async (data) => {
     if (!rating) {
-      toast.error('You need to rate this game to submit a review.')
+      toast.error(validations.rate.required)
 
       return
     }
@@ -71,6 +71,7 @@ function ReviewForm(props: ReviewFormProps) {
             Rate the Game
           </Typography>
           <MuiRating
+            name="rate"
             value={rating}
             precision={0.5}
             onChange={(_, v) => {
@@ -82,7 +83,7 @@ function ReviewForm(props: ReviewFormProps) {
 
               setRating(null)
             }}
-            max={5}
+            max={validations.rate.max.value}
             size="large"
             sx={{
               color: '#ff4d4d',
@@ -107,6 +108,7 @@ function ReviewForm(props: ReviewFormProps) {
             Did you played this game?
           </Typography>
           <Switch
+            name="played"
             value={played}
             checked={played}
             onChange={(_, v) => setPlayed(v)}
@@ -128,6 +130,7 @@ function ReviewForm(props: ReviewFormProps) {
         </Box>
 
         <Input
+          data-qa="comment"
           area
           isFull
           label="Comment"

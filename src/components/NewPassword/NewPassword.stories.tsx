@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { RegisterOptions, useForm } from 'react-hook-form'
 
-import NewPassword, { PasswordInputProps } from './NewPassword'
+import NewPassword, { NewPasswordProps } from './NewPassword'
 
 const meta: Meta<typeof NewPassword> = {
   title: 'Components/NewPassword',
@@ -29,7 +29,7 @@ const meta: Meta<typeof NewPassword> = {
 
 type Story = StoryObj<typeof meta>
 
-const Template = (args: PasswordInputProps) => {
+const Template = (args: NewPasswordProps) => {
   const {
     register,
     formState: { errors },

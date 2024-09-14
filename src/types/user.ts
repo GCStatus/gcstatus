@@ -28,3 +28,22 @@ export interface UpdatePasswordInterface {
   password: string
   password_confirmation: string
 }
+
+export interface TeamMember {
+  id: number
+  bio?: string
+  name: string
+  role: string
+  image: string
+  skills: {
+    name: string
+    proficiency: number
+  }[]
+  socials: {
+    github?: string
+    twitter?: string
+    linkedin?: string
+    whatsapp?: string
+    instagram?: string
+  }
+}

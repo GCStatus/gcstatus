@@ -1,4 +1,4 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query/react'
 
 // Services
@@ -12,15 +12,17 @@ import article from './articleSlice'
 import sidebar from './sidebarSlice'
 import theme from './themeSlice'
 
+const rootReducers = combineReducers({
+  theme,
+  sidebar,
+  account,
+  article,
+  [api.reducerPath]: api.reducer,
+  [newsApi.reducerPath]: newsApi.reducer,
+})
+
 const store = configureStore({
-  reducer: {
-    theme,
-    sidebar,
-    account,
-    article,
-    [api.reducerPath]: api.reducer,
-    [newsApi.reducerPath]: newsApi.reducer,
-  },
+  reducer: rootReducers,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
       .concat(newsApi.middleware)

@@ -161,9 +161,7 @@ function List() {
                 />
               ))
             ) : (
-              <Typography className="text-center">
-                Ops... No posts found.
-              </Typography>
+              <Typography>Ops... No posts found.</Typography>
             )}
           </Box>
         </Box>

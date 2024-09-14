@@ -35,6 +35,7 @@ function Select(props: SelectProps) {
     isFull,
     renderValue,
     multiple = false,
+    ...rest
   } = props
 
   const [selected, setSelected] = useState<any>(
@@ -55,14 +56,17 @@ function Select(props: SelectProps) {
         <InputLabel
           id={`${label}-label`}
           htmlFor={label}
-          className="text-theme-red-900 font-semibold mb-2">
+          className="text-theme-red-900 font-semibold mb-2"
+          data-qa="select-label">
           {label}
         </InputLabel>
       )}
       <MuiSelect
+        {...rest}
         id={label}
         name={label}
         value={selected}
+        data-qa="select"
         multiple={multiple}
         disabled={disabled}
         onChange={handleChange}
@@ -72,6 +76,7 @@ function Select(props: SelectProps) {
           <MenuItem
             key={value}
             value={value}
+            data-qa={`option-${value}`}
             className="dark:bg-theme-dark-900 dark:text-white">
             {multiple ? (
               <>

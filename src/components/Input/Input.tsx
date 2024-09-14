@@ -9,7 +9,7 @@ import {
 } from 'react'
 import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5'
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   error?: boolean
   type?: string
   placeholder?: string
@@ -52,7 +52,9 @@ function Input(
   return (
     <div className={`relative ${isFull ? 'w-full' : 'inline-block'}`}>
       {label && (
-        <label className="block dark:text-white text-gray-600 font-semibold mb-1 break-words">
+        <label
+          htmlFor={label}
+          className="block dark:text-white text-gray-600 font-semibold mb-1 break-words">
           {label}
         </label>
       )}
@@ -60,6 +62,7 @@ function Input(
       <div className="relative flex items-center border border-zinc-600 rounded-md">
         {area ? (
           <textarea
+            id={label}
             rows={rows}
             ref={ref as Ref<HTMLTextAreaElement>}
             className={`${baseClass} resize-y flex-grow`}
@@ -67,6 +70,7 @@ function Input(
           />
         ) : (
           <input
+            id={label}
             ref={ref as React.Ref<HTMLInputElement>}
             type={type === 'password' && passVisible ? 'text' : type}
             className={baseClass}

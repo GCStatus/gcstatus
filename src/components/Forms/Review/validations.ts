@@ -1,8 +1,8 @@
 export const validations = {
   rate: {
-    required: 'Please, write a number between 0 and 10.',
-    min: { value: 0, message: 'The minimum value for a review is 0.' },
-    max: { value: 10, message: 'The maximum value for a review is 10.' },
+    required: 'Please, make a rate with a number between 1 and 5.',
+    min: { value: 0.5, message: 'The minimum value for a review is 0.5.' },
+    max: { value: 5, message: 'The maximum value for a review is 5.' },
   },
   played: {
     required: 'Please, tell me if you already played this game.',

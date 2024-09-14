@@ -60,15 +60,19 @@ function HotGames(props: HotGamesProps) {
               <IconButton
                 onClick={() => handleViewChange('list')}
                 className={`${
-                  view === 'list' ? 'text-theme-red-900' : 'text-white'
-                } transition-all`}>
+                  view === 'list'
+                    ? 'text-theme-red-900'
+                    : 'dark:text-white text-black'
+                } transition-colors duration-300`}>
                 <MdViewList />
               </IconButton>
               <IconButton
                 onClick={() => handleViewChange('grid')}
                 className={`${
-                  view === 'grid' ? 'text-theme-red-900' : 'text-white'
-                } transition-all`}>
+                  view === 'grid'
+                    ? 'text-theme-red-900'
+                    : 'dark:text-white text-black'
+                } transition-colors duration-300`}>
                 <MdViewModule />
               </IconButton>
             </Box>

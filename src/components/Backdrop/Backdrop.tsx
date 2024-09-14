@@ -1,7 +1,7 @@
 import { Backdrop, BackdropProps } from '@mui/material'
 import { useEffect } from 'react'
 
-interface CustomBackdropProps extends BackdropProps {
+export interface CustomBackdropProps extends BackdropProps {
   open: boolean
   toggleBackdrop: () => void
 }

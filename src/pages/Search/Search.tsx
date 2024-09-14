@@ -43,9 +43,9 @@ function Search() {
     Genre?: string
     Platform?: string
   }>({
-    Genre: '',
-    Platform: '',
-    Category: '',
+    Genre: 'all',
+    Platform: 'all',
+    Category: 'all',
   })
   const [sort, setSort] = useState<SortState>({
     field: 'title',
@@ -64,11 +64,11 @@ function Search() {
     const filteredGames = MOCK_SEARCH_GAMES.filter(
       ({ categories, platforms, genres }) => {
         return (
-          (!filters.Category ||
+          (filters.Category === 'all' ||
             categories.some(({ name }) => name === filters.Category)) &&
-          (!filters.Genre ||
+          (filters.Genre === 'all' ||
             genres.some(({ name }) => name === filters.Genre)) &&
-          (!filters.Platform ||
+          (filters.Platform === 'all' ||
             platforms.some(({ name }) => name === filters.Platform))
         )
       },

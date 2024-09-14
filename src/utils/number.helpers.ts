@@ -12,6 +12,8 @@ export const formatPrice = (value: number | undefined) => {
 export const calculateOverallProgress = (
   requirements: (MissionRequirement | TitleRequirement)[],
 ): number => {
+  if (requirements.length === 0) return 0
+
   const totalGoals = requirements.reduce((acc, req) => acc + req.goal, 0)
 
   const totalProgress = requirements.reduce(

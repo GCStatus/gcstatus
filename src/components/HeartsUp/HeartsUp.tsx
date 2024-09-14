@@ -28,7 +28,10 @@ function HeartsUp(props: HeartsUpProps) {
         animationDelay: `${delay}ms`,
         left: `${randomLeftPosition}%`,
       }}>
-      <IoHeart className="text-red-500 w-6 h-6 animate-heart-scale" />
+      <IoHeart
+        role="img"
+        className="text-red-500 w-6 h-6 animate-heart-scale"
+      />
     </Box>
   )
 }

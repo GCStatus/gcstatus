@@ -18,7 +18,7 @@ import { GameList } from '@/types'
 
 import { HeartsUp } from '..'
 
-interface GameCardProps {
+export interface GameCardProps {
   game: GameList
   view: 'list' | 'grid'
 }
@@ -94,7 +94,8 @@ function GameCard(props: GameCardProps) {
                     aria-label="heart"
                     color="primary"
                     size="small"
-                    onClick={handleHeartClick}>
+                    onClick={handleHeartClick}
+                    data-qa="heart">
                     <IoHeartOutline
                       className={
                         isHearted ? 'text-theme-red-900' : 'text-white'
@@ -135,7 +136,7 @@ function GameCard(props: GameCardProps) {
               {game.platforms.map((platform) => (
                 <Link
                   href={`/platforms/${platform.slug}`}
-                  className="dark:bg-gray-800 bg-gray-300 dark:text-white text-black px-3 py-1 rounded-full sm:w-auto w-full text-center"
+                  className="dark:bg-gray-800 dark:hover:bg-gray-700 hover:bg-gray-400 bg-gray-300 dark:text-white text-black px-3 py-1 rounded-full sm:w-auto w-full text-center transition-colors duration-300"
                   key={platform.id}>
                   <Typography
                     component="span"
@@ -153,7 +154,7 @@ function GameCard(props: GameCardProps) {
                 className="dark:text-white text-gray-600 font-bold">
                 {game.sale ? (
                   <div className="flex flex-col">
-                    <span className="text-red-500 line-through">
+                    <span className="text-red-500 line-through text-sm">
                       {(game.commom_price / 100).toLocaleString('en-US', {
                         currency: 'USD',
                         style: 'currency',
@@ -180,7 +181,7 @@ function GameCard(props: GameCardProps) {
             {game.genres.map((genre) => (
               <Link href={`/genres/${genre.slug}`} key={genre.id}>
                 <Chip
-                  className="font-bold border border-theme-red-900 text-theme-red-900 sm:w-auto w-full"
+                  className="font-bold border border-theme-red-900 dark:text-gray-300 text-gray-700 sm:w-auto w-full hover:bg-theme-red-900 hover:text-white hover:border-none hover:outline-none"
                   label={genre.name}
                   variant="outlined"
                 />
@@ -190,9 +191,9 @@ function GameCard(props: GameCardProps) {
 
           <Button
             fullWidth
-            variant="text"
             className="bg-theme-red-900 dark:bg-opacity-10 dark:hover:bg-opacity-40 bg-opacity-60 hover:bg-opacity-80 text-white transition-all"
-            href={`/games/${game.slug}`}>
+            href={`/games/${game.slug}`}
+            data-qa="more-btn">
             View more
           </Button>
         </Box>

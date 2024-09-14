@@ -16,13 +16,13 @@ import {
   passwordRequirements,
 } from '@/utils'
 
-export interface PasswordInputProps {
+export interface NewPasswordProps {
   isFull?: boolean
   customClass?: string
   getProps: (key: any, options?: RegisterOptions) => any
 }
 
-function PasswordInput(props: PasswordInputProps) {
+function NewPassword(props: NewPasswordProps) {
   const { isFull = true, getProps, customClass = 'text-white' } = props
   const [passwordStrength, setPasswordStrength] = useState<number>(0)
   const [passwordValue, setPasswordValue] = useState<string>('')
@@ -134,4 +134,4 @@ function PasswordInput(props: PasswordInputProps) {
   )
 }
 
-export default PasswordInput
+export default NewPassword

@@ -23,7 +23,7 @@ function Header(props: HeaderProps) {
       {withCarousel ? (
         <HeaderCarousel banners={home.banners} />
       ) : (
-        <Box className="pb-24 dark:bg-theme-dark-900 bg-white" />
+        <Box className="pb-28 dark:bg-theme-dark-900 bg-white" />
       )}
     </Box>
   )
