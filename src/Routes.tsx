@@ -9,9 +9,13 @@ export const Routes = () => {
   const Home = L(lazy(() => import('./pages/Home')))
   const Team = L(lazy(() => import('./pages/Team')))
   const Login = L(lazy(() => import('./pages/Login')))
+  const About = L(lazy(() => import('./pages/About')))
+  const Terms = L(lazy(() => import('./pages/Terms')))
   const Search = L(lazy(() => import('./pages/Search')))
   const Blog = L(lazy(() => import('./pages/Blog/List')))
   const News = L(lazy(() => import('./pages/News/List')))
+  const Privacy = L(lazy(() => import('./pages/Privacy')))
+  const Cookies = L(lazy(() => import('./pages/Cookies')))
   const Profile = L(lazy(() => import('./pages/Profile')))
   const Register = L(lazy(() => import('./pages/Register')))
   const Calendar = L(lazy(() => import('./pages/Calendar')))
@@ -79,6 +83,22 @@ export const Routes = () => {
         {
           path: '/team',
           element: <Team />,
+        },
+        {
+          path: '/about',
+          element: <About />,
+        },
+        {
+          path: '/terms-of-use',
+          element: <Terms />,
+        },
+        {
+          path: '/privacy',
+          element: <Privacy />,
+        },
+        {
+          path: '/cookies',
+          element: <Cookies />,
         },
       ],
     },

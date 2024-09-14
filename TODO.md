@@ -78,3 +78,13 @@
   - [ ] Make a system to check user transactions with coins
 - [ ] Orders
   - [ ] Make an order system to purchase coins
+- [ ] Create another user profiles page
+  - [ ] Create a page with another user details
+  - [ ] Create a sysmtem to follow another user
+  - [ ] Create a system of notifications to follow user posts
+- [ ] Think about some leaderboard
+  - [ ] Mark a game as played, make some integration to get hours played (if exists)
+  - [ ] Leaderboard for GCStatus missions, titles, coins and level
+- [ ] Create a ticket for support
+  - [ ] The ticket can be used to get support
+  - [ ] The ticket can be used to report some suspicious activity
