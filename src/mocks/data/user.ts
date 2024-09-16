@@ -160,7 +160,7 @@ export const MOCK_TEAM_MEMBERS: TeamMember[] = [
   },
   {
     id: 2,
-    bio: "Hello! Nice to meet you. I'm a Backend Developer with more than 2 years of experience.",
+    bio: "Hello! Nice to meet you. I'm a Backend Developer with more than 2 years of experience. My main skills are Java and Kotlin. Currently learning Golang.",
     name: 'Pedro Bittencourt',
     role: 'Backend Developer',
     skills: [
@@ -171,6 +171,50 @@ export const MOCK_TEAM_MEMBERS: TeamMember[] = [
       {
         name: 'SpringBoot',
         proficiency: 90,
+      },
+      {
+        name: 'Kotlin',
+        proficiency: 80,
+      },
+      {
+        name: 'Docker',
+        proficiency: 60,
+      },
+      {
+        name: 'MySQL',
+        proficiency: 70,
+      },
+      {
+        name: 'SQL Server',
+        proficiency: 75,
+      },
+      {
+        name: 'Orcale DB',
+        proficiency: 70,
+      },
+      {
+        name: 'API Rest',
+        proficiency: 90,
+      },
+      {
+        name: 'Git',
+        proficiency: 75,
+      },
+      {
+        name: 'Hexagonal Architecture',
+        proficiency: 70,
+      },
+      {
+        name: 'Scrum',
+        proficiency: 75,
+      },
+      {
+        name: 'RabbitMQ',
+        proficiency: 60,
+      },
+      {
+        name: 'Go',
+        proficiency: 0,
       },
     ],
     image:
