@@ -1,9 +1,21 @@
+import { Provider } from 'react-redux'
 import { fireEvent, render } from '@testing-library/react'
+import { MemoryRouter, Route, Routes } from 'react-router-dom'
+
+import store from '@/store'
 
 import Login from './Login'
 
 const renderLogin = () => {
-  return render(<Login />)
+  return render(
+    <Provider store={store}>
+      <MemoryRouter>
+        <Routes>
+          <Route path="*" element={<Login />} />
+        </Routes>
+      </MemoryRouter>
+    </Provider>,
+  )
 }
 
 describe('Login Page', () => {
