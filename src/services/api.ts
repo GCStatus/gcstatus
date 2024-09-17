@@ -8,18 +8,19 @@ import {
 
 import { baseUrl } from '@/constants'
 import { logout } from '@/store/accountSlice'
-import { LoginCredentials, Res, ResetPasswordPayload, User } from '@/types'
+import {
+  LoginCredentials,
+  RegisterCredentials,
+  Res,
+  ResetPasswordPayload,
+  User,
+} from '@/types'
 
 import { shouldRefresh } from './lib/error'
 
 const baseQuery = fetchBaseQuery({
   baseUrl,
   credentials: 'include',
-  prepareHeaders: (headers) => {
-    headers.set('Alias', 'sso')
-
-    return headers
-  },
 })
 
 export const baseQueryFn: BaseQueryFn<
@@ -31,6 +32,7 @@ export const baseQueryFn: BaseQueryFn<
   if (result.error && shouldRefresh(result.error)) {
     api.dispatch(logout())
   }
+
   return result
 }
 
@@ -40,16 +42,21 @@ const api = createApi({
   baseQuery: baseQueryFn,
   tagTypes,
   endpoints: (builder) => ({
-    login: builder.mutation<
-      { message: string; user: User },
-      LoginCredentials
-    >({
+    login: builder.mutation<{ message: string }, LoginCredentials>({
       query: (body) => ({
         url: 'auth/login',
         method: 'POST',
         body,
       }),
       invalidatesTags: tagTypes,
+    }),
+
+    register: builder.mutation<{ message: string }, RegisterCredentials>({
+      query: (body) => ({
+        url: 'auth/register',
+        method: 'POST',
+        body,
+      }),
     }),
 
     forgot: builder.mutation<{ message: string }, { email: string }>({
@@ -92,6 +99,7 @@ export const {
   useForgotMutation,
   useLogoutMutation,
   useLazyGetUserQuery,
+  useRegisterMutation,
   useResetPassMutation,
 } = api
 

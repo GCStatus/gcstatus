@@ -33,14 +33,9 @@ const accountSlice = createSlice({
     builder.addMatcher(auth.endpoints.login.matchPending, (state) => {
       state.loading = true
     })
-    builder.addMatcher(
-      auth.endpoints.login.matchFulfilled,
-      (state, { payload }) => {
-        state.user = payload.user
-        localStorage.setItem(USER_KEY, JSON.stringify(payload.user))
-        state.loading = false
-      },
-    )
+    builder.addMatcher(auth.endpoints.login.matchFulfilled, (state) => {
+      state.loading = false
+    })
     builder.addMatcher(auth.endpoints.login.matchRejected, (state) => {
       state.loading = false
     })
@@ -56,6 +51,17 @@ const accountSlice = createSlice({
       },
     )
     builder.addMatcher(auth.endpoints.getUser.matchRejected, (state) => {
+      state.loading = false
+    })
+    builder.addMatcher(auth.endpoints.logout.matchPending, (state) => {
+      state.loading = true
+    })
+    builder.addMatcher(auth.endpoints.logout.matchFulfilled, (state) => {
+      state.loading = false
+      localStorage.removeItem(USER_KEY)
+      state.user = null
+    })
+    builder.addMatcher(auth.endpoints.logout.matchRejected, (state) => {
       state.loading = false
     })
   },

@@ -1,26 +1,26 @@
-import {
-  Box,
-  Button,
-  Container,
-  Link,
-  Stack,
-  Typography,
-} from '@mui/material'
+import { LoadingButton as Button } from '@mui/lab'
+import { Box, Container, Link, Stack, Typography } from '@mui/material'
 import { RegisterOptions, SubmitHandler, useForm } from 'react-hook-form'
 import { FaFacebook, FaGoogle, FaTwitter } from 'react-icons/fa'
+import { useNavigate } from 'react-router-dom'
 
 import { AuthBg, Input, Logo, NewPassword } from '@/components'
+import { useSuccess } from '@/hooks'
+import { useRegisterMutation } from '@/services/api'
 import { RegisterCredentials } from '@/types'
 
 import { validations } from './validations'
 
 function Login() {
+  const go = useNavigate()
   const {
     watch,
+    reset,
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<RegisterCredentials>()
+  const [trigger, { data, isLoading, isSuccess }] = useRegisterMutation()
 
   const watchPassword = watch('password')
 
@@ -36,13 +36,18 @@ function Login() {
     helperText: errors[key] && errors[key]?.message,
   })
 
-  const onSubmit: SubmitHandler<RegisterCredentials> = (data) => {
-    console.log(data)
+  const onSubmit: SubmitHandler<RegisterCredentials> = async (data) => {
+    await trigger(data).unwrap()
   }
 
   const handleSocialLogin = (platform: string) => {
     console.log(`Register with ${platform}`)
   }
+
+  useSuccess(isSuccess, data?.message, () => {
+    reset()
+    go('/')
+  })
 
   return (
     <Box className="relative w-full min-h-screen overflow-hidden">
@@ -122,7 +127,8 @@ function Login() {
               type="submit"
               fullWidth
               variant="contained"
-              className="bg-gradient-to-r from-red-700 via-red-800 to-red-900 text-white py-2 px-4 rounded-full transition-transform transform hover:scale-105 shadow-lg mb-4">
+              className="bg-gradient-to-r from-red-700 via-red-800 to-red-900 text-white py-2 px-4 rounded-full transition-transform transform hover:scale-105 shadow-lg mb-4"
+              loading={isLoading}>
               Register
             </Button>
           </Stack>

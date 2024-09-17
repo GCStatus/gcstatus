@@ -9,6 +9,8 @@ import {
   IoWallet,
 } from 'react-icons/io5'
 
+import { useAccount } from '@/hooks'
+
 import { NavItem } from './modules'
 import {
   Coins,
@@ -22,16 +24,8 @@ import {
 } from './Sections'
 
 function Profile() {
+  const { user } = useAccount()
   const [activeSection, setActiveSection] = useState<string>('titles')
-
-  const user = {
-    title: 'Warrior',
-    level: 5,
-    currentExperience: 350,
-    nextLevelExperience: 500,
-    nickname: 'GamerX',
-    email: 'gamerx@example.com',
-  }
 
   const sections: { [key: string]: React.ReactNode } = {
     titles: <Titles />,
@@ -48,9 +42,9 @@ function Profile() {
     setActiveSection(section)
   }
 
-  const experiencePercentage = Math.round(
-    (user.currentExperience / user.nextLevelExperience) * 100,
-  )
+  const experiencePercentage = Math.round((350 / 500) * 100)
+
+  if (!user) return <></>
 
   return (
     <Stack className="dark:bg-zinc-900 bg-white text-white min-h-screen">
@@ -62,8 +56,11 @@ function Profile() {
           className="w-full lg:w-72 dark:bg-theme-dark-900 bg-zinc-50 p-6 flex flex-col gap-4 mb-4 lg:mb-0 dark:text-white text-black">
           <Stack className="flex flex-col items-center text-center mb-8">
             <img
-              src="https://w7.pngwing.com/pngs/178/595/png-transparent-user-profile-computer-icons-login-user-avatars.png"
-              alt="Profile"
+              src={
+                user.profile?.photo ||
+                'https://w7.pngwing.com/pngs/178/595/png-transparent-user-profile-computer-icons-login-user-avatars.png'
+              }
+              alt={user.nickname}
               className="w-24 h-24 lg:w-16 lg:h-16 rounded-full border-2 border-theme-red-900 mb-4"
             />
             <Box>
@@ -71,7 +68,7 @@ function Profile() {
                 {user.nickname}
               </Typography>
               <Typography className="text-gray-400">
-                {user.title}
+                {'Warrior'}
               </Typography>
               <Typography className="text-gray-400 text-sm">
                 Lv 48
@@ -79,7 +76,7 @@ function Profile() {
             </Box>
             <Box className="w-full mt-4">
               <Typography className="text-gray-400 mb-2">
-                {user.currentExperience}/{user.nextLevelExperience} XP
+                {350}/{500} XP
               </Typography>
               <Box className="w-full dark:bg-zinc-700 bg-gray-300 rounded-full h-4">
                 <Box

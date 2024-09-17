@@ -1,25 +1,25 @@
-import {
-  Box,
-  Button,
-  Container,
-  Link,
-  Stack,
-  Typography,
-} from '@mui/material'
+import { LoadingButton as Button } from '@mui/lab'
+import { Box, Container, Link, Stack, Typography } from '@mui/material'
 import { RegisterOptions, SubmitHandler, useForm } from 'react-hook-form'
 import { FaFacebook, FaGoogle, FaTwitter } from 'react-icons/fa'
+import { useNavigate } from 'react-router-dom'
 
 import { AuthBg, Input, Logo } from '@/components'
+import { useSuccess } from '@/hooks'
+import { useLoginMutation } from '@/services/api'
 import { LoginCredentials } from '@/types'
 
 import { validations } from './validations'
 
 function Login() {
+  const go = useNavigate()
   const {
+    reset,
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<LoginCredentials>()
+  const [login, { data, isLoading, isSuccess }] = useLoginMutation()
 
   const getProps = (
     key: keyof typeof validations,
@@ -33,13 +33,19 @@ function Login() {
     helperText: errors[key] && errors[key]?.message,
   })
 
-  const onSubmit: SubmitHandler<LoginCredentials> = (data) => {
-    console.log(data)
+  const onSubmit: SubmitHandler<LoginCredentials> = async (data) => {
+    await login(data).unwrap()
   }
 
   const handleSocialLogin = (platform: string) => {
+    // TODO: make social logins later.
     console.log(`Login with ${platform}`)
   }
+
+  useSuccess(isSuccess, data?.message, () => {
+    reset()
+    go('/')
+  })
 
   return (
     <Box className="relative w-full min-h-screen overflow-hidden">
@@ -87,7 +93,8 @@ function Login() {
               type="submit"
               fullWidth
               variant="contained"
-              className="bg-gradient-to-r from-red-700 via-red-800 to-red-900 text-white py-2 px-4 rounded-full transition-transform transform hover:scale-105 shadow-lg mb-4">
+              className="bg-gradient-to-r from-red-700 via-red-800 to-red-900 text-white py-2 px-4 rounded-full transition-transform transform hover:scale-105 shadow-lg mb-4"
+              loading={isLoading}>
               Login
             </Button>
           </Stack>

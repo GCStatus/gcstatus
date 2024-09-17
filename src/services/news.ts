@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-import { NEWS_API_KEY } from '@/constants'
+import { NEWS_API_KEY, prodEnv } from '@/constants'
 
 interface Article {
   id: number
@@ -20,8 +20,9 @@ interface Article {
 export const newsApi = createApi({
   reducerPath: 'newsApi',
   baseQuery: fetchBaseQuery({
-    baseUrl:
-      'https://cors-anywhere.herokuapp.com/https://www.gamespot.com/api/',
+    baseUrl: prodEnv
+      ? 'https://www.gamespot.com/api/'
+      : 'https://cors-anywhere.herokuapp.com/https://www.gamespot.com/api/',
   }),
   endpoints: (builder) => ({
     getGamingNews: builder.query<Article[], void>({

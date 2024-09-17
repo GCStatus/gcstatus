@@ -3,6 +3,8 @@ import { Dispatch, SetStateAction } from 'react'
 import { IoClose, IoSearch } from 'react-icons/io5'
 
 import { Logo, SwitchSidebar, SwitchTheme } from '@/components'
+import { useSuccess } from '@/hooks'
+import { useLogoutMutation } from '@/services/api'
 import { User } from '@/types'
 
 interface MenuProps {
@@ -16,6 +18,11 @@ interface MenuProps {
 
 function Menu(props: MenuProps) {
   const { user, open, toggle, search, setSearch, handleSearch } = props
+  const [out, { data, isSuccess }] = useLogoutMutation()
+
+  const handleLogout = () => out().unwrap()
+
+  useSuccess(isSuccess, data?.message)
 
   return (
     <Stack
@@ -64,11 +71,6 @@ function Menu(props: MenuProps) {
           className="block py-2 px-4 dark:hover:bg-zinc-800 hover:bg-gray-100 rounded-lg transition duration-200 dark:text-gray-300 text-zinc-800">
           News
         </Link>
-        <Link
-          href="/profile"
-          className="block py-2 px-4 dark:hover:bg-zinc-800 hover:bg-gray-100 rounded-lg transition duration-200 dark:text-gray-300 text-zinc-800">
-          Profile
-        </Link>
         {user ? (
           <>
             <Link
@@ -77,8 +79,9 @@ function Menu(props: MenuProps) {
               Profile
             </Link>
             <Link
-              href="#"
-              className="block py-2 px-4 dark:hover:bg-zinc-800 hover:bg-gray-100 rounded-lg transition duration-200 dark:text-gray-300 text-zinc-800">
+              role="button"
+              className="block py-2 px-4 dark:hover:bg-zinc-800 hover:bg-gray-100 rounded-lg transition duration-200 dark:text-gray-300 text-zinc-800"
+              onClick={handleLogout}>
               Logout
             </Link>
           </>
