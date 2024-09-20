@@ -1,24 +1,22 @@
-import {
-  Box,
-  Button,
-  Container,
-  Link,
-  Stack,
-  Typography,
-} from '@mui/material'
+import { LoadingButton as Button } from '@mui/lab'
+import { Box, Container, Link, Stack, Typography } from '@mui/material'
 import { RegisterOptions, SubmitHandler, useForm } from 'react-hook-form'
 
 import { AuthBg, Input, Logo } from '@/components'
+import { useForgotMutation } from '@/services/api'
 import { ForgotInterface } from '@/types'
+import { useSuccess } from '@/hooks'
 
 import { forgotValidations } from './validations'
 
 function Forgot() {
   const {
+    reset,
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<ForgotInterface>()
+  const [send, { data, isLoading, isSuccess }] = useForgotMutation()
 
   const getProps = (
     key: keyof typeof forgotValidations,
@@ -33,8 +31,10 @@ function Forgot() {
   })
 
   const onSubmit: SubmitHandler<ForgotInterface> = (data) => {
-    console.log(data)
+    send(data)
   }
+
+  useSuccess(isSuccess, data?.message, () => reset())
 
   return (
     <Box className="relative w-full min-h-screen overflow-hidden">
@@ -75,7 +75,8 @@ function Forgot() {
               type="submit"
               fullWidth
               variant="contained"
-              className="bg-gradient-to-r from-red-700 via-red-800 to-red-900 text-white py-2 px-4 rounded-full transition-transform transform hover:scale-105 shadow-lg mb-4">
+              className="bg-gradient-to-r from-red-700 via-red-800 to-red-900 text-white py-2 px-4 rounded-full transition-transform transform hover:scale-105 shadow-lg mb-4"
+              loading={isLoading}>
               Send reset link
             </Button>
           </Stack>

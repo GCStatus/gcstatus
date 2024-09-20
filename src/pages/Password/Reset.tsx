@@ -1,17 +1,13 @@
-import {
-  Box,
-  Button,
-  Container,
-  Link,
-  Stack,
-  Typography,
-} from '@mui/material'
+import { LoadingButton as Button } from '@mui/lab'
+import { Box, Container, Link, Stack, Typography } from '@mui/material'
 import { RegisterOptions, SubmitHandler, useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 import { AuthBg, Input, Logo, NewPassword } from '@/components'
+import { useResetPassMutation } from '@/services/api'
 import { ResetInterface } from '@/types'
+import { useSuccess } from '@/hooks'
 import { getParam } from '@/utils'
 
 import { resetValidations } from './validations'
@@ -19,12 +15,16 @@ import { resetValidations } from './validations'
 function Reset() {
   const {
     watch,
+    reset,
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<ResetInterface>()
-  const { token = '' } = useParams()
+  const go = useNavigate()
   const email = getParam('email')
+  const { token = '' } = useParams()
+  const [resetPass, { data, isLoading, isSuccess }] =
+    useResetPassMutation()
 
   const watchPassword = watch('password')
 
@@ -43,7 +43,7 @@ function Reset() {
   const onSubmit: SubmitHandler<ResetInterface> = (data) => {
     if (!email || !token) {
       toast.error(
-        'There is something wrong. Please, try repeating the process or get in touch with moderation.',
+        'There is something wrong. Please, try repeating the process or get in touch with support.',
       )
     }
 
@@ -54,8 +54,13 @@ function Reset() {
       password_confirmation: data.password_confirmation,
     }
 
-    console.log(payload)
+    resetPass(payload)
   }
+
+  useSuccess(isSuccess, data?.message, () => {
+    reset()
+    go('/login')
+  })
 
   return (
     <Box className="relative w-full min-h-screen overflow-hidden">
@@ -101,7 +106,8 @@ function Reset() {
               type="submit"
               fullWidth
               variant="contained"
-              className="bg-gradient-to-r from-red-700 via-red-800 to-red-900 text-white py-2 px-4 rounded-full transition-transform transform hover:scale-105 shadow-lg mb-4">
+              className="bg-gradient-to-r from-red-700 via-red-800 to-red-900 text-white py-2 px-4 rounded-full transition-transform transform hover:scale-105 shadow-lg mb-4"
+              loading={isLoading}>
               Reset
             </Button>
           </Stack>

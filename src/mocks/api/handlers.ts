@@ -13,4 +13,19 @@ export const handlers = [
       user: MOCK_USER,
     })
   }),
+  http.post(url('/auth/password/email/send'), async ({ request }) => {
+    const { email } = (await request.json()) as { email: string }
+
+    if (!email) {
+      return HttpResponse.json(
+        { message: 'Email is required' },
+        { status: 400 },
+      )
+    }
+
+    return HttpResponse.json(
+      { message: 'Password reset email sent successfully to ' + email },
+      { status: 200 },
+    )
+  }),
 ]

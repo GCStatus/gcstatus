@@ -61,7 +61,7 @@ const api = createApi({
 
     forgot: builder.mutation<{ message: string }, { email: string }>({
       query: (body) => ({
-        url: 'auth/password/send',
+        url: 'auth/password/email/send',
         method: 'POST',
         body,
       }),

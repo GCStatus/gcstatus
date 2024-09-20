@@ -1,9 +1,19 @@
-import { fireEvent, render, waitFor } from '@testing-library/react'
+import { BrowserRouter } from 'react-router-dom'
+import { Provider } from 'react-redux'
+import { fireEvent, render } from '@testing-library/react'
+
+import store from '@/store'
 
 import Forgot from './Forgot'
 
 const renderForgot = () => {
-  return render(<Forgot />)
+  return render(
+    <BrowserRouter>
+      <Provider store={store}>
+        <Forgot />
+      </Provider>
+    </BrowserRouter>,
+  )
 }
 
 describe('Forgot Password Page', () => {
@@ -43,29 +53,5 @@ describe('Forgot Password Page', () => {
     const registerLink = getByText(/register/i)
     expect(registerLink).toBeInTheDocument()
     expect(registerLink.getAttribute('href')).toBe('/register')
-  })
-
-  it('calls onSubmit with valid email', async () => {
-    const { getByPlaceholderText, getByRole, queryByText } = renderForgot()
-
-    const consoleSpy = jest
-      .spyOn(console, 'log')
-      .mockImplementation(() => {})
-
-    fireEvent.input(getByPlaceholderText(/type your email/i), {
-      target: { value: 'test@example.com' },
-    })
-
-    fireEvent.click(getByRole('button', { name: /send reset link/i }))
-
-    await waitFor(() => {
-      expect(queryByText(/email is required/i)).not.toBeInTheDocument()
-
-      expect(consoleSpy).toHaveBeenCalledWith({
-        email: 'test@example.com',
-      })
-    })
-
-    consoleSpy.mockRestore()
   })
 })
