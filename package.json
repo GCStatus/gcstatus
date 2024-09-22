@@ -95,7 +95,7 @@
     "jest-axe": "^9.0.0",
     "jest-environment-jsdom": "^29.7.0",
     "msw": "^2.4.5",
-    "netlify-cli": "^17.36.0",
+    "netlify-cli": "^17.36.2",
     "postcss": "^8.4.45",
     "prettier": "^3.3.3",
     "semantic-release": "^24.1.1",
