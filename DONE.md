@@ -98,7 +98,7 @@
   - [x] Platforms
   - [x] Categories
 - [x] Make error pages
-  - [x] Add ambience music
+  - [x] Add ambience music - RE4
   - [x] Add error code
   - [x] Add flickering effect for background image
   - [x] Add flickering effect on text
