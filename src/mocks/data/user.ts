@@ -8,7 +8,6 @@ export const MOCK_USER: User = {
   name: faker.person.fullName(),
   email: faker.internet.email(),
   nickname: faker.internet.userName(),
-  coins: faker.number.int(),
   experience: faker.number.int(),
   level: faker.number.int(),
   birthdate: format(faker.date.past(), 'yyyy-MM-dd'),
@@ -20,6 +19,10 @@ export const MOCK_USER: User = {
     facebook: 'https://facebook.com/fake',
     linkedin: 'https://linkedin.com/in/fake',
     share: true,
+  },
+  wallet: {
+    id: 1,
+    amount: faker.number.int(),
   },
 }
 

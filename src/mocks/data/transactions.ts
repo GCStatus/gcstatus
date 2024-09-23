@@ -16,7 +16,6 @@ for (let i = 0; i < 20; i++) {
       name: faker.person.fullName(),
       email: faker.internet.email(),
       nickname: faker.internet.userName(),
-      coins: faker.number.int(),
       experience: faker.number.int(),
       level: faker.number.int(),
       birthdate: faker.date.anytime().toDateString(),
@@ -25,6 +24,10 @@ for (let i = 0; i < 20; i++) {
       profile: {
         photo: faker.image.url(),
         share: faker.datatype.boolean(),
+      },
+      wallet: {
+        id: 1,
+        amount: faker.number.int(),
       },
     },
   }

@@ -29,7 +29,7 @@ function TitleCard(props: TitleCardProps) {
   const handlePurchase = (title: Title) => {
     if (!title.cost) return
 
-    if (user.coins >= title.cost) {
+    if (user.wallet.amount >= title.cost) {
       alert(`Purchased title: ${title.title}`)
     }
   }
@@ -105,14 +105,16 @@ function TitleCard(props: TitleCardProps) {
             <Button
               fullWidth
               className={`bg-theme-red-900 text-white px-4 py-2 rounded-full shadow-lg hover:bg-red-700 transition-all ${
-                title.cost && user.coins < title.cost
+                title.cost && user.wallet.amount < title.cost
                   ? 'opacity-50 cursor-not-allowed'
                   : ''
               }`}
               startIcon={<FaShoppingCart />}
-              disabled={title.cost ? user.coins < title.cost : true}
+              disabled={
+                title.cost ? user.wallet.amount < title.cost : true
+              }
               onClick={() => handlePurchase(title)}>
-              {title.cost && user.coins >= title.cost
+              {title.cost && user.wallet.amount >= title.cost
                 ? `Buy for ${title.cost} Coins`
                 : 'Not Enough Coins'}
             </Button>

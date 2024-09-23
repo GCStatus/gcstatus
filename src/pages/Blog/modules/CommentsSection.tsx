@@ -36,7 +36,6 @@ function CommentsSection({ comments }: { comments: Message[] }) {
             name: 'Current User',
             email: 'current@user.com',
             nickname: 'currentuser',
-            coins: faker.number.int(),
             experience: faker.number.int(),
             level: faker.number.int(),
             birthdate: '1990-01-01',
@@ -45,6 +44,10 @@ function CommentsSection({ comments }: { comments: Message[] }) {
             profile: {
               photo: 'https://via.placeholder.com/40',
               share: true,
+            },
+            wallet: {
+              id: 1,
+              amount: faker.number.int(),
             },
           },
           replies: [],
@@ -73,7 +76,6 @@ function CommentsSection({ comments }: { comments: Message[] }) {
                       name: 'Current User',
                       email: 'current@user.com',
                       nickname: 'currentuser',
-                      coins: faker.number.int(),
                       experience: faker.number.int(),
                       level: faker.number.int(),
                       birthdate: '1990-01-01',
@@ -82,6 +84,10 @@ function CommentsSection({ comments }: { comments: Message[] }) {
                       profile: {
                         photo: 'https://via.placeholder.com/40',
                         share: true,
+                      },
+                      wallet: {
+                        id: 1,
+                        amount: faker.number.int(),
                       },
                     },
                     replies: [],

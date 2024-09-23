@@ -25,7 +25,6 @@ for (let i = 0; i < 100; i++) {
       name: faker.person.fullName(),
       email: faker.internet.email(),
       nickname: faker.internet.userName(),
-      coins: faker.number.int(),
       experience: faker.number.int(),
       level: faker.number.int(),
       birthdate: faker.date.past().toDateString(),
@@ -34,6 +33,10 @@ for (let i = 0; i < 100; i++) {
       profile: {
         photo: faker.image.avatar(),
         share: faker.datatype.boolean(),
+      },
+      wallet: {
+        id: 1,
+        amount: faker.number.int(),
       },
     },
   }
@@ -64,7 +67,6 @@ export const MOCK_BLOG_DETAILS: BlogDetails = {
     name: faker.person.fullName(),
     email: faker.internet.email(),
     nickname: faker.internet.userName(),
-    coins: faker.number.int(),
     experience: faker.number.int(),
     level: faker.number.int(),
     birthdate: faker.date.past().toDateString(),
@@ -73,6 +75,10 @@ export const MOCK_BLOG_DETAILS: BlogDetails = {
     profile: {
       photo: faker.image.avatar(),
       share: faker.datatype.boolean(),
+    },
+    wallet: {
+      id: 1,
+      amount: faker.number.int(),
     },
   },
   comments: [
@@ -86,7 +92,6 @@ export const MOCK_BLOG_DETAILS: BlogDetails = {
         name: faker.person.fullName(),
         email: faker.internet.email(),
         nickname: faker.internet.userName(),
-        coins: faker.number.int(),
         experience: faker.number.int(),
         level: faker.number.int(),
         birthdate: faker.date.past().toDateString(),
@@ -95,6 +100,10 @@ export const MOCK_BLOG_DETAILS: BlogDetails = {
         profile: {
           photo: faker.image.avatar(),
           share: faker.datatype.boolean(),
+        },
+        wallet: {
+          id: 1,
+          amount: faker.number.int(),
         },
       },
       replies: [],

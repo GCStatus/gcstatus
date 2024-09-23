@@ -17,13 +17,13 @@ export interface User {
   name: string
   email: string
   level: number
-  coins: number
   nickname: string
   birthdate: string
   experience: number
   created_at: string
   updated_at: string
   profile?: Profile
+  wallet: Wallet
 }
 
 export interface UpdateUserInterface {
@@ -63,4 +63,9 @@ export interface Level {
   level: number
   experience: number
   title?: Title
+}
+
+export interface Wallet {
+  id: number
+  amount: number
 }
