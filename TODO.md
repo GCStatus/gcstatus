@@ -9,12 +9,6 @@
 ### MVP (Minimum Viable Product)
 
 - [ ] Implement the game details sale - display the best price on the platforms
-- [ ] User authentication
-  - [x] Create login and register page
-  - [x] Create page to forgot password and reset
-  - [ ] Set up user registration and login
-  - [ ] Implement OAuth for Google and Facebook
-  - [x] Create a user profile page with editable settings
 - [ ] Community forum
   - [x] Create a basic forum structure with categories and threads
   - [ ] Allow users to create, edit, and delete posts
@@ -35,17 +29,11 @@
   - [ ] Write unit tests for all pages
   - [ ] Set up end-to-end testing with Cypress or Playwright
   - [ ] Perform accessibility testing
-- [ ] Deployment
-  - [x] Configure Netlify for continuous deployment
-  - [ ] Set up custom domain and SSL certificate
-  - [ ] Optimize performance for production build
-- [ ] Documentation
-  - [x] Write detailed README.md with project overview
-  - [ ] Document API endpoints
-  - [x] Create a contribution guide for open source contributors
 - [ ] Adjust all keyframes to tailwind
 - [ ] Review entire responsivity
 - [ ] Review entire dark and light mode
+- [ ] Documentation
+  - [ ] Create an issue template
 
 ### Future Ideas
 
@@ -55,8 +43,6 @@
 - [ ] Add some games on the website
 - [ ] Quiz & polls: about the most exciting game release on future or something else
 - [ ] Integrate with social medias
-- [ ] Experience system
-  - [ ] Users must have a level on platform
 - [ ] Missions system
   - [ ] Create missions for the users
   - [ ] Add possibility to create missions for specic users

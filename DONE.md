@@ -104,6 +104,22 @@
   - [x] Add flickering effect on text
 - [x] Game news and reviews section
 - [x] Create routes without header carousel
+- [x] User authentication
+- [x] Experience system
+  - [x] Users must have a level on platform
+  - [x] Create login and register page
+  - [x] Create page to forgot password and reset
+  - [x] Set up user registration and login
+  - [x] Create a user profile page with editable settings
+- [x] Documentation
+  - [x] Write detailed README.md with project overview
+  - [x] Create a contribution guide for open source contributors
+- [x] Deployment
+  - [x] Configure Netlify for continuous deployment
+  - [x] Set up custom domain and SSL certificate
+  - [x] Optimize performance for production build
+- [x] User wallet
+  - [x] User should have a wallet and amount should be shown on profile coins page
 
 ### Post MVP
 
