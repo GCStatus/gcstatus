@@ -1,3 +1,4 @@
+import { faker } from '@faker-js/faker'
 import {
   Avatar,
   Box,
@@ -40,12 +41,18 @@ function GameChat(props: GameChatProps) {
             name: 'Current User',
             email: 'current@user.com',
             nickname: 'currentuser',
+            experience: faker.number.int(),
+            level: faker.number.int(),
             birthdate: '1990-01-01',
             created_at: '2024-01-01T00:00:00.000Z',
             updated_at: '2024-01-01T00:00:00.000Z',
             profile: {
               photo: 'https://via.placeholder.com/40',
               share: true,
+            },
+            wallet: {
+              id: 1,
+              amount: faker.number.int(),
             },
           },
           replies: [],
@@ -75,11 +82,17 @@ function GameChat(props: GameChatProps) {
                       email: 'current@user.com',
                       nickname: 'currentuser',
                       birthdate: '1990-01-01',
+                      experience: faker.number.int(),
+                      level: faker.number.int(),
                       created_at: '2024-01-01T00:00:00.000Z',
                       updated_at: '2024-01-01T00:00:00.000Z',
                       profile: {
                         photo: 'https://via.placeholder.com/40',
                         share: true,
+                      },
+                      wallet: {
+                        id: 1,
+                        amount: faker.number.int(),
                       },
                     },
                     replies: [],

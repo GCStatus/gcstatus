@@ -25,12 +25,18 @@ for (let i = 0; i < 100; i++) {
       name: faker.person.fullName(),
       email: faker.internet.email(),
       nickname: faker.internet.userName(),
+      experience: faker.number.int(),
+      level: faker.number.int(),
       birthdate: faker.date.past().toDateString(),
       created_at: faker.date.anytime().toISOString(),
       updated_at: faker.date.anytime().toISOString(),
       profile: {
         photo: faker.image.avatar(),
         share: faker.datatype.boolean(),
+      },
+      wallet: {
+        id: 1,
+        amount: faker.number.int(),
       },
     },
   }
@@ -61,12 +67,18 @@ export const MOCK_BLOG_DETAILS: BlogDetails = {
     name: faker.person.fullName(),
     email: faker.internet.email(),
     nickname: faker.internet.userName(),
+    experience: faker.number.int(),
+    level: faker.number.int(),
     birthdate: faker.date.past().toDateString(),
     created_at: faker.date.anytime().toISOString(),
     updated_at: faker.date.anytime().toISOString(),
     profile: {
       photo: faker.image.avatar(),
       share: faker.datatype.boolean(),
+    },
+    wallet: {
+      id: 1,
+      amount: faker.number.int(),
     },
   },
   comments: [
@@ -80,12 +92,18 @@ export const MOCK_BLOG_DETAILS: BlogDetails = {
         name: faker.person.fullName(),
         email: faker.internet.email(),
         nickname: faker.internet.userName(),
+        experience: faker.number.int(),
+        level: faker.number.int(),
         birthdate: faker.date.past().toDateString(),
         created_at: faker.date.anytime().toISOString(),
         updated_at: faker.date.anytime().toISOString(),
         profile: {
           photo: faker.image.avatar(),
           share: faker.datatype.boolean(),
+        },
+        wallet: {
+          id: 1,
+          amount: faker.number.int(),
         },
       },
       replies: [],

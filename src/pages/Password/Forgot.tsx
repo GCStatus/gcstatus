@@ -3,9 +3,9 @@ import { Box, Container, Link, Stack, Typography } from '@mui/material'
 import { RegisterOptions, SubmitHandler, useForm } from 'react-hook-form'
 
 import { AuthBg, Input, Logo } from '@/components'
+import { useSuccess } from '@/hooks'
 import { useForgotMutation } from '@/services/api'
 import { ForgotInterface } from '@/types'
-import { useSuccess } from '@/hooks'
 
 import { forgotValidations } from './validations'
 

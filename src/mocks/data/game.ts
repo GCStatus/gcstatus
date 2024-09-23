@@ -1,3 +1,5 @@
+import { faker } from '@faker-js/faker'
+
 import { GameDetails } from '@/types'
 
 export const MOCK_GAME_DETAILS: GameDetails = {
@@ -49,12 +51,18 @@ export const MOCK_GAME_DETAILS: GameDetails = {
         email: 'dev@dev.com',
         nickname: 'theplayer1',
         birthdate: '2000-03-25',
+        experience: faker.number.int(),
+        level: faker.number.int(),
         created_at: '2024-01-01T00:00:00.000Z',
         updated_at: '2024-01-01T00:00:00.000Z',
         profile: {
           photo:
             'https://wac-cdn.atlassian.com/dam/jcr:ba03a215-2f45-40f5-8540-b2015223c918/Max-R_Headshot%20(1).jpg?cdnVersion=2199',
           share: true,
+        },
+        wallet: {
+          id: 1,
+          amount: faker.number.int(),
         },
       },
       replies: [
@@ -69,11 +77,17 @@ export const MOCK_GAME_DETAILS: GameDetails = {
             name: 'Player 2',
             email: 'dev2@dev.com',
             nickname: 'theplayer2',
+            experience: faker.number.int(),
+            level: faker.number.int(),
             birthdate: '2000-03-25',
             created_at: '2024-01-01T00:00:00.000Z',
             updated_at: '2024-01-01T00:00:00.000Z',
             profile: {
               share: true,
+            },
+            wallet: {
+              id: 1,
+              amount: faker.number.int(),
             },
           },
           replies: [],
@@ -109,6 +123,8 @@ export const MOCK_GAME_DETAILS: GameDetails = {
         id: 1,
         name: 'Player 1',
         email: 'dev@dev.com',
+        experience: faker.number.int(),
+        level: faker.number.int(),
         nickname: 'theplayer1',
         birthdate: '2000-03-25',
         created_at: '2024-01-01T00:00:00.000Z',
@@ -117,6 +133,10 @@ export const MOCK_GAME_DETAILS: GameDetails = {
           photo:
             'https://wac-cdn.atlassian.com/dam/jcr:ba03a215-2f45-40f5-8540-b2015223c918/Max-R_Headshot%20(1).jpg?cdnVersion=2199',
           share: true,
+        },
+        wallet: {
+          id: 1,
+          amount: faker.number.int(),
         },
       },
     },
@@ -131,6 +151,8 @@ export const MOCK_GAME_DETAILS: GameDetails = {
         id: 2,
         name: 'Player 2',
         email: 'dev2@dev.com',
+        experience: faker.number.int(),
+        level: faker.number.int(),
         nickname: 'theplayer2',
         birthdate: '2000-03-25',
         created_at: '2024-01-01T00:00:00.000Z',
@@ -139,6 +161,10 @@ export const MOCK_GAME_DETAILS: GameDetails = {
           photo:
             'https://wac-cdn.atlassian.com/dam/jcr:ba03a215-2f45-40f5-8540-b2015223c918/Max-R_Headshot%20(1).jpg?cdnVersion=2199',
           share: true,
+        },
+        wallet: {
+          id: 1,
+          amount: faker.number.int(),
         },
       },
     },
@@ -153,6 +179,8 @@ export const MOCK_GAME_DETAILS: GameDetails = {
         name: 'Player 3',
         email: 'dev3@dev.com',
         nickname: 'theplayer3',
+        experience: faker.number.int(),
+        level: faker.number.int(),
         birthdate: '2000-03-25',
         created_at: '2024-01-01T00:00:00.000Z',
         updated_at: '2024-01-01T00:00:00.000Z',
@@ -160,6 +188,10 @@ export const MOCK_GAME_DETAILS: GameDetails = {
           photo:
             'https://wac-cdn.atlassian.com/dam/jcr:ba03a215-2f45-40f5-8540-b2015223c918/Max-R_Headshot%20(1).jpg?cdnVersion=2199',
           share: true,
+        },
+        wallet: {
+          id: 1,
+          amount: faker.number.int(),
         },
       },
     },
@@ -174,6 +206,8 @@ export const MOCK_GAME_DETAILS: GameDetails = {
         name: 'Player 4',
         email: 'dev4@dev.com',
         nickname: 'theplayer4',
+        experience: faker.number.int(),
+        level: faker.number.int(),
         birthdate: '2000-03-25',
         created_at: '2024-01-01T00:00:00.000Z',
         updated_at: '2024-01-01T00:00:00.000Z',
@@ -181,6 +215,10 @@ export const MOCK_GAME_DETAILS: GameDetails = {
           photo:
             'https://wac-cdn.atlassian.com/dam/jcr:ba03a215-2f45-40f5-8540-b2015223c918/Max-R_Headshot%20(1).jpg?cdnVersion=2199',
           share: true,
+        },
+        wallet: {
+          id: 1,
+          amount: faker.number.int(),
         },
       },
     },

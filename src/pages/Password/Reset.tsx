@@ -5,9 +5,9 @@ import toast from 'react-hot-toast'
 import { useNavigate, useParams } from 'react-router-dom'
 
 import { AuthBg, Input, Logo, NewPassword } from '@/components'
+import { useSuccess } from '@/hooks'
 import { useResetPassMutation } from '@/services/api'
 import { ResetInterface } from '@/types'
-import { useSuccess } from '@/hooks'
 import { getParam } from '@/utils'
 
 import { resetValidations } from './validations'
