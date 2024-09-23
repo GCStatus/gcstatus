@@ -10,6 +10,7 @@ import {
 } from '@mui/material'
 import { format } from 'date-fns'
 import { useState } from 'react'
+import { faker } from '@faker-js/faker'
 import { IoChatboxEllipsesOutline, IoSendOutline } from 'react-icons/io5'
 
 import { Input } from '@/components'
@@ -35,6 +36,9 @@ function CommentsSection({ comments }: { comments: Message[] }) {
             name: 'Current User',
             email: 'current@user.com',
             nickname: 'currentuser',
+            coins: faker.number.int(),
+            experience: faker.number.int(),
+            level: faker.number.int(),
             birthdate: '1990-01-01',
             created_at: '2024-01-01T00:00:00.000Z',
             updated_at: '2024-01-01T00:00:00.000Z',
@@ -69,6 +73,9 @@ function CommentsSection({ comments }: { comments: Message[] }) {
                       name: 'Current User',
                       email: 'current@user.com',
                       nickname: 'currentuser',
+                      coins: faker.number.int(),
+                      experience: faker.number.int(),
+                      level: faker.number.int(),
                       birthdate: '1990-01-01',
                       created_at: '2024-01-01T00:00:00.000Z',
                       updated_at: '2024-01-01T00:00:00.000Z',

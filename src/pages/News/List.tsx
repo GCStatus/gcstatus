@@ -31,6 +31,10 @@ interface Article {
   image: {
     original: string
   }
+  categories: {
+    id: number
+    name: string
+  }[]
 }
 
 function List() {
@@ -146,6 +150,10 @@ function List() {
                 )}{' '}
                 by {article.authors || 'Unknown'}
               </Typography>
+
+              <Box className="flex flex-row mt-4 text-sm text-gray-400">
+                {article.categories.map(({ name }) => name).join(', ')}
+              </Box>
             </CardContent>
 
             <CardActions

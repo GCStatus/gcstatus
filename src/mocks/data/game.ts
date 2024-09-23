@@ -1,3 +1,5 @@
+import { faker } from '@faker-js/faker'
+
 import { GameDetails } from '@/types'
 
 export const MOCK_GAME_DETAILS: GameDetails = {
@@ -49,6 +51,9 @@ export const MOCK_GAME_DETAILS: GameDetails = {
         email: 'dev@dev.com',
         nickname: 'theplayer1',
         birthdate: '2000-03-25',
+        coins: faker.number.int(),
+        experience: faker.number.int(),
+        level: faker.number.int(),
         created_at: '2024-01-01T00:00:00.000Z',
         updated_at: '2024-01-01T00:00:00.000Z',
         profile: {
@@ -69,6 +74,9 @@ export const MOCK_GAME_DETAILS: GameDetails = {
             name: 'Player 2',
             email: 'dev2@dev.com',
             nickname: 'theplayer2',
+            coins: faker.number.int(),
+            experience: faker.number.int(),
+            level: faker.number.int(),
             birthdate: '2000-03-25',
             created_at: '2024-01-01T00:00:00.000Z',
             updated_at: '2024-01-01T00:00:00.000Z',
@@ -109,6 +117,9 @@ export const MOCK_GAME_DETAILS: GameDetails = {
         id: 1,
         name: 'Player 1',
         email: 'dev@dev.com',
+        coins: faker.number.int(),
+        experience: faker.number.int(),
+        level: faker.number.int(),
         nickname: 'theplayer1',
         birthdate: '2000-03-25',
         created_at: '2024-01-01T00:00:00.000Z',
@@ -131,6 +142,9 @@ export const MOCK_GAME_DETAILS: GameDetails = {
         id: 2,
         name: 'Player 2',
         email: 'dev2@dev.com',
+        coins: faker.number.int(),
+        experience: faker.number.int(),
+        level: faker.number.int(),
         nickname: 'theplayer2',
         birthdate: '2000-03-25',
         created_at: '2024-01-01T00:00:00.000Z',
@@ -153,6 +167,9 @@ export const MOCK_GAME_DETAILS: GameDetails = {
         name: 'Player 3',
         email: 'dev3@dev.com',
         nickname: 'theplayer3',
+        coins: faker.number.int(),
+        experience: faker.number.int(),
+        level: faker.number.int(),
         birthdate: '2000-03-25',
         created_at: '2024-01-01T00:00:00.000Z',
         updated_at: '2024-01-01T00:00:00.000Z',
@@ -174,6 +191,9 @@ export const MOCK_GAME_DETAILS: GameDetails = {
         name: 'Player 4',
         email: 'dev4@dev.com',
         nickname: 'theplayer4',
+        coins: faker.number.int(),
+        experience: faker.number.int(),
+        level: faker.number.int(),
         birthdate: '2000-03-25',
         created_at: '2024-01-01T00:00:00.000Z',
         updated_at: '2024-01-01T00:00:00.000Z',

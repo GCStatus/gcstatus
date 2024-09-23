@@ -15,6 +15,10 @@ interface Article {
   image: {
     original: string
   }
+  categories: {
+    id: number
+    name: string
+  }[]
 }
 
 export const newsApi = createApi({

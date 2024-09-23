@@ -19,6 +19,10 @@ interface Article {
   image: {
     original: string
   }
+  categories: {
+    id: number
+    name: string
+  }[]
 }
 
 const isExpired = () => {

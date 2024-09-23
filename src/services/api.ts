@@ -9,6 +9,7 @@ import {
 import { baseUrl } from '@/constants'
 import { logout } from '@/store/accountSlice'
 import {
+  Level,
   LoginCredentials,
   RegisterCredentials,
   Res,
@@ -36,7 +37,7 @@ export const baseQueryFn: BaseQueryFn<
   return result
 }
 
-export const tagTypes = ['user'] as const
+export const tagTypes = ['user', 'levels'] as const
 
 const api = createApi({
   baseQuery: baseQueryFn,
@@ -90,6 +91,12 @@ const api = createApi({
       }),
       invalidatesTags: tagTypes,
     }),
+
+    getLevels: builder.query<Level[], void>({
+      query: () => 'levels',
+      transformResponse: (res: Res<Level[]>) => res.data,
+      providesTags: ['levels'],
+    }),
   }),
 })
 
@@ -98,6 +105,7 @@ export const {
   useLoginMutation,
   useForgotMutation,
   useLogoutMutation,
+  useGetLevelsQuery,
   useLazyGetUserQuery,
   useRegisterMutation,
   useResetPassMutation,

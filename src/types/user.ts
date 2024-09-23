@@ -1,8 +1,14 @@
+import { Title } from '.'
+
 export interface Profile {
   phone?: string
   photo?: string
   linkedin?: string
   facebook?: string
+  twitter?: string
+  instagram?: string
+  youtube?: string
+  twitch?: string
   share: boolean
 }
 
@@ -10,8 +16,11 @@ export interface User {
   id: number
   name: string
   email: string
-  nickname?: string
+  level: number
+  coins: number
+  nickname: string
   birthdate: string
+  experience: number
   created_at: string
   updated_at: string
   profile?: Profile
@@ -46,4 +55,12 @@ export interface TeamMember {
     whatsapp?: string
     instagram?: string
   }
+}
+
+export interface Level {
+  id: number
+  coins: number
+  level: number
+  experience: number
+  title?: Title
 }
