@@ -1,18 +1,31 @@
 import { Stack, Typography } from '@mui/material'
 import { RegisterOptions, SubmitHandler, useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 
 import { Button, Input, NewPassword } from '@/components'
+import { useSuccess } from '@/hooks'
+import { useUpdatePasswordMutation } from '@/services/api'
 import { UpdatePasswordInterface } from '@/types'
 
 import { updatePasswordValidations } from './validations'
 
+interface TempUpdatePasswordInterface {
+  old_password: string
+  password: string
+  password_confirmation: string
+}
+
 function UpdatePassword() {
+  const go = useNavigate()
+  const [trigger, { data, isLoading, isSuccess }] =
+    useUpdatePasswordMutation()
   const {
     watch,
+    reset,
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<UpdatePasswordInterface>({
+  } = useForm<TempUpdatePasswordInterface>({
     defaultValues: {
       old_password: '',
       password: '',
@@ -29,15 +42,28 @@ function UpdatePassword() {
     ...register(key, {
       ...updatePasswordValidations[key],
       ...options,
-    } as RegisterOptions<UpdatePasswordInterface>),
+    } as RegisterOptions<TempUpdatePasswordInterface>),
     type: 'password',
     error: !!errors[key],
     helperText: errors[key] && errors[key]?.message,
   })
 
-  const onSubmt: SubmitHandler<UpdatePasswordInterface> = (data) => {
-    console.log(data)
+  const onSubmt: SubmitHandler<TempUpdatePasswordInterface> = async (
+    data,
+  ) => {
+    const payload: UpdatePasswordInterface = {
+      password: data.old_password,
+      new_password: data.password,
+      new_password_confirmation: data.password_confirmation,
+    }
+
+    await trigger(payload)
   }
+
+  useSuccess(isSuccess, data?.message, () => {
+    reset()
+    go('/login')
+  })
 
   return (
     <Stack
@@ -68,7 +94,7 @@ function UpdatePassword() {
           })}
         />
 
-        <Button fullWidth type="submit">
+        <Button fullWidth type="submit" isLoading={isLoading}>
           Save Changes
         </Button>
       </Stack>

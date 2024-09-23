@@ -14,6 +14,7 @@ import {
   RegisterCredentials,
   Res,
   ResetPasswordPayload,
+  UpdatePasswordInterface,
   User,
 } from '@/types'
 
@@ -97,6 +98,18 @@ const api = createApi({
       transformResponse: (res: Res<Level[]>) => res.data,
       providesTags: ['levels'],
     }),
+
+    updatePassword: builder.mutation<
+      { message: string },
+      UpdatePasswordInterface
+    >({
+      query: (body) => ({
+        url: 'profile/password',
+        method: 'PUT',
+        body,
+      }),
+      invalidatesTags: ['user'],
+    }),
   }),
 })
 
@@ -110,6 +123,7 @@ export const {
   useRegisterMutation,
   useResetPassMutation,
   useLazyGetLevelsQuery,
+  useUpdatePasswordMutation,
 } = api
 
 export default api
