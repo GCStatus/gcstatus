@@ -1,5 +1,5 @@
 import { Box, Container, Stack, Typography } from '@mui/material'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { AiFillCamera } from 'react-icons/ai'
 import {
   FaClipboardList,
@@ -16,7 +16,9 @@ import {
 } from 'react-icons/io5'
 
 import { LoadingScreen } from '@/components'
-import { useAccount } from '@/hooks'
+import { useAccount, useLevels } from '@/hooks'
+import { useLazyGetLevelsQuery } from '@/services/api'
+import { Level } from '@/types'
 
 import { NavItem } from './modules'
 import {
@@ -33,9 +35,21 @@ import {
 
 function Profile() {
   const { user, loading } = useAccount()
+  const { levels, loading: levelsLoading } = useLevels()
+  const [stLevels, setStLevels] = useState<Level[]>([])
   const [activeSection, setActiveSection] = useState<string>('titles')
+  const [getLevels] = useLazyGetLevelsQuery()
+
+  useEffect(() => {
+    if (levelsLoading) return
+
+    if (levels.length > 0) setStLevels(levels)
+    else getLevels()
+  }, [levels, levelsLoading, getLevels])
 
   if (!user || loading) return <LoadingScreen />
+
+  const nextLevel = levels.find(({ level }) => level === user.level + 1)
 
   const sections: {
     [key: string]: {
@@ -86,7 +100,13 @@ function Profile() {
     },
     levels: {
       label: 'Levels',
-      children: <Levels user={user} />,
+      children: (
+        <Levels
+          user={user}
+          levels={stLevels}
+          loading={levelsLoading || loading}
+        />
+      ),
       icon: <FaLevelUpAlt />,
     },
   }
@@ -95,7 +115,9 @@ function Profile() {
     setActiveSection(section)
   }
 
-  const experiencePercentage = Math.round((user.experience / 500) * 100)
+  const experiencePercentage = Math.round(
+    nextLevel ? (user.experience / nextLevel.experience) * 100 : 100,
+  )
 
   return (
     <Stack className="dark:bg-zinc-900 bg-white text-white min-h-screen">
@@ -130,7 +152,9 @@ function Profile() {
             </Box>
             <Box className="w-full mt-4">
               <Typography className="text-gray-400 mb-2">
-                {user.experience}/{500} XP
+                {nextLevel
+                  ? `${user.experience}/${nextLevel.experience} XP`
+                  : '-'}{' '}
               </Typography>
               <Box className="w-full dark:bg-zinc-700 bg-gray-300 rounded-full h-4">
                 <Box

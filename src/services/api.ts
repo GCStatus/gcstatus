@@ -109,6 +109,7 @@ export const {
   useLazyGetUserQuery,
   useRegisterMutation,
   useResetPassMutation,
+  useLazyGetLevelsQuery,
 } = api
 
 export default api

@@ -1,3 +1,4 @@
+import { faker } from '@faker-js/faker'
 import {
   Avatar,
   Box,
@@ -10,7 +11,6 @@ import {
 } from '@mui/material'
 import { format } from 'date-fns'
 import { useState } from 'react'
-import { faker } from '@faker-js/faker'
 import { IoChatboxEllipsesOutline, IoSendOutline } from 'react-icons/io5'
 
 import { Input } from '@/components'

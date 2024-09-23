@@ -9,11 +9,13 @@ import { newsApi } from '@/services/news'
 // Slices
 import account from './accountSlice'
 import article from './articleSlice'
+import level from './levelsSlice'
 import sidebar from './sidebarSlice'
 import theme from './themeSlice'
 
 const rootReducers = combineReducers({
   theme,
+  level,
   sidebar,
   account,
   article,

@@ -1,22 +1,16 @@
 import { Box, CircularProgress, Stack, Typography } from '@mui/material'
 
 import { LevelCard } from '@/components'
-import { useGetLevelsQuery } from '@/services/api'
-import { User } from '@/types'
+import { Level, User } from '@/types'
 
 interface LevelsProps {
   user: User
+  levels: Level[]
+  loading: boolean
 }
 
 function Levels(props: LevelsProps) {
-  const { user } = props
-  const { levels, isLoading, isFetching } = useGetLevelsQuery(undefined, {
-    selectFromResult: ({ data = [], isLoading, isFetching }) => ({
-      levels: data,
-      isLoading,
-      isFetching,
-    }),
-  })
+  const { user, levels, loading } = props
 
   const currentLevel = levels.find(({ level }) => level === user.level)
   const nextLevel = levels.find(({ level }) => level === user.level + 1)
@@ -31,7 +25,7 @@ function Levels(props: LevelsProps) {
         Levels
       </Typography>
 
-      {isLoading || isFetching ? (
+      {loading ? (
         <Box className="flex justify-center items-center mt-[30vh]">
           <CircularProgress color="error" />
         </Box>
