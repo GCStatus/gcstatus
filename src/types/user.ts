@@ -22,7 +22,7 @@ export interface User {
   experience: number
   created_at: string
   updated_at: string
-  profile?: Profile
+  profile: Profile
   wallet: Wallet
 }
 

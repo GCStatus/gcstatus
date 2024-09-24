@@ -11,6 +11,7 @@ import {
 import {
   IoLockClosed,
   IoPersonCircle,
+  IoShareSocial,
   IoSync,
   IoWallet,
 } from 'react-icons/io5'
@@ -26,6 +27,7 @@ import {
   Levels,
   Missions,
   Orders,
+  Socials,
   Titles,
   Transactions,
   UpdateImage,
@@ -108,6 +110,11 @@ function Profile() {
         />
       ),
       icon: <FaLevelUpAlt />,
+    },
+    socials: {
+      label: 'Socials',
+      children: <Socials user={user} />,
+      icon: <IoShareSocial />,
     },
   }
 

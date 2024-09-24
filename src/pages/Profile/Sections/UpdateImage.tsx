@@ -2,11 +2,18 @@ import { Box, Slider, Stack, Typography } from '@mui/material'
 import { useCallback, useRef, useState } from 'react'
 import Cropper, { Area } from 'react-easy-crop'
 import { AiFillCamera } from 'react-icons/ai'
+import { useDispatch } from 'react-redux'
 
 import { Button } from '@/components'
+import { useSuccess } from '@/hooks'
+import { useUpdatePictureMutation } from '@/services/api'
+import { logout } from '@/store/accountSlice'
 import { getCroppedImg } from '@/utils'
 
 function UpdateImage() {
+  const dispatch = useDispatch()
+  const [trigger, { data, isLoading, isSuccess }] =
+    useUpdatePictureMutation()
   const [imageSrc, setImageSrc] = useState<string | null>(null)
   const fileInputRef = useRef<HTMLInputElement | null>(null)
   const [zoom, setZoom] = useState<number>(1)
@@ -40,8 +47,22 @@ function UpdateImage() {
   const handleCrop = useCallback(async () => {
     if (!imageSrc || !croppedAreaPixels) return
     try {
-      const croppedImage = await getCroppedImg(imageSrc, croppedAreaPixels)
-      setCroppedImage(croppedImage)
+      const croppedImageDataUrl = await getCroppedImg(
+        imageSrc,
+        croppedAreaPixels,
+      )
+
+      if (croppedImageDataUrl) {
+        const response = await fetch(croppedImageDataUrl)
+        const blob = await response.blob()
+        const file = new File([blob], 'cropped-image.png', {
+          type: 'image/png',
+        })
+        setCroppedImage(URL.createObjectURL(file))
+        return file
+      } else {
+        console.error('Cropped image data URL is invalid.')
+      }
     } catch (e) {
       console.error(e)
     }
@@ -61,10 +82,21 @@ function UpdateImage() {
   const onSubmit = async () => {
     const formData = new FormData()
 
-    if (croppedImage) formData.append('photo', croppedImage)
+    if (croppedImage) {
+      const file = await handleCrop()
+      if (file) formData.append('file', file)
+    }
 
-    console.log(formData, croppedImage)
+    await trigger(formData)
+    dispatch(logout())
   }
+
+  useSuccess(isSuccess, data?.message, () => {
+    setImageSrc(null)
+    setCroppedImage(null)
+    setCrop({ x: 0, y: 0 })
+    setCroppedAreaPixels(null)
+  })
 
   return (
     <Box className="md:p-6 p-2 rounded-lg animate-fade-in">
@@ -152,7 +184,8 @@ function UpdateImage() {
               mt={4}>
               <Button
                 onClick={onSubmit}
-                className="bg-theme-red-900 hover:bg-theme-red-800">
+                className="bg-theme-red-900 hover:bg-theme-red-800"
+                isLoading={isLoading}>
                 Confirm
               </Button>
               <Button
