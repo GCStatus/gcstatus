@@ -120,6 +120,9 @@
   - [x] Optimize performance for production build
 - [x] User wallet
   - [x] User should have a wallet and amount should be shown on profile coins page
+- [x] User profile update
+  - [x] Update user profile picture
+  - [x] Update user profile social medias and shareable
 
 ### Post MVP
 
