@@ -17,9 +17,6 @@
   - [ ] Ensure the website is mobile-friendly
   - [ ] Test across different screen sizes and browsers
   - [ ] Optimize UI components for responsiveness
-- [ ] User updation
-  - [ ] Update user name
-  - [ ] Update user birthdate
 
 ### Post-MVP
 

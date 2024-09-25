@@ -1,11 +1,4 @@
-import { differenceInYears, parseISO } from 'date-fns'
-
-const isOlderThan14Years = (dateString: string) => {
-  const date = parseISO(dateString)
-  const today = new Date()
-
-  return differenceInYears(today, date) >= 14
-}
+import { isOlderThan14Years } from '@/utils'
 
 export const validations = {
   name: {

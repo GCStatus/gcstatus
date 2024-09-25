@@ -123,7 +123,9 @@
 - [x] User profile update
   - [x] Update user profile picture
   - [x] Update user profile social medias and shareable
-
+  - [x] Update user name
+  - [x] Update user birthdate
+  - [x] Update user nickname and email, with password request
 ### Post MVP
 
 - [x] Integrate a game release calendar

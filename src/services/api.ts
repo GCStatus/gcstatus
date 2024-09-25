@@ -16,6 +16,8 @@ import {
   Res,
   ResetPasswordPayload,
   UpdatePasswordInterface,
+  UpdateUserBasicsInterface,
+  UpdateUserNickAndEmailInterface,
   User,
 } from '@/types'
 
@@ -130,6 +132,30 @@ const api = createApi({
       }),
       invalidatesTags: (_, error) => (!error ? ['user'] : []),
     }),
+
+    updateNickAndEmail: builder.mutation<
+      { message: string },
+      UpdateUserNickAndEmailInterface
+    >({
+      query: (body) => ({
+        url: 'user/update/sensitive',
+        method: 'PUT',
+        body,
+      }),
+      invalidatesTags: (_, error) => (!error ? ['user'] : []),
+    }),
+
+    updateUserBasics: builder.mutation<
+      { message: string },
+      UpdateUserBasicsInterface
+    >({
+      query: (body) => ({
+        url: 'user/update/basics',
+        method: 'PUT',
+        body,
+      }),
+      invalidatesTags: (_, error) => (!error ? ['user'] : []),
+    }),
   }),
 })
 
@@ -146,6 +172,8 @@ export const {
   useUpdatePictureMutation,
   useUpdateSocialsMutation,
   useUpdatePasswordMutation,
+  useUpdateUserBasicsMutation,
+  useUpdateNickAndEmailMutation,
 } = api
 
 export default api

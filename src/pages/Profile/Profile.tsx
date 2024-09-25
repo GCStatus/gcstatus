@@ -39,7 +39,7 @@ function Profile() {
   const { user, loading } = useAccount()
   const { levels, loading: levelsLoading } = useLevels()
   const [stLevels, setStLevels] = useState<Level[]>([])
-  const [activeSection, setActiveSection] = useState<string>('titles')
+  const [activeSection, setActiveSection] = useState<string>('info')
   const [getLevels] = useLazyGetLevelsQuery()
 
   useEffect(() => {
@@ -60,6 +60,11 @@ function Profile() {
       children: React.ReactNode
     }
   } = {
+    info: {
+      label: 'Me',
+      children: <UpdateUser user={user} />,
+      icon: <IoPersonCircle />,
+    },
     titles: {
       label: 'Titles',
       children: <Titles user={user} />,
@@ -79,11 +84,6 @@ function Profile() {
       label: 'Password',
       children: <UpdatePassword />,
       icon: <IoLockClosed />,
-    },
-    nicknameAndEmail: {
-      label: 'Nickname & Email',
-      children: <UpdateUser />,
-      icon: <IoPersonCircle />,
     },
     updateProfilePicture: {
       label: 'Picture',

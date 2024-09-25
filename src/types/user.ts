@@ -26,10 +26,15 @@ export interface User {
   wallet: Wallet
 }
 
-export interface UpdateUserInterface {
+export interface UpdateUserNickAndEmailInterface {
   email: string
   nickname: string
   password: string
+}
+
+export interface UpdateUserBasicsInterface {
+  name: string
+  birthdate: string
 }
 
 export interface UpdatePasswordInterface {
