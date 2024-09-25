@@ -11,6 +11,7 @@ import { logout } from '@/store/accountSlice'
 import {
   Level,
   LoginCredentials,
+  Profile,
   RegisterCredentials,
   Res,
   ResetPasswordPayload,
@@ -50,7 +51,7 @@ const api = createApi({
         method: 'POST',
         body,
       }),
-      invalidatesTags: tagTypes,
+      invalidatesTags: (_, error) => (!error ? tagTypes : []),
     }),
 
     register: builder.mutation<{ message: string }, RegisterCredentials>({
@@ -76,6 +77,7 @@ const api = createApi({
           method: 'POST',
           body,
         }),
+        invalidatesTags: (_, error) => (!error ? ['user'] : []),
       },
     ),
 
@@ -90,7 +92,7 @@ const api = createApi({
         url: 'auth/logout',
         method: 'POST',
       }),
-      invalidatesTags: tagTypes,
+      invalidatesTags: (_, error) => (!error ? tagTypes : []),
     }),
 
     getLevels: builder.query<Level[], void>({
@@ -108,7 +110,25 @@ const api = createApi({
         method: 'PUT',
         body,
       }),
-      invalidatesTags: ['user'],
+      invalidatesTags: (_, error) => (!error ? ['user'] : []),
+    }),
+
+    updatePicture: builder.mutation<{ message: string }, FormData>({
+      query: (body) => ({
+        url: 'profile/picture',
+        method: 'PUT',
+        body,
+      }),
+      invalidatesTags: (_, error) => (!error ? ['user'] : []),
+    }),
+
+    updateSocials: builder.mutation<{ message: string }, Profile>({
+      query: (body) => ({
+        url: 'profile/socials',
+        method: 'PUT',
+        body,
+      }),
+      invalidatesTags: (_, error) => (!error ? ['user'] : []),
     }),
   }),
 })
@@ -123,6 +143,8 @@ export const {
   useRegisterMutation,
   useResetPassMutation,
   useLazyGetLevelsQuery,
+  useUpdatePictureMutation,
+  useUpdateSocialsMutation,
   useUpdatePasswordMutation,
 } = api
 
