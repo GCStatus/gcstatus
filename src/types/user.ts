@@ -1,4 +1,4 @@
-import { Title } from '.'
+import { BaseReward, Title } from '.'
 
 export interface Profile {
   phone?: string
@@ -24,6 +24,7 @@ export interface User {
   updated_at: string
   profile: Profile
   wallet: Wallet
+  title?: Title
 }
 
 export interface UpdateUserNickAndEmailInterface {
@@ -67,7 +68,7 @@ export interface Level {
   coins: number
   level: number
   experience: number
-  title?: Title
+  rewards: BaseReward[]
 }
 
 export interface Wallet {

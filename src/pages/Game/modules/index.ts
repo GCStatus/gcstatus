@@ -1,5 +1,4 @@
 export { default as DLCs } from './DLCs'
-export { default as Tabs } from './Tabs'
 export { default as Filters } from './Filters'
 export { default as Critics } from './Critics'
 export { default as GameChat } from './GameChat'

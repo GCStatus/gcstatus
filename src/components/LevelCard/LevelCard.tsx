@@ -1,7 +1,8 @@
-import { Box, Card, CardContent, SvgIcon, Typography } from '@mui/material'
-import { FaMedal } from 'react-icons/fa'
+import { Box, Card, CardContent, Typography } from '@mui/material'
 
 import { Level, User } from '@/types'
+
+import { RewardList } from './modules'
 
 interface LevelCardProps {
   user: User
@@ -11,7 +12,7 @@ interface LevelCardProps {
 
 function LevelCard(props: LevelCardProps) {
   const { user, level, label } = props
-  const { title, experience, coins } = level
+  const { rewards, experience, coins } = level
 
   const shouldApplyOpacity = user.level === level.level
 
@@ -58,21 +59,7 @@ function LevelCard(props: LevelCardProps) {
           </Box>
         </Box>
 
-        {title && (
-          <Box className="relative">
-            <Typography className="text-lg font-bold text-theme-red-900 mb-2">
-              Title Reward
-            </Typography>
-            <Box className="text-gray-200 p-4 rounded-lg border border-zinc-900 my-2 flex justify-between items-center">
-              <Typography className="dark:text-gray-400 text-gray-500 text-base">
-                {title.title}
-              </Typography>
-              <SvgIcon>
-                <FaMedal color="#ff4d4d" />
-              </SvgIcon>
-            </Box>
-          </Box>
-        )}
+        {rewards.length > 0 && <RewardList rewards={rewards} />}
       </CardContent>
     </Card>
   )

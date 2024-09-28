@@ -1,6 +1,7 @@
 export { default as Auth } from './Auth'
 export { default as Icon } from './Icon'
 export { default as Logo } from './Logo'
+export { default as Tabs } from './Tabs'
 export { default as Input } from './Input'
 export { default as Button } from './Button'
 export { default as AuthBg } from './AuthBg'

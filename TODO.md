@@ -75,3 +75,5 @@
 - [ ] Create a ticket for support
   - [ ] The ticket can be used to get support
   - [ ] The ticket can be used to report some suspicious activity
+- [ ] Create a new screen to spend money
+- [ ] Create a screen to buy coins

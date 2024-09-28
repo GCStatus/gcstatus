@@ -17,7 +17,7 @@ export const calculateOverallProgress = (
   const totalGoals = requirements.reduce((acc, req) => acc + req.goal, 0)
 
   const totalProgress = requirements.reduce(
-    (acc, req) => acc + req.progress.progress,
+    (acc, req) => acc + (req.progress ? req.progress.progress : 0),
     0,
   )
 
