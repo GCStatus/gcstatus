@@ -2,16 +2,13 @@ import { Box, Slider, Stack, Typography } from '@mui/material'
 import { useCallback, useRef, useState } from 'react'
 import Cropper, { Area } from 'react-easy-crop'
 import { AiFillCamera } from 'react-icons/ai'
-import { useDispatch } from 'react-redux'
 
 import { Button } from '@/components'
 import { useSuccess } from '@/hooks'
 import { useUpdatePictureMutation } from '@/services/api'
-import { logout } from '@/store/accountSlice'
 import { getCroppedImg } from '@/utils'
 
 function UpdateImage() {
-  const dispatch = useDispatch()
   const [trigger, { data, isLoading, isSuccess }] =
     useUpdatePictureMutation()
   const [imageSrc, setImageSrc] = useState<string | null>(null)
@@ -88,7 +85,6 @@ function UpdateImage() {
     }
 
     await trigger(formData)
-    dispatch(logout())
   }
 
   useSuccess(isSuccess, data?.message, () => {

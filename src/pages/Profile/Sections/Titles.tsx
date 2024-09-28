@@ -1,9 +1,16 @@
-import { Box, Pagination, Stack, Typography } from '@mui/material'
+import {
+  Box,
+  LinearProgress,
+  Pagination,
+  Stack,
+  Typography,
+} from '@mui/material'
 import { ChangeEvent, useState } from 'react'
 
-import { TitleCard } from '@/components'
-import { MOCK_TITLES } from '@/mocks'
-import { Title, User } from '@/types'
+import { Tabs, TitleCard } from '@/components'
+import { useGetTitlesQuery } from '@/services/api'
+import { User } from '@/types'
+import { calculateOverallProgress as c } from '@/utils'
 
 interface TitlesProps {
   user: User
@@ -11,17 +18,56 @@ interface TitlesProps {
 
 function Titles(props: TitlesProps) {
   const { user } = props
-  const [titles] = useState<Title[]>(MOCK_TITLES)
+  const { titles, isLoading } = useGetTitlesQuery(undefined, {
+    selectFromResult: ({ data = [], isLoading, isFetching }) => ({
+      titles: data,
+      isLoading: isLoading || isFetching,
+    }),
+  })
   const [currentPage, setCurrentPage] = useState<number>(1)
+  const [activeTab, setActiveTab] = useState<string>('All')
   const titlesPerPage = 3
 
   const handleChangePage = (_: ChangeEvent<unknown>, value: number) => {
     setCurrentPage(value)
   }
 
-  const displayedTitles = titles.slice(
+  const ownedTitles = titles.filter(
+    ({ requirements }) => c(requirements) === 100,
+  )
+  const availableTitles = titles.filter(
+    ({ requirements }) => c(requirements) < 100,
+  )
+  const purchasableTitles = titles.filter(({ purchasable }) => purchasable)
+
+  const getTitlesByTab = () => {
+    switch (activeTab) {
+      case 'Availables':
+        return availableTitles
+      case 'Owned':
+        return ownedTitles
+      case 'To buy':
+        return purchasableTitles
+      default:
+        return titles
+    }
+  }
+
+  const titlesForActiveTab = getTitlesByTab()
+    .slice()
+    .sort((a) => (c(a.requirements) === 100 ? 1 : -1))
+
+  const displayedTitles = titlesForActiveTab.slice(
     (currentPage - 1) * titlesPerPage,
     currentPage * titlesPerPage,
+  )
+
+  const element = displayedTitles.map((title) => (
+    <TitleCard key={title.id} title={title} user={user} />
+  ))
+
+  const totalPageCount = Math.ceil(
+    titlesForActiveTab.length / titlesPerPage,
   )
 
   return (
@@ -32,15 +78,36 @@ function Titles(props: TitlesProps) {
         Titles
       </Typography>
 
-      <Stack spacing={4} className="w-full">
-        {displayedTitles.map((title) => (
-          <TitleCard key={title.id} title={title} user={user} />
-        ))}
-      </Stack>
+      {isLoading ? (
+        <LinearProgress color="error" />
+      ) : (
+        <Tabs
+          tabs={[
+            {
+              tab: 'All',
+              element,
+            },
+            {
+              tab: 'Availables',
+              element,
+            },
+            {
+              tab: 'Owned',
+              element,
+            },
+            {
+              tab: 'To buy',
+              element,
+            },
+          ]}
+          setAssistantTab={setActiveTab}
+          spacing={2.5}
+        />
+      )}
 
       <Box className="flex md:justify-end justify-center mt-8">
         <Pagination
-          count={Math.ceil(titles.length / titlesPerPage)}
+          count={totalPageCount}
           page={currentPage}
           onChange={handleChangePage}
           sx={{

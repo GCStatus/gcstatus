@@ -1,16 +1,26 @@
+import { LoadingButton as Button } from '@mui/lab'
 import {
   Box,
-  Button,
   Card,
   CardContent,
   Chip,
   LinearProgress,
+  List,
+  ListItem,
+  ListItemText,
   Typography,
 } from '@mui/material'
+import { useEffect } from 'react'
+import toast from 'react-hot-toast'
 import { FaCheckCircle, FaShoppingCart } from 'react-icons/fa'
+import { IoCheckmarkOutline, IoSwapHorizontal } from 'react-icons/io5'
 
+import {
+  useBuyTitleMutation,
+  useToggleTitleMutation,
+} from '@/services/api'
 import { Title, User } from '@/types'
-import { calculateOverallProgress } from '@/utils'
+import { calculateOverallProgress as c } from '@/utils'
 
 interface TitleCardProps {
   user: User
@@ -19,20 +29,38 @@ interface TitleCardProps {
 
 function TitleCard(props: TitleCardProps) {
   const { title, user } = props
+  const [toggle, { data, isLoading, isSuccess }] = useToggleTitleMutation()
+  const [
+    buy,
+    { data: buyData, isLoading: loadingBuy, isSuccess: buySuccess },
+  ] = useBuyTitleMutation()
 
-  const shouldApplyOpacity = [
-    'completed',
-    'canceled',
-    'unavailable',
-  ].includes(title.status)
+  useEffect(() => {
+    if (isSuccess || buySuccess) {
+      if (buyData) toast.success(buyData.message)
+      if (data) toast.success(data.message)
+    }
+  }, [buySuccess, isSuccess])
 
-  const handlePurchase = (title: Title) => {
-    if (!title.cost) return
+  const overallProgress = c(title.requirements)
+
+  const shouldApplyOpacity = ['canceled', 'unavailable'].includes(
+    title.status,
+  )
+
+  const handlePurchase = async () => {
+    if (!(title.cost && title.purchasable)) return
 
     if (user.wallet.amount >= title.cost) {
-      alert(`Purchased title: ${title.title}`)
+      await buy(title.id)
     }
   }
+
+  const handleToggle = async () => {
+    await toggle(title.id)
+  }
+
+  const isEnabled = user.title && user.title.id === title.id
 
   return (
     <Card
@@ -41,7 +69,7 @@ function TitleCard(props: TitleCardProps) {
           ? 'opacity-50'
           : 'hover:-translate-y-2 shadow-lg duration-500 hover:shadow-2xl hover:border-red-700 transition-transform'
       }`}>
-      <CardContent className="text-white group flex flex-col">
+      <CardContent className="text-white group flex flex-col mb-6">
         <Typography className="md:text-2xl text-xl font-bold mb-4 text-theme-red-900">
           {title.title}
         </Typography>
@@ -56,7 +84,7 @@ function TitleCard(props: TitleCardProps) {
         <Box className="relative mb-6">
           <LinearProgress
             variant="determinate"
-            value={calculateOverallProgress(title.requirements)}
+            value={overallProgress}
             className="h-2 rounded-full dark:bg-zinc-900 bg-gray-300"
             sx={{
               '& .MuiLinearProgress-bar': {
@@ -65,7 +93,7 @@ function TitleCard(props: TitleCardProps) {
             }}
           />
           <Box className="absolute right-0 -top-6 text-white text-sm font-bold">
-            {calculateOverallProgress(title.requirements)}%
+            {overallProgress}%
           </Box>
         </Box>
 
@@ -79,53 +107,69 @@ function TitleCard(props: TitleCardProps) {
               : 'grid-cols-1'
           } md:gap-4 gap-2 w-full`}>
           {title.requirements.map((req) => (
-            <Box
+            <List
               key={req.id}
+              disablePadding
               className="flex justify-between items-center text-gray-200 p-4 rounded-lg border border-zinc-900 my-2">
-              <Typography className="dark:text-gray-400 text-gray-500 text-base">
-                {req.task}
-              </Typography>
-              <Typography className="font-bold text-theme-red-900">
-                {req.progress.completed
-                  ? 'Completed'
-                  : `${req.progress.progress}/${req.goal}`}
-              </Typography>
-            </Box>
+              <ListItem
+                disablePadding
+                secondaryAction={
+                  <Typography className="font-bold text-theme-red-900">
+                    {req.progress?.completed ? (
+                      <IoCheckmarkOutline size={18} />
+                    ) : (
+                      `${req.progress?.progress || 0}/${req.goal}`
+                    )}
+                  </Typography>
+                }>
+                <ListItemText
+                  primary={req.task}
+                  secondary={req.description}
+                />
+              </ListItem>
+            </List>
           ))}
         </Box>
 
-        <Box className="mt-4 flex items-center">
-          {title.status === 'completed' ? (
-            <Chip
-              label="Owned"
-              className="capitalize bg-green-600 text-white px-4 py-1 rounded-full shadow-lg"
-              icon={<FaCheckCircle />}
-            />
-          ) : title.purchasable ? (
-            <Button
-              fullWidth
-              className={`bg-theme-red-900 text-white px-4 py-2 rounded-full shadow-lg hover:bg-red-700 transition-all ${
-                title.cost && user.wallet.amount < title.cost
-                  ? 'opacity-50 cursor-not-allowed'
-                  : ''
-              }`}
-              startIcon={<FaShoppingCart />}
-              disabled={
-                title.cost ? user.wallet.amount < title.cost : true
-              }
-              onClick={() => handlePurchase(title)}>
-              {title.cost && user.wallet.amount >= title.cost
-                ? `Buy for ${title.cost} Coins`
-                : 'Not Enough Coins'}
-            </Button>
-          ) : (
-            <Chip
-              label="Available"
-              className="capitalize bg-yellow-600 text-white px-4 py-1 rounded-full shadow-lg"
-            />
-          )}
-        </Box>
+        {title.purchasable && overallProgress !== 100 && (
+          <Button
+            fullWidth
+            className={`bg-theme-red-900 text-white px-4 py-2 rounded-full shadow-lg hover:bg-red-700 transition-all mt-2 ${
+              title.cost && user.wallet.amount < title.cost
+                ? 'opacity-50 cursor-not-allowed'
+                : ''
+            }`}
+            startIcon={<FaShoppingCart />}
+            disabled={title.cost ? user.wallet.amount < title.cost : true}
+            onClick={handlePurchase}
+            loading={loadingBuy}>
+            Buy for {title.cost} Coins
+          </Button>
+        )}
+        {overallProgress === 100 && (
+          <Button
+            fullWidth
+            className="bg-theme-red-900 text-white px-4 py-2 rounded-full shadow-lg hover:bg-red-700 transition-all mt-2"
+            startIcon={<IoSwapHorizontal />}
+            onClick={handleToggle}
+            loading={isLoading}>
+            {isEnabled ? 'Disable' : 'Enable'} title
+          </Button>
+        )}
       </CardContent>
+
+      {overallProgress === 100 ? (
+        <Chip
+          label="Owned"
+          className="capitalize bg-green-600 text-white px-4 py-1 rounded-full shadow-lg absolute bottom-4 left-10"
+          icon={<FaCheckCircle color="white" />}
+        />
+      ) : (
+        <Chip
+          label="In progress"
+          className="capitalize bg-yellow-600 text-white px-4 py-1 rounded-full shadow-lg absolute bottom-4 left-10"
+        />
+      )}
     </Card>
   )
 }

@@ -1,7 +1,7 @@
 import { Box, Container, List, Stack, Typography } from '@mui/material'
 import { IoStar } from 'react-icons/io5'
 
-import { ReviewForm } from '@/components'
+import { ReviewForm, Tabs } from '@/components'
 import { MOCK_GAME_DETAILS } from '@/mocks'
 
 import {
@@ -13,7 +13,6 @@ import {
   MainDetails,
   Requirements,
   ReviewCard,
-  Tabs,
   Torrents,
 } from './modules'
 

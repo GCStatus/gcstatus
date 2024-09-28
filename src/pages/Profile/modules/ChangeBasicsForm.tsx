@@ -2,12 +2,10 @@ import { Stack, Typography } from '@mui/material'
 import { format } from 'date-fns'
 import { useEffect } from 'react'
 import { RegisterOptions, SubmitHandler, useForm } from 'react-hook-form'
-import { useDispatch } from 'react-redux'
 
 import { Button, Input } from '@/components'
 import { useSuccess } from '@/hooks'
 import { useUpdateUserBasicsMutation } from '@/services/api'
-import { logout } from '@/store/accountSlice'
 import { UpdateUserBasicsInterface, User } from '@/types'
 
 import { updateUserBasicsValidations } from './validations'
@@ -18,7 +16,6 @@ interface ChangeBasicsFormProps {
 
 function ChangeBasicsForm(props: ChangeBasicsFormProps) {
   const { user } = props
-  const dispatch = useDispatch()
   const [trigger, { data, isLoading, isSuccess }] =
     useUpdateUserBasicsMutation()
   const {
@@ -53,7 +50,7 @@ function ChangeBasicsForm(props: ChangeBasicsFormProps) {
     await trigger(payload)
   }
 
-  useSuccess(isSuccess, data?.message, () => dispatch(logout()))
+  useSuccess(isSuccess, data?.message)
 
   useEffect(() => {
     const formattedBirthdate = user.birthdate

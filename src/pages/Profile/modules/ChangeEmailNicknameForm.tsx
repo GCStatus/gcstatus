@@ -1,12 +1,10 @@
 import { Stack, Typography } from '@mui/material'
 import { useEffect } from 'react'
 import { RegisterOptions, SubmitHandler, useForm } from 'react-hook-form'
-import { useDispatch } from 'react-redux'
 
 import { Button, Input } from '@/components'
 import { useSuccess } from '@/hooks'
 import { useUpdateNickAndEmailMutation } from '@/services/api'
-import { logout } from '@/store/accountSlice'
 import { UpdateUserNickAndEmailInterface, User } from '@/types'
 
 import { updateUserNickAndEmailValidations } from './validations'
@@ -17,7 +15,6 @@ interface ChangeEmailNicknameFormProps {
 
 function ChangeEmailNicknameForm(props: ChangeEmailNicknameFormProps) {
   const { user } = props
-  const dispatch = useDispatch()
   const [trigger, { data, isLoading, isSuccess }] =
     useUpdateNickAndEmailMutation()
   const {
@@ -47,7 +44,7 @@ function ChangeEmailNicknameForm(props: ChangeEmailNicknameFormProps) {
     await trigger(data)
   }
 
-  useSuccess(isSuccess, data?.message, () => dispatch(logout()))
+  useSuccess(isSuccess, data?.message)
 
   useEffect(() => {
     if (user) {

@@ -18,7 +18,7 @@ import {
 
 import { LoadingScreen } from '@/components'
 import { useAccount, useLevels } from '@/hooks'
-import { useLazyGetLevelsQuery } from '@/services/api'
+import { useGetUserQuery, useLazyGetLevelsQuery } from '@/services/api'
 import { Level } from '@/types'
 
 import { NavItem } from './modules'
@@ -36,6 +36,7 @@ import {
 } from './Sections'
 
 function Profile() {
+  useGetUserQuery()
   const { user, loading } = useAccount()
   const { levels, loading: levelsLoading } = useLevels()
   const [stLevels, setStLevels] = useState<Level[]>([])
@@ -147,12 +148,14 @@ function Profile() {
               <Typography variant="h2" className="text-xl font-bold">
                 {user.nickname}
               </Typography>
-              <Box className="flex items-center justify-center gap-1">
-                <FaMedal color="#ff4d4d" size={10} />
-                <Typography className="text-gray-400">
-                  {'Warrior'}
-                </Typography>
-              </Box>
+              {user.title && (
+                <Box className="flex items-center justify-center gap-1">
+                  <FaMedal color="#ff4d4d" size={10} />
+                  <Typography className="text-gray-400">
+                    {user.title.title}
+                  </Typography>
+                </Box>
+              )}
               <Typography className="text-gray-400 text-sm">
                 Lv {user.level}
               </Typography>

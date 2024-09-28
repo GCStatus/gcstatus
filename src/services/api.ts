@@ -15,6 +15,7 @@ import {
   RegisterCredentials,
   Res,
   ResetPasswordPayload,
+  Title,
   UpdatePasswordInterface,
   UpdateUserBasicsInterface,
   UpdateUserNickAndEmailInterface,
@@ -41,7 +42,7 @@ export const baseQueryFn: BaseQueryFn<
   return result
 }
 
-export const tagTypes = ['user', 'levels'] as const
+export const tagTypes = ['user', 'levels', 'titles'] as const
 
 const api = createApi({
   baseQuery: baseQueryFn,
@@ -156,6 +157,28 @@ const api = createApi({
       }),
       invalidatesTags: (_, error) => (!error ? ['user'] : []),
     }),
+
+    getTitles: builder.query<Title[], void>({
+      query: () => 'titles',
+      transformResponse: (res: Res<Title[]>) => res.data,
+      providesTags: ['titles'],
+    }),
+
+    toggleTitle: builder.mutation<{ message: string }, number>({
+      query: (id) => ({
+        url: `titles/${id}/toggle`,
+        method: 'PUT',
+      }),
+      invalidatesTags: (_, error) => (!error ? ['user', 'titles'] : []),
+    }),
+
+    buyTitle: builder.mutation<{ message: string }, number>({
+      query: (id) => ({
+        url: `titles/${id}/buy`,
+        method: 'POST',
+      }),
+      invalidatesTags: (_, error) => (!error ? ['user', 'titles'] : []),
+    }),
   }),
 })
 
@@ -165,10 +188,13 @@ export const {
   useForgotMutation,
   useLogoutMutation,
   useGetLevelsQuery,
+  useGetTitlesQuery,
+  useBuyTitleMutation,
   useLazyGetUserQuery,
   useRegisterMutation,
   useResetPassMutation,
   useLazyGetLevelsQuery,
+  useToggleTitleMutation,
   useUpdatePictureMutation,
   useUpdateSocialsMutation,
   useUpdatePasswordMutation,

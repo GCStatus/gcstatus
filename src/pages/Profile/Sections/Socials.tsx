@@ -13,12 +13,10 @@ import {
   SubmitHandler,
   useForm,
 } from 'react-hook-form'
-import { useDispatch } from 'react-redux'
 
 import { Button, Input } from '@/components'
 import { useSuccess } from '@/hooks'
 import { useUpdateSocialsMutation } from '@/services/api'
-import { logout } from '@/store/accountSlice'
 import { Profile, User } from '@/types'
 
 import { updateSocialsValidations } from './validations'
@@ -29,7 +27,6 @@ interface UpdateSocialsProps {
 
 function UpdateSocials(props: UpdateSocialsProps) {
   const { user } = props
-  const dispatch = useDispatch()
   const [trigger, { data, isLoading, isSuccess }] =
     useUpdateSocialsMutation()
   const {
@@ -60,7 +57,7 @@ function UpdateSocials(props: UpdateSocialsProps) {
     await trigger(data)
   }
 
-  useSuccess(isSuccess, data?.message, () => dispatch(logout()))
+  useSuccess(isSuccess, data?.message)
 
   useEffect(() => {
     if (user) {
