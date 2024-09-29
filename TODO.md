@@ -56,13 +56,11 @@
   - [ ] Add possibility to buy coins
   - [ ] Some quizzez can reward with coins
 - [ ] Title system
-  - [ ] Create titles requirements
-  - [ ] Add posibility to purchase some titles by coins
+  - [x] Create titles requirements
+  - [x] Add posibility to purchase some titles by coins
   - [ ] Some titles could be earned by doing missions/quests
-  - [ ] Some titles could be earned just getting some level
+  - [x] Some titles could be earned just getting some level
   - [ ] Some titles could be earned by hitting a percentage of a quiz
-- [ ] User transactions
-  - [ ] Make a system to check user transactions with coins
 - [ ] Orders
   - [ ] Make an order system to purchase coins
 - [ ] Create another user profiles page
