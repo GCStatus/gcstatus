@@ -126,6 +126,7 @@
   - [x] Update user name
   - [x] Update user birthdate
   - [x] Update user nickname and email, with password request
+
 ### Post MVP
 
 - [x] Integrate a game release calendar
@@ -133,3 +134,7 @@
   - [x] Switcher to enable and disable floating menu
 - [x] Storybook
   - [x] Add a storybook for every component
+- [x] User transactions
+  - [x] Make a system to check user transactions with coins
+  - [x] Notify user with an email
+  - [x] Integrate transactions with API

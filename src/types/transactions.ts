@@ -1,10 +1,7 @@
-import { User } from '.'
-
 export interface Transaction {
   id: number
-  date: string
   type: string
   amount: number
+  created_at: string
   description: string
-  user: User
 }

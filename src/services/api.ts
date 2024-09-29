@@ -16,6 +16,7 @@ import {
   Res,
   ResetPasswordPayload,
   Title,
+  Transaction,
   UpdatePasswordInterface,
   UpdateUserBasicsInterface,
   UpdateUserNickAndEmailInterface,
@@ -42,7 +43,12 @@ export const baseQueryFn: BaseQueryFn<
   return result
 }
 
-export const tagTypes = ['user', 'levels', 'titles'] as const
+export const tagTypes = [
+  'user',
+  'levels',
+  'titles',
+  'transactions',
+] as const
 
 const api = createApi({
   baseQuery: baseQueryFn,
@@ -179,6 +185,12 @@ const api = createApi({
       }),
       invalidatesTags: (_, error) => (!error ? ['user', 'titles'] : []),
     }),
+
+    getTransactions: builder.query<Transaction[], void>({
+      query: () => 'transactions',
+      providesTags: ['transactions'],
+      transformResponse: (res: Res<Transaction[]>) => res.data,
+    }),
   }),
 })
 
@@ -195,6 +207,7 @@ export const {
   useResetPassMutation,
   useLazyGetLevelsQuery,
   useToggleTitleMutation,
+  useGetTransactionsQuery,
   useUpdatePictureMutation,
   useUpdateSocialsMutation,
   useUpdatePasswordMutation,
