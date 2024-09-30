@@ -11,6 +11,7 @@ import { logout } from '@/store/accountSlice'
 import {
   Level,
   LoginCredentials,
+  Notification,
   Profile,
   RegisterCredentials,
   Res,
@@ -48,6 +49,7 @@ export const tagTypes = [
   'levels',
   'titles',
   'transactions',
+  'notifications',
 ] as const
 
 const api = createApi({
@@ -183,13 +185,71 @@ const api = createApi({
         url: `titles/${id}/buy`,
         method: 'POST',
       }),
-      invalidatesTags: (_, error) => (!error ? ['user', 'titles'] : []),
+      invalidatesTags: (_, error) =>
+        !error ? ['user', 'titles', 'notifications'] : [],
     }),
 
     getTransactions: builder.query<Transaction[], void>({
       query: () => 'transactions',
       providesTags: ['transactions'],
       transformResponse: (res: Res<Transaction[]>) => res.data,
+    }),
+
+    getNotifications: builder.query<Notification[], void>({
+      query: () => 'notifications',
+      providesTags: ['notifications'],
+      transformResponse: (res: Res<Notification[]>) => res.data,
+    }),
+
+    markNotificationRead: builder.mutation<{ message: string }, number>({
+      query: (id) => ({
+        url: `notifications/${id}/read`,
+        method: 'PUT',
+      }),
+      invalidatesTags: (_, error) => (!error ? ['notifications'] : []),
+    }),
+
+    markNotificationUnread: builder.mutation<{ message: string }, number>({
+      query: (id) => ({
+        url: `notifications/${id}/unread`,
+        method: 'PUT',
+      }),
+      invalidatesTags: (_, error) => (!error ? ['notifications'] : []),
+    }),
+
+    deleteNotification: builder.mutation<{ message: string }, number>({
+      query: (id) => ({
+        url: `notifications/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: (_, error) => (!error ? ['notifications'] : []),
+    }),
+
+    markAllNotificationsRead: builder.mutation<{ message: string }, void>({
+      query: () => ({
+        url: 'notifications/all/read',
+        method: 'PUT',
+      }),
+      invalidatesTags: (_, error) => (!error ? ['notifications'] : []),
+    }),
+
+    markAllNotificationsUnread: builder.mutation<
+      { message: string },
+      void
+    >({
+      query: () => ({
+        url: 'notifications/all/unread',
+        method: 'PUT',
+      }),
+      invalidatesTags: (_, error) => (!error ? ['notifications'] : []),
+    }),
+
+    deleteAllNotifications: builder.mutation<{ message: string }, void>({
+      query: () => ({
+        url: 'notifications/all',
+        method: 'DELETE',
+      }),
+      invalidatesTags: (_, error) => (!error ? ['notifications'] : []),
     }),
   }),
 })
@@ -210,9 +270,16 @@ export const {
   useGetTransactionsQuery,
   useUpdatePictureMutation,
   useUpdateSocialsMutation,
+  useGetNotificationsQuery,
   useUpdatePasswordMutation,
   useUpdateUserBasicsMutation,
   useUpdateNickAndEmailMutation,
+  useDeleteNotificationMutation,
+  useMarkNotificationReadMutation,
+  useMarkNotificationUnreadMutation,
+  useDeleteAllNotificationsMutation,
+  useMarkAllNotificationsReadMutation,
+  useMarkAllNotificationsUnreadMutation,
 } = api
 
 export default api

@@ -20,6 +20,7 @@ import { LoadingScreen } from '@/components'
 import { useAccount, useLevels } from '@/hooks'
 import { useGetUserQuery, useLazyGetLevelsQuery } from '@/services/api'
 import { Level } from '@/types'
+import { getParam } from '@/utils'
 
 import { NavItem } from './modules'
 import {
@@ -37,10 +38,11 @@ import {
 
 function Profile() {
   useGetUserQuery()
+  const section = getParam('section') ?? 'info'
   const { user, loading } = useAccount()
   const { levels, loading: levelsLoading } = useLevels()
   const [stLevels, setStLevels] = useState<Level[]>([])
-  const [activeSection, setActiveSection] = useState<string>('info')
+  const [activeSection, setActiveSection] = useState<string>(section)
   const [getLevels] = useLazyGetLevelsQuery()
 
   useEffect(() => {
@@ -121,6 +123,12 @@ function Profile() {
 
   const handleSectionChange = (section: string) => {
     setActiveSection(section)
+
+    if (getParam('section')) {
+      const url = new URL(window.location.href)
+      url.searchParams.delete('section')
+      window.history.pushState({}, '', '/profile')
+    }
   }
 
   const experiencePercentage = Math.round(

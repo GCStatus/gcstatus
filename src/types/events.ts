@@ -1,7 +1,11 @@
 export interface Notification {
-  id: string
-  title: string
-  actionUrl: string
-  icon: string
+  id: number
+  content: {
+    title: string
+    actionUrl: string
+    icon: string
+  }
+  read_at: string | null
   created_at: string
+  updated_at: string
 }

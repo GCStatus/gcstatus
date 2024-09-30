@@ -19,10 +19,11 @@ import { Menu, Notifications } from '.'
 interface NavbarProps {
   notifications: Notification[]
   withCarousel: boolean
+  loadingNotifications: boolean
 }
 
 function Navbar(props: NavbarProps) {
-  const { notifications, withCarousel } = props
+  const { notifications, withCarousel, loadingNotifications } = props
   const go = useNavigate()
   const { user } = useAccount()
   const { query = '' } = useParams()
@@ -120,7 +121,11 @@ function Navbar(props: NavbarProps) {
               <IconButton
                 className="relative bg-transparent group"
                 onClick={toggleNotification}>
-                <Badge badgeContent={notifications.length} color="warning">
+                <Badge
+                  badgeContent={
+                    notifications.filter(({ read_at }) => !read_at).length
+                  }
+                  color="warning">
                   <IoNotificationsOutline className="text-white group-hover:text-yellow-500 transition-colors duration-300" />
                 </Badge>
               </IconButton>
@@ -139,6 +144,7 @@ function Navbar(props: NavbarProps) {
         open={notificationsOpen}
         toggle={toggleNotification}
         notifications={notifications}
+        loading={loadingNotifications}
       />
 
       <Menu
