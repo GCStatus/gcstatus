@@ -26,7 +26,7 @@ function Menu(props: MenuProps) {
 
   return (
     <Stack
-      className={`fixed top-0 right-0 h-full md:w-1/3 w-full dark:bg-zinc-900 bg-white shadow-lg z-50 transform transition-transform duration-300 opacity-90 p-8 ${
+      className={`fixed top-0 right-0 h-full lg:w-1/3 w-full dark:bg-zinc-900 bg-white shadow-lg z-50 transform transition-transform duration-300 opacity-90 p-8 ${
         open ? 'translate-x-0' : 'translate-x-full'
       }`}>
       <Box className="flex items-center justify-between">
@@ -44,7 +44,7 @@ function Menu(props: MenuProps) {
         {user && (
           <Typography variant="h5">Welcome, {user.name}!</Typography>
         )}
-        <Box className="hidden md:flex items-center relative w-full my-3">
+        <Box className="flex items-center relative w-full my-3">
           <input
             type="text"
             value={search}

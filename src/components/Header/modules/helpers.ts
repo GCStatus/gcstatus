@@ -3,7 +3,7 @@ import { useMemo } from 'react'
 
 import { Notification } from '@/types'
 
-interface GroupedNotifications {
+export interface GroupedNotifications {
   date: Date
   notifications: Notification[]
 }

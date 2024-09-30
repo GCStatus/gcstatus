@@ -138,3 +138,12 @@
   - [x] Make a system to check user transactions with coins
   - [x] Notify user with an email
   - [x] Integrate transactions with API
+- [x] Integrate notifications
+  - [x] Get notifications from API
+  - [x] Mark notification as read
+  - [x] Mark notification as unread
+  - [x] Mark all as read
+  - [x] Mark all as unread
+  - [x] Delete notification
+  - [x] Delete all notfiications
+  - [x] Get notifications count from API

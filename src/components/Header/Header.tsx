@@ -1,6 +1,7 @@
 import { Box } from '@mui/material'
 
 import { MOCK_HOME } from '@/mocks'
+import { useGetNotificationsQuery } from '@/services/api'
 
 import { HeaderCarousel, Navbar } from './modules'
 
@@ -10,14 +11,24 @@ interface HeaderProps {
 
 function Header(props: HeaderProps) {
   const { withCarousel } = props
+  const { notifications, isLoading } = useGetNotificationsQuery(
+    undefined,
+    {
+      selectFromResult: ({ data = [], isLoading, isFetching }) => ({
+        notifications: data,
+        isLoading: isLoading || isFetching,
+      }),
+    },
+  )
 
   const home = MOCK_HOME
 
   return (
     <Box component="header">
       <Navbar
-        notifications={home.notifications}
+        notifications={notifications}
         withCarousel={withCarousel}
+        loadingNotifications={isLoading}
       />
 
       {withCarousel ? (
