@@ -11,6 +11,7 @@ import { logout } from '@/store/accountSlice'
 import {
   Level,
   LoginCredentials,
+  Mission,
   Notification,
   Profile,
   RegisterCredentials,
@@ -48,6 +49,7 @@ export const tagTypes = [
   'user',
   'levels',
   'titles',
+  'missions',
   'transactions',
   'notifications',
 ] as const
@@ -251,6 +253,20 @@ const api = createApi({
       }),
       invalidatesTags: (_, error) => (!error ? ['notifications'] : []),
     }),
+
+    getMissions: builder.query<Mission[], void>({
+      query: () => 'missions',
+      providesTags: ['missions'],
+      transformResponse: (res: Res<Mission[]>) => res.data,
+    }),
+
+    completeMission: builder.mutation<{ message: string }, number>({
+      query: (id) => ({
+        url: `missions/${id}/complete`,
+        method: 'POST',
+      }),
+      invalidatesTags: ['user', 'missions'],
+    }),
   }),
 })
 
@@ -264,6 +280,7 @@ export const {
   useBuyTitleMutation,
   useLazyGetUserQuery,
   useRegisterMutation,
+  useGetMissionsQuery,
   useResetPassMutation,
   useLazyGetLevelsQuery,
   useToggleTitleMutation,
@@ -272,6 +289,7 @@ export const {
   useUpdateSocialsMutation,
   useGetNotificationsQuery,
   useUpdatePasswordMutation,
+  useCompleteMissionMutation,
   useUpdateUserBasicsMutation,
   useUpdateNickAndEmailMutation,
   useDeleteNotificationMutation,

@@ -17,6 +17,7 @@
   - [ ] Ensure the website is mobile-friendly
   - [ ] Test across different screen sizes and browsers
   - [ ] Optimize UI components for responsiveness
+- [ ] Not enough cash audio RE4 on try to buy something with coins that is not enough
 
 ### Post-MVP
 
@@ -43,24 +44,11 @@
 - [ ] Add some games on the website
 - [ ] Quiz & polls: about the most exciting game release on future or something else
 - [ ] Integrate with social medias
-- [ ] Missions system
-  - [ ] Create missions for the users
-  - [ ] Add possibility to create missions for specic users
-  - [ ] Missions can have the possibility to reward with coins and experience
-  - [ ] Missions can have the possibility to have a quiz associated
 - [ ] Coin system
-  - [ ] Create missions to earn coins
-  - [ ] Create daily tasks to earn free coins
   - [ ] Create a system to reward user to do something on platform, like comment in a game
     - [ ] Block user to earn coins for commenting the same game (or reduce the amount for each task doing)
   - [ ] Add possibility to buy coins
   - [ ] Some quizzez can reward with coins
-- [ ] Title system
-  - [x] Create titles requirements
-  - [x] Add posibility to purchase some titles by coins
-  - [ ] Some titles could be earned by doing missions/quests
-  - [x] Some titles could be earned just getting some level
-  - [ ] Some titles could be earned by hitting a percentage of a quiz
 - [ ] Orders
   - [ ] Make an order system to purchase coins
 - [ ] Create another user profiles page

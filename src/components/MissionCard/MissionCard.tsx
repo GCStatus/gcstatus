@@ -4,18 +4,20 @@ import {
   CardContent,
   Chip,
   LinearProgress,
+  List,
+  ListItem,
+  ListItemText,
   Typography,
 } from '@mui/material'
-import {
-  FaCheckCircle,
-  FaPlayCircle,
-  FaQuestion,
-  FaStar,
-} from 'react-icons/fa'
-import { IoClose } from 'react-icons/io5'
+import { formatRelative, isWithinInterval, subWeeks } from 'date-fns'
+import { FaCheckCircle, FaGift, FaPlayCircle } from 'react-icons/fa'
+import { IoCheckmarkOutline, IoClose } from 'react-icons/io5'
 
+import { Button, RewardList } from '@/components'
+import { useSuccess } from '@/hooks'
+import { useCompleteMissionMutation } from '@/services/api'
 import { Mission } from '@/types'
-import { calculateOverallProgress } from '@/utils'
+import { calculateOverallProgress as c } from '@/utils'
 
 interface MissionCardProps {
   mission: Mission
@@ -23,12 +25,70 @@ interface MissionCardProps {
 
 function MissionCard(props: MissionCardProps) {
   const { mission } = props
+  const [complete, { data, isLoading, isSuccess }] =
+    useCompleteMissionMutation()
 
-  const shouldApplyOpacity = [
-    'completed',
-    'canceled',
-    'unavailable',
-  ].includes(mission.status)
+  const shouldApplyOpacity = ['canceled', 'unavailable'].includes(
+    mission.status,
+  )
+
+  const overallProgress = c(mission.requirements)
+
+  const isRecurring = mission.frequency !== 'one-time'
+  const resetTime = isRecurring
+    ? `Resets at: ${formatRelative(new Date(mission.reset_time), new Date())}`
+    : ''
+
+  const rewardsRedeemable =
+    !(mission.user_mission && mission.user_mission.completed) &&
+    overallProgress >= 100 &&
+    !shouldApplyOpacity
+
+  const renderNewTag =
+    mission.status === 'available' &&
+    mission.frequency !== 'one-time' &&
+    isWithinInterval(new Date(mission.created_at), {
+      start: subWeeks(new Date(), 1),
+      end: new Date(),
+    })
+
+  const handleRedeemRewards = async () => {
+    complete(mission.id)
+  }
+
+  const getResetInfo = () => {
+    if (!isRecurring) return null
+
+    const frequencyIcons: { [key: string]: string } = {
+      daily: '🌞',
+      weekly: '📅',
+      monthly: '🗓️',
+    }
+
+    const frequencyColors: { [key: string]: string } = {
+      daily: 'text-yellow-400',
+      weekly: 'text-blue-400',
+      monthly: 'text-purple-400',
+    }
+
+    return (
+      <Box className="text-sm font-bold flex items-center my-1">
+        <span className={`${frequencyColors[mission.frequency]} mr-2`}>
+          {frequencyIcons[mission.frequency]}
+        </span>
+        <span className="text-gray-400">
+          {`Frequency: ${mission.frequency.charAt(0).toUpperCase() + mission.frequency.slice(1)}`}
+        </span>
+        {isRecurring && (
+          <span className="ml-2 text-red-400 animate-pulse">
+            {resetTime}
+          </span>
+        )}
+      </Box>
+    )
+  }
+
+  useSuccess(isSuccess, data?.message)
 
   return (
     <Card
@@ -39,8 +99,18 @@ function MissionCard(props: MissionCardProps) {
       }`}>
       <CardContent className="text-white group flex flex-col">
         <Typography className="md:text-2xl text-xl font-bold mb-4 text-theme-red-900">
-          {mission.title}
+          {mission.mission}
         </Typography>
+
+        <Box className="flex justify-start space-x-4 mb-4">
+          <Typography className="text-lg font-bold text-yellow-400">
+            Coins: {mission.coins}
+          </Typography>
+          <Typography className="text-lg font-bold text-blue-400">
+            XP: {mission.experience}
+          </Typography>
+        </Box>
+
         <Typography className="dark:text-gray-400 text-gray-500 mb-6">
           {mission.description}
         </Typography>
@@ -52,7 +122,7 @@ function MissionCard(props: MissionCardProps) {
         <Box className="relative mb-6">
           <LinearProgress
             variant="determinate"
-            value={calculateOverallProgress(mission.requirements)}
+            value={overallProgress}
             className="h-2 rounded-full dark:bg-zinc-900 bg-gray-300"
             sx={{
               '& .MuiLinearProgress-bar': {
@@ -61,93 +131,91 @@ function MissionCard(props: MissionCardProps) {
             }}
           />
           <Box className="absolute right-0 -top-6 text-white text-sm font-bold">
-            {calculateOverallProgress(mission.requirements)}%
+            {overallProgress}%
           </Box>
         </Box>
 
-        <Typography className="text-lg font-bold text-theme-red-900 mb-2">
+        <Typography className="text-lg md:text-xl font-bold text-theme-red-900 mb-2">
           Requirements
         </Typography>
-        <Box
+        <List
+          disablePadding
           className={`grid ${
             mission.requirements.length > 1
               ? 'md:grid-cols-2 grid-cols-1'
               : 'grid-cols-1'
-          } md:gap-4 gap-2 w-full`}>
+          } gap-4 w-full`}>
           {mission.requirements.map((req) => (
-            <Box
+            <ListItem
+              disablePadding
               key={req.id}
-              className="flex justify-between items-center text-gray-200 p-4 rounded-lg border border-zinc-900 my-2">
-              <Typography className="dark:text-gray-400 text-gray-500 text-base">
-                {req.task}
-              </Typography>
+              className="flex sm:flex-row flex-col sm:text-left text-center justify-between items-center text-gray-200 p-4 rounded-lg border border-zinc-900 my-2">
+              <ListItemText
+                primary={req.task}
+                secondary={req.description}
+              />
               <Typography className="font-bold text-theme-red-900">
-                {req.progress.completed
-                  ? 'Completed'
-                  : `${req.progress.progress}/${req.goal}`}
+                {req.progress?.completed ? (
+                  <IoCheckmarkOutline size={18} />
+                ) : (
+                  `${req.progress?.progress || 0}/${req.goal}`
+                )}
               </Typography>
-            </Box>
+            </ListItem>
           ))}
-        </Box>
+        </List>
 
-        <Typography className="text-lg font-bold text-theme-red-900 mb-2">
-          Rewards
-        </Typography>
-        <Box
-          className={`grid ${
-            mission.rewards.length > 1
-              ? 'md:grid-cols-2 grid-cols-1'
-              : 'grid-cols-1'
-          } md:gap-4 gap-2 w-full`}>
-          {mission.rewards.map((reward) => (
-            <Box
-              key={reward.id}
-              className="flex justify-between items-center text-gray-200 p-4 rounded-lg border border-zinc-900 my-2">
-              <Typography className="dark:text-gray-400 text-gray-500 text-base capitalize">
-                {reward.type}
-              </Typography>
-              <Typography className="font-bold text-theme-red-900">
-                {reward.type === 'title'
-                  ? reward.rewardable?.title
-                  : reward.amount}
-              </Typography>
-            </Box>
-          ))}
-        </Box>
+        {mission.rewards.length > 0 && (
+          <RewardList rewards={mission.rewards} />
+        )}
+
+        {rewardsRedeemable && (
+          <Box className="mt-4">
+            <Button
+              isLoading={isLoading}
+              fullWidth
+              onClick={handleRedeemRewards}>
+              Redeem Rewards
+            </Button>
+          </Box>
+        )}
+
+        {getResetInfo()}
 
         <Box className="mt-4">
           <Chip
             label={
-              mission.status.charAt(0).toUpperCase() +
-              mission.status.slice(1)
+              mission.user_mission?.completed
+                ? 'Completed'
+                : overallProgress === 100
+                  ? 'Redeemable'
+                  : mission.status === 'available'
+                    ? 'In Progress'
+                    : mission.status.charAt(0).toUpperCase() +
+                      mission.status.slice(1)
             }
             className={`capitalize text-white px-4 py-1 rounded-full shadow-lg ${
-              mission.status === 'available' ||
-              mission.status === 'canceled'
-                ? 'bg-theme-red-900'
-                : mission.status === 'progress'
+              mission.user_mission?.completed || overallProgress === 100
+                ? 'bg-green-600'
+                : mission.status === 'available'
                   ? 'bg-yellow-600'
-                  : mission.status === 'completed'
-                    ? 'bg-green-600'
-                    : 'bg-gray-600'
+                  : 'bg-theme-red-900'
             }`}
             icon={
-              mission.status === 'available' ? (
-                <FaPlayCircle />
-              ) : mission.status === 'progress' ? (
-                <FaStar />
-              ) : mission.status === 'completed' ? (
+              mission.user_mission?.completed ? (
                 <FaCheckCircle />
-              ) : mission.status === 'canceled' ? (
-                <IoClose />
+              ) : overallProgress === 100 ? (
+                <FaGift />
+              ) : mission.status === 'available' ? (
+                <FaPlayCircle />
               ) : (
-                <FaQuestion />
+                <IoClose />
               )
             }
           />
         </Box>
 
-        {mission.status === 'available' && (
+        {renderNewTag && (
           <Box className="absolute top-4 right-4 bg-theme-red-900 text-white px-2 py-1 rounded-lg text-xs shadow-lg">
             New
           </Box>

@@ -126,6 +126,18 @@
   - [x] Update user name
   - [x] Update user birthdate
   - [x] Update user nickname and email, with password request
+- [x] Missions system
+  - [x] Create missions for the users
+  - [x] Add possibility to create missions for specic users
+  - [x] Missions can have the possibility to reward with coins and experience
+- [x] Coin system
+  - [x] Create missions to earn coins
+  - [x] Create daily tasks to earn free coins
+- [x] Title system
+  - [x] Create titles requirements
+  - [x] Add posibility to purchase some titles by coins
+  - [x] Some titles could be earned by doing missions/quests
+  - [x] Some titles could be earned just getting some level
 
 ### Post MVP
 
