@@ -20,7 +20,7 @@ function RewardList(props: RewardListProps) {
       const { title } = titleReward
 
       return (
-        <Box className="relative">
+        <Box className="relative my-2">
           <Typography className="text-lg font-bold text-theme-red-900 mb-2">
             Title Reward
           </Typography>

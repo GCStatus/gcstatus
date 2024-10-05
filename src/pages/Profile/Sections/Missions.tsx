@@ -1,12 +1,22 @@
-import { Box, Pagination, Stack, Typography } from '@mui/material'
+import {
+  Box,
+  LinearProgress,
+  Pagination,
+  Stack,
+  Typography,
+} from '@mui/material'
 import { ChangeEvent, useState } from 'react'
 
 import { MissionCard } from '@/components'
-import { MOCK_MISSIONS } from '@/mocks'
-import { Mission } from '@/types'
+import { useGetMissionsQuery } from '@/services/api'
 
 function Missions() {
-  const [missions] = useState<Mission[]>(MOCK_MISSIONS)
+  const { missions, isLoading } = useGetMissionsQuery(undefined, {
+    selectFromResult: ({ data = [], isLoading, isFetching }) => ({
+      missions: data,
+      isLoading: isLoading || isFetching,
+    }),
+  })
   const [currentPage, setCurrentPage] = useState<number>(1)
   const missionsPerPage = 3
 
@@ -28,9 +38,13 @@ function Missions() {
       </Typography>
 
       <Stack spacing={4} className="w-full">
-        {displayedMissions.map((mission) => (
-          <MissionCard key={mission.id} mission={mission} />
-        ))}
+        {isLoading ? (
+          <LinearProgress color="error" />
+        ) : (
+          displayedMissions.map((mission) => (
+            <MissionCard key={mission.id} mission={mission} />
+          ))
+        )}
       </Stack>
 
       <Box className="flex md:justify-end justify-center mt-8">

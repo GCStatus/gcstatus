@@ -17,6 +17,7 @@
   - [ ] Ensure the website is mobile-friendly
   - [ ] Test across different screen sizes and browsers
   - [ ] Optimize UI components for responsiveness
+- [ ] Not enough cash audio RE4 on try to buy something with coins that is not enough
 
 ### Post-MVP
 

@@ -1,11 +1,17 @@
+import { Title } from '.'
+
 export interface MissionReward {
   id: number
-  type: 'coin' | 'exp' | 'title'
-  amount: number
-  rewardable?: {
-    id: number
-    title: string
-  }
+  created_at: string
+  updated_at: string
+  sourceable_type: string
+  rewardable_type: string
+  title?: Title
+}
+
+export interface UserMission {
+  completed: boolean
+  last_completed_at: string | null
 }
 
 export interface MissionProgress {
@@ -17,21 +23,22 @@ export interface MissionProgress {
 export interface MissionRequirement {
   id: number
   task: string
+  description?: string
   goal: number
-  progress: MissionProgress
+  progress: MissionProgress | null
 }
 
 export interface Mission {
   id: number
-  title: string
+  mission: string
   description: string
-  status:
-    | 'available'
-    | 'unavailable'
-    | 'completed'
-    | 'canceled'
-    | 'pending'
-    | 'progress'
+  coins: number
+  experience: number
+  status: 'available' | 'unavailable' | 'canceled'
+  frequency: 'one-time' | 'daily' | 'weekly' | 'monthly'
+  reset_time: string
+  created_at: string
   rewards: MissionReward[]
   requirements: MissionRequirement[]
+  user_mission: UserMission | null
 }

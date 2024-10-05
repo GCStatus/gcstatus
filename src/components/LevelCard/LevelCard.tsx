@@ -1,8 +1,7 @@
 import { Box, Card, CardContent, Typography } from '@mui/material'
 
+import { RewardList } from '@/components'
 import { Level, User } from '@/types'
-
-import { RewardList } from './modules'
 
 interface LevelCardProps {
   user: User
