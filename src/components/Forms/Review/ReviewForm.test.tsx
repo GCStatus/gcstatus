@@ -27,7 +27,7 @@ describe('ReviewForm Component', () => {
     expect(getByText(/Rate the Game/i)).toBeInTheDocument()
     expect(getByText(/Did you played this game?/i)).toBeInTheDocument()
     expect(
-      getByPlaceholderText(/Write your comment here/i),
+      getByPlaceholderText(/Write your review here/i),
     ).toBeInTheDocument()
     expect(getByRole('button', { name: /Submit/i })).toBeInTheDocument()
   })
@@ -54,13 +54,13 @@ describe('ReviewForm Component', () => {
     })
   })
 
-  it('displays validation error for too short comment', async () => {
+  it('displays validation error for too short review', async () => {
     const { getByText, findByText, getAllByRole, getByPlaceholderText } =
       renderReviewForm()
 
     fireEvent.click(getAllByRole('radio')[3])
 
-    fireEvent.change(getByPlaceholderText('Write your comment here...'), {
+    fireEvent.change(getByPlaceholderText('Write your review here...'), {
       target: { value: 'Too short' },
     })
 
@@ -72,15 +72,15 @@ describe('ReviewForm Component', () => {
     expect(errorMessage).toBeInTheDocument()
   })
 
-  it('displays validation error for too long comment', async () => {
+  it('displays validation error for too long review', async () => {
     const { getByText, findByText, getAllByRole, getByPlaceholderText } =
       renderReviewForm()
 
     fireEvent.click(getAllByRole('radio')[4])
 
-    const longComment = 'a'.repeat(2001)
-    fireEvent.change(getByPlaceholderText('Write your comment here...'), {
-      target: { value: longComment },
+    const longReview = 'a'.repeat(2001)
+    fireEvent.change(getByPlaceholderText('Write your review here...'), {
+      target: { value: longReview },
     })
 
     fireEvent.click(getByText(/Submit/i))
@@ -98,9 +98,9 @@ describe('ReviewForm Component', () => {
 
     fireEvent.click(getByRole('checkbox'))
 
-    fireEvent.change(getByPlaceholderText('Write your comment here...'), {
+    fireEvent.change(getByPlaceholderText('Write your review here...'), {
       target: {
-        value: 'This is a valid comment with more than 15 characters.',
+        value: 'This is a valid review with more than 15 characters.',
       },
     })
 
@@ -110,7 +110,7 @@ describe('ReviewForm Component', () => {
 
     await waitFor(() => {
       expect(consoleSpy).toHaveBeenCalledWith({
-        comment: 'This is a valid comment with more than 15 characters.',
+        review: 'This is a valid review with more than 15 characters.',
         played: true,
         userId: 1,
         rate: 2.5,

@@ -117,19 +117,22 @@ function Navbar(props: NavbarProps) {
               </IconButton>
             </Tooltip>
 
-            <Tooltip title="Open notifications">
-              <IconButton
-                className="relative bg-transparent group"
-                onClick={toggleNotification}>
-                <Badge
-                  badgeContent={
-                    notifications.filter(({ read_at }) => !read_at).length
-                  }
-                  color="warning">
-                  <IoNotificationsOutline className="text-white group-hover:text-yellow-500 transition-colors duration-300" />
-                </Badge>
-              </IconButton>
-            </Tooltip>
+            {user && (
+              <Tooltip title="Open notifications">
+                <IconButton
+                  className="relative bg-transparent group"
+                  onClick={toggleNotification}>
+                  <Badge
+                    badgeContent={
+                      notifications.filter(({ read_at }) => !read_at)
+                        .length
+                    }
+                    color="warning">
+                    <IoNotificationsOutline className="text-white group-hover:text-yellow-500 transition-colors duration-300" />
+                  </Badge>
+                </IconButton>
+              </Tooltip>
+            )}
 
             <Tooltip title="Open menu">
               <IconButton onClick={toggleMenu} className="group">
@@ -140,12 +143,14 @@ function Navbar(props: NavbarProps) {
         </Box>
       </Box>
 
-      <Notifications
-        open={notificationsOpen}
-        toggle={toggleNotification}
-        notifications={notifications}
-        loading={loadingNotifications}
-      />
+      {user && (
+        <Notifications
+          open={notificationsOpen}
+          toggle={toggleNotification}
+          notifications={notifications}
+          loading={loadingNotifications}
+        />
+      )}
 
       <Menu
         user={user}

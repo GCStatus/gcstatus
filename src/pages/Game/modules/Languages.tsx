@@ -7,14 +7,14 @@ import {
   TableRow,
 } from '@mui/material'
 
-import { Language } from '@/types'
+import { GameLanguage } from '@/types'
 
 interface LanguagesProps {
-  languages: Language[]
+  gameLanguages: GameLanguage[]
 }
 
 function Languages(props: LanguagesProps) {
-  const { languages } = props
+  const { gameLanguages } = props
 
   return (
     <Stack className="overflow-x-auto">
@@ -42,12 +42,12 @@ function Languages(props: LanguagesProps) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {languages.map((lang) => (
+          {gameLanguages.map((lang) => (
             <TableRow
-              key={lang.name}
+              key={lang.language.name}
               className="hover:opacity-40 transition duration-500">
               <TableCell className="border-b border-gray-700 px-4 py-2">
-                {lang.name}
+                {lang.language.name}
               </TableCell>
               <TableCell
                 align="center"

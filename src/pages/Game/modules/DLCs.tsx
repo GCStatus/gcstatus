@@ -2,6 +2,7 @@ import { Box, Link, Typography } from '@mui/material'
 import { useState } from 'react'
 import { IoPlay } from 'react-icons/io5'
 
+import videoThumb from '@/assets/video-thumb.png'
 import { DLC } from '@/types'
 
 import { DLCsModal } from '.'
@@ -47,7 +48,7 @@ function DLCs(props: DLCsProps) {
             <Typography
               component="span"
               className="text-gray-600 dark:text-gray-400 block mt-2">
-              Release Date: {dlc.release}
+              Release Date: {dlc.release_date}
             </Typography>
 
             <Box className="mt-4 flex flex-wrap gap-2 sm:justify-start justify-center text-center">
@@ -70,7 +71,7 @@ function DLCs(props: DLCsProps) {
             Gallery
           </Typography>
           <Box className="flex flex-wrap gap-4">
-            {dlc.galleries.map(({ id, media_type, thumbnail, path }) => (
+            {dlc.galleries.map(({ id, media_type, path }) => (
               <Box
                 key={id}
                 className="relative group cursor-pointer p-1 rounded-lg sm:w-auto w-full"
@@ -79,14 +80,14 @@ function DLCs(props: DLCsProps) {
                 }>
                 {media_type.name === 'photo' ? (
                   <img
-                    src={thumbnail}
+                    src={path}
                     alt={`Gallery ${id}`}
                     className="sm:w-48 w-full rounded-md shadow-md duration-300 hover:shadow-lg hover:shadow-red-400/50"
                   />
                 ) : (
                   <Box className="relative">
                     <img
-                      src={thumbnail}
+                      src={videoThumb}
                       alt={`Gallery ${id}`}
                       className="sm:w-48 w-full rounded-md shadow-md duration-300 hover:shadow-lg hover:shadow-red-400/50"
                     />
@@ -111,26 +112,26 @@ function DLCs(props: DLCsProps) {
             Available At
           </Typography>
           <Box className="flex flex-wrap gap-4">
-            {dlc.companies.map((company) => (
+            {dlc.stores.map((dlcStore) => (
               <Link
-                key={company.id}
-                href={company.url}
+                key={dlcStore.id}
+                href={dlcStore.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex sm:flex-row flex-col items-center justify-center gap-3 p-4 border border-gray-600 rounded-lg bg-gradient-to-br from-gray-100 dark:from-gray-800 to-white dark:to-zinc-900 transition-all duration-500 hover:shadow-lg hover:shadow-theme-red-900/50 sm:w-auto w-full">
                 <img
-                  src={company.logo}
-                  alt={`${company.name} Logo`}
+                  src={dlcStore.store.logo}
+                  alt={`${dlcStore.store.name} Logo`}
                   className="w-12 h-12 object-contain"
                 />
                 <Box>
                   <Typography
                     variant="h5"
                     className="text-sm font-bold text-gray-800 dark:text-white">
-                    {company.name}
+                    {dlcStore.store.name}
                   </Typography>
                   <Typography className="text-gray-600 dark:text-gray-400">
-                    {(company.price / 100).toLocaleString('en-US', {
+                    {(dlcStore.price / 100).toLocaleString('en-US', {
                       currency: 'USD',
                       style: 'currency',
                     })}

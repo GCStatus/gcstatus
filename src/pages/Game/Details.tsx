@@ -1,9 +1,12 @@
 import { Box, Container, List, Stack, Typography } from '@mui/material'
+import { format } from 'date-fns'
 import { IoStar } from 'react-icons/io5'
+import { useParams } from 'react-router-dom'
 
-import { ReviewForm, Tabs } from '@/components'
-import { MOCK_GAME_DETAILS } from '@/mocks'
+import { LoadingScreen, ReviewForm, Tabs } from '@/components'
+import { useGetGameDetailsQuery } from '@/services/api'
 
+import Error from '../Error'
 import {
   Availables,
   Critics,
@@ -17,7 +20,24 @@ import {
 } from './modules'
 
 function Details() {
-  const game = MOCK_GAME_DETAILS
+  const { slug = '' } = useParams()
+  const { game, isLoading } = useGetGameDetailsQuery(slug, {
+    selectFromResult: ({ data, isLoading, isFetching }) => ({
+      game: data,
+      isLoading: isLoading || isFetching,
+    }),
+  })
+
+  if (isLoading) return <LoadingScreen />
+
+  if (!game) {
+    return (
+      <Error
+        error={404}
+        description="The game you are looking for was not found."
+      />
+    )
+  }
 
   return (
     <Stack className="dark:bg-theme-dark-900 bg-white dark:text-white text-black sm:p-6 p-0">
@@ -44,7 +64,8 @@ function Details() {
           <Typography
             component="span"
             className="dark:text-gray-400 text-white bg-gradient-to-r dark:from-zinc-900 dark:via-transparent dark:to-transparent from-theme-red-900 to-theme-dark-900 px-4 py-2 rounded-full shadow-md">
-            Release Date: {game.release}
+            Release Date:{' '}
+            {format(new Date(game.release_date), 'yyyy-MM-dd')}
           </Typography>
         </Box>
 
@@ -109,14 +130,14 @@ function Details() {
                       className="flex items-center gap-1">
                       <IoStar size={18} className="text-yellow-500" />
                       {game.critics.reduce(
-                        (total, curr) => total + curr.rate,
+                        (total, curr) => total + parseFloat(curr.rate),
                         0,
                       ) / game.critics.length}
                     </Box>
                   )}
                   <Box component="section" className="flex flex-col gap-4">
                     {game.critics.map((critic) => (
-                      <Critics key={critic.id} critic={critic} />
+                      <Critics key={critic.id} criticable={critic} />
                     ))}
                   </Box>
 
@@ -134,8 +155,8 @@ function Details() {
               tab: 'Purchase',
               element: (
                 <Box component="section" className="flex flex-col gap-4">
-                  {game.companies.map((company) => (
-                    <Availables key={company.id} company={company} />
+                  {game.stores.map((store) => (
+                    <Availables key={store.id} gameStore={store} />
                   ))}
                 </Box>
               ),
@@ -170,7 +191,7 @@ function Details() {
               tab: 'Languages',
               element: (
                 <Box component="section" className="flex flex-col gap-4">
-                  <Languages languages={game.languages} />
+                  <Languages gameLanguages={game.languages} />
                 </Box>
               ),
             },

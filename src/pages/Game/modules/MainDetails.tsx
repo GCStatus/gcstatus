@@ -9,7 +9,7 @@ import {
   Typography,
 } from '@mui/material'
 import { useState } from 'react'
-import { IoEyeOutline, IoHeartOutline } from 'react-icons/io5'
+import { IoEyeOutline, IoHeart, IoHeartOutline } from 'react-icons/io5'
 
 import { HeartsUp } from '@/components'
 import { GameDetails } from '@/types'
@@ -21,7 +21,7 @@ interface MainDetailsProps {
 function MainDetails(props: MainDetailsProps) {
   const { game } = props
   const [hearts, setHearts] = useState<number>(game.hearts_count)
-  const [isHearted, setIsHearted] = useState<boolean>(false)
+  const [isHearted, setIsHearted] = useState<boolean>(game.is_hearted)
   const [heartPops, setHeartPops] = useState<number[]>([])
 
   const handleHeartClick = () => {
@@ -35,8 +35,6 @@ function MainDetails(props: MainDetailsProps) {
       setHeartPops((prev) => [...prev, ...newHearts])
     }
   }
-
-  console.log(heartPops)
 
   return (
     <>
@@ -104,8 +102,8 @@ function MainDetails(props: MainDetailsProps) {
               </Typography>
               <Typography
                 component="span"
-                className="px-2 py-1 bg-red-500 text-white rounded-full">
-                {game.age}+
+                className={`px-2 py-1 ${game.age > 0 ? 'bg-red-500' : 'bg-green-500'} text-white rounded-full`}>
+                {game.age > 0 ? `${game.age}+` : 'G'}
               </Typography>
             </Box>
             <Box className="flex sm:flex-row flex-col items-center gap-1">
@@ -126,21 +124,9 @@ function MainDetails(props: MainDetailsProps) {
               </Typography>
               <Chip
                 label={game.crack.status}
-                className={`${game.crack.status === 'Cracked' ? 'bg-green-500' : 'bg-red-500'} text-white`}
+                className={`${game.crack.status === 'cracked' ? 'bg-green-500' : 'bg-red-500'} text-white`}
               />
             </Box>
-            {game.crack.torrent && (
-              <Box className="flex sm:flex-row flex-col items-center gap-1">
-                <Typography
-                  component="span"
-                  className="inline-block font-bold dark:text-white text-black">
-                  Torrent:
-                </Typography>
-                <Typography component="span" className="text-lg">
-                  {game.crack.torrent}
-                </Typography>
-              </Box>
-            )}
             {game.crack.by && (
               <Box className="flex sm:flex-row flex-col items-center gap-1">
                 <Typography
@@ -155,14 +141,14 @@ function MainDetails(props: MainDetailsProps) {
             )}
             <Box className="flex sm:flex-row flex-col items-center gap-1">
               <IconButton sx={{ padding: 0.5 }} onClick={handleHeartClick}>
-                <IoHeartOutline
-                  className={
-                    isHearted
-                      ? 'text-theme-red-900 animate-pulse'
-                      : 'text-white'
-                  }
-                  size={28}
-                />
+                {isHearted ? (
+                  <IoHeart
+                    className="text-theme-red-900 animate-pulse"
+                    size={28}
+                  />
+                ) : (
+                  <IoHeartOutline className="text-white" size={28} />
+                )}
               </IconButton>
               {hearts}
             </Box>
@@ -179,27 +165,31 @@ function MainDetails(props: MainDetailsProps) {
             className="sm:text-2xl text-xl font-bold mb-4 dark:text-white text-black">
             Platforms
           </Typography>
-          <List
-            disablePadding
-            className="dark:text-gray-300 text-black"
-            sx={{
-              listStyleType: 'disc',
-              pl: 2,
-              '& .MuiListItem-root': {
-                display: 'list-item',
-              },
-            }}>
-            {game.platforms.map((platform) => (
-              <ListItem disableGutters disablePadding key={platform.id}>
-                <Link
-                  href={`/platforms/${platform.slug}`}
-                  target="_blank"
-                  className="dark:text-gray-200 text-black">
-                  {platform.name}
-                </Link>
-              </ListItem>
-            ))}
-          </List>
+          {game.platforms.length > 0 ? (
+            <List
+              disablePadding
+              className="dark:text-gray-300 text-black"
+              sx={{
+                listStyleType: 'disc',
+                pl: 2,
+                '& .MuiListItem-root': {
+                  display: 'list-item',
+                },
+              }}>
+              {game.platforms.map((platform) => (
+                <ListItem disableGutters disablePadding key={platform.id}>
+                  <Link
+                    href={`/platforms/${platform.slug}`}
+                    target="_blank"
+                    className="dark:text-gray-200 text-black">
+                    {platform.name}
+                  </Link>
+                </ListItem>
+              ))}
+            </List>
+          ) : (
+            <Typography>No one genre related.</Typography>
+          )}
         </Box>
 
         <Box className="flex-1 border dark:border-gray-800 border-gray-100 bg-gradient-to-b dark:from-zinc-900 from-gray-200 to-transparent p-6 rounded-lg shadow-lg transition-transform transform hover:scale-[1.02] duration-500 relative">
@@ -208,27 +198,31 @@ function MainDetails(props: MainDetailsProps) {
             className="text-2xl font-bold mb-4 dark:text-white text-black">
             Genres
           </Typography>
-          <List
-            disablePadding
-            className="dark:text-gray-300 text-black"
-            sx={{
-              listStyleType: 'disc',
-              pl: 2,
-              '& .MuiListItem-root': {
-                display: 'list-item',
-              },
-            }}>
-            {game.genres.map((genre) => (
-              <ListItem disableGutters disablePadding key={genre.id}>
-                <Link
-                  href={`/genres/${genre.slug}`}
-                  target="_blank"
-                  className="dark:text-gray-200 text-black">
-                  {genre.name}
-                </Link>
-              </ListItem>
-            ))}
-          </List>
+          {game.genres.length > 0 ? (
+            <List
+              disablePadding
+              className="dark:text-gray-300 text-black"
+              sx={{
+                listStyleType: 'disc',
+                pl: 2,
+                '& .MuiListItem-root': {
+                  display: 'list-item',
+                },
+              }}>
+              {game.genres.map((genre) => (
+                <ListItem disableGutters disablePadding key={genre.id}>
+                  <Link
+                    href={`/genres/${genre.slug}`}
+                    target="_blank"
+                    className="dark:text-gray-200 text-black">
+                    {genre.name}
+                  </Link>
+                </ListItem>
+              ))}
+            </List>
+          ) : (
+            <Typography>No one genre related.</Typography>
+          )}
         </Box>
       </Box>
 
@@ -241,27 +235,31 @@ function MainDetails(props: MainDetailsProps) {
             className="sm:text-2xl text-xl font-bold mb-4 dark:text-white text-black">
             Tags
           </Typography>
-          <List
-            disablePadding
-            className="dark:text-gray-300 text-black"
-            sx={{
-              listStyleType: 'disc',
-              pl: 2,
-              '& .MuiListItem-root': {
-                display: 'list-item',
-              },
-            }}>
-            {game.tags.map((tag) => (
-              <ListItem disableGutters disablePadding key={tag.id}>
-                <Link
-                  href={`/tags/${tag.slug}`}
-                  target="_blank"
-                  className="dark:text-gray-200 text-black">
-                  {tag.name}
-                </Link>
-              </ListItem>
-            ))}
-          </List>
+          {game.tags.length > 0 ? (
+            <List
+              disablePadding
+              className="dark:text-gray-300 text-black"
+              sx={{
+                listStyleType: 'disc',
+                pl: 2,
+                '& .MuiListItem-root': {
+                  display: 'list-item',
+                },
+              }}>
+              {game.tags.map((tag) => (
+                <ListItem disableGutters disablePadding key={tag.id}>
+                  <Link
+                    href={`/tags/${tag.slug}`}
+                    target="_blank"
+                    className="dark:text-gray-200 text-black">
+                    {tag.name}
+                  </Link>
+                </ListItem>
+              ))}
+            </List>
+          ) : (
+            <Typography>No one tag related.</Typography>
+          )}
         </Box>
 
         <Box className="flex-1 border dark:border-gray-800 border-gray-100 bg-gradient-to-b dark:from-zinc-900 from-gray-200 to-transparent p-6 rounded-lg shadow-lg transition-transform transform hover:scale-[1.02] duration-500 relative">
@@ -270,27 +268,31 @@ function MainDetails(props: MainDetailsProps) {
             className="text-2xl font-bold mb-4 dark:text-white text-black">
             Categories
           </Typography>
-          <List
-            disablePadding
-            className="dark:text-gray-300 text-black"
-            sx={{
-              listStyleType: 'disc',
-              pl: 2,
-              '& .MuiListItem-root': {
-                display: 'list-item',
-              },
-            }}>
-            {game.categories.map((category) => (
-              <ListItem disableGutters disablePadding key={category.id}>
-                <Link
-                  href={`/categories/${category.slug}`}
-                  target="_blank"
-                  className="dark:text-gray-200 text-black">
-                  {category.name}
-                </Link>
-              </ListItem>
-            ))}
-          </List>
+          {game.categories.length > 0 ? (
+            <List
+              disablePadding
+              className="dark:text-gray-300 text-black"
+              sx={{
+                listStyleType: 'disc',
+                pl: 2,
+                '& .MuiListItem-root': {
+                  display: 'list-item',
+                },
+              }}>
+              {game.categories.map((category) => (
+                <ListItem disableGutters disablePadding key={category.id}>
+                  <Link
+                    href={`/categories/${category.slug}`}
+                    target="_blank"
+                    className="dark:text-gray-200 text-black">
+                    {category.name}
+                  </Link>
+                </ListItem>
+              ))}
+            </List>
+          ) : (
+            <Typography>No one category related.</Typography>
+          )}
         </Box>
       </Box>
 

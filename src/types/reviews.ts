@@ -1,11 +1,11 @@
-import { User } from '.'
+import { MinimalUser } from '.'
 
 export interface Review {
   id: number
   rate: number
-  comment: string
+  review: string
   played: boolean
-  user: User
+  user: MinimalUser
 }
 
 export interface ReviewStore {
@@ -13,5 +13,5 @@ export interface ReviewStore {
   gameId: number
   userId: number
   played: boolean
-  comment?: string
+  review?: string
 }

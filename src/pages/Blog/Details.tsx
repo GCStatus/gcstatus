@@ -1,4 +1,11 @@
-import { Box, Button, Container, Tooltip, Typography } from '@mui/material'
+import {
+  Box,
+  Button,
+  Container,
+  Stack,
+  Tooltip,
+  Typography,
+} from '@mui/material'
 import { formatRelative } from 'date-fns'
 import { useState } from 'react'
 import {
@@ -15,9 +22,8 @@ import { CommentsSection } from './modules'
 
 function Details() {
   const post = MOCK_BLOG_DETAILS
-
   const [hearts, setHearts] = useState<number>(post.hearts_count)
-  const [isHearted, setIsHearted] = useState<boolean>(false)
+  const [isHearted, setIsHearted] = useState<boolean>(post.is_hearted)
   const [heartPops, setHeartPops] = useState<number[]>([])
 
   const handleHeartClick = () => {
@@ -145,7 +151,14 @@ function Details() {
         </Button>
 
         <Box className="mt-10">
-          <CommentsSection comments={post.comments} />
+          <Stack spacing={1}>
+            <Typography
+              variant="h2"
+              className="sm:text-4xl text-2xl font-bold text-theme-red-900 dark:text-white">
+              Comments
+            </Typography>
+            <CommentsSection post={post} />
+          </Stack>
         </Box>
       </Container>
     </Box>

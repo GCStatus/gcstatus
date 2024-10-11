@@ -7,7 +7,7 @@ export const validations = {
   played: {
     required: 'Please, tell me if you already played this game.',
   },
-  comment: {
+  review: {
     minLength: {
       value: 15,
       message: 'Your review must have at least 15 characters.',

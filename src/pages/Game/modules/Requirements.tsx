@@ -11,7 +11,10 @@ function Requirements(props: RequirementsProps) {
 
   const uniqueTypes = Array.from(
     new Set(
-      requirements.map((req) => `${req.type.name}-${req.type.type}`),
+      requirements.map(
+        (req) =>
+          `${req.requirement_type.os}-${req.requirement_type.potential}`,
+      ),
     ),
   ).map((key) => {
     const [name, type] = key.split('-')
@@ -42,7 +45,11 @@ function Requirements(props: RequirementsProps) {
       </div>
 
       {requirements
-        .filter((req) => `${req.type.name}-${req.type.type}` === activeTab)
+        .filter(
+          (req) =>
+            `${req.requirement_type.os}-${req.requirement_type.potential}` ===
+            activeTab,
+        )
         .map((req) => (
           <div
             key={req.id}
@@ -50,8 +57,8 @@ function Requirements(props: RequirementsProps) {
             <div className="absolute inset-0 rounded-lg opacity-10 hover:opacity-30 transition-opacity duration-500 pointer-events-none" />
 
             <h3 className="sm:text-left text-center text-xl font-bold text-theme-red-900 mb-4">
-              {req.type.name.charAt(0).toUpperCase() +
-                req.type.name.slice(1)}{' '}
+              {req.requirement_type.os.charAt(0).toUpperCase() +
+                req.requirement_type.os.slice(1)}{' '}
               Requirements
             </h3>
 
@@ -60,7 +67,7 @@ function Requirements(props: RequirementsProps) {
                 <span className="font-bold dark:text-white text-black">
                   OS:
                 </span>{' '}
-                {req.so}
+                {req.os}
               </li>
               <li>
                 <span className=" dark:text-white text-black">CPU:</span>{' '}
@@ -87,8 +94,10 @@ function Requirements(props: RequirementsProps) {
                 {req.rom}
               </li>
               <li>
-                <span className=" dark:text-white text-black">Bits:</span>{' '}
-                {req.bits}-bit
+                <span className=" dark:text-white text-black">
+                  Network:
+                </span>{' '}
+                {req.network}
               </li>
               {req.obs && (
                 <li>
