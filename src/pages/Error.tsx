@@ -75,8 +75,6 @@ function Error(props: ErrorProps) {
     <Box className="relative min-h-screen h-full w-full flex flex-col justify-center items-center bg-theme-dark-900 text-white overflow-hidden">
       <img
         src="https://picfiles.alphacoders.com/534/534637.jpg"
-        // src="https://picfiles.alphacoders.com/534/534640.jpg"
-        // src="https://images4.alphacoders.com/628/thumb-1920-628354.jpg"
         alt="404 background"
         className="absolute inset-0 w-full h-full object-cover flicker-bottom"
       />

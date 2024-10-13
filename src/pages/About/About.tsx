@@ -81,14 +81,24 @@ function About() {
             community make this project stronger and more dynamic.
           </Typography>
           <Button
-            href="https://github.com/felipebrsk/gcstatus"
+            href="https://github.com/GCStatus/gcstatus"
             target="_blank"
             rel="noopener noreferrer"
             variant="contained"
             color="primary"
             className="bg-theme-red-900 text-white px-6 py-3 rounded-lg sm:w-auto w-full"
             role="button">
-            Contribute to Our Project
+            Contribute to Our Front-End Project (React)
+          </Button>
+          <Button
+            href="https://github.com/GCStatus/api-gcstatus"
+            target="_blank"
+            rel="noopener noreferrer"
+            variant="contained"
+            color="primary"
+            className="bg-theme-red-900 text-white px-6 py-3 rounded-lg sm:w-auto w-full"
+            role="button">
+            Contribute to Our Back-End Project (GoLang)
           </Button>
         </Box>
 

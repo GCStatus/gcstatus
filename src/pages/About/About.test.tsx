@@ -55,17 +55,31 @@ describe('About Page', () => {
     expect(joinCommunityHeading).toBeInTheDocument()
   })
 
-  it('renders the Contribute button', () => {
+  it('renders the Contribute to front-end button', () => {
     const { getByRole } = renderAbout()
 
     const contributeButton = getByRole('button', {
-      name: /contribute to our project/i,
+      name: /contribute to our front-end project/i,
     })
 
     expect(contributeButton).toBeInTheDocument()
     expect(contributeButton).toHaveAttribute(
       'href',
-      'https://github.com/felipebrsk/gcstatus',
+      'https://github.com/GCStatus/gcstatus',
+    )
+  })
+
+  it('renders the Contribute to back-end button', () => {
+    const { getByRole } = renderAbout()
+
+    const contributeButton = getByRole('button', {
+      name: /contribute to our back-end project/i,
+    })
+
+    expect(contributeButton).toBeInTheDocument()
+    expect(contributeButton).toHaveAttribute(
+      'href',
+      'https://github.com/GCStatus/api-gcstatus',
     )
   })
 

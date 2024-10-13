@@ -23,10 +23,10 @@ function Tabs(props: TabsProps) {
         {tabs.map(({ tab }) => (
           <button
             key={tab}
-            className={`px-4 py-2 rounded-md text-white font-semibold transition-colors duration-300 break-words ${
+            className={`px-4 py-2 rounded-md font-semibold transition-colors duration-300 break-words ${
               activeTab === tab
-                ? 'bg-theme-red-900 shadow-lg hover:bg-red-700'
-                : 'bg-zinc-900 hover:bg-zinc-800'
+                ? 'bg-theme-red-900 shadow-lg hover:bg-red-700 text-white'
+                : 'dark:bg-zinc-900 dark:hover:bg-zinc-800 bg-gray-50 hover:bg-gray-200 dark:text-white text-black'
             }`}
             onClick={() => {
               setActiveTab(tab)

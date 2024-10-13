@@ -1,4 +1,4 @@
-import { Category, Message, Tag, User } from '.'
+import { Category, Comment, Tag, User } from '.'
 
 export interface Blog {
   id: number
@@ -9,6 +9,7 @@ export interface Blog {
   created_at: string
   updated_at: string
   views_count: number
+  is_hearted: boolean
   hearts_count: number
   comments_count: number
   user: User
@@ -17,5 +18,5 @@ export interface Blog {
 }
 
 export interface BlogDetails extends Blog {
-  comments: Message[]
+  comments: Comment[]
 }

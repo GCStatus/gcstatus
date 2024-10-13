@@ -13,6 +13,7 @@ for (let i = 0; i < 100; i++) {
     title: faker.lorem.words({ min: 1, max: 3 }),
     body: faker.lorem.text(),
     slug: faker.lorem.slug(),
+    is_hearted: faker.datatype.boolean(),
     categories: faker.helpers.arrayElements(MOCK_CATEGORIES),
     tags: faker.helpers.arrayElements(MOCK_TAGS),
     views_count: faker.number.int({ min: 1, max: 99999 }),
@@ -57,6 +58,7 @@ export const MOCK_BLOG_DETAILS: BlogDetails = {
   slug: faker.lorem.slug(),
   categories: faker.helpers.arrayElements(MOCK_CATEGORIES),
   tags: faker.helpers.arrayElements(MOCK_TAGS),
+  is_hearted: faker.datatype.boolean(),
   views_count: faker.number.int({ min: 1, max: 99999 }),
   hearts_count: faker.number.int({ min: 1, max: 99999 }),
   comments_count: faker.number.int({ min: 1, max: 99999 }),
@@ -84,7 +86,9 @@ export const MOCK_BLOG_DETAILS: BlogDetails = {
   comments: [
     {
       id: 1,
-      message: faker.lorem.text(),
+      comment: faker.lorem.text(),
+      hearts_count: faker.number.int(),
+      is_hearted: faker.datatype.boolean(),
       created_at: faker.date.anytime().toISOString(),
       updated_at: faker.date.anytime().toISOString(),
       by: {
@@ -92,19 +96,8 @@ export const MOCK_BLOG_DETAILS: BlogDetails = {
         name: faker.person.fullName(),
         email: faker.internet.email(),
         nickname: faker.internet.userName(),
-        experience: faker.number.int(),
-        level: faker.number.int(),
-        birthdate: faker.date.past().toDateString(),
         created_at: faker.date.anytime().toISOString(),
-        updated_at: faker.date.anytime().toISOString(),
-        profile: {
-          photo: faker.image.avatar(),
-          share: faker.datatype.boolean(),
-        },
-        wallet: {
-          id: 1,
-          amount: faker.number.int(),
-        },
+        photo: faker.image.avatar(),
       },
       replies: [],
     },

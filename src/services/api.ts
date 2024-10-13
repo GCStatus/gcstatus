@@ -9,6 +9,7 @@ import {
 import { baseUrl } from '@/constants'
 import { logout } from '@/store/accountSlice'
 import {
+  GameDetails,
   Level,
   LoginCredentials,
   Mission,
@@ -47,6 +48,7 @@ export const baseQueryFn: BaseQueryFn<
 
 export const tagTypes = [
   'user',
+  'games',
   'levels',
   'titles',
   'missions',
@@ -267,6 +269,12 @@ const api = createApi({
       }),
       invalidatesTags: ['user', 'missions'],
     }),
+
+    getGameDetails: builder.query<GameDetails, string>({
+      query: (slug) => `games/${slug}`,
+      transformResponse: (res: Res<GameDetails>) => res.data,
+      providesTags: (_, __, slug) => [{ id: slug, type: 'games' }],
+    }),
   }),
 })
 
@@ -284,6 +292,7 @@ export const {
   useResetPassMutation,
   useLazyGetLevelsQuery,
   useToggleTitleMutation,
+  useGetGameDetailsQuery,
   useGetTransactionsQuery,
   useUpdatePictureMutation,
   useUpdateSocialsMutation,
@@ -291,6 +300,7 @@ export const {
   useUpdatePasswordMutation,
   useCompleteMissionMutation,
   useUpdateUserBasicsMutation,
+  useLazyGetNotificationsQuery,
   useUpdateNickAndEmailMutation,
   useDeleteNotificationMutation,
   useMarkNotificationReadMutation,

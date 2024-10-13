@@ -28,7 +28,7 @@ function ReviewForm(props: ReviewFormProps) {
     handleSubmit,
     formState: { errors },
   } = useForm<ReviewStore>({
-    defaultValues: { comment: '' },
+    defaultValues: { review: '' },
   })
 
   const getProps = (
@@ -133,9 +133,9 @@ function ReviewForm(props: ReviewFormProps) {
           data-qa="comment"
           area
           isFull
-          label="Comment"
-          placeholder="Write your comment here..."
-          {...getProps('comment')}
+          label="Review"
+          placeholder="Write your review here..."
+          {...getProps('review')}
         />
       </Grid2>
 

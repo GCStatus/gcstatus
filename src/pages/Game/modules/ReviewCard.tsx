@@ -20,7 +20,7 @@ function ReviewCard(props: ReviewCardProps) {
     <Box className="relative p-4 border dark:border-gray-800 border-gray-100 bg-gradient-to-b dark:from-zinc-900 from-gray-200 to-transparent rounded-lg shadow-lg transition-all duration-300 sm:text-left text-center flex flex-col gap-2">
       <Box className="flex items-center sm:flex-row flex-col gap-2">
         <img
-          src={review.user.profile?.photo}
+          src={review.user.photo}
           alt={review.user.nickname}
           className="w-16 h-16 rounded-full border-4 border-primary"
         />
@@ -35,7 +35,7 @@ function ReviewCard(props: ReviewCardProps) {
       </Box>
 
       <Typography className="text-sm text-gray-800 dark:text-gray-400 mb-4">
-        {review.comment}
+        {review.review}
       </Typography>
 
       <Box className="flex sm:justify-end justify-center items-center">

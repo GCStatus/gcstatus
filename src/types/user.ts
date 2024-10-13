@@ -27,6 +27,15 @@ export interface User {
   title?: Title
 }
 
+export interface MinimalUser {
+  id: number
+  name: string
+  email: string
+  photo?: string
+  nickname: string
+  created_at: string
+}
+
 export interface UpdateUserNickAndEmailInterface {
   email: string
   nickname: string
