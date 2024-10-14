@@ -31,11 +31,11 @@ function UpcomingList(props: UpcomingListProps) {
   const filteredGames = games.filter(
     (game) =>
       isSameMonth(
-        new Date(game.release),
+        new Date(game.release_date),
         new Date(selectedYear, selectedMonth),
       ) &&
       isSameYear(
-        new Date(game.release),
+        new Date(game.release_date),
         new Date(selectedYear, selectedMonth),
       ),
   )

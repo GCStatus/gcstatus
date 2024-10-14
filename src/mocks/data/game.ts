@@ -29,7 +29,7 @@ export const MOCK_GAME_DETAILS: GameDetails = {
   is_free: false,
   crack: {
     id: 1,
-    status: 'Uncracked',
+    status: 'uncracked',
     cracked_at: null,
     by: null,
     protection: {

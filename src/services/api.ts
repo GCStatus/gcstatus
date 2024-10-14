@@ -10,6 +10,7 @@ import { baseUrl } from '@/constants'
 import { logout } from '@/store/accountSlice'
 import {
   GameDetails,
+  Home,
   Level,
   LoginCredentials,
   Mission,
@@ -47,6 +48,7 @@ export const baseQueryFn: BaseQueryFn<
 }
 
 export const tagTypes = [
+  'home',
   'user',
   'games',
   'levels',
@@ -275,11 +277,18 @@ const api = createApi({
       transformResponse: (res: Res<GameDetails>) => res.data,
       providesTags: (_, __, slug) => [{ id: slug, type: 'games' }],
     }),
+
+    getHome: builder.query<Home, void>({
+      query: () => 'home',
+      transformResponse: (res: Res<Home>) => res.data,
+      providesTags: ['home'],
+    }),
   }),
 })
 
 export const {
   useGetUserQuery,
+  useGetHomeQuery,
   useLoginMutation,
   useForgotMutation,
   useLogoutMutation,

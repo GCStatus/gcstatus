@@ -1,4 +1,5 @@
 import { Box, Link, Typography } from '@mui/material'
+import { format } from 'date-fns'
 import { useState } from 'react'
 import { IoPlay } from 'react-icons/io5'
 
@@ -48,7 +49,8 @@ function DLCs(props: DLCsProps) {
             <Typography
               component="span"
               className="text-gray-600 dark:text-gray-400 block mt-2">
-              Release Date: {dlc.release_date}
+              Release Date:{' '}
+              {format(new Date(dlc.release_date), 'yyyy-MM-dd')}
             </Typography>
 
             <Box className="mt-4 flex flex-wrap gap-2 sm:justify-start justify-center text-center">
@@ -63,6 +65,16 @@ function DLCs(props: DLCsProps) {
             </Box>
           </Box>
         </Box>
+
+        {dlc.about && (
+          <Box className="flex-1">
+            <Box
+              component="section"
+              className="text-md leading-relaxed animate-fade-in w-full gap-2"
+              dangerouslySetInnerHTML={{ __html: dlc.about }}
+            />
+          </Box>
+        )}
 
         <Box className="relative">
           <Typography

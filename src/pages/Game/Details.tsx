@@ -100,46 +100,60 @@ function Details() {
                     className="sm:text-2xl text-xl font-semibold animate-flicker text-theme-red-900 dark:text-white break-words">
                     User reviews
                   </Typography>
-                  {game.reviews.length > 0 && (
-                    <Box
-                      component="span"
-                      className="flex items-center gap-1">
-                      <IoStar size={18} className="text-yellow-500" />
-                      {game.reviews.reduce(
-                        (total, curr) => total + curr.rate,
-                        0,
-                      ) / game.reviews.length}
-                    </Box>
+                  {game.reviews.length > 0 ? (
+                    <>
+                      <Box
+                        component="span"
+                        className="flex items-center gap-1">
+                        <IoStar size={18} className="text-yellow-500" />
+                        {game.reviews.reduce(
+                          (total, curr) => total + curr.rate,
+                          0,
+                        ) / game.reviews.length}
+                      </Box>
+                      <Box
+                        component="section"
+                        className="grid sm:grid-cols-2 grid-cols-1 gap-4">
+                        {game.reviews.map((review) => (
+                          <ReviewCard key={review.id} review={review} />
+                        ))}
+                      </Box>
+                    </>
+                  ) : (
+                    <Typography>
+                      No one review found for this game.
+                    </Typography>
                   )}
-                  <Box
-                    component="section"
-                    className="grid sm:grid-cols-2 grid-cols-1 gap-4">
-                    {game.reviews.map((review) => (
-                      <ReviewCard key={review.id} review={review} />
-                    ))}
-                  </Box>
 
                   <Typography
                     variant="h2"
                     className="sm:text-2xl text-xl font-semibold animate-flicker text-theme-red-900 dark:text-white break-words">
                     Critics
                   </Typography>
-                  {game.critics.length > 0 && (
-                    <Box
-                      component="span"
-                      className="flex items-center gap-1">
-                      <IoStar size={18} className="text-yellow-500" />
-                      {game.critics.reduce(
-                        (total, curr) => total + parseFloat(curr.rate),
-                        0,
-                      ) / game.critics.length}
-                    </Box>
+                  {game.critics.length > 0 ? (
+                    <>
+                      <Box
+                        component="span"
+                        className="flex items-center gap-1">
+                        <IoStar size={18} className="text-yellow-500" />
+                        {game.critics.reduce(
+                          (total, curr) => total + parseFloat(curr.rate),
+                          0,
+                        ) / game.critics.length}
+                      </Box>
+                      <Box
+                        component="section"
+                        className="flex flex-col gap-4">
+                        {game.critics.map((critic) => (
+                          <Critics key={critic.id} criticable={critic} />
+                        ))}
+                      </Box>
+                    </>
+                  ) : (
+                    <Typography>
+                      No one critic found for this game.
+                    </Typography>
                   )}
-                  <Box component="section" className="flex flex-col gap-4">
-                    {game.critics.map((critic) => (
-                      <Critics key={critic.id} criticable={critic} />
-                    ))}
-                  </Box>
 
                   <Typography
                     variant="h2"
@@ -183,7 +197,13 @@ function Details() {
               tab: 'Requirements',
               element: (
                 <Box component="section" className="flex flex-col gap-4">
-                  <Requirements requirements={game.requirements} />
+                  {game.requirements.length > 0 ? (
+                    <Requirements requirements={game.requirements} />
+                  ) : (
+                    <Typography>
+                      The requirements for this game was not provided.
+                    </Typography>
+                  )}
                 </Box>
               ),
             },
@@ -191,7 +211,13 @@ function Details() {
               tab: 'Languages',
               element: (
                 <Box component="section" className="flex flex-col gap-4">
-                  <Languages gameLanguages={game.languages} />
+                  {game.languages.length > 0 ? (
+                    <Languages gameLanguages={game.languages} />
+                  ) : (
+                    <Typography>
+                      The languages for this game was not provided.
+                    </Typography>
+                  )}
                 </Box>
               ),
             },

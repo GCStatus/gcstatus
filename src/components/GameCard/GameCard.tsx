@@ -7,14 +7,18 @@ import {
   Stack,
   Typography,
 } from '@mui/material'
-import { useState } from 'react'
+import { format } from 'date-fns'
+import { useCallback, useMemo, useState } from 'react'
 import {
+  IoCheckmarkCircleOutline,
+  IoCloseCircleOutline,
   IoEyeOutline,
   IoHeartOutline,
   IoNotificationsOutline,
 } from 'react-icons/io5'
 
 import { GameList } from '@/types'
+import { mapCrack } from '@/utils'
 
 import { HeartsUp } from '..'
 
@@ -30,17 +34,16 @@ function GameCard(props: GameCardProps) {
   const [isHearted, setIsHearted] = useState<boolean>(false)
   const [heartPops, setHeartPops] = useState<number[]>([])
 
-  const handleHeartClick = () => {
+  const newHearts = useMemo(
+    () => Array.from({ length: 10 }, (_, i) => i * 10),
+    [],
+  )
+
+  const handleHeartClick = useCallback(() => {
     setIsHearted((prev) => !prev)
-
-    setHearts(hearts + (isHearted ? -1 : 1))
-
-    if (!isHearted) {
-      const newHearts = Array.from({ length: 10 }, (_, i) => i * 10)
-
-      setHeartPops((prev) => [...prev, ...newHearts])
-    }
-  }
+    setHearts((prev) => prev + (isHearted ? -1 : 1))
+    if (!isHearted) setHeartPops((prev) => [...prev, ...newHearts])
+  }, [isHearted, newHearts])
 
   return (
     <>
@@ -65,9 +68,9 @@ function GameCard(props: GameCardProps) {
         <Box
           position="relative"
           className={`${view === 'list' ? 'sm:w-1/3' : ''} flex-shrink-0`}>
-          {game.badge && (
+          {game.condition && game.condition !== 'commom' && (
             <Chip
-              label={game.badge}
+              label={game.condition}
               className="absolute top-2 left-2 z-10 bg-gradient-to-r from-theme-red-900 to-yellow-500 text-sm font-bold text-white"
               style={{
                 boxShadow: '0 0 10px rgba(255, 255, 255, 0.7)',
@@ -76,11 +79,12 @@ function GameCard(props: GameCardProps) {
           )}
           <Box className="relative h-full overflow-hidden">
             <img
+              loading="lazy"
               src={game.cover}
               alt={game.title}
               className={`object-cover w-full h-full transform group-hover:scale-110 transition-transform duration-500 ${view === 'grid' ? 'max-h-72' : 'sm:h-full h-auto'}`}
             />
-            <Box className="absolute bottom-0 left-0 w-full px-4 py-2 flex md:flex-row flex-col md:text-left text-center justify-between items-center backdrop-blur-sm bg-gradient-to-r from-black via-black to-red-400 opacity-85">
+            <Box className="absolute bottom-0 left-0 w-full px-4 py-2 flex md:flex-row flex-col md:text-left text-center justify-between items-center backdrop-blur-sm bg-gradient-to-r from-red-400 via-black to-black opacity-85">
               <Link href={`/games/${game.slug}`}>
                 <Typography
                   variant="h6"
@@ -130,7 +134,8 @@ function GameCard(props: GameCardProps) {
           } h-full gap-4`}>
           <Box className="flex flex-col flex-grow">
             <Typography variant="body2" className="text-gray-400">
-              Release Date: {game.release}
+              Release Date:{' '}
+              {format(new Date(game.release_date), 'yyyy-MM-dd')}
             </Typography>
             <Box className="grid xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-2 grid-cols-1 items-center my-2 sm:gap-1 gap-2 w-full">
               {game.platforms.map((platform) => (
@@ -147,34 +152,6 @@ function GameCard(props: GameCardProps) {
                 </Link>
               ))}
             </Box>
-
-            <Box className="flex justify-between items-center">
-              <Typography
-                variant="h6"
-                className="dark:text-white text-gray-600 font-bold">
-                {game.sale ? (
-                  <div className="flex flex-col">
-                    <span className="text-red-500 line-through text-sm">
-                      {(game.commom_price / 100).toLocaleString('en-US', {
-                        currency: 'USD',
-                        style: 'currency',
-                      })}
-                    </span>
-                    <span className="dark:text-white text-gray-600">
-                      {(game.best_price / 100).toLocaleString('en-US', {
-                        currency: 'USD',
-                        style: 'currency',
-                      })}
-                    </span>
-                  </div>
-                ) : (
-                  (game.best_price / 100).toLocaleString('en-US', {
-                    currency: 'USD',
-                    style: 'currency',
-                  })
-                )}
-              </Typography>
-            </Box>
           </Box>
 
           <Box className="flex flex-wrap gap-2 my-2 w-full mt-auto">
@@ -188,6 +165,78 @@ function GameCard(props: GameCardProps) {
               </Link>
             ))}
           </Box>
+
+          {game.crack ? (
+            <Box className="flex flex-col gap-2 relative">
+              {['cracked', 'cracked-oneday'].includes(game.crack.status) &&
+                game.crack.by && (
+                  <Box className="flex items-center gap-2">
+                    <Typography
+                      variant="body2"
+                      className="font-bold text-gray-600 dark:text-gray-300"
+                      style={{
+                        transition: 'color 0.3s ease-in-out',
+                      }}>
+                      Cracked by:
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      className="font-bold dark:text-white text-gray-800 hover:text-theme-red-900 transition-all duration-300">
+                      {game.crack.by.name}
+                    </Typography>
+                  </Box>
+                )}
+
+              {game.crack.protection && (
+                <Box className="flex items-center gap-2">
+                  <Typography
+                    variant="body2"
+                    className="font-bold text-gray-600 dark:text-gray-300">
+                    Protection:
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    className="font-bold dark:text-white text-gray-800 hover:text-theme-red-900 transition-all duration-300">
+                    {game.crack.protection.name}
+                  </Typography>
+                </Box>
+              )}
+
+              <Chip
+                label={mapCrack[game.crack.status]}
+                icon={
+                  game.crack.status === 'uncracked' ? (
+                    <IoCloseCircleOutline className="text-white" />
+                  ) : (
+                    <IoCheckmarkCircleOutline className="text-white" />
+                  )
+                }
+                className={`font-bold px-3 py-1 rounded-md text-white ${
+                  game.crack.status === 'uncracked'
+                    ? 'bg-theme-red-900 animate-pulse'
+                    : 'bg-green-500'
+                }`}
+                style={{
+                  boxShadow: `0 4px 10px ${
+                    game.crack.status === 'uncracked'
+                      ? 'rgba(255, 77, 77, 0.5)'
+                      : 'rgba(76, 175, 80, 0.5)'
+                  }`,
+                  transition: 'transform 0.3s ease-in-out',
+                }}
+              />
+            </Box>
+          ) : (
+            <Chip
+              label="Crack not available yet"
+              icon={<IoCloseCircleOutline className="text-white" />}
+              className="font-bold px-3 py-1 rounded-md text-white bg-theme-red-900 animate-pulse"
+              style={{
+                boxShadow: '0 1px 4px rgba(255, 77, 77, 0.5)',
+                transition: 'transform 0.3s ease-in-out',
+              }}
+            />
+          )}
 
           <Button
             fullWidth

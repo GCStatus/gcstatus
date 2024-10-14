@@ -30,7 +30,7 @@ function Calendar() {
 
   const getTileContent = ({ date, view }: CalendarTileProperties) => {
     const appointment = games.filter((game) =>
-      isSameDay(parseISO(game.release), date),
+      isSameDay(parseISO(game.release_date), date),
     )
 
     if (!appointment || view !== 'month') return null
@@ -39,7 +39,7 @@ function Calendar() {
       <Box sx={{ padding: isMobile ? '0.25rem' : '0.5rem' }}>
         {appointment.map((item) => (
           <Tooltip
-            title={`${item.title} - ${format(parseISO(item.release), 'yyyy-MM-dd')}`}
+            title={`${item.title} - ${format(parseISO(item.release_date), 'yyyy-MM-dd')}`}
             sx={{ display: 'block' }}
             disableInteractive
             key={item.id}>

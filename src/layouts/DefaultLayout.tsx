@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
 import { Outlet } from 'react-router-dom'
 
-import { Footer, Header } from '@/components'
+import { CookieConsent, Footer, Header } from '@/components'
 import { useSidebar } from '@/hooks'
 
 import { ScrollToTop, Sidebar } from './modules'
@@ -22,6 +22,7 @@ function DefaultLayout(props: DefaultLayoutProps) {
         <Outlet />
       </Box>
       <ScrollToTop />
+      <CookieConsent />
       <Footer />
     </Box>
   )

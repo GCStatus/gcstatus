@@ -1,6 +1,7 @@
 import { Box } from '@mui/material'
 
-import { MOCK_HOME } from '@/mocks'
+import { LoadingScreen } from '@/components'
+import { useGetHomeQuery } from '@/services/api'
 
 import {
   HomeNextRelease,
@@ -11,15 +12,28 @@ import {
 } from './modules'
 
 function Home() {
-  const home = MOCK_HOME
+  const { home, isLoading } = useGetHomeQuery(undefined, {
+    selectFromResult: ({ data, isLoading, isFetching }) => ({
+      home: data,
+      isLoading: isLoading || isFetching,
+    }),
+  })
+
+  if (isLoading) return <LoadingScreen />
+
+  if (!home) return <></>
 
   return (
     <Box>
-      <HotGames games={home.hot} />
-      <HomeNextRelease game={home.next_release} />
-      <PopularGames games={home.popular} />
-      <LikedGames games={home.most_liked_games} />
-      <UpcomingGames games={home.upcoming_games} />
+      {home.hot.length > 0 && <HotGames games={home.hot} />}
+      {home.next_release && <HomeNextRelease game={home.next_release} />}
+      {home.popular.length > 0 && <PopularGames games={home.popular} />}
+      {home.most_liked_games.length > 0 && (
+        <LikedGames games={home.most_liked_games} />
+      )}
+      {home.upcoming_games.length > 0 && (
+        <UpcomingGames games={home.upcoming_games} />
+      )}
     </Box>
   )
 }

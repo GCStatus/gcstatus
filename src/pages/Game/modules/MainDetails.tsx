@@ -13,6 +13,7 @@ import { IoEyeOutline, IoHeart, IoHeartOutline } from 'react-icons/io5'
 
 import { HeartsUp } from '@/components'
 import { GameDetails } from '@/types'
+import { mapCrack } from '@/utils'
 
 interface MainDetailsProps {
   game: GameDetails
@@ -113,7 +114,7 @@ function MainDetails(props: MainDetailsProps) {
                 Protection:
               </Typography>
               <Typography component="span" className="text-lg">
-                {game.crack.protection.name}
+                {game.crack ? game.crack.protection.name : 'Not available'}
               </Typography>
             </Box>
             <Box className="flex sm:flex-row flex-col items-center gap-1">
@@ -122,12 +123,19 @@ function MainDetails(props: MainDetailsProps) {
                 className="inline-block font-bold dark:text-white text-black">
                 Status:
               </Typography>
-              <Chip
-                label={game.crack.status}
-                className={`${game.crack.status === 'cracked' ? 'bg-green-500' : 'bg-red-500'} text-white`}
-              />
+              {game.crack ? (
+                <Chip
+                  label={mapCrack[game.crack.status]}
+                  className={`${game.crack.status === 'cracked' || game.crack.status === 'cracked-oneday' ? 'bg-green-500' : 'bg-red-500'} text-white`}
+                />
+              ) : (
+                <Chip
+                  label="Crack not available"
+                  className="bg-red-500 text-white"
+                />
+              )}
             </Box>
-            {game.crack.by && (
+            {game.crack && game.crack.by && (
               <Box className="flex sm:flex-row flex-col items-center gap-1">
                 <Typography
                   component="span"
@@ -305,22 +313,26 @@ function MainDetails(props: MainDetailsProps) {
             className="sm:text-2xl text-xl font-bold mb-4 dark:text-white text-black">
             Publishers
           </Typography>
-          <List
-            disablePadding
-            className="dark:text-gray-300 text-black"
-            sx={{
-              listStyleType: 'disc',
-              pl: 2,
-              '& .MuiListItem-root': {
-                display: 'list-item',
-              },
-            }}>
-            {game.publishers.map((publisher) => (
-              <ListItem disableGutters disablePadding key={publisher.id}>
-                {publisher.name}
-              </ListItem>
-            ))}
-          </List>
+          {game.publishers.length > 0 ? (
+            <List
+              disablePadding
+              className="dark:text-gray-300 text-black"
+              sx={{
+                listStyleType: 'disc',
+                pl: 2,
+                '& .MuiListItem-root': {
+                  display: 'list-item',
+                },
+              }}>
+              {game.publishers.map((publisher) => (
+                <ListItem disableGutters disablePadding key={publisher.id}>
+                  {publisher.name}
+                </ListItem>
+              ))}
+            </List>
+          ) : (
+            <Typography>No one publisher related.</Typography>
+          )}
         </Box>
 
         <Box className="flex-1 border dark:border-gray-800 border-gray-100 bg-gradient-to-b dark:from-zinc-900 from-gray-200 to-transparent p-6 rounded-lg shadow-lg transition-transform transform hover:scale-[1.02] duration-500 relative">
@@ -329,24 +341,71 @@ function MainDetails(props: MainDetailsProps) {
             className="text-2xl font-bold mb-4 dark:text-white text-black">
             Developers
           </Typography>
-          <List
-            disablePadding
-            className="dark:text-gray-300 text-black"
-            sx={{
-              listStyleType: 'disc',
-              pl: 2,
-              '& .MuiListItem-root': {
-                display: 'list-item',
-              },
-            }}>
-            {game.developers.map((developer) => (
-              <ListItem disableGutters disablePadding key={developer.id}>
-                {developer.name}
-              </ListItem>
-            ))}
-          </List>
+          {game.developers.length > 0 ? (
+            <List
+              disablePadding
+              className="dark:text-gray-300 text-black"
+              sx={{
+                listStyleType: 'disc',
+                pl: 2,
+                '& .MuiListItem-root': {
+                  display: 'list-item',
+                },
+              }}>
+              {game.developers.map((developer) => (
+                <ListItem disableGutters disablePadding key={developer.id}>
+                  {developer.name}
+                </ListItem>
+              ))}
+            </List>
+          ) : (
+            <Typography>No one developer related.</Typography>
+          )}
         </Box>
       </Box>
+
+      {game.support && (
+        <Box component="span" className="mb-4">
+          <Box className="flex-1 border dark:border-gray-800 border-gray-100 bg-gradient-to-b dark:from-zinc-900 from-gray-200 to-transparent p-6 rounded-lg shadow-lg transition-transform transform hover:scale-[1.02] duration-500 relative">
+            <Typography
+              variant="h2"
+              className="sm:text-2xl text-xl font-bold mb-4 dark:text-white text-black">
+              Support
+            </Typography>
+            <List
+              disablePadding
+              className="dark:text-gray-300 text-black"
+              sx={{
+                listStyleType: 'disc',
+                pl: 2,
+                '& .MuiListItem-root': {
+                  display: 'list-item',
+                },
+              }}>
+              {game.support.email && (
+                <ListItem disableGutters disablePadding>
+                  Email:{' '}
+                  <Link
+                    href={`mailto:${game.support.email}`}
+                    className="underline text-red-500 hover:opacity-70 transition-all duration-300">
+                    {game.support.email}
+                  </Link>
+                </ListItem>
+              )}
+              {game.support.url && (
+                <ListItem disableGutters disablePadding>
+                  Website:{' '}
+                  <Link
+                    href={game.support.url}
+                    className="underline text-red-500 hover:opacity-70 transition-all duration-300">
+                    {game.support.url}
+                  </Link>
+                </ListItem>
+              )}
+            </List>
+          </Box>
+        </Box>
+      )}
 
       <Box
         component="section"

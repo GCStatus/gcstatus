@@ -18,6 +18,10 @@
   - [ ] Test across different screen sizes and browsers
   - [ ] Optimize UI components for responsiveness
 - [ ] Not enough cash audio RE4 on try to buy something with coins that is not enough
+- [ ] Games with protection route
+  - [ ] Display all games that has that protection
+- [ ] Games cracked by
+  - [ ] Display all games cracked by cracker
 
 ### Post-MVP
 
@@ -35,6 +39,7 @@
 - [ ] Review entire dark and light mode
 - [ ] Documentation
   - [ ] Create an issue template
+- [ ] Implement user way for accessibility
 
 ### Future Ideas
 

@@ -25,16 +25,14 @@ export interface Price {
 export interface GameList {
   id: number
   slug: string
-  sale: boolean
   title: string
   cover: string
-  badge?: string
-  release: string
-  best_price: number
+  condition?: string
   views_count: number
-  commom_price: number
+  release_date: string
   hearts_count: number
   short_description: string
+  crack?: Crack
   tags: Tag[]
   genres: Genre[]
   platforms: Platform[]
@@ -80,7 +78,7 @@ export interface GameDetails {
   critics: Criticable[]
   torrents: Torrent[]
   comments: Comment[]
-  crack: Crack
+  crack?: Crack
   support?: Support
 }
 
@@ -89,7 +87,7 @@ export interface NextRelease {
   slug: string
   title: string
   cover: string
-  release: string
+  release_date: string
   genres: Genre[]
   platforms: Platform[]
 }

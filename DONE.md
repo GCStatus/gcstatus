@@ -138,6 +138,13 @@
   - [x] Add posibility to purchase some titles by coins
   - [x] Some titles could be earned by doing missions/quests
   - [x] Some titles could be earned just getting some level
+- [x] Integrating home
+  - [x] Integrating home banners
+  - [x] Integrate home hot games
+  - [x] Integrate home next release
+  - [x] Integrate home upcoming games
+  - [x] Integrate home most liked games
+- [x] Integrate game details
 
 ### Post MVP
 

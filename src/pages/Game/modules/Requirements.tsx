@@ -9,9 +9,22 @@ interface RequirementsProps {
 function Requirements(props: RequirementsProps) {
   const { requirements } = props
 
+  const potentialPriority: { [key: string]: number } = {
+    minimum: 1,
+    recommended: 2,
+    maximum: 3,
+  }
+
+  const sortedRequirements = [...requirements].sort((a, b) => {
+    return (
+      potentialPriority[a.requirement_type.potential] -
+      potentialPriority[b.requirement_type.potential]
+    )
+  })
+
   const uniqueTypes = Array.from(
     new Set(
-      requirements.map(
+      sortedRequirements.map(
         (req) =>
           `${req.requirement_type.os}-${req.requirement_type.potential}`,
       ),
@@ -44,7 +57,7 @@ function Requirements(props: RequirementsProps) {
         ))}
       </div>
 
-      {requirements
+      {sortedRequirements
         .filter(
           (req) =>
             `${req.requirement_type.os}-${req.requirement_type.potential}` ===
@@ -58,8 +71,11 @@ function Requirements(props: RequirementsProps) {
 
             <h3 className="sm:text-left text-center text-xl font-bold text-theme-red-900 mb-4">
               {req.requirement_type.os.charAt(0).toUpperCase() +
-                req.requirement_type.os.slice(1)}{' '}
-              Requirements
+                req.requirement_type.os.slice(1)}
+              {' - '}
+              {req.requirement_type.potential.charAt(0).toUpperCase() +
+                req.requirement_type.potential.slice(1)}{' '}
+              requirements
             </h3>
 
             <ul className="space-y-2 dark:text-gray-300 text-gray-700">
