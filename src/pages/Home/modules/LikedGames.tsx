@@ -40,7 +40,7 @@ function LikedGames(props: LikedGamesProps) {
                   {game.title}
                 </Link>
                 <Typography className="text-lg mb-4">
-                  {game.release}
+                  {game.release_date}
                 </Typography>
                 <Box className="flex sm:flex-row flex-col items-center flex-wrap mt-4 gap-2">
                   <Typography className="text-md">Platforms: </Typography>

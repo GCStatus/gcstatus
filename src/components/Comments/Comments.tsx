@@ -17,8 +17,8 @@ import {
   IoSendOutline,
 } from 'react-icons/io5'
 
-import { Comment } from '@/types'
 import { HeartsUp, Input } from '@/components'
+import { Comment } from '@/types'
 
 interface CommentsProps {
   defaultComments: Comment[]

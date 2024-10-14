@@ -21,7 +21,7 @@ export type SortField =
   | 'title'
   | 'hearts_count'
   | 'views_count'
-  | 'release'
+  | 'release_date'
 
 export interface SortState {
   field: SortField

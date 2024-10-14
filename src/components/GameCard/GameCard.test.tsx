@@ -7,44 +7,6 @@ import GameCard, { GameCardProps } from './GameCard'
 
 const game = MOCK_HOT_GAMES.pop() as GameList
 
-const saleGame: GameList = {
-  id: 1,
-  cover: 'https://images7.alphacoders.com/135/thumb-1920-1355897.jpeg',
-  title: 'Ghost of Tsushima',
-  slug: 'ghost-of-tsushima',
-  short_description: '',
-  best_price: 1990,
-  commom_price: 9990,
-  release: '2024-09-01',
-  platforms: [
-    { id: 1, slug: 'ps5', name: 'PS5' },
-    { id: 2, slug: 'ps4', name: 'PS4' },
-    { id: 3, slug: 'pc', name: 'PC' },
-  ],
-  genres: [
-    { id: 1, slug: 'action', name: 'Action' },
-    { id: 2, slug: 'adventure', name: 'Adventure' },
-    { id: 3, slug: 'single-player', name: 'Single-player' },
-    { id: 10, slug: 'samurai', name: 'Samurai' },
-  ],
-  categories: [{ id: 1, slug: 'action', name: 'Action' }],
-  tags: [
-    { id: 13, slug: 'souls', name: 'Souls' },
-    { id: 12, slug: 'uncracked', name: 'Uncracked' },
-    { id: 9, slug: 'denuvo', name: 'Denuvo' },
-    { id: 8, slug: 'rpg', name: 'RPG' },
-    { id: 1, slug: 'action', name: 'Action' },
-    { id: 2, slug: 'adventure', name: 'Adventure' },
-    { id: 3, slug: 'single-player', name: 'Single-player' },
-    { id: 4, slug: 'fantasy', name: 'Fantasy' },
-    { id: 5, slug: 'mythologic', name: 'Mythologic' },
-  ],
-  badge: 'hot',
-  views_count: 4958,
-  hearts_count: 1982,
-  sale: true,
-}
-
 const renderGameCard = (
   props: GameCardProps = {
     game,
@@ -76,7 +38,7 @@ describe('GameCard Component', () => {
 
     expect(getByAltText(game.title)).toBeInTheDocument()
 
-    expect(getByText(game.badge!)).toBeInTheDocument()
+    expect(getByText(game.condition!)).toBeInTheDocument()
 
     expect(getByText(game.hearts_count.toString())).toBeInTheDocument()
 
@@ -109,28 +71,6 @@ describe('GameCard Component', () => {
     await waitFor(() => {
       expect(getByText(game.hearts_count.toString())).toBeInTheDocument()
     })
-  })
-
-  it('shows the correct prices for sale games', () => {
-    const { getByText } = renderGameCard({ game: saleGame, view: 'grid' })
-
-    expect(
-      getByText(
-        (game.commom_price / 100).toLocaleString('en-US', {
-          currency: 'USD',
-          style: 'currency',
-        }),
-      ),
-    ).toBeInTheDocument()
-
-    expect(
-      getByText(
-        (game.best_price / 100).toLocaleString('en-US', {
-          currency: 'USD',
-          style: 'currency',
-        }),
-      ),
-    ).toBeInTheDocument()
   })
 
   it('renders genres correctly', () => {

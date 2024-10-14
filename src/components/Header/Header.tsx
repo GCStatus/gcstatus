@@ -2,9 +2,12 @@ import { Box } from '@mui/material'
 import { useEffect } from 'react'
 
 import { useAccount } from '@/hooks'
-import { MOCK_HOME } from '@/mocks'
-import { useLazyGetNotificationsQuery } from '@/services/api'
+import {
+  useGetHomeQuery,
+  useLazyGetNotificationsQuery,
+} from '@/services/api'
 
+import { LoadingScreen } from '..'
 import { HeaderCarousel, Navbar } from './modules'
 
 interface HeaderProps {
@@ -21,12 +24,18 @@ function Header(props: HeaderProps) {
         isLoading: isLoading || isFetching,
       }),
     })
-
-  const home = MOCK_HOME
+  const { home, loadingHome } = useGetHomeQuery(undefined, {
+    selectFromResult: ({ data, isLoading, isFetching }) => ({
+      home: data,
+      loadingHome: isLoading || isFetching,
+    }),
+  })
 
   useEffect(() => {
     if (user) trigger()
   }, [user])
+
+  if (loadingHome) return <LoadingScreen />
 
   return (
     <Box component="header">
@@ -37,7 +46,7 @@ function Header(props: HeaderProps) {
       />
 
       {withCarousel ? (
-        <HeaderCarousel banners={home.banners} />
+        home && <HeaderCarousel banners={home.banners} />
       ) : (
         <Box className="pb-28 dark:bg-theme-dark-900 bg-white" />
       )}

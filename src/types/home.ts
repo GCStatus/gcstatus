@@ -1,4 +1,4 @@
-import { Banner, GameList, NextRelease, Notification } from '.'
+import { Banner, GameList, NextRelease } from '.'
 
 export interface Home {
   hot: GameList[]
@@ -7,5 +7,4 @@ export interface Home {
   next_release: NextRelease
   upcoming_games: GameList[]
   most_liked_games: GameList[]
-  notifications: Notification[]
 }

@@ -58,7 +58,8 @@ function HomeNextRelease(props: HomeNextReleaseProps) {
           {game.title}
         </Link>
         <Typography className="text-lg mb-6">
-          Release Date: {format(new Date(game.release), 'LLLL, dd yyyy')}
+          Release Date:{' '}
+          {format(new Date(game.release_date), 'LLLL, dd yyyy')}
         </Typography>
         <Typography className="text-md">
           Platforms: {game.platforms.map(({ name }) => name).join(', ')}
@@ -66,7 +67,10 @@ function HomeNextRelease(props: HomeNextReleaseProps) {
         <Typography className="text-md">
           Genres: {game.genres.map(({ name }) => name).join(', ')}
         </Typography>
-        <Countdown date={new Date(game.release)} renderer={renderer} />
+        <Countdown
+          date={new Date(game.release_date)}
+          renderer={renderer}
+        />
       </Box>
     </Stack>
   )

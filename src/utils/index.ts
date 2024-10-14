@@ -1,4 +1,5 @@
 export * from './date.helpers'
+export * from './game.helpers'
 export * from './image.helpers'
 export * from './string.helpers'
 export * from './number.helpers'

@@ -8,7 +8,7 @@ export interface Crackers {
 
 export interface Crack {
   id: number
-  status: string
+  status: 'cracked' | 'uncracked' | 'cracked-oneday'
   cracked_at: string | null
   by: Crackers | null
   protection: Protection

@@ -73,7 +73,7 @@ function UpcomingGames(props: UpcomingGamesProps) {
                   {game.title}
                 </Typography>
                 <Typography className="text-md text-white mb-4">
-                  Release Date: {game.release}
+                  Release Date: {game.release_date}
                 </Typography>
                 <Box className="grid grid-cols-3 gap-2">
                   {game.platforms.map(({ id, name }) => (
