@@ -1,42 +1,21 @@
-import {
-  Box,
-  Button,
-  Container,
-  Stack,
-  Tooltip,
-  Typography,
-} from '@mui/material'
+import { Box, Container, Stack, Tooltip, Typography } from '@mui/material'
 import { formatRelative } from 'date-fns'
 import { useState } from 'react'
 import {
   IoChatbubbleOutline,
   IoEyeOutline,
-  IoHeart,
   IoHeartOutline,
 } from 'react-icons/io5'
 
-import { HeartsUp } from '@/components'
+import { HeartButton, HeartsUp } from '@/components'
 import { MOCK_BLOG_DETAILS } from '@/mocks'
 
 import { CommentsSection } from './modules'
 
 function Details() {
   const post = MOCK_BLOG_DETAILS
-  const [hearts, setHearts] = useState<number>(post.hearts_count)
-  const [isHearted, setIsHearted] = useState<boolean>(post.is_hearted)
   const [heartPops, setHeartPops] = useState<number[]>([])
-
-  const handleHeartClick = () => {
-    setIsHearted((prev) => !prev)
-
-    setHearts(hearts + (isHearted ? -1 : 1))
-
-    if (!isHearted) {
-      const newHearts = Array.from({ length: 10 }, (_, i) => i * 10)
-
-      setHeartPops((prev) => [...prev, ...newHearts])
-    }
-  }
+  const [hearts, setHearts] = useState<number>(post.hearts_count)
 
   return (
     <Box className="sm:p-6 p-2 dark:bg-theme-dark-900 bg-transparent flex flex-col justify-between sm:text-start text-center relative">
@@ -138,17 +117,14 @@ function Details() {
           </Box>
         </Box>
 
-        <Button
-          variant="outlined"
-          className={`mt-8 border-2 px-5 py-2 text-lg font-bold transition-all shadow-lg sm:w-auto w-full ${
-            isHearted
-              ? 'border-red-500 bg-red-500 text-white'
-              : 'border-theme-red-900 text-theme-red-900'
-          }`}
-          startIcon={isHearted ? <IoHeart /> : <IoHeartOutline />}
-          onClick={handleHeartClick}>
-          {isHearted ? 'Loved it!' : 'Love it!'}
-        </Button>
+        <HeartButton
+          type="button"
+          setHearts={setHearts}
+          heartable_id={post.id}
+          heartable_type="blogs"
+          isHearted={post.is_hearted}
+          setHeartPops={setHeartPops}
+        />
 
         <Box className="mt-10">
           <Stack spacing={1}>

@@ -1,6 +1,9 @@
-import { fireEvent, render, waitFor } from '@testing-library/react'
+import { render } from '@testing-library/react'
+import { Provider } from 'react-redux'
+import { MemoryRouter } from 'react-router-dom'
 
 import { MOCK_HOT_GAMES } from '@/mocks'
+import store from '@/store'
 import { GameList } from '@/types'
 
 import GameCard, { GameCardProps } from './GameCard'
@@ -13,7 +16,13 @@ const renderGameCard = (
     view: 'grid',
   },
 ) => {
-  return render(<GameCard {...props} />)
+  return render(
+    <Provider store={store}>
+      <MemoryRouter>
+        <GameCard {...props} />
+      </MemoryRouter>
+    </Provider>,
+  )
 }
 
 jest.mock('../HeartsUp', () => ({
@@ -51,26 +60,6 @@ describe('GameCard Component', () => {
     expect(getByText(game.title)).toBeInTheDocument()
 
     expect(getByAltText(game.title)).toBeInTheDocument()
-  })
-
-  it('handles heart button click correctly', async () => {
-    const { getByTestId, getByText } = renderGameCard()
-
-    const heartButton = getByTestId('heart')
-
-    fireEvent.click(heartButton)
-
-    await waitFor(() => {
-      expect(
-        getByText((game.hearts_count + 1).toString()),
-      ).toBeInTheDocument()
-    })
-
-    fireEvent.click(heartButton)
-
-    await waitFor(() => {
-      expect(getByText(game.hearts_count.toString())).toBeInTheDocument()
-    })
   })
 
   it('renders genres correctly', () => {

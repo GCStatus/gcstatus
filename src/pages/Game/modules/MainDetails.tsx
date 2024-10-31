@@ -1,7 +1,6 @@
 import {
   Box,
   Chip,
-  IconButton,
   Link,
   List,
   ListItem,
@@ -9,9 +8,9 @@ import {
   Typography,
 } from '@mui/material'
 import { useState } from 'react'
-import { IoEyeOutline, IoHeart, IoHeartOutline } from 'react-icons/io5'
+import { IoEyeOutline } from 'react-icons/io5'
 
-import { HeartsUp } from '@/components'
+import { HeartButton, HeartsUp } from '@/components'
 import { GameDetails } from '@/types'
 import { mapCrack } from '@/utils'
 
@@ -21,21 +20,8 @@ interface MainDetailsProps {
 
 function MainDetails(props: MainDetailsProps) {
   const { game } = props
-  const [hearts, setHearts] = useState<number>(game.hearts_count)
-  const [isHearted, setIsHearted] = useState<boolean>(game.is_hearted)
   const [heartPops, setHeartPops] = useState<number[]>([])
-
-  const handleHeartClick = () => {
-    setIsHearted((prev) => !prev)
-
-    setHearts(hearts + (isHearted ? -1 : 1))
-
-    if (!isHearted) {
-      const newHearts = Array.from({ length: 10 }, (_, i) => i * 10)
-
-      setHeartPops((prev) => [...prev, ...newHearts])
-    }
-  }
+  const [hearts, setHearts] = useState<number>(game.hearts_count)
 
   return (
     <>
@@ -48,7 +34,6 @@ function MainDetails(props: MainDetailsProps) {
           />
         ))}
       </Box>
-
       <Box
         component="span"
         className="flex flex-col md:flex-row relative sm:gap-4 gap-4 mb-4">
@@ -148,16 +133,15 @@ function MainDetails(props: MainDetailsProps) {
               </Box>
             )}
             <Box className="flex sm:flex-row flex-col items-center gap-1">
-              <IconButton sx={{ padding: 0.5 }} onClick={handleHeartClick}>
-                {isHearted ? (
-                  <IoHeart
-                    className="text-theme-red-900 animate-pulse"
-                    size={28}
-                  />
-                ) : (
-                  <IoHeartOutline className="text-white" size={28} />
-                )}
-              </IconButton>
+              <HeartButton
+                size={24}
+                type="icon"
+                setHearts={setHearts}
+                heartable_id={game.id}
+                heartable_type="games"
+                isHearted={game.is_hearted}
+                setHeartPops={setHeartPops}
+              />
               {hearts}
             </Box>
           </Box>

@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie'
 import { IoCheckmarkCircleOutline } from 'react-icons/io5'
 
-import Logo from '../Logo'
+import { Logo } from '..'
 
 const CookieConsent = () => {
   const [isVisible, setIsVisible] = useState(false)

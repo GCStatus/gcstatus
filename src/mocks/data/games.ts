@@ -12,6 +12,7 @@ export const MOCK_HOT_GAMES: GameList[] = [
     title: 'Ghost of Tsushima',
     slug: 'ghost-of-tsushima',
     short_description: '',
+    is_hearted: faker.datatype.boolean(),
     release_date: '2024-09-01',
     platforms: [
       { id: 1, slug: 'ps5', name: 'PS5' },
@@ -46,6 +47,7 @@ export const MOCK_HOT_GAMES: GameList[] = [
     title: 'Black Myth: Wukong',
     slug: 'black-myth-wukong',
     short_description: '',
+    is_hearted: faker.datatype.boolean(),
     release_date: '2024-09-01',
     platforms: [
       { id: 1, slug: 'ps5', name: 'PS5' },
@@ -84,6 +86,7 @@ export const MOCK_HOT_GAMES: GameList[] = [
     title: 'God of War: Ragnarok',
     slug: 'god-of-war-ragnarok',
     short_description: '',
+    is_hearted: faker.datatype.boolean(),
     release_date: '2024-09-01',
     platforms: [
       { id: 1, slug: 'ps5', name: 'PS5' },
@@ -115,6 +118,7 @@ export const MOCK_HOT_GAMES: GameList[] = [
     cover: 'https://wallpapercave.com/wp/wp11402292.jpg',
     title: 'The Callisto Protocol',
     slug: 'the-callisto-protocol',
+    is_hearted: faker.datatype.boolean(),
     short_description: '',
     release_date: '2024-09-01',
     platforms: [
@@ -150,6 +154,7 @@ export const MOCK_HOT_GAMES: GameList[] = [
     id: 5,
     cover: 'https://images8.alphacoders.com/134/thumb-1920-1348137.jpeg',
     title: 'Prince of Persia: The Lost Crown',
+    is_hearted: faker.datatype.boolean(),
     slug: 'prince-of-persia-the-lost-crown',
     short_description: '',
     release_date: '2024-09-01',
@@ -193,6 +198,7 @@ export const MOCK_HOT_GAMES: GameList[] = [
     slug: 'the-last-of-us-part-ii-remastered',
     short_description: '',
     release_date: '2024-09-01',
+    is_hearted: faker.datatype.boolean(),
     platforms: [{ id: 1, slug: 'ps5', name: 'PS5' }],
     genres: [
       { id: 1, slug: 'action', name: 'Action' },
@@ -222,6 +228,7 @@ export const MOCK_HOT_GAMES: GameList[] = [
     title: 'Granblue Fantasy: Relink',
     slug: 'granblue-fantasy-relink',
     short_description: '',
+    is_hearted: faker.datatype.boolean(),
     release_date: '2024-09-01',
     platforms: [
       { id: 1, slug: 'ps5', name: 'PS5' },
@@ -257,6 +264,7 @@ export const MOCK_HOT_GAMES: GameList[] = [
     cover: 'https://images2.alphacoders.com/135/thumb-1920-1350158.jpeg',
     title: 'Persona 3: Reload',
     slug: 'persona-3-reload',
+    is_hearted: faker.datatype.boolean(),
     short_description: '',
     release_date: '2024-02-01',
     platforms: [
@@ -297,6 +305,7 @@ export const MOCK_HOT_GAMES: GameList[] = [
     title: "Assassin's Creed: Shadows",
     slug: 'assassins-creed-shadows',
     short_description: '',
+    is_hearted: faker.datatype.boolean(),
     release_date: '2024-11-12',
     platforms: [
       { id: 1, slug: 'ps5', name: 'PS5' },
@@ -338,6 +347,7 @@ export const MOCK_POPULAR_GAMES: GameList[] = [
     slug: 'ghost-of-tsushima',
     short_description: '',
     release_date: '2024-09-01',
+    is_hearted: faker.datatype.boolean(),
     platforms: [
       { id: 1, slug: 'ps5', name: 'PS5' },
       { id: 2, slug: 'ps4', name: 'PS4' },
@@ -371,6 +381,7 @@ export const MOCK_POPULAR_GAMES: GameList[] = [
     title: 'Black Myth: Wukong',
     slug: 'black-myth-wukong',
     short_description: '',
+    is_hearted: faker.datatype.boolean(),
     release_date: '2024-09-01',
     platforms: [
       { id: 1, slug: 'ps5', name: 'PS5' },
@@ -408,6 +419,7 @@ export const MOCK_POPULAR_GAMES: GameList[] = [
     cover: 'https://images2.alphacoders.com/137/thumb-1920-1370582.jpeg',
     title: 'God of War: Ragnarok',
     slug: 'god-of-war-ragnarok',
+    is_hearted: faker.datatype.boolean(),
     short_description: '',
     release_date: '2024-09-01',
     platforms: [
@@ -440,6 +452,7 @@ export const MOCK_POPULAR_GAMES: GameList[] = [
     cover: 'https://wallpapercave.com/wp/wp11402292.jpg',
     title: 'The Callisto Protocol',
     slug: 'the-callisto-protocol',
+    is_hearted: faker.datatype.boolean(),
     short_description: '',
     release_date: '2024-09-01',
     platforms: [
@@ -476,6 +489,7 @@ export const MOCK_POPULAR_GAMES: GameList[] = [
     cover: 'https://images8.alphacoders.com/134/thumb-1920-1348137.jpeg',
     title: 'Prince of Persia: The Lost Crown',
     slug: 'prince-of-persia-the-lost-crown',
+    is_hearted: faker.datatype.boolean(),
     short_description: '',
     release_date: '2024-09-01',
     platforms: [
@@ -516,6 +530,7 @@ export const MOCK_POPULAR_GAMES: GameList[] = [
     cover: 'https://images7.alphacoders.com/124/thumb-1920-1244875.jpg',
     title: 'The Last of Us: Part II - Remastered',
     slug: 'the-last-of-us-part-ii-remastered',
+    is_hearted: faker.datatype.boolean(),
     short_description: '',
     release_date: '2024-09-01',
     platforms: [{ id: 1, slug: 'ps5', name: 'PS5' }],
@@ -546,6 +561,7 @@ export const MOCK_POPULAR_GAMES: GameList[] = [
     cover: 'https://images.alphacoders.com/135/thumb-1920-1354304.jpeg',
     title: 'Granblue Fantasy: Relink',
     slug: 'granblue-fantasy-relink',
+    is_hearted: faker.datatype.boolean(),
     short_description: '',
     release_date: '2024-09-01',
     platforms: [
@@ -583,6 +599,7 @@ export const MOCK_POPULAR_GAMES: GameList[] = [
     title: 'Persona 3: Reload',
     slug: 'persona-3-reload',
     short_description: '',
+    is_hearted: faker.datatype.boolean(),
     release_date: '2024-02-01',
     platforms: [
       { id: 1, slug: 'ps5', name: 'PS5' },
@@ -623,6 +640,7 @@ export const MOCK_POPULAR_GAMES: GameList[] = [
     slug: 'assassins-creed-shadows',
     short_description: '',
     release_date: '2024-11-12',
+    is_hearted: faker.datatype.boolean(),
     platforms: [
       { id: 1, slug: 'ps5', name: 'PS5' },
       { id: 3, slug: 'pc', name: 'PC' },
@@ -662,6 +680,7 @@ export const MOCK_MOST_LIKED_GAMES: GameList[] = [
     title: 'Ghost of Tsushima',
     slug: 'ghost-of-tsushima',
     short_description: '',
+    is_hearted: faker.datatype.boolean(),
     release_date: '2024-09-01',
     platforms: [
       { id: 1, slug: 'ps5', name: 'PS5' },
@@ -697,6 +716,7 @@ export const MOCK_MOST_LIKED_GAMES: GameList[] = [
     slug: 'black-myth-wukong',
     short_description: '',
     release_date: '2024-09-01',
+    is_hearted: faker.datatype.boolean(),
     platforms: [
       { id: 1, slug: 'ps5', name: 'PS5' },
       { id: 3, slug: 'pc', name: 'PC' },
@@ -735,6 +755,7 @@ export const MOCK_MOST_LIKED_GAMES: GameList[] = [
     slug: 'god-of-war-ragnarok',
     short_description: '',
     release_date: '2024-09-01',
+    is_hearted: faker.datatype.boolean(),
     platforms: [
       { id: 1, slug: 'ps5', name: 'PS5' },
       { id: 2, slug: 'ps4', name: 'PS4' },
@@ -766,6 +787,7 @@ export const MOCK_MOST_LIKED_GAMES: GameList[] = [
     title: 'The Callisto Protocol',
     slug: 'the-callisto-protocol',
     short_description: '',
+    is_hearted: faker.datatype.boolean(),
     release_date: '2024-09-01',
     platforms: [
       { id: 1, slug: 'ps5', name: 'PS5' },
@@ -802,6 +824,7 @@ export const MOCK_MOST_LIKED_GAMES: GameList[] = [
     title: 'Prince of Persia: The Lost Crown',
     slug: 'prince-of-persia-the-lost-crown',
     short_description: '',
+    is_hearted: faker.datatype.boolean(),
     release_date: '2024-09-01',
     platforms: [
       { id: 1, slug: 'ps5', name: 'PS5' },
@@ -841,6 +864,7 @@ export const MOCK_MOST_LIKED_GAMES: GameList[] = [
     cover: 'https://images7.alphacoders.com/124/thumb-1920-1244875.jpg',
     title: 'The Last of Us: Part II - Remastered',
     slug: 'the-last-of-us-part-ii-remastered',
+    is_hearted: faker.datatype.boolean(),
     short_description: '',
     release_date: '2024-09-01',
     platforms: [{ id: 1, slug: 'ps5', name: 'PS5' }],
@@ -872,6 +896,7 @@ export const MOCK_MOST_LIKED_GAMES: GameList[] = [
     title: 'Granblue Fantasy: Relink',
     slug: 'granblue-fantasy-relink',
     short_description: '',
+    is_hearted: faker.datatype.boolean(),
     release_date: '2024-09-01',
     platforms: [
       { id: 1, slug: 'ps5', name: 'PS5' },
@@ -907,6 +932,7 @@ export const MOCK_MOST_LIKED_GAMES: GameList[] = [
     cover: 'https://images2.alphacoders.com/135/thumb-1920-1350158.jpeg',
     title: 'Persona 3: Reload',
     slug: 'persona-3-reload',
+    is_hearted: faker.datatype.boolean(),
     short_description: '',
     release_date: '2024-02-01',
     platforms: [
@@ -948,6 +974,7 @@ export const MOCK_MOST_LIKED_GAMES: GameList[] = [
     slug: 'assassins-creed-shadows',
     short_description: '',
     release_date: '2024-11-12',
+    is_hearted: faker.datatype.boolean(),
     platforms: [
       { id: 1, slug: 'ps5', name: 'PS5' },
       { id: 3, slug: 'pc', name: 'PC' },
@@ -986,6 +1013,7 @@ export const MOCK_UPCOMING_GAMES: GameList[] = [
     cover: 'https://images7.alphacoders.com/135/thumb-1920-1355897.jpeg',
     title: 'Ghost of Tsushima',
     slug: 'ghost-of-tsushima',
+    is_hearted: faker.datatype.boolean(),
     short_description: '',
     release_date: '2024-09-01',
     platforms: [
@@ -1021,6 +1049,7 @@ export const MOCK_UPCOMING_GAMES: GameList[] = [
     title: 'Black Myth: Wukong',
     slug: 'black-myth-wukong',
     short_description: '',
+    is_hearted: faker.datatype.boolean(),
     release_date: '2024-09-01',
     platforms: [
       { id: 1, slug: 'ps5', name: 'PS5' },
@@ -1060,6 +1089,7 @@ export const MOCK_UPCOMING_GAMES: GameList[] = [
     slug: 'god-of-war-ragnarok',
     short_description: '',
     release_date: '2024-09-01',
+    is_hearted: faker.datatype.boolean(),
     platforms: [
       { id: 1, slug: 'ps5', name: 'PS5' },
       { id: 2, slug: 'ps4', name: 'PS4' },
@@ -1092,6 +1122,7 @@ export const MOCK_UPCOMING_GAMES: GameList[] = [
     slug: 'the-callisto-protocol',
     short_description: '',
     release_date: '2024-09-01',
+    is_hearted: faker.datatype.boolean(),
     platforms: [
       { id: 1, slug: 'ps5', name: 'PS5' },
       { id: 2, slug: 'ps4', name: 'PS4' },
@@ -1127,6 +1158,7 @@ export const MOCK_UPCOMING_GAMES: GameList[] = [
     title: 'Prince of Persia: The Lost Crown',
     slug: 'prince-of-persia-the-lost-crown',
     short_description: '',
+    is_hearted: faker.datatype.boolean(),
     release_date: '2024-09-01',
     platforms: [
       { id: 1, slug: 'ps5', name: 'PS5' },
@@ -1168,6 +1200,7 @@ export const MOCK_UPCOMING_GAMES: GameList[] = [
     slug: 'the-last-of-us-part-ii-remastered',
     short_description: '',
     release_date: '2024-09-01',
+    is_hearted: faker.datatype.boolean(),
     platforms: [{ id: 1, slug: 'ps5', name: 'PS5' }],
     genres: [
       { id: 1, slug: 'action', name: 'Action' },
@@ -1197,6 +1230,7 @@ export const MOCK_UPCOMING_GAMES: GameList[] = [
     title: 'Granblue Fantasy: Relink',
     slug: 'granblue-fantasy-relink',
     short_description: '',
+    is_hearted: faker.datatype.boolean(),
     release_date: '2024-09-01',
     platforms: [
       { id: 1, slug: 'ps5', name: 'PS5' },
@@ -1234,6 +1268,7 @@ export const MOCK_UPCOMING_GAMES: GameList[] = [
     slug: 'persona-3-reload',
     short_description: '',
     release_date: '2024-02-01',
+    is_hearted: faker.datatype.boolean(),
     platforms: [
       { id: 1, slug: 'ps5', name: 'PS5' },
       { id: 2, slug: 'ps4', name: 'PS4' },
@@ -1271,6 +1306,7 @@ export const MOCK_UPCOMING_GAMES: GameList[] = [
     cover: 'https://images8.alphacoders.com/136/thumb-1920-1362729.jpeg',
     title: "Assassin's Creed: Shadows",
     slug: 'assassins-creed-shadows',
+    is_hearted: faker.datatype.boolean(),
     short_description: '',
     release_date: '2024-11-12',
     platforms: [
@@ -1337,6 +1373,7 @@ for (let i = 0; i < 100; i++) {
     title: faker.lorem.words({ min: 1, max: 3 }),
     slug: faker.lorem.slug(),
     short_description: faker.lorem.text(),
+    is_hearted: faker.datatype.boolean(),
     release_date: format(faker.date.anytime(), 'yyyy-MM-dd'),
     platforms: faker.helpers.arrayElements(MOCK_PLATFORMS),
     genres: faker.helpers.arrayElements(MOCK_GENRES),

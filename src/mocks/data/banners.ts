@@ -13,6 +13,7 @@ export const MOCK_BANNERS: Banner[] = [
       title: 'Black Myth: Wukong',
       views_count: faker.number.int(),
       hearts_count: faker.number.int(),
+      is_hearted: faker.datatype.boolean(),
       release_date: faker.date.anytime().toISOString(),
       cover: 'https://images5.alphacoders.com/112/thumb-1920-1129255.jpg',
       short_description: `Black Myth: Wukong is an action RPG that draws on Chinese
@@ -51,6 +52,7 @@ export const MOCK_BANNERS: Banner[] = [
       title: 'God of War: Ragnarok',
       views_count: faker.number.int(),
       hearts_count: faker.number.int(),
+      is_hearted: faker.datatype.boolean(),
       release_date: faker.date.anytime().toISOString(),
       cover: 'https://images2.alphacoders.com/137/thumb-1920-1370582.jpeg',
       short_description: `God of War: Ragnarok follows Kratos and Atreus as they
@@ -84,6 +86,7 @@ export const MOCK_BANNERS: Banner[] = [
       id: 3,
       views_count: faker.number.int(),
       hearts_count: faker.number.int(),
+      is_hearted: faker.datatype.boolean(),
       release_date: faker.date.anytime().toISOString(),
       slug: 'the-last-of-us-part-ii-remastered',
       title: 'The Last of Us: Part II - Remastered',
@@ -119,6 +122,7 @@ export const MOCK_BANNERS: Banner[] = [
       title: 'Alan Wake 2',
       views_count: faker.number.int(),
       hearts_count: faker.number.int(),
+      is_hearted: faker.datatype.boolean(),
       release_date: faker.date.anytime().toISOString(),
       cover: 'https://images7.alphacoders.com/133/thumb-1920-1335668.jpeg',
       short_description: `Alan Wake 2 is a survival horror game developed by Remedy Entertainment.
@@ -161,6 +165,7 @@ export const MOCK_BANNERS: Banner[] = [
       title: 'Hades II',
       views_count: faker.number.int(),
       hearts_count: faker.number.int(),
+      is_hearted: faker.datatype.boolean(),
       release_date: faker.date.anytime().toISOString(),
       cover: 'https://images8.alphacoders.com/129/thumb-1920-1293291.png',
       short_description: `Hades II is the sequel from the Supergiant Games studio, consisting of the most enjoyable aspects of the original indie game and developing them.
@@ -202,6 +207,7 @@ export const MOCK_BANNERS: Banner[] = [
       title: 'Star Wars: Outlaws',
       views_count: faker.number.int(),
       hearts_count: faker.number.int(),
+      is_hearted: faker.datatype.boolean(),
       release_date: faker.date.anytime().toISOString(),
       cover: 'https://images7.alphacoders.com/132/thumb-1920-1323282.jpeg',
       short_description: `Star Wars: Outlaws is an action-adventure game developed by Massive Entertainment with cooperation from other Ubisoft divisions.

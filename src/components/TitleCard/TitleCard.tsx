@@ -22,7 +22,7 @@ import {
 import { Title, User } from '@/types'
 import { calculateOverallProgress as c } from '@/utils'
 
-interface TitleCardProps {
+export interface TitleCardProps {
   user: User
   title: Title
 }
