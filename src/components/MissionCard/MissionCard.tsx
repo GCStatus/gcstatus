@@ -46,7 +46,6 @@ function MissionCard(props: MissionCardProps) {
 
   const renderNewTag =
     mission.status === 'available' &&
-    mission.frequency !== 'one-time' &&
     isWithinInterval(new Date(mission.created_at), {
       start: subWeeks(new Date(), 1),
       end: new Date(),
@@ -76,7 +75,7 @@ function MissionCard(props: MissionCardProps) {
         <span className={`${frequencyColors[mission.frequency]} mr-2`}>
           {frequencyIcons[mission.frequency]}
         </span>
-        <span className="text-gray-400">
+        <span className="dark:text-gray-400 text-gray-600">
           {`Frequency: ${mission.frequency.charAt(0).toUpperCase() + mission.frequency.slice(1)}`}
         </span>
         {isRecurring && (
@@ -153,6 +152,12 @@ function MissionCard(props: MissionCardProps) {
               <ListItemText
                 primary={req.task}
                 secondary={req.description}
+                primaryTypographyProps={{
+                  className: 'dark:text-white text-gray-700',
+                }}
+                secondaryTypographyProps={{
+                  className: 'dark:text-white text-gray-700',
+                }}
               />
               <Typography className="font-bold text-theme-red-900">
                 {req.progress?.completed ? (
@@ -203,13 +208,13 @@ function MissionCard(props: MissionCardProps) {
             }`}
             icon={
               mission.user_mission?.completed ? (
-                <FaCheckCircle />
+                <FaCheckCircle className="text-white" />
               ) : overallProgress === 100 ? (
-                <FaGift />
+                <FaGift className="text-white" />
               ) : mission.status === 'available' ? (
-                <FaPlayCircle />
+                <FaPlayCircle className="text-white" />
               ) : (
-                <IoClose />
+                <IoClose className="text-white" />
               )
             }
           />

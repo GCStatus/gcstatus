@@ -5,8 +5,13 @@ import { IoCheckmarkCircleOutline } from 'react-icons/io5'
 
 import { Logo } from '..'
 
-const CookieConsent = () => {
-  const [isVisible, setIsVisible] = useState(false)
+export interface CookieConsentProps {
+  visible?: boolean
+}
+
+function CookieConsent(props: CookieConsentProps) {
+  const { visible = false } = props
+  const [isVisible, setIsVisible] = useState<boolean>(visible)
   const [cookies, setCookie] = useCookies(['_gc_accept_cookies'])
 
   useEffect(() => {

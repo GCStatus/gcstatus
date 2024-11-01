@@ -11,8 +11,8 @@ import { IoSearch } from 'react-icons/io5'
 import { MdViewList, MdViewModule } from 'react-icons/md'
 import { useNavigate, useParams } from 'react-router-dom'
 
-import { GameCard } from '@/components'
-import { MOCK_SEARCH_GAMES } from '@/mocks'
+import { GameCard, LoadingScreen } from '@/components'
+import { useLazySearchGamesQuery } from '@/services/api'
 import { GameList } from '@/types'
 
 import { Filters } from './modules'
@@ -29,13 +29,20 @@ export interface SortState {
 }
 
 function Search() {
+  const [trigger, { games, isLoading }] = useLazySearchGamesQuery({
+    selectFromResult: ({ data = [], isLoading, isFetching }) => ({
+      games: data,
+      isLoading: isLoading || isFetching,
+    }),
+  })
   const go = useNavigate()
   const { query = '' } = useParams()
   const [search, setSearch] = useState<string>(query)
-  const [games, setGames] = useState<GameList[]>([])
+  const [originalGames, setOriginalGames] = useState<GameList[]>([])
+  const [displayedGames, setDisplayedGames] = useState<GameList[]>([])
   const [totalGames, setTotalGames] = useState<number>(0)
   const [currentPage, setCurrentPage] = useState<number>(1)
-  const [pageSize, setPageSize] = useState<number>(5)
+  const [pageSize, setPageSize] = useState<number>(12)
   const [view, setView] = useState<'grid' | 'list'>('grid')
   const [isAnimating, setIsAnimating] = useState<boolean>(false)
   const [filters, setFilters] = useState<{
@@ -60,18 +67,15 @@ function Search() {
     }, 500)
   }
 
-  const fetchGames = async () => {
-    const filteredGames = MOCK_SEARCH_GAMES.filter(
-      ({ categories, platforms, genres }) => {
-        return (
-          (filters.Category === 'all' ||
-            categories.some(({ name }) => name === filters.Category)) &&
-          (filters.Genre === 'all' ||
-            genres.some(({ name }) => name === filters.Genre)) &&
-          (filters.Platform === 'all' ||
-            platforms.some(({ name }) => name === filters.Platform))
-        )
-      },
+  const applyFiltersAndSort = () => {
+    const filteredGames = originalGames.filter(
+      ({ categories, platforms, genres }) =>
+        (filters.Category === 'all' ||
+          categories.some(({ name }) => name === filters.Category)) &&
+        (filters.Genre === 'all' ||
+          genres.some(({ name }) => name === filters.Genre)) &&
+        (filters.Platform === 'all' ||
+          platforms.some(({ name }) => name === filters.Platform)),
     )
 
     const sortedGames = filteredGames.sort((a, b) => {
@@ -92,7 +96,7 @@ function Search() {
       return 0
     })
 
-    setGames(
+    setDisplayedGames(
       sortedGames.slice(
         (currentPage - 1) * pageSize,
         currentPage * pageSize,
@@ -100,10 +104,6 @@ function Search() {
     )
     setTotalGames(filteredGames.length)
   }
-
-  useEffect(() => {
-    fetchGames()
-  }, [currentPage, pageSize, filters, sort])
 
   const handlePageChange = (_: ChangeEvent<unknown>, newPage: number) => {
     setCurrentPage(newPage)
@@ -129,15 +129,34 @@ function Search() {
     go(`/search/${search}`)
   }
 
+  useEffect(() => {
+    if (search && search.trim() !== '') trigger(search)
+  }, [search])
+
+  useEffect(() => {
+    if (!isLoading && games) {
+      setOriginalGames(games)
+      setDisplayedGames(games)
+      setTotalGames(games.length)
+    }
+  }, [games, isLoading])
+
+  useEffect(() => {
+    applyFiltersAndSort()
+  }, [currentPage, pageSize, filters, sort, originalGames])
+
   const handlePageSizeChange = (event: ChangeEvent<HTMLSelectElement>) => {
     setPageSize(parseInt(event.target.value))
     setCurrentPage(1)
   }
 
   return (
-    <Container maxWidth="xl" className="relative p-6 text-white">
+    <Container
+      maxWidth="xl"
+      className="relative p-6 text-white min-h-[64vh]">
       <Box className="flex flex-col justify-between items-center mb-6 gap-6">
         <Filters
+          games={displayedGames}
           pageSize={pageSize}
           onPageSizeChange={handlePageSizeChange}
           filters={filters}
@@ -182,45 +201,51 @@ function Search() {
         </Box>
       </Box>
 
-      <Box
-        className={`grid gap-6 transition-opacity duration-500 ease-in-out ${
-          isAnimating ? 'opacity-0' : 'opacity-100'
-        } ${
-          view === 'grid'
-            ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
-            : 'grid-cols-1'
-        }`}>
-        {games.length > 0 ? (
-          games.map((game) => (
-            <GameCard key={game.id} game={game} view={view} />
-          ))
-        ) : (
-          <Typography className="text-gray-400">
-            No games found for the current filters.
-          </Typography>
-        )}
-      </Box>
+      {isLoading ? (
+        <LoadingScreen />
+      ) : (
+        <Box
+          className={`grid gap-6 transition-opacity duration-500 ease-in-out ${
+            isAnimating ? 'opacity-0' : 'opacity-100'
+          } ${
+            view === 'grid'
+              ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
+              : 'grid-cols-1'
+          }`}>
+          {displayedGames.length > 0 ? (
+            displayedGames.map((game) => (
+              <GameCard key={game.id} game={game} view={view} />
+            ))
+          ) : (
+            <Typography className="text-gray-400">
+              No games found for the current filters.
+            </Typography>
+          )}
+        </Box>
+      )}
 
-      <Box className="flex justify-end items-center mt-8">
-        <Pagination
-          count={Math.ceil(totalGames / pageSize)}
-          page={currentPage}
-          onChange={handlePageChange}
-          sx={{
-            '& .MuiPaginationItem-root': {
-              color: '#ff4d4d',
-              '&:hover': {
-                color: '#fff',
-                bgcolor: '#ff4d4d',
+      {totalGames > 0 && (
+        <Box className="flex justify-end items-center mt-8">
+          <Pagination
+            count={Math.ceil(totalGames / pageSize)}
+            page={currentPage}
+            onChange={handlePageChange}
+            sx={{
+              '& .MuiPaginationItem-root': {
+                color: '#ff4d4d',
+                '&:hover': {
+                  color: '#fff',
+                  bgcolor: '#ff4d4d',
+                },
               },
-            },
-            '& .Mui-selected': {
-              color: '#fff',
-              bgcolor: '#ff4d4d !important',
-            },
-          }}
-        />
-      </Box>
+              '& .Mui-selected': {
+                color: '#fff',
+                bgcolor: '#ff4d4d !important',
+              },
+            }}
+          />
+        </Box>
+      )}
     </Container>
   )
 }

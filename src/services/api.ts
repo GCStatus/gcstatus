@@ -10,6 +10,7 @@ import { baseUrl } from '@/constants'
 import { logout } from '@/store/accountSlice'
 import {
   GameDetails,
+  GameList,
   HeartablePayload,
   Home,
   Level,
@@ -292,6 +293,14 @@ const api = createApi({
         body,
       }),
     }),
+
+    searchGames: builder.query<GameList[], string>({
+      query: (search) => ({
+        url: 'games/search',
+        params: { search },
+      }),
+      transformResponse: (res: Res<GameList[]>) => res.data,
+    }),
   }),
 })
 
@@ -314,6 +323,7 @@ export const {
   useToggleTitleMutation,
   useGetGameDetailsQuery,
   useGetTransactionsQuery,
+  useLazySearchGamesQuery,
   useUpdatePictureMutation,
   useUpdateSocialsMutation,
   useGetNotificationsQuery,

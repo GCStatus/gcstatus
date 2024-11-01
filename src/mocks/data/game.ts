@@ -62,7 +62,7 @@ export const MOCK_GAME_DETAILS: GameDetails = {
       },
       replies: [
         {
-          id: 1,
+          id: 2,
           comment:
             'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Libero, recusandae repudiandae quia itaque, animi quasi iste atque porro nisi sit suscipit consequatur autem deserunt vel deleniti quae harum aliquam aliquid?',
           is_hearted: false,

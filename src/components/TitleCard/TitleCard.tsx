@@ -125,6 +125,12 @@ function TitleCard(props: TitleCardProps) {
                 <ListItemText
                   primary={req.task}
                   secondary={req.description}
+                  primaryTypographyProps={{
+                    className: 'dark:text-white text-gray-700',
+                  }}
+                  secondaryTypographyProps={{
+                    className: 'dark:text-white text-gray-700',
+                  }}
                 />
               </ListItem>
             </List>
