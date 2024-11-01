@@ -21,7 +21,8 @@ function LevelCard(props: LevelCardProps) {
         shouldApplyOpacity
           ? 'opacity-60'
           : 'hover:-translate-y-2 shadow-lg duration-500 hover:shadow-2xl hover:border-red-700 transition-transform'
-      }`}>
+      }`}
+      role="article">
       <CardContent className="text-white group flex flex-col gap-4">
         <Box className="flex justify-between items-center">
           <Typography className="md:text-2xl text-xl font-bold text-theme-red-900">

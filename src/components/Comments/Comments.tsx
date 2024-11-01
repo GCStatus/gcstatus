@@ -10,14 +10,9 @@ import {
 } from '@mui/material'
 import { formatRelative } from 'date-fns'
 import { useEffect, useState } from 'react'
-import {
-  IoChatboxEllipsesOutline,
-  IoHeart,
-  IoHeartOutline,
-  IoSendOutline,
-} from 'react-icons/io5'
+import { IoChatboxEllipsesOutline, IoSendOutline } from 'react-icons/io5'
 
-import { HeartsUp, Input } from '@/components'
+import { HeartButton, HeartsUp, Input } from '@/components'
 import { Comment } from '@/types'
 
 interface CommentsProps {
@@ -38,10 +33,10 @@ function Comments(props: CommentsProps) {
   const handleHeartClick = (item: Comment, parentId?: number) => {
     const isReply = Boolean(parentId)
     const itemId = isReply ? `${parentId}-${item.id}` : item.id
-    const isLiked = likedComments.has(itemId)
 
     setLikedComments((prev) => {
       const updatedLikes = new Set(prev)
+      const isLiked = updatedLikes.has(itemId)
 
       if (isLiked) {
         updatedLikes.delete(itemId)
@@ -49,13 +44,9 @@ function Comments(props: CommentsProps) {
         updatedLikes.add(itemId)
       }
 
-      return updatedLikes
-    })
-
-    if (isReply && parentId) {
       setComments((prevComments) =>
         prevComments.map((comment) =>
-          comment.id === parentId
+          isReply && parentId && comment.id === parentId
             ? {
                 ...comment,
                 replies: comment.replies.map((reply) =>
@@ -69,27 +60,18 @@ function Comments(props: CommentsProps) {
                     : reply,
                 ),
               }
-            : comment,
+            : !isReply && comment.id === item.id
+              ? {
+                  ...comment,
+                  hearts_count: comment.hearts_count + (isLiked ? -1 : 1),
+                  is_hearted: !isLiked,
+                }
+              : comment,
         ),
       )
-    } else {
-      setComments((prevComments) =>
-        prevComments.map((c) =>
-          c.id === item.id
-            ? {
-                ...c,
-                hearts_count: c.hearts_count + (isLiked ? -1 : 1),
-                is_hearted: !isLiked,
-              }
-            : c,
-        ),
-      )
-    }
 
-    if (!isLiked) {
-      const newHearts = Array.from({ length: 10 }, (_, i) => i * 100)
-      setHeartPops((prev) => [...prev, ...newHearts])
-    }
+      return updatedLikes
+    })
   }
 
   const handleSendMessage = () => {
@@ -227,18 +209,18 @@ function Comments(props: CommentsProps) {
                 </Tooltip>
 
                 <Box className="flex items-center gap-2">
-                  <Tooltip title="Like this comment">
-                    <IconButton
-                      onClick={() => handleHeartClick(comment)}
-                      className="relative transition-transform duration-300 hover:scale-125 ease-in-out">
-                      {likedComments.has(comment.id) ||
-                      comment.is_hearted ? (
-                        <IoHeart className="text-red-500" />
-                      ) : (
-                        <IoHeartOutline className="text-theme-red-900 dark:text-gray-400" />
-                      )}
-                    </IconButton>
-                  </Tooltip>
+                  <HeartButton
+                    heartable_id={comment.id}
+                    heartable_type="commentables"
+                    setHeartPops={setHeartPops}
+                    isHearted={
+                      likedComments.has(comment.id) || comment.is_hearted
+                    }
+                    type="icon"
+                    setHearts={() => {}}
+                    onHeartToggle={() => handleHeartClick(comment)}
+                    size={28}
+                  />
                   <Typography
                     variant="body2"
                     className="dark:text-white text-gray-800">
@@ -306,21 +288,22 @@ function Comments(props: CommentsProps) {
                             <IoChatboxEllipsesOutline />
                           </IconButton>
                         </Tooltip>
-                        <Tooltip title="Like this comment">
-                          <IconButton
-                            onClick={() =>
-                              handleHeartClick(reply, comment.id)
-                            }
-                            className="transition-transform duration-300 hover:scale-125 ease-in-out">
-                            {likedComments.has(
+                        <HeartButton
+                          heartable_id={reply.id}
+                          heartable_type="commentables"
+                          setHeartPops={setHeartPops}
+                          isHearted={
+                            likedComments.has(
                               `${comment.id}-${reply.id}`,
-                            ) || reply.is_hearted ? (
-                              <IoHeart className="text-red-500" />
-                            ) : (
-                              <IoHeartOutline className="text-theme-red-900 dark:text-gray-400" />
-                            )}
-                          </IconButton>
-                        </Tooltip>
+                            ) || reply.is_hearted
+                          }
+                          type="icon"
+                          setHearts={() => {}}
+                          onHeartToggle={() =>
+                            handleHeartClick(reply, comment.id)
+                          }
+                          size={28}
+                        />
                         <Typography
                           variant="body2"
                           className="dark:text-white text-gray-800">

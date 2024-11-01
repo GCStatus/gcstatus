@@ -10,6 +10,8 @@ import { baseUrl } from '@/constants'
 import { logout } from '@/store/accountSlice'
 import {
   GameDetails,
+  GameList,
+  HeartablePayload,
   Home,
   Level,
   LoginCredentials,
@@ -283,6 +285,22 @@ const api = createApi({
       transformResponse: (res: Res<Home>) => res.data,
       providesTags: ['home'],
     }),
+
+    heartItem: builder.mutation<void, HeartablePayload>({
+      query: (body) => ({
+        url: 'hearts',
+        method: 'POST',
+        body,
+      }),
+    }),
+
+    searchGames: builder.query<GameList[], string>({
+      query: (search) => ({
+        url: 'games/search',
+        params: { search },
+      }),
+      transformResponse: (res: Res<GameList[]>) => res.data,
+    }),
   }),
 })
 
@@ -294,15 +312,18 @@ export const {
   useLogoutMutation,
   useGetLevelsQuery,
   useGetTitlesQuery,
+  useLazyGetHomeQuery,
   useBuyTitleMutation,
   useLazyGetUserQuery,
   useRegisterMutation,
   useGetMissionsQuery,
   useResetPassMutation,
+  useHeartItemMutation,
   useLazyGetLevelsQuery,
   useToggleTitleMutation,
   useGetGameDetailsQuery,
   useGetTransactionsQuery,
+  useLazySearchGamesQuery,
   useUpdatePictureMutation,
   useUpdateSocialsMutation,
   useGetNotificationsQuery,

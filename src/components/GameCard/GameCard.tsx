@@ -8,19 +8,18 @@ import {
   Typography,
 } from '@mui/material'
 import { format } from 'date-fns'
-import { useCallback, useMemo, useState } from 'react'
+import { useState } from 'react'
 import {
   IoCheckmarkCircleOutline,
   IoCloseCircleOutline,
   IoEyeOutline,
-  IoHeartOutline,
   IoNotificationsOutline,
 } from 'react-icons/io5'
 
 import { GameList } from '@/types'
 import { mapCrack } from '@/utils'
 
-import { HeartsUp } from '..'
+import { HeartButton, HeartsUp } from '..'
 
 export interface GameCardProps {
   game: GameList
@@ -29,21 +28,8 @@ export interface GameCardProps {
 
 function GameCard(props: GameCardProps) {
   const { game, view } = props
-
-  const [hearts, setHearts] = useState<number>(game.hearts_count)
-  const [isHearted, setIsHearted] = useState<boolean>(false)
   const [heartPops, setHeartPops] = useState<number[]>([])
-
-  const newHearts = useMemo(
-    () => Array.from({ length: 10 }, (_, i) => i * 10),
-    [],
-  )
-
-  const handleHeartClick = useCallback(() => {
-    setIsHearted((prev) => !prev)
-    setHearts((prev) => prev + (isHearted ? -1 : 1))
-    if (!isHearted) setHeartPops((prev) => [...prev, ...newHearts])
-  }, [isHearted, newHearts])
+  const [hearts, setHearts] = useState<number>(game.hearts_count)
 
   return (
     <>
@@ -94,18 +80,14 @@ function GameCard(props: GameCardProps) {
               </Link>
               <Box className="flex items-center sm:flex-row flex-col sm:gap-2 gap-0">
                 <Box display="flex" alignItems="center">
-                  <IconButton
-                    aria-label="heart"
-                    color="primary"
-                    size="small"
-                    onClick={handleHeartClick}
-                    data-qa="heart">
-                    <IoHeartOutline
-                      className={
-                        isHearted ? 'text-theme-red-900' : 'text-white'
-                      }
-                    />
-                  </IconButton>
+                  <HeartButton
+                    type="icon"
+                    setHearts={setHearts}
+                    heartable_id={game.id}
+                    heartable_type="games"
+                    isHearted={game.is_hearted}
+                    setHeartPops={setHeartPops}
+                  />
                   <Typography variant="caption">{hearts}</Typography>
                 </Box>
                 <Box className="flex items-center gap-1">

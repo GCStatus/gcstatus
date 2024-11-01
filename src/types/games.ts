@@ -28,6 +28,7 @@ export interface GameList {
   title: string
   cover: string
   condition?: string
+  is_hearted: boolean
   views_count: number
   release_date: string
   hearts_count: number

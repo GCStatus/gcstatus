@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 
 import { useAccount } from '@/hooks'
 import {
-  useGetHomeQuery,
+  useLazyGetHomeQuery,
   useLazyGetNotificationsQuery,
 } from '@/services/api'
 
@@ -24,7 +24,7 @@ function Header(props: HeaderProps) {
         isLoading: isLoading || isFetching,
       }),
     })
-  const { home, loadingHome } = useGetHomeQuery(undefined, {
+  const [getHome, { home, loadingHome }] = useLazyGetHomeQuery({
     selectFromResult: ({ data, isLoading, isFetching }) => ({
       home: data,
       loadingHome: isLoading || isFetching,
@@ -34,6 +34,10 @@ function Header(props: HeaderProps) {
   useEffect(() => {
     if (user) trigger()
   }, [user])
+
+  useEffect(() => {
+    if (withCarousel) getHome()
+  }, [withCarousel])
 
   if (loadingHome) return <LoadingScreen />
 

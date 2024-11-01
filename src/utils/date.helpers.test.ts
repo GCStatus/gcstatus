@@ -2,8 +2,8 @@ import { formatRelativeDateOnly } from './date.helpers'
 
 describe('formatRelativeDateOnly()', () => {
   it('formats past dates correctly', () => {
-    const pastDate = new Date('2023-01-02')
-    const baseDate = new Date('2023-01-10')
+    const pastDate = new Date('2023-01-02T00:00:00')
+    const baseDate = new Date('2023-01-10T00:00:00')
 
     const result = formatRelativeDateOnly(pastDate, baseDate)
 
@@ -11,8 +11,8 @@ describe('formatRelativeDateOnly()', () => {
   })
 
   it('formats future dates correctly', () => {
-    const futureDate = new Date('2023-01-20')
-    const baseDate = new Date('2023-01-10')
+    const futureDate = new Date('2023-01-20T00:00:00')
+    const baseDate = new Date('2023-01-10T00:00:00')
 
     const result = formatRelativeDateOnly(futureDate, baseDate)
 
@@ -20,8 +20,8 @@ describe('formatRelativeDateOnly()', () => {
   })
 
   it('returns x weekday if dates are close', () => {
-    const pastDate = new Date('2023-01-08')
-    const baseDate = new Date('2023-01-10')
+    const pastDate = new Date('2023-01-08T00:00:00')
+    const baseDate = new Date('2023-01-10T00:00:00')
 
     const result = formatRelativeDateOnly(pastDate, baseDate)
 

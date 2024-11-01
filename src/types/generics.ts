@@ -1,21 +1,21 @@
-export type Res<T> = {
+export interface Res<T> {
   data: T
 }
 
-export type ResPaginated<T> = {
+export interface ResPaginated<T> {
   data: T[]
   links?: ResLinks
   meta?: ResMeta
 }
 
-type ResLinks = {
+interface ResLinks {
   first: string
   last: string
   prev: string | null
   next: string | null
 }
 
-type ResMeta = {
+interface ResMeta {
   current_page: number
   from: number
   last_page: number
@@ -23,4 +23,9 @@ type ResMeta = {
   per_page: number
   to: number
   total: number
+}
+
+export interface HeartablePayload {
+  heartable_id: number
+  heartable_type: 'games' | 'blogs' | 'commentables'
 }

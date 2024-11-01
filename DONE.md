@@ -145,6 +145,10 @@
   - [x] Integrate home upcoming games
   - [x] Integrate home most liked games
 - [x] Integrate game details
+- [x] Integrate heart button
+  - [x] Heart games
+  - [x] Heart comments and replies
+  - [x] Heart blog posts
 
 ### Post MVP
 

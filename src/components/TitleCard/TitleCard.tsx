@@ -22,7 +22,7 @@ import {
 import { Title, User } from '@/types'
 import { calculateOverallProgress as c } from '@/utils'
 
-interface TitleCardProps {
+export interface TitleCardProps {
   user: User
   title: Title
 }
@@ -125,6 +125,12 @@ function TitleCard(props: TitleCardProps) {
                 <ListItemText
                   primary={req.task}
                   secondary={req.description}
+                  primaryTypographyProps={{
+                    className: 'dark:text-white text-gray-700',
+                  }}
+                  secondaryTypographyProps={{
+                    className: 'dark:text-white text-gray-700',
+                  }}
                 />
               </ListItem>
             </List>
