@@ -10,17 +10,26 @@ import {
 } from '@mui/material'
 import { formatRelative } from 'date-fns'
 import { useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
 import { IoChatboxEllipsesOutline, IoSendOutline } from 'react-icons/io5'
+import { useNavigate } from 'react-router-dom'
 
 import { HeartButton, HeartsUp, Input } from '@/components'
+import { useAccount } from '@/hooks'
+import { useCreateCommentMutation } from '@/services/api'
 import { Comment } from '@/types'
 
 interface CommentsProps {
   defaultComments: Comment[]
+  commentableId: number
+  commentableType: string
 }
 
 function Comments(props: CommentsProps) {
-  const { defaultComments } = props
+  const { defaultComments, commentableId, commentableType } = props
+  const go = useNavigate()
+  const { user } = useAccount()
+  const [trigger] = useCreateCommentMutation()
   const [comments, setComments] = useState<Comment[]>(defaultComments)
   const [newMessage, setNewMessage] = useState<string>('')
   const [replyMessage, setReplyMessage] = useState<string>('')
@@ -74,66 +83,57 @@ function Comments(props: CommentsProps) {
     })
   }
 
-  const handleSendMessage = () => {
-    if (newMessage.trim()) {
-      setComments([
-        ...comments,
-        {
-          id: Date.now(),
-          hearts_count: 0,
-          is_hearted: false,
-          comment: newMessage,
-          created_at: new Date().toISOString(),
-          updated_at: new Date().toISOString(),
-          by: {
-            id: 2,
-            name: 'Current User',
-            email: 'current@user.com',
-            nickname: 'currentuser',
-            created_at: '2024-01-01T00:00:00.000Z',
-            photo: 'https://via.placeholder.com/40',
-          },
-          replies: [],
-        },
-      ])
-      setNewMessage('')
+  const handleSendMessage = async () => {
+    if (!newMessage.trim()) {
+      toast.error('You can not submit an empty message.')
+      return
     }
+
+    if (!user) {
+      go('/login')
+      return
+    }
+
+    const comment = await trigger({
+      comment: newMessage,
+      commentable_id: commentableId,
+      commentable_type: commentableType,
+    }).unwrap()
+
+    setComments([...comments, comment])
+    setNewMessage('')
   }
 
-  const handleReplyMessage = (id: number) => {
-    if (replyMessage.trim()) {
-      setComments(
-        comments.map((comment) =>
-          comment.id === id
-            ? {
-                ...comment,
-                replies: [
-                  ...comment.replies,
-                  {
-                    id: Date.now(),
-                    hearts_count: 0,
-                    is_hearted: false,
-                    comment: replyMessage,
-                    created_at: new Date().toISOString(),
-                    updated_at: new Date().toISOString(),
-                    by: {
-                      id: 2,
-                      name: 'Current User',
-                      email: 'current@user.com',
-                      nickname: 'currentuser',
-                      created_at: '2024-01-01T00:00:00.000Z',
-                      photo: 'https://via.placeholder.com/40',
-                    },
-                    replies: [],
-                  },
-                ],
-              }
-            : comment,
-        ),
-      )
-      setReplyMessage('')
-      setReplyTo(null)
+  const handleReplyMessage = async (id: number) => {
+    if (!replyMessage.trim()) {
+      toast.error('You can not submit an empty message.')
+      return
     }
+
+    if (!user) {
+      go('/login')
+      return
+    }
+
+    const reply = await trigger({
+      parent_id: id,
+      comment: replyMessage,
+      commentable_id: commentableId,
+      commentable_type: commentableType,
+    }).unwrap()
+
+    setComments(
+      comments.map((comment) =>
+        comment.id === id
+          ? {
+              ...comment,
+              replies: [...comment.replies, reply],
+            }
+          : comment,
+      ),
+    )
+    setReplyTo(null)
+    setReplyMessage('')
   }
 
   useEffect(() => {
@@ -209,18 +209,20 @@ function Comments(props: CommentsProps) {
                 </Tooltip>
 
                 <Box className="flex items-center gap-2">
-                  <HeartButton
-                    heartable_id={comment.id}
-                    heartable_type="commentables"
-                    setHeartPops={setHeartPops}
-                    isHearted={
-                      likedComments.has(comment.id) || comment.is_hearted
-                    }
-                    type="icon"
-                    setHearts={() => {}}
-                    onHeartToggle={() => handleHeartClick(comment)}
-                    size={28}
-                  />
+                  {comment.by.id !== user?.id && (
+                    <HeartButton
+                      heartable_id={comment.id}
+                      heartable_type="commentables"
+                      setHeartPops={setHeartPops}
+                      isHearted={
+                        likedComments.has(comment.id) || comment.is_hearted
+                      }
+                      type="icon"
+                      setHearts={() => {}}
+                      onHeartToggle={() => handleHeartClick(comment)}
+                      size={28}
+                    />
+                  )}
                   <Typography
                     variant="body2"
                     className="dark:text-white text-gray-800">
@@ -288,22 +290,24 @@ function Comments(props: CommentsProps) {
                             <IoChatboxEllipsesOutline />
                           </IconButton>
                         </Tooltip>
-                        <HeartButton
-                          heartable_id={reply.id}
-                          heartable_type="commentables"
-                          setHeartPops={setHeartPops}
-                          isHearted={
-                            likedComments.has(
-                              `${comment.id}-${reply.id}`,
-                            ) || reply.is_hearted
-                          }
-                          type="icon"
-                          setHearts={() => {}}
-                          onHeartToggle={() =>
-                            handleHeartClick(reply, comment.id)
-                          }
-                          size={28}
-                        />
+                        {reply.by.id !== user?.id && (
+                          <HeartButton
+                            heartable_id={reply.id}
+                            heartable_type="commentables"
+                            setHeartPops={setHeartPops}
+                            isHearted={
+                              likedComments.has(
+                                `${comment.id}-${reply.id}`,
+                              ) || reply.is_hearted
+                            }
+                            type="icon"
+                            setHearts={() => {}}
+                            onHeartToggle={() =>
+                              handleHeartClick(reply, comment.id)
+                            }
+                            size={28}
+                          />
+                        )}
                         <Typography
                           variant="body2"
                           className="dark:text-white text-gray-800">

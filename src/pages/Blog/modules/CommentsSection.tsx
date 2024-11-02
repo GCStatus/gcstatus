@@ -8,7 +8,13 @@ interface CommentsSectionProps {
 function CommentsSection(props: CommentsSectionProps) {
   const { post } = props
 
-  return <Comments defaultComments={post.comments} />
+  return (
+    <Comments
+      defaultComments={post.comments}
+      commentableId={post.id}
+      commentableType="blogs"
+    />
+  )
 }
 
 export default CommentsSection

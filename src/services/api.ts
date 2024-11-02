@@ -9,6 +9,8 @@ import {
 import { baseUrl } from '@/constants'
 import { logout } from '@/store/accountSlice'
 import {
+  Comment,
+  CommentPayload,
   GameDetails,
   GameList,
   HeartablePayload,
@@ -301,6 +303,15 @@ const api = createApi({
       }),
       transformResponse: (res: Res<GameList[]>) => res.data,
     }),
+
+    createComment: builder.mutation<Comment, CommentPayload>({
+      query: (body) => ({
+        url: 'comments',
+        method: 'POST',
+        body,
+      }),
+      transformResponse: (res: Res<Comment>) => res.data,
+    }),
   }),
 })
 
@@ -324,6 +335,7 @@ export const {
   useGetGameDetailsQuery,
   useGetTransactionsQuery,
   useLazySearchGamesQuery,
+  useCreateCommentMutation,
   useUpdatePictureMutation,
   useUpdateSocialsMutation,
   useGetNotificationsQuery,
