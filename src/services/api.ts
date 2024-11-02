@@ -312,6 +312,13 @@ const api = createApi({
       }),
       transformResponse: (res: Res<Comment>) => res.data,
     }),
+
+    deleteComment: builder.mutation<{ message: string }, number>({
+      query: (id) => ({
+        url: `comments/${id}`,
+        method: 'DELETE',
+      }),
+    }),
   }),
 })
 
@@ -336,6 +343,7 @@ export const {
   useGetTransactionsQuery,
   useLazySearchGamesQuery,
   useCreateCommentMutation,
+  useDeleteCommentMutation,
   useUpdatePictureMutation,
   useUpdateSocialsMutation,
   useGetNotificationsQuery,

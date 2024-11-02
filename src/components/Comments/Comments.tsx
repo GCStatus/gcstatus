@@ -11,13 +11,16 @@ import {
 import { formatRelative } from 'date-fns'
 import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
-import { IoChatboxEllipsesOutline, IoSendOutline } from 'react-icons/io5'
 import { useNavigate } from 'react-router-dom'
 
-import { HeartButton, HeartsUp, Input } from '@/components'
-import { useAccount } from '@/hooks'
-import { useCreateCommentMutation } from '@/services/api'
+import { HeartButton, HeartsUp, Icon, Input } from '@/components'
+import { useAccount, useSuccess } from '@/hooks'
+import {
+  useCreateCommentMutation,
+  useDeleteCommentMutation,
+} from '@/services/api'
 import { Comment } from '@/types'
+import ActionDialog from '../ActionDialog'
 
 interface CommentsProps {
   defaultComments: Comment[]
@@ -30,6 +33,7 @@ function Comments(props: CommentsProps) {
   const go = useNavigate()
   const { user } = useAccount()
   const [trigger] = useCreateCommentMutation()
+  const [triggerDel, { data, isSuccess }] = useDeleteCommentMutation()
   const [comments, setComments] = useState<Comment[]>(defaultComments)
   const [newMessage, setNewMessage] = useState<string>('')
   const [replyMessage, setReplyMessage] = useState<string>('')
@@ -38,6 +42,12 @@ function Comments(props: CommentsProps) {
   const [likedComments, setLikedComments] = useState<Set<string | number>>(
     new Set(),
   )
+
+  const handleDelete = async (id: number) => {
+    await triggerDel(id)
+
+    setComments(comments.filter(({ id: commentId }) => commentId !== id))
+  }
 
   const handleHeartClick = (item: Comment, parentId?: number) => {
     const isReply = Boolean(parentId)
@@ -154,6 +164,8 @@ function Comments(props: CommentsProps) {
     setLikedComments(initialLikedComments)
   }, [comments])
 
+  useSuccess(isSuccess, data?.message)
+
   return (
     <Box className="flex flex-col w-full">
       <Box className="fixed inset-0 pointer-events-none z-50">
@@ -181,7 +193,7 @@ function Comments(props: CommentsProps) {
                 </Avatar>
                 <ListItemText
                   primary={comment.comment}
-                  secondary={`by ${comment.by.nickname}, ${formatRelative(new Date(comment.created_at), new Date())}`}
+                  secondary={`by ${comment.by.nickname === user?.nickname ? 'me' : comment.by.nickname}, ${formatRelative(new Date(comment.created_at), new Date())}`}
                   primaryTypographyProps={{
                     className:
                       'dark:text-white text-gray-900 font-semibold break-words',
@@ -204,12 +216,30 @@ function Comments(props: CommentsProps) {
                       )
                     }
                     className="text-theme-red-900 hover:text-theme-red-700 hover:scale-110 transition-transform duration-300">
-                    <IoChatboxEllipsesOutline />
+                    <Icon name="IoChatboxEllipsesOutline" />
                   </IconButton>
                 </Tooltip>
 
+                <ActionDialog
+                  title="Remove comment"
+                  description="This action is irreversible. Are you sure?"
+                  confirmAction={() => handleDelete(comment.id)}
+                  trigger={
+                    <Tooltip title="Remove comment">
+                      <IconButton>
+                        <Icon
+                          name="IoTrashOutline"
+                          className="text-theme-red-900"
+                        />
+                      </IconButton>
+                    </Tooltip>
+                  }
+                />
+
                 <Box className="flex items-center gap-2">
-                  {comment.by.id !== user?.id && (
+                  {comment.by.id === user?.id ? (
+                    <Icon name="IoHeartOutline" size={28} />
+                  ) : (
                     <HeartButton
                       heartable_id={comment.id}
                       heartable_type="commentables"
@@ -249,7 +279,7 @@ function Comments(props: CommentsProps) {
                     <IconButton
                       onClick={() => handleReplyMessage(comment.id)}
                       className="text-theme-red-900 hover:text-theme-red-700 hover:scale-110 transition-transform duration-300">
-                      <IoSendOutline />
+                      <Icon name="IoSendOutline" />
                     </IconButton>
                   }
                 />
@@ -287,7 +317,7 @@ function Comments(props: CommentsProps) {
                               )
                             }
                             className="text-theme-red-900 hover:text-theme-red-700 hover:scale-110 transition-transform duration-300">
-                            <IoChatboxEllipsesOutline />
+                            <Icon name="IoChatboxEllipsesOutline" />
                           </IconButton>
                         </Tooltip>
                         {reply.by.id !== user?.id && (
@@ -338,7 +368,7 @@ function Comments(props: CommentsProps) {
                                 handleReplyMessage(comment.id)
                               }
                               className="text-theme-red-900 hover:text-theme-red-700 hover:scale-110 transition-transform duration-300">
-                              <IoSendOutline />
+                              <Icon name="IoSendOutline" />
                             </IconButton>
                           }
                         />
@@ -368,7 +398,10 @@ function Comments(props: CommentsProps) {
             <IconButton
               onClick={handleSendMessage}
               className="hover:scale-125 transition-transform duration-300 ease-in-out">
-              <IoSendOutline className="text-theme-red-900 dark:text-white" />
+              <Icon
+                name="IoSendOutline"
+                className="text-theme-red-900 dark:text-white"
+              />
             </IconButton>
           }
         />

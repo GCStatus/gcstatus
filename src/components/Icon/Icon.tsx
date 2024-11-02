@@ -14,10 +14,11 @@ const Icons = {
 
 export interface IconProps extends React.ComponentProps<'svg'> {
   name: keyof typeof Icons
+  size?: number
 }
 
 function Icon(props: IconProps) {
-  const { name, ...rest } = props
+  const { name, size, ...rest } = props
 
   const IconComponent = Icons[name]
 
@@ -25,12 +26,13 @@ function Icon(props: IconProps) {
     return (
       <Icons.IoNotificationsOutline
         data-icon="IoNotificationsOutline"
+        size={size}
         {...rest}
       />
     )
   }
 
-  return <IconComponent {...rest} />
+  return <IconComponent size={size} {...rest} />
 }
 
 export default Icon
