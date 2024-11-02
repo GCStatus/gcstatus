@@ -17,7 +17,11 @@ function GameChat(props: GameChatProps) {
         className="sm:text-4xl text-2xl font-bold text-theme-red-900 dark:text-white">
         Game Chat
       </Typography>
-      <Comments defaultComments={game.comments} />
+      <Comments
+        defaultComments={game.comments}
+        commentableId={game.id}
+        commentableType="games"
+      />
     </Stack>
   )
 }

@@ -10,3 +10,10 @@ export interface Comment {
   by: MinimalUser
   replies: Comment[]
 }
+
+export interface CommentPayload {
+  comment: string
+  parent_id?: number
+  commentable_id: number
+  commentable_type: string
+}

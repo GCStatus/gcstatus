@@ -10,17 +10,30 @@ import {
 } from '@mui/material'
 import { formatRelative } from 'date-fns'
 import { useEffect, useState } from 'react'
-import { IoChatboxEllipsesOutline, IoSendOutline } from 'react-icons/io5'
+import toast from 'react-hot-toast'
+import { useNavigate } from 'react-router-dom'
 
-import { HeartButton, HeartsUp, Input } from '@/components'
+import { HeartButton, HeartsUp, Icon, Input } from '@/components'
+import { useAccount, useSuccess } from '@/hooks'
+import {
+  useCreateCommentMutation,
+  useDeleteCommentMutation,
+} from '@/services/api'
 import { Comment } from '@/types'
+import ActionDialog from '../ActionDialog'
 
 interface CommentsProps {
   defaultComments: Comment[]
+  commentableId: number
+  commentableType: string
 }
 
 function Comments(props: CommentsProps) {
-  const { defaultComments } = props
+  const { defaultComments, commentableId, commentableType } = props
+  const go = useNavigate()
+  const { user } = useAccount()
+  const [trigger] = useCreateCommentMutation()
+  const [triggerDel, { data, isSuccess }] = useDeleteCommentMutation()
   const [comments, setComments] = useState<Comment[]>(defaultComments)
   const [newMessage, setNewMessage] = useState<string>('')
   const [replyMessage, setReplyMessage] = useState<string>('')
@@ -29,6 +42,12 @@ function Comments(props: CommentsProps) {
   const [likedComments, setLikedComments] = useState<Set<string | number>>(
     new Set(),
   )
+
+  const handleDelete = async (id: number) => {
+    await triggerDel(id)
+
+    setComments(comments.filter(({ id: commentId }) => commentId !== id))
+  }
 
   const handleHeartClick = (item: Comment, parentId?: number) => {
     const isReply = Boolean(parentId)
@@ -74,66 +93,57 @@ function Comments(props: CommentsProps) {
     })
   }
 
-  const handleSendMessage = () => {
-    if (newMessage.trim()) {
-      setComments([
-        ...comments,
-        {
-          id: Date.now(),
-          hearts_count: 0,
-          is_hearted: false,
-          comment: newMessage,
-          created_at: new Date().toISOString(),
-          updated_at: new Date().toISOString(),
-          by: {
-            id: 2,
-            name: 'Current User',
-            email: 'current@user.com',
-            nickname: 'currentuser',
-            created_at: '2024-01-01T00:00:00.000Z',
-            photo: 'https://via.placeholder.com/40',
-          },
-          replies: [],
-        },
-      ])
-      setNewMessage('')
+  const handleSendMessage = async () => {
+    if (!newMessage.trim()) {
+      toast.error('You can not submit an empty message.')
+      return
     }
+
+    if (!user) {
+      go('/login')
+      return
+    }
+
+    const comment = await trigger({
+      comment: newMessage,
+      commentable_id: commentableId,
+      commentable_type: commentableType,
+    }).unwrap()
+
+    setComments([...comments, comment])
+    setNewMessage('')
   }
 
-  const handleReplyMessage = (id: number) => {
-    if (replyMessage.trim()) {
-      setComments(
-        comments.map((comment) =>
-          comment.id === id
-            ? {
-                ...comment,
-                replies: [
-                  ...comment.replies,
-                  {
-                    id: Date.now(),
-                    hearts_count: 0,
-                    is_hearted: false,
-                    comment: replyMessage,
-                    created_at: new Date().toISOString(),
-                    updated_at: new Date().toISOString(),
-                    by: {
-                      id: 2,
-                      name: 'Current User',
-                      email: 'current@user.com',
-                      nickname: 'currentuser',
-                      created_at: '2024-01-01T00:00:00.000Z',
-                      photo: 'https://via.placeholder.com/40',
-                    },
-                    replies: [],
-                  },
-                ],
-              }
-            : comment,
-        ),
-      )
-      setReplyMessage('')
-      setReplyTo(null)
+  const handleReplyMessage = async (id: number) => {
+    if (!replyMessage.trim()) {
+      toast.error('You can not submit an empty message.')
+      return
     }
+
+    if (!user) {
+      go('/login')
+      return
+    }
+
+    const reply = await trigger({
+      parent_id: id,
+      comment: replyMessage,
+      commentable_id: commentableId,
+      commentable_type: commentableType,
+    }).unwrap()
+
+    setComments(
+      comments.map((comment) =>
+        comment.id === id
+          ? {
+              ...comment,
+              replies: [...comment.replies, reply],
+            }
+          : comment,
+      ),
+    )
+    setReplyTo(null)
+    setReplyMessage('')
   }
 
   useEffect(() => {
@@ -153,6 +163,8 @@ function Comments(props: CommentsProps) {
 
     setLikedComments(initialLikedComments)
   }, [comments])
+
+  useSuccess(isSuccess, data?.message)
 
   return (
     <Box className="flex flex-col w-full">
@@ -181,7 +193,7 @@ function Comments(props: CommentsProps) {
                 </Avatar>
                 <ListItemText
                   primary={comment.comment}
-                  secondary={`by ${comment.by.nickname}, ${formatRelative(new Date(comment.created_at), new Date())}`}
+                  secondary={`by ${comment.by.nickname === user?.nickname ? 'me' : comment.by.nickname}, ${formatRelative(new Date(comment.created_at), new Date())}`}
                   primaryTypographyProps={{
                     className:
                       'dark:text-white text-gray-900 font-semibold break-words',
@@ -204,23 +216,43 @@ function Comments(props: CommentsProps) {
                       )
                     }
                     className="text-theme-red-900 hover:text-theme-red-700 hover:scale-110 transition-transform duration-300">
-                    <IoChatboxEllipsesOutline />
+                    <Icon name="IoChatboxEllipsesOutline" />
                   </IconButton>
                 </Tooltip>
 
+                <ActionDialog
+                  title="Remove comment"
+                  description="This action is irreversible. Are you sure?"
+                  confirmAction={() => handleDelete(comment.id)}
+                  trigger={
+                    <Tooltip title="Remove comment">
+                      <IconButton>
+                        <Icon
+                          name="IoTrashOutline"
+                          className="text-theme-red-900"
+                        />
+                      </IconButton>
+                    </Tooltip>
+                  }
+                />
+
                 <Box className="flex items-center gap-2">
-                  <HeartButton
-                    heartable_id={comment.id}
-                    heartable_type="commentables"
-                    setHeartPops={setHeartPops}
-                    isHearted={
-                      likedComments.has(comment.id) || comment.is_hearted
-                    }
-                    type="icon"
-                    setHearts={() => {}}
-                    onHeartToggle={() => handleHeartClick(comment)}
-                    size={28}
-                  />
+                  {comment.by.id === user?.id ? (
+                    <Icon name="IoHeartOutline" size={28} />
+                  ) : (
+                    <HeartButton
+                      heartable_id={comment.id}
+                      heartable_type="commentables"
+                      setHeartPops={setHeartPops}
+                      isHearted={
+                        likedComments.has(comment.id) || comment.is_hearted
+                      }
+                      type="icon"
+                      setHearts={() => {}}
+                      onHeartToggle={() => handleHeartClick(comment)}
+                      size={28}
+                    />
+                  )}
                   <Typography
                     variant="body2"
                     className="dark:text-white text-gray-800">
@@ -247,7 +279,7 @@ function Comments(props: CommentsProps) {
                     <IconButton
                       onClick={() => handleReplyMessage(comment.id)}
                       className="text-theme-red-900 hover:text-theme-red-700 hover:scale-110 transition-transform duration-300">
-                      <IoSendOutline />
+                      <Icon name="IoSendOutline" />
                     </IconButton>
                   }
                 />
@@ -285,25 +317,27 @@ function Comments(props: CommentsProps) {
                               )
                             }
                             className="text-theme-red-900 hover:text-theme-red-700 hover:scale-110 transition-transform duration-300">
-                            <IoChatboxEllipsesOutline />
+                            <Icon name="IoChatboxEllipsesOutline" />
                           </IconButton>
                         </Tooltip>
-                        <HeartButton
-                          heartable_id={reply.id}
-                          heartable_type="commentables"
-                          setHeartPops={setHeartPops}
-                          isHearted={
-                            likedComments.has(
-                              `${comment.id}-${reply.id}`,
-                            ) || reply.is_hearted
-                          }
-                          type="icon"
-                          setHearts={() => {}}
-                          onHeartToggle={() =>
-                            handleHeartClick(reply, comment.id)
-                          }
-                          size={28}
-                        />
+                        {reply.by.id !== user?.id && (
+                          <HeartButton
+                            heartable_id={reply.id}
+                            heartable_type="commentables"
+                            setHeartPops={setHeartPops}
+                            isHearted={
+                              likedComments.has(
+                                `${comment.id}-${reply.id}`,
+                              ) || reply.is_hearted
+                            }
+                            type="icon"
+                            setHearts={() => {}}
+                            onHeartToggle={() =>
+                              handleHeartClick(reply, comment.id)
+                            }
+                            size={28}
+                          />
+                        )}
                         <Typography
                           variant="body2"
                           className="dark:text-white text-gray-800">
@@ -334,7 +368,7 @@ function Comments(props: CommentsProps) {
                                 handleReplyMessage(comment.id)
                               }
                               className="text-theme-red-900 hover:text-theme-red-700 hover:scale-110 transition-transform duration-300">
-                              <IoSendOutline />
+                              <Icon name="IoSendOutline" />
                             </IconButton>
                           }
                         />
@@ -364,7 +398,10 @@ function Comments(props: CommentsProps) {
             <IconButton
               onClick={handleSendMessage}
               className="hover:scale-125 transition-transform duration-300 ease-in-out">
-              <IoSendOutline className="text-theme-red-900 dark:text-white" />
+              <Icon
+                name="IoSendOutline"
+                className="text-theme-red-900 dark:text-white"
+              />
             </IconButton>
           }
         />

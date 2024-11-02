@@ -1,3 +1,4 @@
+import { faker } from '@faker-js/faker'
 import type { Meta, StoryObj } from '@storybook/react'
 import { Provider } from 'react-redux'
 import { MemoryRouter } from 'react-router-dom'
@@ -11,6 +12,8 @@ const meta: Meta<typeof Comments> = {
   title: 'Components/Comments',
   component: Comments,
   args: {
+    commentableType: 'games',
+    commentableId: faker.number.int(),
     defaultComments: MOCK_GAME_DETAILS.comments,
   },
 }

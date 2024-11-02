@@ -149,6 +149,10 @@
   - [x] Heart games
   - [x] Heart comments and replies
   - [x] Heart blog posts
+- [x] Integrating comments
+  - [x] Create comments
+  - [x] Delete comment
+- [x] Integrate the search page
 
 ### Post MVP
 
