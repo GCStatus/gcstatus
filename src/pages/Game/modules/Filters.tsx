@@ -40,7 +40,7 @@ function Filters(props: FiltersProps) {
             { label: 'Title', value: 'title' },
             { label: 'Hearts', value: 'hearts_count' },
             { label: 'Views', value: 'views_count' },
-            { label: 'Release Date', value: 'release' },
+            { label: 'Release Date', value: 'release_date' },
           ]}
         />
 
@@ -62,10 +62,10 @@ function Filters(props: FiltersProps) {
         defaultValue={pageSize}
         onChange={onPageSizeChange}
         options={[
-          { label: '5', value: '5' },
-          { label: '10', value: '10' },
-          { label: '25', value: '25' },
-          { label: '50', value: '50' },
+          { label: '12', value: '12' },
+          { label: '24', value: '24' },
+          { label: '36', value: '36' },
+          { label: '54', value: '54' },
           { label: '100', value: '100' },
         ]}
       />

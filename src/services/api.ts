@@ -319,6 +319,19 @@ const api = createApi({
         method: 'DELETE',
       }),
     }),
+
+    findGamesBy: builder.query<
+      GameList[],
+      {
+        by: 'genres' | 'categories' | 'tags' | 'platforms'
+        filterable: string
+      }
+    >({
+      query: ({ by, filterable }) => ({
+        url: `games/filters/${by}/${filterable}`,
+      }),
+      transformResponse: (res: Res<GameList[]>) => res.data,
+    }),
   }),
 })
 
@@ -340,6 +353,7 @@ export const {
   useLazyGetLevelsQuery,
   useToggleTitleMutation,
   useGetGameDetailsQuery,
+  useLazyFindGamesByQuery,
   useGetTransactionsQuery,
   useLazySearchGamesQuery,
   useCreateCommentMutation,

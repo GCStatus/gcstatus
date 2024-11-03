@@ -8,7 +8,7 @@ import ModuledFilters from './ModuledFilters'
 function Platforms() {
   const { platform = '' } = useParams()
   const [view, setView] = useState<'grid' | 'list'>('grid')
-  const [isAnimating, setIsAnimating] = useState(false)
+  const [isAnimating, setIsAnimating] = useState<boolean>(false)
 
   const {
     games,
@@ -30,6 +30,8 @@ function Platforms() {
       setIsAnimating(false)
     }, 500)
   }
+
+  console.log(games)
 
   return (
     <ModuledFilters
