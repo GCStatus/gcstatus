@@ -1,13 +1,12 @@
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 
-import { LoadingScreen } from '@/components'
 import { useGames } from '@/hooks'
 
 import ModuledFilters from './ModuledFilters'
 
-function Categories() {
-  const { category = '' } = useParams()
+function Developers() {
+  const { developer = '' } = useParams()
   const [view, setView] = useState<'grid' | 'list'>('grid')
   const [isAnimating, setIsAnimating] = useState<boolean>(false)
 
@@ -17,12 +16,11 @@ function Categories() {
     currentPage,
     pageSize,
     sort,
-    isLoading,
     handlePageChange,
     handleSortChange,
     handlePageSizeChange,
   } = useGames({
-    category,
+    developer,
   })
 
   const handleViewChange = (newView: 'grid' | 'list') => {
@@ -33,9 +31,7 @@ function Categories() {
     }, 500)
   }
 
-  return isLoading ? (
-    <LoadingScreen />
-  ) : (
+  return (
     <ModuledFilters
       games={games}
       totalGames={totalGames}
@@ -52,4 +48,4 @@ function Categories() {
   )
 }
 
-export default Categories
+export default Developers

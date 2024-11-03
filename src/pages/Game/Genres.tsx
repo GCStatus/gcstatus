@@ -8,7 +8,7 @@ import ModuledFilters from './ModuledFilters'
 function Genres() {
   const { genre = '' } = useParams()
   const [view, setView] = useState<'grid' | 'list'>('grid')
-  const [isAnimating, setIsAnimating] = useState(false)
+  const [isAnimating, setIsAnimating] = useState<boolean>(false)
 
   const {
     games,

@@ -35,6 +35,7 @@ export const MOCK_GAME_DETAILS: GameDetails = {
     protection: {
       id: 1,
       name: 'Denuvo',
+      slug: 'denuvo',
     },
   },
   support: {
@@ -239,6 +240,7 @@ export const MOCK_GAME_DETAILS: GameDetails = {
     {
       id: 1,
       name: 'Game Science',
+      slug: 'game-science',
       acting: true,
     },
   ],
@@ -246,6 +248,7 @@ export const MOCK_GAME_DETAILS: GameDetails = {
     {
       id: 1,
       name: 'Game Science',
+      slug: 'game-science',
       acting: true,
     },
   ],

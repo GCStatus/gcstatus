@@ -99,7 +99,16 @@ function MainDetails(props: MainDetailsProps) {
                 Protection:
               </Typography>
               <Typography component="span" className="text-lg">
-                {game.crack ? game.crack.protection.name : 'Not available'}
+                {game.crack ? (
+                  <Link
+                    href={`/protections/${game.crack.protection.slug}`}
+                    target="_blank"
+                    className="dark:text-gray-200 text-black dark:hover:text-theme-red-900 hover:text-theme-red-900 transition-colors duration-300">
+                    {game.crack.protection.name}
+                  </Link>
+                ) : (
+                  'Not available'
+                )}
               </Typography>
             </Box>
             <Box className="flex sm:flex-row flex-col items-center gap-1">
@@ -109,10 +118,16 @@ function MainDetails(props: MainDetailsProps) {
                 Status:
               </Typography>
               {game.crack ? (
-                <Chip
-                  label={mapCrack[game.crack.status]}
-                  className={`${game.crack.status === 'cracked' || game.crack.status === 'cracked-oneday' ? 'bg-green-500' : 'bg-red-500'} text-white`}
-                />
+                <Tooltip title="Check all games with this crack status">
+                  <Link
+                    href={`/cracks/${game.crack?.status}`}
+                    target="_blank">
+                    <Chip
+                      label={mapCrack[game.crack.status]}
+                      className={`${game.crack.status === 'cracked' || game.crack.status === 'cracked-oneday' ? 'bg-green-500' : 'bg-red-500'} text-white`}
+                    />
+                  </Link>
+                </Tooltip>
               ) : (
                 <Chip
                   label="Crack not available"
@@ -128,7 +143,12 @@ function MainDetails(props: MainDetailsProps) {
                   Cracked By:
                 </Typography>
                 <Typography component="span" className="text-lg">
-                  {game.crack.by.name}
+                  <Link
+                    href={`/crackers/${game.crack.by.slug}`}
+                    target="_blank"
+                    className="dark:text-gray-200 text-black dark:hover:text-theme-red-900 hover:text-theme-red-900 transition-colors duration-300">
+                    {game.crack.by.name}
+                  </Link>
                 </Typography>
               </Box>
             )}
@@ -173,7 +193,7 @@ function MainDetails(props: MainDetailsProps) {
                   <Link
                     href={`/platforms/${platform.slug}`}
                     target="_blank"
-                    className="dark:text-gray-200 text-black">
+                    className="dark:text-gray-200 text-black dark:hover:text-theme-red-900 hover:text-theme-red-900 transition-colors duration-300">
                     {platform.name}
                   </Link>
                 </ListItem>
@@ -206,7 +226,7 @@ function MainDetails(props: MainDetailsProps) {
                   <Link
                     href={`/genres/${genre.slug}`}
                     target="_blank"
-                    className="dark:text-gray-200 text-black">
+                    className="dark:text-gray-200 text-black dark:hover:text-theme-red-900 hover:text-theme-red-900 transition-colors duration-300">
                     {genre.name}
                   </Link>
                 </ListItem>
@@ -243,7 +263,7 @@ function MainDetails(props: MainDetailsProps) {
                   <Link
                     href={`/tags/${tag.slug}`}
                     target="_blank"
-                    className="dark:text-gray-200 text-black">
+                    className="dark:text-gray-200 text-black dark:hover:text-theme-red-900 hover:text-theme-red-900 transition-colors duration-300">
                     {tag.name}
                   </Link>
                 </ListItem>
@@ -276,7 +296,7 @@ function MainDetails(props: MainDetailsProps) {
                   <Link
                     href={`/categories/${category.slug}`}
                     target="_blank"
-                    className="dark:text-gray-200 text-black">
+                    className="dark:text-gray-200 text-black dark:hover:text-theme-red-900 hover:text-theme-red-900 transition-colors duration-300">
                     {category.name}
                   </Link>
                 </ListItem>
@@ -310,7 +330,12 @@ function MainDetails(props: MainDetailsProps) {
               }}>
               {game.publishers.map((publisher) => (
                 <ListItem disableGutters disablePadding key={publisher.id}>
-                  {publisher.name}
+                  <Link
+                    href={`/publishers/${publisher.slug}`}
+                    target="_blank"
+                    className="dark:text-gray-200 text-black dark:hover:text-theme-red-900 hover:text-theme-red-900 transition-colors duration-300">
+                    {publisher.name}
+                  </Link>
                 </ListItem>
               ))}
             </List>
@@ -338,7 +363,12 @@ function MainDetails(props: MainDetailsProps) {
               }}>
               {game.developers.map((developer) => (
                 <ListItem disableGutters disablePadding key={developer.id}>
-                  {developer.name}
+                  <Link
+                    href={`/developers/${developer.slug}`}
+                    target="_blank"
+                    className="dark:text-gray-200 text-black dark:hover:text-theme-red-900 hover:text-theme-red-900 transition-colors duration-300">
+                    {developer.name}
+                  </Link>
                 </ListItem>
               ))}
             </List>

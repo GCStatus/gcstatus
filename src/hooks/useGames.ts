@@ -1,7 +1,7 @@
-import { ChangeEvent, useEffect, useState } from 'react'
+import { ChangeEvent, useEffect, useMemo, useState } from 'react'
 
-import { MOCK_SEARCH_GAMES } from '@/mocks'
-import { GameList } from '@/types'
+import { useLazyFindGamesByQuery } from '@/services/api'
+import { FiltersClassifications, GameList } from '@/types'
 
 export type SortField =
   | 'title'
@@ -19,44 +19,36 @@ function useGames(params: {
   category?: string
   genre?: string
   tag?: string
+  cracker?: string
+  developer?: string
+  publisher?: string
+  crack?: string
 }) {
-  const [games, setGames] = useState<GameList[]>([])
+  const [trigger, { games, isLoading }] = useLazyFindGamesByQuery({
+    selectFromResult: ({ data = [], isLoading, isFetching }) => ({
+      games: data,
+      isLoading: isLoading || isFetching,
+    }),
+  })
+  const [initialRequestDone, setInitialRequestDone] =
+    useState<boolean>(false)
+  const [originalGames, setOriginalGames] = useState<GameList[]>([])
+  const [displayedGames, setDisplayedGames] = useState<GameList[]>([])
   const [totalGames, setTotalGames] = useState<number>(0)
   const [currentPage, setCurrentPage] = useState<number>(1)
-  const [pageSize, setPageSize] = useState<number>(5)
+  const [pageSize, setPageSize] = useState<number>(12)
   const [sort, setSort] = useState<SortState>({
     field: 'title',
     order: 'asc',
   })
 
+  const memoizedParams = useMemo(
+    () => params,
+    [params.category, params.platform, params.genre, params.tag],
+  )
+
   const fetchGames = async () => {
-    let filteredGames = MOCK_SEARCH_GAMES
-
-    if (params.category) {
-      filteredGames = filteredGames.filter((game) =>
-        game.categories.some(({ slug }) => slug === params.category),
-      )
-    }
-
-    if (params.genre) {
-      filteredGames = filteredGames.filter((game) =>
-        game.genres.some(({ slug }) => slug === params.genre),
-      )
-    }
-
-    if (params.tag) {
-      filteredGames = filteredGames.filter((game) =>
-        game.tags.some(({ slug }) => slug === params.tag),
-      )
-    }
-
-    if (params.platform) {
-      filteredGames = filteredGames.filter((game) =>
-        game.platforms.some(({ slug }) => slug === params.platform),
-      )
-    }
-
-    const sortedGames = filteredGames.sort((a, b) => {
+    const sortedGames = displayedGames.sort((a, b) => {
       const aValue = a[sort.field]
       const bValue = b[sort.field]
 
@@ -74,19 +66,54 @@ function useGames(params: {
       return 0
     })
 
-    setGames(
+    setDisplayedGames(
       sortedGames.slice(
         (currentPage - 1) * pageSize,
         currentPage * pageSize,
       ),
     )
-
-    setTotalGames(filteredGames.length)
+    setTotalGames(displayedGames.length)
   }
 
   useEffect(() => {
     fetchGames()
-  }, [currentPage, pageSize, sort])
+  }, [currentPage, pageSize, sort, originalGames])
+
+  useEffect(() => {
+    if (!isLoading && !initialRequestDone) {
+      const filters: {
+        by: FiltersClassifications
+        filterable?: string
+      }[] = [
+        { by: 'tags', filterable: memoizedParams.tag },
+        { by: 'genres', filterable: memoizedParams.genre },
+        { by: 'cracks', filterable: memoizedParams.crack },
+        { by: 'crackers', filterable: memoizedParams.cracker },
+        { by: 'platforms', filterable: memoizedParams.platform },
+        { by: 'categories', filterable: memoizedParams.category },
+        { by: 'developers', filterable: memoizedParams.developer },
+        { by: 'publishers', filterable: memoizedParams.publisher },
+      ]
+
+      filters.forEach((filter) => {
+        if (filter.filterable && originalGames.length === 0) {
+          trigger({
+            by: filter.by,
+            filterable: filter.filterable,
+          })
+        }
+      })
+      setInitialRequestDone(true)
+    }
+  }, [memoizedParams, isLoading, initialRequestDone])
+
+  useEffect(() => {
+    if (games && games.length > 0 && originalGames.length === 0) {
+      setOriginalGames(games)
+      setDisplayedGames(games)
+      setTotalGames(games.length)
+    }
+  }, [games])
 
   const handleSortChange = (field: SortField, order: 'asc' | 'desc') => {
     setSort({ field, order })
@@ -104,14 +131,15 @@ function useGames(params: {
 
   return {
     sort,
-    games,
     pageSize,
+    isLoading,
     totalGames,
     currentPage,
     setCurrentPage,
     handleSortChange,
     handlePageChange,
     handlePageSizeChange,
+    games: displayedGames,
   }
 }
 

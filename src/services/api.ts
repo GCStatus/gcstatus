@@ -11,6 +11,7 @@ import { logout } from '@/store/accountSlice'
 import {
   Comment,
   CommentPayload,
+  FiltersClassifications,
   GameDetails,
   GameList,
   HeartablePayload,
@@ -319,6 +320,19 @@ const api = createApi({
         method: 'DELETE',
       }),
     }),
+
+    findGamesBy: builder.query<
+      GameList[],
+      {
+        by: FiltersClassifications
+        filterable: string
+      }
+    >({
+      query: ({ by, filterable }) => ({
+        url: `games/filters/${by}/${filterable}`,
+      }),
+      transformResponse: (res: Res<GameList[]>) => res.data,
+    }),
   }),
 })
 
@@ -340,6 +354,7 @@ export const {
   useLazyGetLevelsQuery,
   useToggleTitleMutation,
   useGetGameDetailsQuery,
+  useLazyFindGamesByQuery,
   useGetTransactionsQuery,
   useLazySearchGamesQuery,
   useCreateCommentMutation,
