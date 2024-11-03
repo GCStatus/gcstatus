@@ -92,3 +92,13 @@ export interface NextRelease {
   genres: Genre[]
   platforms: Platform[]
 }
+
+export type FiltersClassifications =
+  | 'genres'
+  | 'categories'
+  | 'tags'
+  | 'platforms'
+  | 'crackers'
+  | 'developers'
+  | 'publishers'
+  | 'cracks'

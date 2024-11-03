@@ -23,10 +23,14 @@ export const Routes = () => {
   const Reset = L(lazy(() => import('./pages/Password/Reset')))
   const Forgot = L(lazy(() => import('./pages/Password/Forgot')))
   const GameGenres = L(lazy(() => import('./pages/Game/Genres')))
+  const GameCracks = L(lazy(() => import('./pages/Game/Cracks')))
   const BlogDetails = L(lazy(() => import('./pages/Blog/Details')))
   const GameDetails = L(lazy(() => import('./pages/Game/Details')))
+  const GameCrackers = L(lazy(() => import('./pages/Game/Crackers')))
   const GamePlatforms = L(lazy(() => import('./pages/Game/Platforms')))
+  const GamePublishers = L(lazy(() => import('./pages/Game/Publishers')))
   const GameCategories = L(lazy(() => import('./pages/Game/Categories')))
+  const GameDevelopers = L(lazy(() => import('./pages/Game/Developers')))
 
   return useRoutes([
     { path: '/login', element: <Login /> },
@@ -58,8 +62,18 @@ export const Routes = () => {
             },
             { path: '/tags/:tag', element: <GameTags /> },
             { path: '/genres/:genre', element: <GameGenres /> },
+            { path: '/cracks/:crack', element: <GameCracks /> },
+            { path: '/crackers/:cracker', element: <GameCrackers /> },
             { path: '/platforms/:platform', element: <GamePlatforms /> },
             { path: '/categories/:category', element: <GameCategories /> },
+            {
+              path: '/developers/:developer',
+              element: <GameDevelopers />,
+            },
+            {
+              path: '/publishers/:publisher',
+              element: <GamePublishers />,
+            },
           ],
         },
       ],

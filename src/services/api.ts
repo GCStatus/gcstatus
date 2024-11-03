@@ -11,6 +11,7 @@ import { logout } from '@/store/accountSlice'
 import {
   Comment,
   CommentPayload,
+  FiltersClassifications,
   GameDetails,
   GameList,
   HeartablePayload,
@@ -323,7 +324,7 @@ const api = createApi({
     findGamesBy: builder.query<
       GameList[],
       {
-        by: 'genres' | 'categories' | 'tags' | 'platforms'
+        by: FiltersClassifications
         filterable: string
       }
     >({

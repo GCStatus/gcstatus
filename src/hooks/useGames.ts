@@ -1,7 +1,7 @@
 import { ChangeEvent, useEffect, useMemo, useState } from 'react'
 
 import { useLazyFindGamesByQuery } from '@/services/api'
-import { GameList } from '@/types'
+import { FiltersClassifications, GameList } from '@/types'
 
 export type SortField =
   | 'title'
@@ -19,6 +19,10 @@ function useGames(params: {
   category?: string
   genre?: string
   tag?: string
+  cracker?: string
+  developer?: string
+  publisher?: string
+  crack?: string
 }) {
   const [trigger, { games, isLoading }] = useLazyFindGamesByQuery({
     selectFromResult: ({ data = [], isLoading, isFetching }) => ({
@@ -44,33 +48,7 @@ function useGames(params: {
   )
 
   const fetchGames = async () => {
-    let filteredGames = originalGames
-
-    if (params.category) {
-      filteredGames = filteredGames.filter((game) =>
-        game.categories.some(({ slug }) => slug === params.category),
-      )
-    }
-
-    if (params.genre) {
-      filteredGames = filteredGames.filter((game) =>
-        game.genres.some(({ slug }) => slug === params.genre),
-      )
-    }
-
-    if (params.tag) {
-      filteredGames = filteredGames.filter((game) =>
-        game.tags.some(({ slug }) => slug === params.tag),
-      )
-    }
-
-    if (params.platform) {
-      filteredGames = filteredGames.filter((game) =>
-        game.platforms.some(({ slug }) => slug === params.platform),
-      )
-    }
-
-    const sortedGames = filteredGames.sort((a, b) => {
+    const sortedGames = displayedGames.sort((a, b) => {
       const aValue = a[sort.field]
       const bValue = b[sort.field]
 
@@ -94,7 +72,7 @@ function useGames(params: {
         currentPage * pageSize,
       ),
     )
-    setTotalGames(filteredGames.length)
+    setTotalGames(displayedGames.length)
   }
 
   useEffect(() => {
@@ -104,13 +82,17 @@ function useGames(params: {
   useEffect(() => {
     if (!isLoading && !initialRequestDone) {
       const filters: {
-        by: 'categories' | 'platforms' | 'tags' | 'genres'
+        by: FiltersClassifications
         filterable?: string
       }[] = [
-        { by: 'categories', filterable: memoizedParams.category },
-        { by: 'platforms', filterable: memoizedParams.platform },
-        { by: 'genres', filterable: memoizedParams.genre },
         { by: 'tags', filterable: memoizedParams.tag },
+        { by: 'genres', filterable: memoizedParams.genre },
+        { by: 'cracks', filterable: memoizedParams.crack },
+        { by: 'crackers', filterable: memoizedParams.cracker },
+        { by: 'platforms', filterable: memoizedParams.platform },
+        { by: 'categories', filterable: memoizedParams.category },
+        { by: 'developers', filterable: memoizedParams.developer },
+        { by: 'publishers', filterable: memoizedParams.publisher },
       ]
 
       filters.forEach((filter) => {

@@ -3,6 +3,7 @@ import { Protection } from '.'
 export interface Crackers {
   id: number
   name: string
+  slug: string
   acting: boolean
 }
 
