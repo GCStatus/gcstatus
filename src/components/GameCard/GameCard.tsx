@@ -74,7 +74,7 @@ function GameCard(props: GameCardProps) {
               <Link href={`/games/${game.slug}`}>
                 <Typography
                   variant="h6"
-                  className="text-lg font-bold text-white hover:text-theme-red-900 transition duration-500">
+                  className="text-lg font-bold text-white transition-all duration-300 ease-in-out hover:bg-gradient-to-r hover:from-white hover:to-red-600 hover:bg-clip-text hover:text-transparent">
                   {game.title}
                 </Typography>
               </Link>
@@ -122,7 +122,7 @@ function GameCard(props: GameCardProps) {
             <Box className="grid xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-2 grid-cols-1 items-center my-2 sm:gap-1 gap-2 w-full">
               {game.platforms.map((platform) => (
                 <Link
-                  href={`/platforms/${platform.slug}`}
+                  href={`/games/platforms/${platform.slug}`}
                   className="dark:bg-gray-800 dark:hover:bg-gray-700 hover:bg-gray-400 bg-gray-300 dark:text-white text-black px-3 py-1 rounded-full sm:w-auto w-full text-center transition-colors duration-300"
                   key={platform.id}>
                   <Typography
@@ -138,7 +138,7 @@ function GameCard(props: GameCardProps) {
 
           <Box className="flex flex-wrap gap-2 my-2 w-full mt-auto">
             {game.genres.map((genre) => (
-              <Link href={`/genres/${genre.slug}`} key={genre.id}>
+              <Link href={`/games/genres/${genre.slug}`} key={genre.id}>
                 <Chip
                   className="font-bold border border-theme-red-900 dark:text-gray-300 text-gray-700 sm:w-auto w-full hover:bg-theme-red-900 hover:text-white hover:border-none hover:outline-none"
                   label={genre.name}
@@ -163,8 +163,13 @@ function GameCard(props: GameCardProps) {
                     </Typography>
                     <Typography
                       variant="body2"
-                      className="font-bold dark:text-white text-gray-800 hover:text-theme-red-900 transition-all duration-300">
-                      {game.crack.by.name}
+                      className="font-bold dark:text-white text-gray-800">
+                      <Link
+                        href={`/crackers/${game.crack.by.slug}`}
+                        className="hover:text-theme-red-900 transition-colors duration-300"
+                        target="_blank">
+                        {game.crack.by.name}
+                      </Link>
                     </Typography>
                   </Box>
                 )}
@@ -178,8 +183,13 @@ function GameCard(props: GameCardProps) {
                   </Typography>
                   <Typography
                     variant="body2"
-                    className="font-bold dark:text-white text-gray-800 hover:text-theme-red-900 transition-all duration-300">
-                    {game.crack.protection.name}
+                    className="font-bold dark:text-white text-gray-800">
+                    <Link
+                      href={`/games/protections/${game.crack.protection.slug}`}
+                      className="hover:text-theme-red-900 transition-colors duration-300"
+                      target="_blank">
+                      {game.crack.protection.name}
+                    </Link>
                   </Typography>
                 </Box>
               )}

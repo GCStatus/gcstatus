@@ -28,9 +28,11 @@ export const Routes = () => {
   const GameDetails = L(lazy(() => import('./pages/Game/Details')))
   const GameCrackers = L(lazy(() => import('./pages/Game/Crackers')))
   const GamePlatforms = L(lazy(() => import('./pages/Game/Platforms')))
+  const GameCondition = L(lazy(() => import('./pages/Game/Condition')))
   const GamePublishers = L(lazy(() => import('./pages/Game/Publishers')))
   const GameCategories = L(lazy(() => import('./pages/Game/Categories')))
   const GameDevelopers = L(lazy(() => import('./pages/Game/Developers')))
+  const GameProtections = L(lazy(() => import('./pages/Game/Protections')))
 
   return useRoutes([
     { path: '/login', element: <Login /> },
@@ -54,25 +56,41 @@ export const Routes = () => {
             },
             {
               path: '/games',
-              children: [{ index: true, element: <>Games</> }],
+              children: [
+                { index: true, element: <>Games</> },
+                { path: 'tags/:tag', element: <GameTags /> },
+                { path: 'genres/:genre', element: <GameGenres /> },
+                { path: 'cracks/:crack', element: <GameCracks /> },
+                { path: 'crackers/:cracker', element: <GameCrackers /> },
+                {
+                  path: 'platforms/:platform',
+                  element: <GamePlatforms />,
+                },
+                {
+                  path: 'categories/:category',
+                  element: <GameCategories />,
+                },
+                {
+                  path: 'developers/:developer',
+                  element: <GameDevelopers />,
+                },
+                {
+                  path: 'publishers/:publisher',
+                  element: <GamePublishers />,
+                },
+                {
+                  path: 'protections/:protection',
+                  element: <GameProtections />,
+                },
+                {
+                  path: 'condition/:condition',
+                  element: <GameCondition />,
+                },
+              ],
             },
             {
               path: 'news',
               children: [{ index: true, element: <News /> }],
-            },
-            { path: '/tags/:tag', element: <GameTags /> },
-            { path: '/genres/:genre', element: <GameGenres /> },
-            { path: '/cracks/:crack', element: <GameCracks /> },
-            { path: '/crackers/:cracker', element: <GameCrackers /> },
-            { path: '/platforms/:platform', element: <GamePlatforms /> },
-            { path: '/categories/:category', element: <GameCategories /> },
-            {
-              path: '/developers/:developer',
-              element: <GameDevelopers />,
-            },
-            {
-              path: '/publishers/:publisher',
-              element: <GamePublishers />,
             },
           ],
         },

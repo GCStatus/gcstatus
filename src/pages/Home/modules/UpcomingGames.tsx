@@ -1,4 +1,5 @@
 import { Box, Container, Typography } from '@mui/material'
+import { format } from 'date-fns'
 import { Autoplay, EffectCoverflow } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
@@ -73,7 +74,8 @@ function UpcomingGames(props: UpcomingGamesProps) {
                   {game.title}
                 </Typography>
                 <Typography className="text-md text-white mb-4">
-                  Release Date: {game.release_date}
+                  Release Date:{' '}
+                  {format(new Date(game.release_date), 'yyyy-MM-dd')}
                 </Typography>
                 <Box className="grid grid-cols-3 gap-2">
                   {game.platforms.map(({ id, name }) => (

@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 
-import { LoadingScreen } from '@/components'
 import { useGames } from '@/hooks'
 
 import ModuledFilters from './ModuledFilters'
@@ -17,7 +16,6 @@ function Categories() {
     currentPage,
     pageSize,
     sort,
-    isLoading,
     handlePageChange,
     handleSortChange,
     handlePageSizeChange,
@@ -33,9 +31,7 @@ function Categories() {
     }, 500)
   }
 
-  return isLoading ? (
-    <LoadingScreen />
-  ) : (
+  return (
     <ModuledFilters
       games={games}
       totalGames={totalGames}

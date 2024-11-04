@@ -5,8 +5,8 @@ import { useGames } from '@/hooks'
 
 import ModuledFilters from './ModuledFilters'
 
-function Platforms() {
-  const { platform = '' } = useParams()
+function Protections() {
+  const { protection = '' } = useParams()
   const [view, setView] = useState<'grid' | 'list'>('grid')
   const [isAnimating, setIsAnimating] = useState<boolean>(false)
 
@@ -20,7 +20,7 @@ function Platforms() {
     handleSortChange,
     handlePageSizeChange,
   } = useGames({
-    platform,
+    protection,
   })
 
   const handleViewChange = (newView: 'grid' | 'list') => {
@@ -48,4 +48,4 @@ function Platforms() {
   )
 }
 
-export default Platforms
+export default Protections

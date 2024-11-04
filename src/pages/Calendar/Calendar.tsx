@@ -1,6 +1,7 @@
 import {
   Box,
   Chip,
+  CircularProgress,
   Tooltip,
   Typography,
   useMediaQuery,
@@ -8,8 +9,9 @@ import {
 import { format, isSameDay, parseISO } from 'date-fns'
 import { useNavigate } from 'react-router-dom'
 
+import { Icon } from '@/components'
 import { useTheme } from '@/hooks'
-import { MOCK_UPCOMING_GAMES } from '@/mocks'
+import { useCalendarGamesQuery } from '@/services/api'
 
 import { StyledCalendar, StyledCalendarLight } from './Calendar.styles'
 import { UpcomingList } from './modules'
@@ -23,10 +25,15 @@ interface CalendarTileProperties {
 }
 
 function Calendar() {
-  const games = MOCK_UPCOMING_GAMES
   const mode = useTheme()
   const go = useNavigate()
   const isMobile = useMediaQuery('(max-width: 490px)')
+  const { games, isLoading } = useCalendarGamesQuery(undefined, {
+    selectFromResult: ({ data = [], isLoading, isFetching }) => ({
+      games: data,
+      isLoading: isLoading || isFetching,
+    }),
+  })
 
   const getTileContent = ({ date, view }: CalendarTileProperties) => {
     const appointment = games.filter((game) =>
@@ -44,6 +51,7 @@ function Calendar() {
             disableInteractive
             key={item.id}>
             <Chip
+              className="group"
               onClick={() => go(`/games/${item.slug}`)}
               sx={{
                 width: 'auto',
@@ -55,7 +63,25 @@ function Calendar() {
                   color: ({ palette }) => palette.primary.contrastText,
                 },
               }}
-              label={item.title}
+              label={
+                <Box className="flex items-center gap-1">
+                  {item.title}
+                  {item.crack &&
+                    ['cracked', 'cracked-oneday'].includes(
+                      item.crack.status,
+                    ) && (
+                      <Tooltip title="Crack is available" arrow>
+                        <span>
+                          <Icon
+                            name="IoCheckmarkCircleOutline"
+                            className="group-hover:text-green-600 text-green-400 mb-0.5"
+                            size={14}
+                          />
+                        </span>
+                      </Tooltip>
+                    )}
+                </Box>
+              }
             />
           </Tooltip>
         ))}
@@ -63,7 +89,14 @@ function Calendar() {
     )
   }
 
-  return (
+  return isLoading ? (
+    <Box className="py-24">
+      <CircularProgress
+        color="error"
+        className="m-auto flex justify-center"
+      />
+    </Box>
+  ) : (
     <Box className={!isMobile ? 'p-12' : 'p-8'}>
       {!isMobile ? (
         mode === 'dark' ? (

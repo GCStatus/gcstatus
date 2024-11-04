@@ -82,7 +82,9 @@ function HeartButton(props: HeartButtonProps) {
       <IoHeartOutline
         size={size}
         className={
-          hearted ? 'text-theme-red-900 animate-pulse' : 'text-white'
+          hearted
+            ? 'text-theme-red-900 animate-pulse'
+            : 'dark:text-white text-black'
         }
       />
     </IconButton>
