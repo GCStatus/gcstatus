@@ -328,9 +328,17 @@ const api = createApi({
         filterable: string
       }
     >({
-      query: ({ by, filterable }) => ({
-        url: `games/filters/${by}/${filterable}`,
-      }),
+      query: ({ by, filterable }) => `games/filters/${by}/${filterable}`,
+      transformResponse: (res: Res<GameList[]>) => res.data,
+    }),
+
+    findGamesByCondition: builder.query<GameList[], string>({
+      query: (condition) => `games/condition/${condition}`,
+      transformResponse: (res: Res<GameList[]>) => res.data,
+    }),
+
+    calendarGames: builder.query<GameList[], void>({
+      query: () => 'games/calendar',
       transformResponse: (res: Res<GameList[]>) => res.data,
     }),
   }),
@@ -352,6 +360,7 @@ export const {
   useResetPassMutation,
   useHeartItemMutation,
   useLazyGetLevelsQuery,
+  useCalendarGamesQuery,
   useToggleTitleMutation,
   useGetGameDetailsQuery,
   useLazyFindGamesByQuery,
@@ -369,6 +378,7 @@ export const {
   useUpdateNickAndEmailMutation,
   useDeleteNotificationMutation,
   useMarkNotificationReadMutation,
+  useLazyFindGamesByConditionQuery,
   useMarkNotificationUnreadMutation,
   useDeleteAllNotificationsMutation,
   useMarkAllNotificationsReadMutation,

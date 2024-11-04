@@ -102,3 +102,4 @@ export type FiltersClassifications =
   | 'developers'
   | 'publishers'
   | 'cracks'
+  | 'protections'

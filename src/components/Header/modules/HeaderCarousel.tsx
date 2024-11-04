@@ -68,7 +68,7 @@ function HeaderCarousel(props: HeaderCarouselProps) {
                       component="span"
                       className="bg-gray-800 px-3 py-1 rounded-full text-sm"
                       key={id}>
-                      <Link href={`/platforms/${slug}`}>{name}</Link>
+                      <Link href={`/games/platforms/${slug}`}>{name}</Link>
                     </Box>
                   ))}
                 </Box>
@@ -78,7 +78,7 @@ function HeaderCarousel(props: HeaderCarouselProps) {
                       component="span"
                       className="bg-gray-700 px-3 py-1 rounded-full text-sm"
                       key={id}>
-                      <Link href={`/genres/${slug}`}>{name}</Link>
+                      <Link href={`/games/genres/${slug}`}>{name}</Link>
                     </Box>
                   ))}
                 </Box>

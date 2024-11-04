@@ -1,4 +1,5 @@
 import { Box, Link, Typography } from '@mui/material'
+import { format } from 'date-fns'
 import { IoHeartOutline } from 'react-icons/io5'
 import { Autoplay, EffectCoverflow } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -40,7 +41,7 @@ function LikedGames(props: LikedGamesProps) {
                   {game.title}
                 </Link>
                 <Typography className="text-lg mb-4">
-                  {game.release_date}
+                  {format(new Date(game.release_date), 'yyyy-MM-dd')}
                 </Typography>
                 <Box className="flex sm:flex-row flex-col items-center flex-wrap mt-4 gap-2">
                   <Typography className="text-md">Platforms: </Typography>

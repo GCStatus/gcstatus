@@ -94,7 +94,7 @@ function PopularGames(props: PopularGamesProps) {
       </Box>
 
       <Link
-        href="/games/popular"
+        href="/games/condition/popular"
         className="flex justify-center p-4 mt-6 border border-theme-red-900 sm:max-w-48 w-full mx-auto rounded-lg hover:bg-theme-red-900 transition duration-500 dark:text-white text-black hover:text-white">
         See more...
       </Link>

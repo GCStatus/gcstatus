@@ -23,6 +23,7 @@ function useGames(params: {
   developer?: string
   publisher?: string
   crack?: string
+  protection?: string
 }) {
   const [trigger, { games, isLoading }] = useLazyFindGamesByQuery({
     selectFromResult: ({ data = [], isLoading, isFetching }) => ({
@@ -48,7 +49,7 @@ function useGames(params: {
   )
 
   const fetchGames = async () => {
-    const sortedGames = displayedGames.sort((a, b) => {
+    const sortedGames = [...displayedGames].sort((a, b) => {
       const aValue = a[sort.field]
       const bValue = b[sort.field]
 
@@ -93,6 +94,7 @@ function useGames(params: {
         { by: 'categories', filterable: memoizedParams.category },
         { by: 'developers', filterable: memoizedParams.developer },
         { by: 'publishers', filterable: memoizedParams.publisher },
+        { by: 'protections', filterable: memoizedParams.protection },
       ]
 
       filters.forEach((filter) => {
