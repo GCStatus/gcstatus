@@ -165,6 +165,7 @@ function GameCard(props: GameCardProps) {
                       variant="body2"
                       className="font-bold dark:text-white text-gray-800">
                       <Link
+                        rel="noopener noreferrer"
                         href={`/crackers/${game.crack.by.slug}`}
                         className="hover:text-theme-red-900 transition-colors duration-300"
                         target="_blank">
@@ -185,6 +186,7 @@ function GameCard(props: GameCardProps) {
                     variant="body2"
                     className="font-bold dark:text-white text-gray-800">
                     <Link
+                      rel="noopener noreferrer"
                       href={`/games/protections/${game.crack.protection.slug}`}
                       className="hover:text-theme-red-900 transition-colors duration-300"
                       target="_blank">

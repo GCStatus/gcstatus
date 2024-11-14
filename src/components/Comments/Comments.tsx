@@ -21,7 +21,7 @@ import {
 } from '@/services/api'
 import { Comment } from '@/types'
 
-import ActionDialog from '../ActionDialog'
+import { ActionDialog } from '..'
 
 interface CommentsProps {
   defaultComments: Comment[]
@@ -44,10 +44,25 @@ function Comments(props: CommentsProps) {
     new Set(),
   )
 
-  const handleDelete = async (id: number) => {
+  const handleDelete = async (id: number, parentId?: number) => {
     await triggerDel(id)
 
-    setComments(comments.filter(({ id: commentId }) => commentId !== id))
+    if (parentId) {
+      setComments(
+        comments.map((comment) =>
+          comment.id === parentId
+            ? {
+                ...comment,
+                replies: comment.replies.filter(
+                  ({ id: commentId }) => commentId !== id,
+                ),
+              }
+            : comment,
+        ),
+      )
+    } else {
+      setComments(comments.filter(({ id: commentId }) => commentId !== id))
+    }
   }
 
   const handleHeartClick = (item: Comment, parentId?: number) => {
@@ -217,26 +232,37 @@ function Comments(props: CommentsProps) {
                       )
                     }
                     className="text-theme-red-900 hover:text-theme-red-700 hover:scale-110 transition-transform duration-300">
-                    <Icon name="IoChatboxEllipsesOutline" />
+                    <Icon
+                      name={
+                        replyTo === comment.id
+                          ? 'IoCloseOutline'
+                          : 'IoChatboxEllipsesOutline'
+                      }
+                    />
                   </IconButton>
                 </Tooltip>
-
-                <ActionDialog
-                  title="Remove comment"
-                  description="This action is irreversible. Are you sure?"
-                  confirmAction={() => handleDelete(comment.id)}
-                  trigger={
-                    <Tooltip title="Remove comment">
-                      <IconButton>
-                        <Icon
-                          name="IoTrashOutline"
-                          className="text-theme-red-900"
-                        />
-                      </IconButton>
-                    </Tooltip>
-                  }
-                />
-
+                {comment.by.id === user?.id && (
+                  <ActionDialog
+                    title="Remove comment"
+                    description="This action is irreversible. Are you sure?"
+                    confirmAction={() => handleDelete(comment.id)}
+                    alert={{
+                      severity: 'info',
+                      variant: 'outlined',
+                      children: `Are you sure you want to remove the comment: ${comment.comment}?`,
+                    }}
+                    trigger={
+                      <Tooltip title="Remove comment">
+                        <IconButton>
+                          <Icon
+                            name="IoTrashOutline"
+                            className="text-theme-red-900"
+                          />
+                        </IconButton>
+                      </Tooltip>
+                    }
+                  />
+                )}
                 <Box className="flex items-center gap-2">
                   {comment.by.id === user?.id ? (
                     <Icon name="IoHeartOutline" size={28} />
@@ -318,32 +344,66 @@ function Comments(props: CommentsProps) {
                               )
                             }
                             className="text-theme-red-900 hover:text-theme-red-700 hover:scale-110 transition-transform duration-300">
-                            <Icon name="IoChatboxEllipsesOutline" />
+                            <Icon
+                              name={
+                                replyTo === reply.id
+                                  ? 'IoCloseOutline'
+                                  : 'IoChatboxEllipsesOutline'
+                              }
+                            />
                           </IconButton>
                         </Tooltip>
-                        {reply.by.id !== user?.id && (
-                          <HeartButton
-                            heartable_id={reply.id}
-                            heartable_type="commentables"
-                            setHeartPops={setHeartPops}
-                            isHearted={
-                              likedComments.has(
-                                `${comment.id}-${reply.id}`,
-                              ) || reply.is_hearted
+                        {reply.by.id === user?.id && (
+                          <ActionDialog
+                            title="Remove comment"
+                            description="This action is irreversible. Are you sure?"
+                            alert={{
+                              severity: 'info',
+                              variant: 'outlined',
+                              children: `Are you sure you want to remove the comment: ${reply.comment}?`,
+                            }}
+                            confirmAction={() =>
+                              handleDelete(reply.id, comment.id)
                             }
-                            type="icon"
-                            setHearts={() => {}}
-                            onHeartToggle={() =>
-                              handleHeartClick(reply, comment.id)
+                            trigger={
+                              <Tooltip title="Remove comment">
+                                <IconButton>
+                                  <Icon
+                                    name="IoTrashOutline"
+                                    className="text-theme-red-900"
+                                  />
+                                </IconButton>
+                              </Tooltip>
                             }
-                            size={28}
                           />
                         )}
-                        <Typography
-                          variant="body2"
-                          className="dark:text-white text-gray-800">
-                          {reply.hearts_count}
-                        </Typography>
+                        <Box className="flex items-center gap-2">
+                          {reply.by.id === user?.id ? (
+                            <Icon name="IoHeartOutline" size={28} />
+                          ) : (
+                            <HeartButton
+                              heartable_id={reply.id}
+                              heartable_type="commentables"
+                              setHeartPops={setHeartPops}
+                              isHearted={
+                                likedComments.has(
+                                  `${comment.id}-${reply.id}`,
+                                ) || reply.is_hearted
+                              }
+                              type="icon"
+                              setHearts={() => {}}
+                              onHeartToggle={() =>
+                                handleHeartClick(reply, comment.id)
+                              }
+                              size={28}
+                            />
+                          )}
+                          <Typography
+                            variant="body2"
+                            className="dark:text-white text-gray-800">
+                            {reply.hearts_count}
+                          </Typography>
+                        </Box>
                       </Box>
                     </ListItem>
 

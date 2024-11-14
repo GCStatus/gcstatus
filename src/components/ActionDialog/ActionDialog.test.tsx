@@ -45,7 +45,7 @@ describe('ActionDialog', () => {
 
     expect(screen.getByRole('dialog')).toBeInTheDocument()
 
-    fireEvent.click(screen.getByText('Cancelar'))
+    fireEvent.click(screen.getByText('Cancel'))
 
     await waitFor(() => {
       expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
@@ -76,7 +76,9 @@ describe('ActionDialog', () => {
     fireEvent.click(screen.getByText('Confirm'))
 
     await waitFor(() => {
-      expect(toast.error).toHaveBeenCalledWith('Ops! Algo deu errado')
+      expect(toast.error).toHaveBeenCalledWith(
+        'Ops! Something went wrong.',
+      )
     })
 
     expect(screen.getByRole('dialog')).toBeInTheDocument()

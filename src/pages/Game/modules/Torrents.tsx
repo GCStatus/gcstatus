@@ -28,6 +28,7 @@ function Torrents(props: TorrentsProps) {
                     <Link
                       href={torrent.url}
                       target="_blank"
+                      rel="noopener noreferrer"
                       className="underline dark:text-gray-400 text-zinc-700">
                       {torrent.provider.name}
                     </Link>

@@ -23,6 +23,7 @@ function Availables(props: AvailablesProps) {
             className="font-bold sm:text-2xl text-xl ">
             <Link
               target="_blank"
+              rel="noopener noreferrer"
               href={`/companies/${gameStore.store.slug}`}
               className="dark:text-white text-black">
               {gameStore.store.name}

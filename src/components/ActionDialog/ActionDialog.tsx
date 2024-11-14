@@ -74,7 +74,7 @@ function ActionDialog(props: ActionDialogProps) {
       await confirmAction()
     } catch (e) {
       console.log(e)
-      toast.error('Ops! Algo deu errado')
+      toast.error('Ops! Something went wrong.')
     }
   }
 
@@ -154,7 +154,7 @@ function ActionDialog(props: ActionDialogProps) {
                 flexGrow: 1,
                 textTransform: 'uppercase',
               }}>
-              Cancelar
+              Cancel
             </Button>
 
             <Button

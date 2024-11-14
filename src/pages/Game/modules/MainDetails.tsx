@@ -105,7 +105,8 @@ function MainDetails(props: MainDetailsProps) {
                   <Link
                     href={`/crackers/${game.crack.protection.slug}`}
                     className="hover:text-theme-red-900 transition-colors duration-300"
-                    target="_blank">
+                    target="_blank"
+                    rel="noopener noreferrer">
                     {game.crack.protection.name}
                   </Link>
                 ) : (
@@ -123,7 +124,8 @@ function MainDetails(props: MainDetailsProps) {
                 <Tooltip title="Check all games with this crack status">
                   <Link
                     href={`/games/cracks/${game.crack?.status}`}
-                    target="_blank">
+                    target="_blank"
+                    rel="noopener noreferrer">
                     <Chip
                       label={mapCrack[game.crack.status]}
                       className={`${game.crack.status === 'cracked' || game.crack.status === 'cracked-oneday' ? 'bg-green-500' : 'bg-red-500'} text-white`}
@@ -150,7 +152,8 @@ function MainDetails(props: MainDetailsProps) {
                   <Link
                     href={`/crackers/${game.crack.by.slug}`}
                     className="hover:text-theme-red-900 transition-colors duration-300"
-                    target="_blank">
+                    target="_blank"
+                    rel="noopener noreferrer">
                     {game.crack.by.name}
                   </Link>
                 </Typography>
@@ -197,6 +200,7 @@ function MainDetails(props: MainDetailsProps) {
                   <Link
                     href={`/games/platforms/${platform.slug}`}
                     target="_blank"
+                    rel="noopener noreferrer"
                     className="dark:text-gray-200 text-black dark:hover:text-theme-red-900 hover:text-theme-red-900 transition-colors duration-300">
                     {platform.name}
                   </Link>
@@ -230,6 +234,7 @@ function MainDetails(props: MainDetailsProps) {
                   <Link
                     href={`/games/genres/${genre.slug}`}
                     target="_blank"
+                    rel="noopener noreferrer"
                     className="dark:text-gray-200 text-black dark:hover:text-theme-red-900 hover:text-theme-red-900 transition-colors duration-300">
                     {genre.name}
                   </Link>
@@ -267,6 +272,7 @@ function MainDetails(props: MainDetailsProps) {
                   <Link
                     href={`/games/tags/${tag.slug}`}
                     target="_blank"
+                    rel="noopener noreferrer"
                     className="dark:text-gray-200 text-black dark:hover:text-theme-red-900 hover:text-theme-red-900 transition-colors duration-300">
                     {tag.name}
                   </Link>
@@ -300,6 +306,7 @@ function MainDetails(props: MainDetailsProps) {
                   <Link
                     href={`/games/categories/${category.slug}`}
                     target="_blank"
+                    rel="noopener noreferrer"
                     className="dark:text-gray-200 text-black dark:hover:text-theme-red-900 hover:text-theme-red-900 transition-colors duration-300">
                     {category.name}
                   </Link>
@@ -337,6 +344,7 @@ function MainDetails(props: MainDetailsProps) {
                   <Link
                     href={`/games/publishers/${publisher.slug}`}
                     target="_blank"
+                    rel="noopener noreferrer"
                     className="dark:text-gray-200 text-black dark:hover:text-theme-red-900 hover:text-theme-red-900 transition-colors duration-300">
                     {publisher.name}
                   </Link>
@@ -370,6 +378,7 @@ function MainDetails(props: MainDetailsProps) {
                   <Link
                     href={`/games/developers/${developer.slug}`}
                     target="_blank"
+                    rel="noopener noreferrer"
                     className="dark:text-gray-200 text-black dark:hover:text-theme-red-900 hover:text-theme-red-900 transition-colors duration-300">
                     {developer.name}
                   </Link>

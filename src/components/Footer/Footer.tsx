@@ -46,6 +46,7 @@ function Footer() {
 
           <Grid2 spacing={1} className="mt-4">
             <IconButton
+              rel="noopener noreferrer"
               href="https://github.com/felipebrsk/"
               target="_blank"
               className="animate-pulse"
@@ -53,6 +54,7 @@ function Footer() {
               <IoLogoGithub />
             </IconButton>
             <IconButton
+              rel="noopener noreferrer"
               href="https://linkedin.com/in/felipe-luz-oliveira/"
               target="_blank"
               className="animate-pulse"
@@ -60,6 +62,7 @@ function Footer() {
               <IoLogoLinkedin />
             </IconButton>
             <IconButton
+              rel="noopener noreferrer"
               href="https://wa.me/5579998677272/?text=Hello!"
               target="_blank"
               className="animate-pulse"
