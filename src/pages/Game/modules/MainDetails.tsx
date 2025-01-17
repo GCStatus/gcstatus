@@ -125,8 +125,8 @@ function MainDetails(props: MainDetailsProps) {
                     href={`/games/cracks/${game.crack?.status}`}
                     target="_blank">
                     <Chip
-                      label={mapCrack[game.crack.status]}
-                      className={`${game.crack.status === 'cracked' || game.crack.status === 'cracked-oneday' ? 'bg-green-500' : 'bg-red-500'} text-white`}
+                      label={mapCrack[game.crack.status.name]}
+                      className={`${['cracked', 'cracked-oneday'].includes(game.crack.status.name) ? 'bg-green-500' : 'bg-red-500'} text-white`}
                     />
                   </Link>
                 </Tooltip>

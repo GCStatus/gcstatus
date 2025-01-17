@@ -17,16 +17,15 @@ function Requirements(props: RequirementsProps) {
 
   const sortedRequirements = [...requirements].sort((a, b) => {
     return (
-      potentialPriority[a.requirement_type.potential] -
-      potentialPriority[b.requirement_type.potential]
+      potentialPriority[a.type.potential] -
+      potentialPriority[b.type.potential]
     )
   })
 
   const uniqueTypes = Array.from(
     new Set(
       sortedRequirements.map(
-        (req) =>
-          `${req.requirement_type.os}-${req.requirement_type.potential}`,
+        (req) => `${req.type.os}-${req.type.potential}`,
       ),
     ),
   ).map((key) => {
@@ -59,9 +58,7 @@ function Requirements(props: RequirementsProps) {
 
       {sortedRequirements
         .filter(
-          (req) =>
-            `${req.requirement_type.os}-${req.requirement_type.potential}` ===
-            activeTab,
+          (req) => `${req.type.os}-${req.type.potential}` === activeTab,
         )
         .map((req) => (
           <div
@@ -70,11 +67,10 @@ function Requirements(props: RequirementsProps) {
             <div className="absolute inset-0 rounded-lg opacity-10 hover:opacity-30 transition-opacity duration-500 pointer-events-none" />
 
             <h3 className="sm:text-left text-center text-xl font-bold text-theme-red-900 mb-4">
-              {req.requirement_type.os.charAt(0).toUpperCase() +
-                req.requirement_type.os.slice(1)}
+              {req.type.os.charAt(0).toUpperCase() + req.type.os.slice(1)}
               {' - '}
-              {req.requirement_type.potential.charAt(0).toUpperCase() +
-                req.requirement_type.potential.slice(1)}{' '}
+              {req.type.potential.charAt(0).toUpperCase() +
+                req.type.potential.slice(1)}{' '}
               requirements
             </h3>
 

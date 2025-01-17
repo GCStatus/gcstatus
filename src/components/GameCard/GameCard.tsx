@@ -150,7 +150,9 @@ function GameCard(props: GameCardProps) {
 
           {game.crack ? (
             <Box className="flex flex-col gap-2 relative">
-              {['cracked', 'cracked-oneday'].includes(game.crack.status) &&
+              {['cracked', 'cracked-oneday'].includes(
+                game.crack.status.name,
+              ) &&
                 game.crack.by && (
                   <Box className="flex items-center gap-2">
                     <Typography
@@ -195,22 +197,22 @@ function GameCard(props: GameCardProps) {
               )}
 
               <Chip
-                label={mapCrack[game.crack.status]}
+                label={mapCrack[game.crack.status.name]}
                 icon={
-                  game.crack.status === 'uncracked' ? (
+                  game.crack.status.name === 'uncracked' ? (
                     <IoCloseCircleOutline className="text-white" />
                   ) : (
                     <IoCheckmarkCircleOutline className="text-white" />
                   )
                 }
                 className={`font-bold px-3 py-1 rounded-md text-white ${
-                  game.crack.status === 'uncracked'
+                  game.crack.status.name === 'uncracked'
                     ? 'bg-theme-red-900 animate-pulse'
                     : 'bg-green-500'
                 }`}
                 style={{
                   boxShadow: `0 4px 10px ${
-                    game.crack.status === 'uncracked'
+                    game.crack.status.name === 'uncracked'
                       ? 'rgba(255, 77, 77, 0.5)'
                       : 'rgba(76, 175, 80, 0.5)'
                   }`,

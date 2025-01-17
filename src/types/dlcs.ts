@@ -1,13 +1,29 @@
-import { DLCStore, Gallery, Platform } from '.'
+import {
+  Category,
+  Developer,
+  DLCStore,
+  Gallery,
+  Genre,
+  Platform,
+  Publisher,
+  Tag,
+} from '.'
 
 export interface DLC {
   id: number
-  name: string
+  slug: string
+  title: string
   about?: string
   cover: string
   release_date: string
   description?: string
   short_description?: string
+  legal?: string
+  categories: Category[]
+  tags: Tag[]
+  developers: Developer[]
+  publishers: Publisher[]
+  genres: Genre[]
   stores: DLCStore[]
   galleries: Gallery[]
   platforms: Platform[]

@@ -1,11 +1,11 @@
 import { Box, Chip, Link, Stack, Tooltip, Typography } from '@mui/material'
 import { Carousel } from 'react-responsive-carousel'
 
-import { Banner } from '@/types'
+import { GameBanner } from '@/types'
 import { mapCrack } from '@/utils'
 
 interface HeaderCarouselProps {
-  banners: Banner[]
+  banners: GameBanner[]
 }
 
 function HeaderCarousel(props: HeaderCarouselProps) {
@@ -23,10 +23,10 @@ function HeaderCarousel(props: HeaderCarouselProps) {
       emulateTouch
       preventMovementUntilSwipeScrollTolerance={true}
       swipeScrollTolerance={50}>
-      {banners.map(({ id, game }) => (
+      {banners.map(({ id, bannerable }) => (
         <Box className="relative h-screen" key={id}>
           <img
-            src={game.cover}
+            src={bannerable.cover}
             alt="Game Banner"
             className="w-full h-full object-cover"
           />
@@ -35,19 +35,19 @@ function HeaderCarousel(props: HeaderCarouselProps) {
               <Box className="flex flex-col max-w-md items-center">
                 <Typography className="text-4xl md:text-5xl font-bold mb-4">
                   <Tooltip
-                    title={`Go to ${game.title} details`}
+                    title={`Go to ${bannerable.title} details`}
                     disableInteractive>
                     <Link
-                      href={`/games/${game.slug}`}
+                      href={`/games/${bannerable.slug}`}
                       className="hover:text-yellow-400 transition duration-300">
-                      {game.title}
+                      {bannerable.title}
                     </Link>
                   </Tooltip>
                 </Typography>
-                {game.crack ? (
+                {bannerable.crack ? (
                   <Chip
-                    label={mapCrack[game.crack.status]}
-                    className={`${['cracked', 'cracked-oneday'].includes(game.crack.status) ? 'bg-green-500' : 'bg-red-500'} text-white`}
+                    label={mapCrack[bannerable.crack.status.name]}
+                    className={`${['cracked', 'cracked-oneday'].includes(bannerable.crack.status.name) ? 'bg-green-500' : 'bg-red-500'} text-white`}
                   />
                 ) : (
                   <Chip
@@ -59,11 +59,11 @@ function HeaderCarousel(props: HeaderCarouselProps) {
 
               <Stack className="flex flex-col max-w-xl md:text-right text-center">
                 <Typography className="mb-4">
-                  {game.short_description}
+                  {bannerable.short_description}
                 </Typography>
                 <Typography className="mb-2">Available on:</Typography>
                 <Box className="flex md:justify-end justify-center gap-2 mb-4 sm:flex-row flex-col sm:px-0 px-8">
-                  {game.platforms.map(({ id, slug, name }) => (
+                  {bannerable.platforms.map(({ id, slug, name }) => (
                     <Box
                       component="span"
                       className="bg-gray-800 px-3 py-1 rounded-full text-sm"
@@ -73,7 +73,7 @@ function HeaderCarousel(props: HeaderCarouselProps) {
                   ))}
                 </Box>
                 <Box className="flex flex-wrap md:justify-end justify-center gap-2 sm:flex-row flex-col sm:px-0 px-8">
-                  {game.genres.map(({ id, slug, name }) => (
+                  {bannerable.genres.map(({ id, slug, name }) => (
                     <Box
                       component="span"
                       className="bg-gray-700 px-3 py-1 rounded-full text-sm"

@@ -1,12 +1,12 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import toast from 'react-hot-toast'
 
-import { MOCK_TITLES, MOCK_USER } from '@/mocks'
+import { MOCK_MISSIONS, MOCK_TITLES, MOCK_USER } from '@/mocks'
 import {
   useBuyTitleMutation,
   useToggleTitleMutation,
 } from '@/services/api'
-import { Title, User } from '@/types'
+import { Mission, Title, User } from '@/types'
 
 import TitleCard from './TitleCard'
 
@@ -21,6 +21,7 @@ jest.mock('react-hot-toast', () => ({
 
 const mockUser: User = MOCK_USER
 const mockTitle: Title = MOCK_TITLES.pop() as Title
+const mockMission: Mission = MOCK_MISSIONS.pop() as Mission
 
 describe('TitleCard', () => {
   beforeEach(() => {
@@ -50,18 +51,24 @@ describe('TitleCard', () => {
   it('shows the progress bar correctly', () => {
     const halfTitle: Title = {
       ...mockTitle,
-      requirements: [
-        {
-          ...mockTitle.requirements[0],
-          progress: {
-            id: 1,
-            progress: mockTitle.requirements[0].goal / 2,
-            completed: false,
-            created_at: '2024-01-01T00:00:00.000Z',
-            updated_at: '2024-01-01T00:00:00.000Z',
-          },
+      rewardable: {
+        id: 1,
+        rewardable_type: 'App\\\\Models\\\\Title',
+        sourceable_type: 'App\\\\Models\\\\Mission',
+        sourceable: {
+          ...mockMission,
+          requirements: [
+            {
+              ...mockMission.requirements[0],
+              progress: {
+                id: 1,
+                progress: mockMission.requirements[0].goal / 2,
+                completed: false,
+              },
+            },
+          ],
         },
-      ],
+      },
     }
 
     render(<TitleCard user={mockUser} title={halfTitle} />)
@@ -88,6 +95,7 @@ describe('TitleCard', () => {
       ...(MOCK_TITLES.shift() as Title),
       purchasable: true,
       cost: 50,
+      own: false,
     }
 
     render(
@@ -96,7 +104,7 @@ describe('TitleCard', () => {
           ...mockUser,
           wallet: {
             id: 1,
-            amount: 50,
+            balance: 50,
           },
         }}
         title={purchasable}
@@ -163,18 +171,24 @@ describe('TitleCard', () => {
 
     const completedTitle: Title = {
       ...mockTitle,
-      requirements: [
-        {
-          ...mockTitle.requirements[0],
-          progress: {
-            id: 1,
-            progress: 100,
-            completed: true,
-            created_at: '2024-01-01T00:00:00.000Z',
-            updated_at: '2024-01-01T00:00:00.000Z',
-          },
+      rewardable: {
+        id: 2,
+        rewardable_type: 'App\\\\Models\\\\Title',
+        sourceable_type: 'App\\\\Models\\\\Mission',
+        sourceable: {
+          ...mockMission,
+          requirements: [
+            {
+              ...mockMission.requirements[0],
+              progress: {
+                id: 1,
+                progress: 100,
+                completed: true,
+              },
+            },
+          ],
         },
-      ],
+      },
     }
 
     render(<TitleCard user={mockUser} title={completedTitle} />)

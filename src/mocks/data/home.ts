@@ -14,6 +14,6 @@ export const MOCK_HOME: Home = {
   banners: MOCK_BANNERS,
   popular: MOCK_POPULAR_GAMES,
   next_release: MOCK_NEXT_RELEASE,
-  upcoming_games: MOCK_UPCOMING_GAMES,
-  most_liked_games: MOCK_MOST_LIKED_GAMES,
+  upcoming: MOCK_UPCOMING_GAMES,
+  most_liked: MOCK_MOST_LIKED_GAMES,
 }

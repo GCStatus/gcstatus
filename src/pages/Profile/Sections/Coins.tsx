@@ -22,17 +22,17 @@ function Coins(props: CoinsProps) {
       <Stack spacing={4} alignItems="center" className="relative mb-12">
         <Box className="relative w-36 h-36 bg-theme-red-900 rounded-full flex items-center justify-center shadow-2xl animate-bounce">
           <Typography className="text-white text-3xl font-bold">
-            {user.wallet.amount}
+            {user.wallet.balance}
           </Typography>
           <Box className="absolute inset-0 rounded-full border-4 border-yellow-400 blur-md opacity-20" />
         </Box>
         <Box className="w-full sm:max-w-sm border border-theme-red-900 dark:text-white text-black px-4 py-1 rounded-lg shadow-lg flex justify-center items-center text-center">
-          You have {user.wallet.amount} coins!
+          You have {user.wallet.balance} coins!
         </Box>
       </Stack>
 
       <Stack spacing={6}>
-        {user.wallet.amount > 0 && (
+        {user.wallet.balance > 0 && (
           <Card className="relative bg-transparent p-4 rounded-xl border border-theme-red-900 shadow-lg duration-500 hover:shadow-2xl hover:border-red-700 transition-transform hover:-translate-y-2">
             <CardContent className="text-white text-center group flex flex-col items-center">
               <AiOutlineMinusCircle className="text-theme-red-900 text-5xl mb-4 group-hover:animate-spin" />

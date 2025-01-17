@@ -6,5 +6,5 @@ export interface MediaType {
 export interface Gallery {
   id: number
   path: string
-  media_type: MediaType
+  type: MediaType
 }

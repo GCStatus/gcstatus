@@ -68,7 +68,7 @@ function Calendar() {
                   {item.title}
                   {item.crack &&
                     ['cracked', 'cracked-oneday'].includes(
-                      item.crack.status,
+                      item.crack.status.name,
                     ) && (
                       <Tooltip title="Crack is available" arrow>
                         <span>

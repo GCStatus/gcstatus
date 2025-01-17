@@ -34,8 +34,8 @@ function Transactions() {
 
   const filteredTransactions = transactions.filter(({ type: tType }) => {
     if (type === 'all') return true
-    if (type === 'add') return tType === 'addition'
-    return tType === 'subtraction'
+    if (type === 'add') return tType.type === 'addition'
+    return tType.type === 'subtraction'
   })
 
   const startIndex = (page - 1) * pageSize
@@ -152,7 +152,7 @@ function Transactions() {
                         <TableCell
                           align="center"
                           className="border-b border-gray-700 px-4 py-2">
-                          {transaction.type}
+                          {transaction.type.type}
                         </TableCell>
                       </TableRow>
                     ))}

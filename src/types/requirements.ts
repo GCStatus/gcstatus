@@ -1,7 +1,7 @@
 export interface RequirementType {
   id: number
-  os: 'minimum' | 'recommended' | 'maximum'
-  potential: 'windows' | 'mac' | 'linux'
+  os: 'windows' | 'mac' | 'linux'
+  potential: 'minimum' | 'recommended' | 'maximum'
 }
 
 export interface Requirement {
@@ -14,5 +14,5 @@ export interface Requirement {
   rom: string
   obs?: string
   network: string
-  requirement_type: RequirementType
+  type: RequirementType
 }

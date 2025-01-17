@@ -1,7 +1,7 @@
 import { GameList } from '.'
 
-export interface Banner {
+export interface GameBanner {
   id: number
-  bannerable_type: string
-  game: GameList
+  type: string
+  bannerable: GameList
 }

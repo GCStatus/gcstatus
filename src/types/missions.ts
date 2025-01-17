@@ -28,17 +28,22 @@ export interface MissionRequirement {
   progress: MissionProgress | null
 }
 
+export interface MissionStatus {
+  id: number
+  name: 'available' | 'unavailable' | 'canceled'
+}
+
 export interface Mission {
   id: number
   mission: string
   description: string
   coins: number
   experience: number
-  status: 'available' | 'unavailable' | 'canceled'
-  frequency: 'one-time' | 'daily' | 'weekly' | 'monthly'
+  status: MissionStatus
+  frequency: 'one_time' | 'daily' | 'weekly' | 'monthly'
   reset_time: string
   created_at: string
   rewards: MissionReward[]
   requirements: MissionRequirement[]
-  user_mission: UserMission | null
+  progress: UserMission | null
 }

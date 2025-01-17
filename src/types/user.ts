@@ -82,5 +82,5 @@ export interface Level {
 
 export interface Wallet {
   id: number
-  amount: number
+  balance: number
 }

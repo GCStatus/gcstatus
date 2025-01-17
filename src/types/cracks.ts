@@ -7,10 +7,15 @@ export interface Crackers {
   acting: boolean
 }
 
+export interface CrackStatus {
+  id: number
+  name: 'cracked' | 'uncracked' | 'cracked-oneday'
+}
+
 export interface Crack {
   id: number
-  status: 'cracked' | 'uncracked' | 'cracked-oneday'
   cracked_at: string | null
   by: Crackers | null
+  status: CrackStatus
   protection: Protection
 }

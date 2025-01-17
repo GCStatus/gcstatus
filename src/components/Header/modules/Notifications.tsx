@@ -119,12 +119,12 @@ function Notifications(props: NotificationsProps) {
 
     toggle()
 
-    if (notification.content.actionUrl.startsWith('https://')) {
-      window.open(notification.content.actionUrl, '_blank')
+    if (notification.data.actionUrl.startsWith('https://')) {
+      window.open(notification.data.actionUrl, '_blank')
       return
     }
 
-    go(notification.content.actionUrl)
+    go(notification.data.actionUrl)
   }
 
   useSuccess(successRead, readData?.message)
@@ -260,7 +260,7 @@ function Notifications(props: NotificationsProps) {
                         className={`focus:outline-none w-8 h-8 border rounded-full dark:border-gray-200 border-gray-700 flex items-center flex-shrink-0 justify-center ${!notification.read_at ? 'animate-pulse' : ''}`}>
                         <Icon
                           name={
-                            notification.content.icon as keyof typeof Icons
+                            notification.data.icon as keyof typeof Icons
                           }
                           className="dark:text-gray-400 text-gray-900"
                         />
@@ -269,13 +269,13 @@ function Notifications(props: NotificationsProps) {
                         <Box
                           component="span"
                           className="focus:outline-none text-sm leading-none flex flex-col gap-2">
-                          <Tooltip title={notification.content.title}>
+                          <Tooltip title={notification.data.title}>
                             <Link
                               onClick={() =>
                                 handleOpenNotification(notification)
                               }
                               className="dark:text-gray-300 text-gray-900 hover:text-yellow-400 transition-colors duration-300 hover:animate-pulse cursor-pointer">
-                              {s(notification.content.title, 70)}
+                              {s(notification.data.title, 70)}
                             </Link>
                           </Tooltip>
                           <Typography

@@ -37,7 +37,7 @@ for (let i = 0; i < 100; i++) {
       },
       wallet: {
         id: 1,
-        amount: faker.number.int(),
+        balance: faker.number.int(),
       },
     },
   }
@@ -80,7 +80,7 @@ export const MOCK_BLOG_DETAILS: BlogDetails = {
     },
     wallet: {
       id: 1,
-      amount: faker.number.int(),
+      balance: faker.number.int(),
     },
   },
   comments: [

@@ -1,12 +1,12 @@
 import { faker } from '@faker-js/faker'
 
-import { Banner } from '@/types'
+import { GameBanner } from '@/types'
 
-export const MOCK_BANNERS: Banner[] = [
+export const MOCK_BANNERS: GameBanner[] = [
   {
     id: 1,
-    bannerable_type: 'games',
-    game: {
+    type: 'games',
+    bannerable: {
       id: 1,
       condition: 'hot',
       slug: 'black-myth-wukong',
@@ -45,8 +45,8 @@ export const MOCK_BANNERS: Banner[] = [
   },
   {
     id: 2,
-    bannerable_type: 'games',
-    game: {
+    type: 'games',
+    bannerable: {
       id: 2,
       slug: 'god-of-war-ragnarok',
       title: 'God of War: Ragnarok',
@@ -81,8 +81,8 @@ export const MOCK_BANNERS: Banner[] = [
   },
   {
     id: 3,
-    bannerable_type: 'games',
-    game: {
+    type: 'games',
+    bannerable: {
       id: 3,
       views_count: faker.number.int(),
       hearts_count: faker.number.int(),
@@ -115,8 +115,8 @@ export const MOCK_BANNERS: Banner[] = [
   },
   {
     id: 4,
-    bannerable_type: 'games',
-    game: {
+    type: 'games',
+    bannerable: {
       id: 4,
       slug: 'alan-wake-2',
       title: 'Alan Wake 2',
@@ -158,8 +158,8 @@ export const MOCK_BANNERS: Banner[] = [
   },
   {
     id: 5,
-    bannerable_type: 'games',
-    game: {
+    type: 'games',
+    bannerable: {
       id: 5,
       slug: 'hades-ii',
       title: 'Hades II',
@@ -200,8 +200,8 @@ export const MOCK_BANNERS: Banner[] = [
   },
   {
     id: 6,
-    bannerable_type: 'games',
-    game: {
+    type: 'games',
+    bannerable: {
       id: 6,
       slug: 'star-wars-outlaws',
       title: 'Star Wars: Outlaws',

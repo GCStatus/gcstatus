@@ -1,7 +1,7 @@
+import { Mission } from './missions'
+
 export interface BaseReward {
   id: number
-  created_at: string
-  updated_at: string
   sourceable_type: string
   rewardable_type: string
 }
@@ -17,4 +17,8 @@ export interface TitleReward extends BaseReward {
     created_at: string
     requirements: any | null
   }
+}
+
+export interface TitleRewardSource extends BaseReward {
+  sourceable: Mission
 }

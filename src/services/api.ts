@@ -69,7 +69,7 @@ const api = createApi({
   endpoints: (builder) => ({
     login: builder.mutation<{ message: string }, LoginCredentials>({
       query: (body) => ({
-        url: 'auth/login',
+        url: 'login',
         method: 'POST',
         body,
       }),
@@ -78,7 +78,7 @@ const api = createApi({
 
     register: builder.mutation<{ message: string }, RegisterCredentials>({
       query: (body) => ({
-        url: 'auth/register',
+        url: 'register',
         method: 'POST',
         body,
       }),
@@ -86,7 +86,7 @@ const api = createApi({
 
     forgot: builder.mutation<{ message: string }, { email: string }>({
       query: (body) => ({
-        url: 'auth/password/email/send',
+        url: 'password/reset/notify',
         method: 'POST',
         body,
       }),
@@ -95,7 +95,7 @@ const api = createApi({
     resetPass: builder.mutation<{ message: string }, ResetPasswordPayload>(
       {
         query: (body) => ({
-          url: 'auth/password/reset',
+          url: 'password/reset',
           method: 'POST',
           body,
         }),
