@@ -4,14 +4,14 @@ export interface Review {
   id: number
   rate: number
   review: string
-  played: boolean
-  user: MinimalUser
+  consumed: boolean
+  by: MinimalUser
 }
 
 export interface ReviewStore {
   rate: number
   gameId: number
   userId: number
-  played: boolean
+  consumed: boolean
   review?: string
 }

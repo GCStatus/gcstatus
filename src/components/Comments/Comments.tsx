@@ -221,21 +221,23 @@ function Comments(props: CommentsProps) {
                   </IconButton>
                 </Tooltip>
 
-                <ActionDialog
-                  title="Remove comment"
-                  description="This action is irreversible. Are you sure?"
-                  confirmAction={() => handleDelete(comment.id)}
-                  trigger={
-                    <Tooltip title="Remove comment">
-                      <IconButton>
-                        <Icon
-                          name="IoTrashOutline"
-                          className="text-theme-red-900"
-                        />
-                      </IconButton>
-                    </Tooltip>
-                  }
-                />
+                {comment.by.id === user?.id && (
+                  <ActionDialog
+                    title="Remove comment"
+                    description="This action is irreversible. Are you sure?"
+                    confirmAction={() => handleDelete(comment.id)}
+                    trigger={
+                      <Tooltip title="Remove comment">
+                        <IconButton>
+                          <Icon
+                            name="IoTrashOutline"
+                            className="text-theme-red-900"
+                          />
+                        </IconButton>
+                      </Tooltip>
+                    }
+                  />
+                )}
 
                 <Box className="flex items-center gap-2">
                   {comment.by.id === user?.id ? (
@@ -301,7 +303,7 @@ function Comments(props: CommentsProps) {
                         </Avatar>
                         <ListItemText
                           primary={reply.comment}
-                          secondary={`by ${reply.by.nickname}, ${formatRelative(new Date(reply.created_at), new Date())}`}
+                          secondary={`by ${reply.by.nickname === user?.nickname ? 'me' : reply.by.nickname}, ${formatRelative(new Date(reply.created_at), new Date())}`}
                           primaryTypographyProps={{
                             className:
                               'dark:text-gray-400 text-gray-600 break-words',
@@ -321,7 +323,26 @@ function Comments(props: CommentsProps) {
                             <Icon name="IoChatboxEllipsesOutline" />
                           </IconButton>
                         </Tooltip>
-                        {reply.by.id !== user?.id && (
+                        {reply.by.id === user?.id && (
+                          <ActionDialog
+                            title="Remove reply"
+                            description="This action is irreversible. Are you sure?"
+                            confirmAction={() => handleDelete(reply.id)}
+                            trigger={
+                              <Tooltip title="Remove reply">
+                                <IconButton>
+                                  <Icon
+                                    name="IoTrashOutline"
+                                    className="text-theme-red-900"
+                                  />
+                                </IconButton>
+                              </Tooltip>
+                            }
+                          />
+                        )}
+                        {reply.by.id === user?.id ? (
+                          <Icon name="IoHeartOutline" size={28} />
+                        ) : (
                           <HeartButton
                             heartable_id={reply.id}
                             heartable_type="commentables"
@@ -341,7 +362,7 @@ function Comments(props: CommentsProps) {
                         )}
                         <Typography
                           variant="body2"
-                          className="dark:text-white text-gray-800">
+                          className="dark:text-white text-gray-800 ml-2">
                           {reply.hearts_count}
                         </Typography>
                       </Box>

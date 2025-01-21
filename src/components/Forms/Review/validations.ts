@@ -4,8 +4,8 @@ export const validations = {
     min: { value: 0.5, message: 'The minimum value for a review is 0.5.' },
     max: { value: 5, message: 'The maximum value for a review is 5.' },
   },
-  played: {
-    required: 'Please, tell me if you already played this game.',
+  consumed: {
+    required: 'Please, tell me if you already consumed this game.',
   },
   review: {
     minLength: {

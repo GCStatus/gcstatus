@@ -100,12 +100,12 @@ export const MOCK_GAME_DETAILS: GameDetails = {
   reviews: [
     {
       id: 1,
-      played: true,
+      consumed: true,
       rate: 5,
       review: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat laudantium praesentium architecto quis iusto aut et non facere, incidunt quo corrupti? Quibusdam ipsum voluptate quaerat distinctio ea. Quasi, debitis maiores!
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat laudantium praesentium architecto quis iusto aut et non facere, incidunt quo corrupti? Quibusdam ipsum voluptate quaerat distinctio ea. Quasi, debitis maiores!
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat laudantium praesentium architecto quis iusto aut et non facere, incidunt quo corrupti? Quibusdam ipsum voluptate quaerat distinctio ea. Quasi, debitis maiores!`,
-      user: {
+      by: {
         id: 1,
         name: 'Player 1',
         email: 'dev@dev.com',
@@ -117,12 +117,12 @@ export const MOCK_GAME_DETAILS: GameDetails = {
     },
     {
       id: 2,
-      played: false,
+      consumed: false,
       rate: 3.5,
       review: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat laudantium praesentium architecto quis iusto aut et non facere, incidunt quo corrupti? Quibusdam ipsum voluptate quaerat distinctio ea. Quasi, debitis maiores!
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat laudantium praesentium architecto quis iusto aut et non facere, incidunt quo corrupti? Quibusdam ipsum voluptate quaerat distinctio ea. Quasi, debitis maiores!
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat laudantium praesentium architecto quis iusto aut et non facere, incidunt quo corrupti? Quibusdam ipsum voluptate quaerat distinctio ea. Quasi, debitis maiores!`,
-      user: {
+      by: {
         id: 2,
         name: 'Player 2',
         email: 'dev2@dev.com',
@@ -134,11 +134,11 @@ export const MOCK_GAME_DETAILS: GameDetails = {
     },
     {
       id: 3,
-      played: false,
+      consumed: false,
       rate: 2.5,
       review:
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat laudantium praesentium architecto quis iusto aut et non facere, incidunt quo corrupti? Quibusdam ipsum voluptate quaerat distinctio ea. Quasi, debitis maiores!',
-      user: {
+      by: {
         id: 3,
         name: 'Player 3',
         email: 'dev3@dev.com',
@@ -150,11 +150,11 @@ export const MOCK_GAME_DETAILS: GameDetails = {
     },
     {
       id: 4,
-      played: true,
+      consumed: true,
       rate: 2,
       review:
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat laudantium praesentium architecto quis iusto aut et non facere, incidunt quo corrupti? Quibusdam ipsum voluptate quaerat distinctio ea. Quasi, debitis maiores!',
-      user: {
+      by: {
         id: 4,
         name: 'Player 4',
         email: 'dev4@dev.com',
@@ -383,11 +383,12 @@ export const MOCK_GAME_DETAILS: GameDetails = {
   torrents: [
     {
       id: 1,
-      posted_in: '2024-02-09T00:00:00.000Z',
+      posted_at: '2024-02-09T00:00:00.000Z',
       url: 'https://google.com',
       provider: {
         id: 1,
         name: 'FitGirl Repacks',
+        slug: 'fitgirl-repacks',
         url: 'https://google.com',
       },
     },
