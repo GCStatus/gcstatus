@@ -244,20 +244,9 @@ const api = createApi({
       invalidatesTags: (_, error) => (!error ? ['notifications'] : []),
     }),
 
-    markAllNotificationsUnread: builder.mutation<
-      { message: string },
-      void
-    >({
-      query: () => ({
-        url: 'notifications/all/unread',
-        method: 'PUT',
-      }),
-      invalidatesTags: (_, error) => (!error ? ['notifications'] : []),
-    }),
-
     deleteAllNotifications: builder.mutation<{ message: string }, void>({
       query: () => ({
-        url: 'notifications/all',
+        url: 'notifications/all/remove',
         method: 'DELETE',
       }),
       invalidatesTags: (_, error) => (!error ? ['notifications'] : []),
@@ -300,7 +289,7 @@ const api = createApi({
     searchGames: builder.query<GameList[], string>({
       query: (search) => ({
         url: 'games/search',
-        params: { search },
+        params: { q: search },
       }),
       transformResponse: (res: Res<GameList[]>) => res.data,
     }),
@@ -382,7 +371,6 @@ export const {
   useMarkNotificationUnreadMutation,
   useDeleteAllNotificationsMutation,
   useMarkAllNotificationsReadMutation,
-  useMarkAllNotificationsUnreadMutation,
 } = api
 
 export default api

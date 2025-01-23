@@ -94,7 +94,8 @@ function Terms() {
             <Link
               href="/ticket/create"
               target="_blank"
-              className="text-theme-red-900">
+              className="text-theme-red-900"
+              rel="noopener noreferrer">
               click here
             </Link>
             .

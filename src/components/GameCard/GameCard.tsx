@@ -153,7 +153,7 @@ function GameCard(props: GameCardProps) {
               {['cracked', 'cracked-oneday'].includes(
                 game.crack.status.name,
               ) &&
-                game.crack.by && (
+                game.crack.cracker && (
                   <Box className="flex items-center gap-2">
                     <Typography
                       variant="body2"
@@ -167,10 +167,11 @@ function GameCard(props: GameCardProps) {
                       variant="body2"
                       className="font-bold dark:text-white text-gray-800">
                       <Link
-                        href={`/crackers/${game.crack.by.slug}`}
+                        href={`/crackers/${game.crack.cracker.slug}`}
                         className="hover:text-theme-red-900 transition-colors duration-300"
-                        target="_blank">
-                        {game.crack.by.name}
+                        target="_blank"
+                        rel="noopener noreferrer">
+                        {game.crack.cracker.name}
                       </Link>
                     </Typography>
                   </Box>
@@ -189,7 +190,8 @@ function GameCard(props: GameCardProps) {
                     <Link
                       href={`/games/protections/${game.crack.protection.slug}`}
                       className="hover:text-theme-red-900 transition-colors duration-300"
-                      target="_blank">
+                      target="_blank"
+                      rel="noopener noreferrer">
                       {game.crack.protection.name}
                     </Link>
                   </Typography>

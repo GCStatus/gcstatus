@@ -46,13 +46,17 @@ function Search() {
   const [view, setView] = useState<'grid' | 'list'>('grid')
   const [isAnimating, setIsAnimating] = useState<boolean>(false)
   const [filters, setFilters] = useState<{
-    Category?: string
-    Genre?: string
-    Platform?: string
+    Category: string
+    Genre: string
+    Platform: string
+    Crack: string
+    Protection: string
   }>({
     Genre: 'all',
+    Crack: 'all',
     Platform: 'all',
     Category: 'all',
+    Protection: 'all',
   })
   const [sort, setSort] = useState<SortState>({
     field: 'title',
@@ -68,14 +72,40 @@ function Search() {
   }
 
   const applyFiltersAndSort = () => {
-    const filteredGames = originalGames.filter(
-      ({ categories, platforms, genres }) =>
-        (filters.Category === 'all' ||
-          categories.some(({ name }) => name === filters.Category)) &&
-        (filters.Genre === 'all' ||
-          genres.some(({ name }) => name === filters.Genre)) &&
-        (filters.Platform === 'all' ||
-          platforms.some(({ name }) => name === filters.Platform)),
+    const { Category, Genre, Platform, Crack, Protection } = filters
+
+    const isAll = (filter: string) => filter === 'all'
+
+    const filterMap: { [key: string]: (item: GameList) => boolean } = {
+      Category: ({ categories }) =>
+        isAll(Category) ||
+        categories.some(({ name }) => name === Category),
+      Genre: ({ genres }) =>
+        isAll(Genre) || genres.some(({ name }) => name === Genre),
+      Platform: ({ platforms }) =>
+        isAll(Platform) || platforms.some(({ name }) => name === Platform),
+      Crack: ({ crack }) => {
+        if (isAll(Crack)) return true
+
+        if (Crack === 'uncracked') {
+          return !crack || crack.status.name === 'uncracked'
+        }
+
+        if (Crack === 'cracked') {
+          return (
+            !!crack &&
+            ['cracked', 'cracked-oneday'].includes(crack.status.name)
+          )
+        }
+
+        return false
+      },
+      Protection: ({ crack }) =>
+        isAll(Protection) || crack?.protection.name === Protection,
+    }
+
+    const filteredGames = originalGames.filter((game) =>
+      Object.values(filterMap).every((filterFn) => filterFn(game)),
     )
 
     const sortedGames = filteredGames.sort((a, b) => {
@@ -134,7 +164,9 @@ function Search() {
   }, [search])
 
   useEffect(() => {
-    if (!isLoading && games) {
+    if (isLoading) return
+
+    if (games && games.length > 0) {
       setOriginalGames(games)
       setDisplayedGames(games)
       setTotalGames(games.length)

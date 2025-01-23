@@ -34,7 +34,7 @@ export const MOCK_GAME_DETAILS: GameDetails = {
       name: 'uncracked',
     },
     cracked_at: null,
-    by: null,
+    cracker: null,
     protection: {
       id: 1,
       name: 'Denuvo',

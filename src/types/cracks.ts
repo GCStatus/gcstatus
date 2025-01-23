@@ -1,6 +1,6 @@
 import { Protection } from '.'
 
-export interface Crackers {
+export interface Cracker {
   id: number
   name: string
   slug: string
@@ -15,7 +15,7 @@ export interface CrackStatus {
 export interface Crack {
   id: number
   cracked_at: string | null
-  by: Crackers | null
+  cracker: Cracker | null
   status: CrackStatus
   protection: Protection
 }

@@ -7,6 +7,8 @@ import {
   useMediaQuery,
 } from '@mui/material'
 import { format, isSameDay, parseISO } from 'date-fns'
+import { useState } from 'react'
+import { CalendarProps } from 'react-calendar'
 import { useNavigate } from 'react-router-dom'
 
 import { Icon } from '@/components'
@@ -27,6 +29,7 @@ interface CalendarTileProperties {
 function Calendar() {
   const mode = useTheme()
   const go = useNavigate()
+  const [date, setDate] = useState(new Date())
   const isMobile = useMediaQuery('(max-width: 490px)')
   const { games, isLoading } = useCalendarGamesQuery(undefined, {
     selectFromResult: ({ data = [], isLoading, isFetching }) => ({
@@ -34,6 +37,8 @@ function Calendar() {
       isLoading: isLoading || isFetching,
     }),
   })
+
+  const currentDate = new Date()
 
   const getTileContent = ({ date, view }: CalendarTileProperties) => {
     const appointment = games.filter((game) =>
@@ -43,7 +48,13 @@ function Calendar() {
     if (!appointment || view !== 'month') return null
 
     return (
-      <Box sx={{ padding: isMobile ? '0.25rem' : '0.5rem' }}>
+      <Box
+        sx={{
+          padding: isMobile ? '0.25rem' : '0.5rem',
+          display: 'flex',
+          flexDirection: 'column',
+          width: '100%',
+        }}>
         {appointment.map((item) => (
           <Tooltip
             title={`${item.title} - ${format(parseISO(item.release_date), 'yyyy-MM-dd')}`}
@@ -71,13 +82,13 @@ function Calendar() {
                       item.crack.status.name,
                     ) && (
                       <Tooltip title="Crack is available" arrow>
-                        <span>
+                        <Box component="span">
                           <Icon
                             name="IoCheckmarkCircleOutline"
                             className="group-hover:text-green-600 text-green-400 mb-0.5"
                             size={14}
                           />
-                        </span>
+                        </Box>
                       </Tooltip>
                     )}
                 </Box>
@@ -87,6 +98,17 @@ function Calendar() {
         ))}
       </Box>
     )
+  }
+
+  const props: CalendarProps = {
+    locale: 'en-US',
+    minDetail: 'year',
+    tileContent: (tileProps: CalendarTileProperties) =>
+      getTileContent(tileProps),
+    onChange: (value) => value && setDate(value as Date),
+    value: date,
+    maxDate: new Date(currentDate.getFullYear(), 11),
+    minDate: new Date(currentDate.getFullYear() - 1, 0),
   }
 
   return isLoading ? (
@@ -100,17 +122,9 @@ function Calendar() {
     <Box className={!isMobile ? 'p-12' : 'p-8'}>
       {!isMobile ? (
         mode === 'dark' ? (
-          <StyledCalendar
-            locale="en-US"
-            minDetail="year"
-            tileContent={getTileContent}
-          />
+          <StyledCalendar {...props} />
         ) : (
-          <StyledCalendarLight
-            locale="en-US"
-            minDetail="year"
-            tileContent={getTileContent}
-          />
+          <StyledCalendarLight {...props} />
         )
       ) : (
         <Typography>

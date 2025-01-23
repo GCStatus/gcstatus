@@ -20,7 +20,6 @@ import {
   useDeleteAllNotificationsMutation,
   useDeleteNotificationMutation,
   useMarkAllNotificationsReadMutation,
-  useMarkAllNotificationsUnreadMutation,
   useMarkNotificationReadMutation,
   useMarkNotificationUnreadMutation,
 } from '@/services/api'
@@ -54,19 +53,11 @@ function Notifications(props: NotificationsProps) {
   const [
     readAll,
     {
-      data: unreadAllData,
+      data: readAllData,
       isLoading: loadingReadAll,
       isSuccess: successReadAll,
     },
   ] = useMarkAllNotificationsReadMutation()
-  const [
-    unreadAll,
-    {
-      data: readAllData,
-      isLoading: loadingUnreadAll,
-      isSuccess: successUnreadAll,
-    },
-  ] = useMarkAllNotificationsUnreadMutation()
   const [
     deleteAll,
     {
@@ -106,10 +97,6 @@ function Notifications(props: NotificationsProps) {
     await readAll()
   }
 
-  const handleUnreadAll = async () => {
-    await unreadAll()
-  }
-
   const handleDeleteAll = async () => {
     await deleteAll()
   }
@@ -131,7 +118,6 @@ function Notifications(props: NotificationsProps) {
   useSuccess(successUnread, unreadData?.message)
   useSuccess(successRemove, removeData?.message)
   useSuccess(successReadAll, readAllData?.message)
-  useSuccess(successUnreadAll, unreadAllData?.message)
   useSuccess(successDeleteAll, deleteAllData?.message)
 
   const renderEmptyState = () => (
@@ -190,38 +176,7 @@ function Notifications(props: NotificationsProps) {
     </Box>
   )
 
-  const renderMarkAllAs = () => {
-    if (notifications.some(({ read_at }) => !read_at)) {
-      return (
-        <Button
-          className="mt-4"
-          onClick={handleReadAll}
-          isLoading={loadingReadAll}>
-          Mark all as read
-        </Button>
-      )
-    }
-
-    return (
-      <Button
-        className="mt-4"
-        onClick={handleUnreadAll}
-        isLoading={loadingUnreadAll}>
-        Mark all as unread
-      </Button>
-    )
-  }
-
-  const renderDeleteAll = () => {
-    return (
-      <Button
-        className="mt-4"
-        onClick={handleDeleteAll}
-        isLoading={loadingDeleteAll}>
-        Remove all
-      </Button>
-    )
-  }
+  const hasUnread = notifications.some(({ read_at }) => !read_at)
 
   return (
     <Stack
@@ -241,9 +196,24 @@ function Notifications(props: NotificationsProps) {
         <>
           {notifications.length > 0 ? (
             <>
-              <Box className="grid grid-cols-2 gap-4 xs:grid-cols-1">
-                {renderMarkAllAs()}
-                {renderDeleteAll()}
+              <Box
+                className={`grid gap-4 mt-4 ${
+                  hasUnread ? 'grid-cols-2' : 'grid-cols-1'
+                } xs:grid-cols-1`}>
+                {hasUnread && (
+                  <Button
+                    fullWidth
+                    onClick={handleReadAll}
+                    isLoading={loadingReadAll}>
+                    Mark all as read
+                  </Button>
+                )}
+                <Button
+                  fullWidth
+                  onClick={handleDeleteAll}
+                  isLoading={loadingDeleteAll}>
+                  Remove all
+                </Button>
               </Box>
               {groupedNotifications.map(({ date, notifications }) => (
                 <Box key={date.toISOString()}>

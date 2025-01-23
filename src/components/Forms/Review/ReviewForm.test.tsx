@@ -111,7 +111,7 @@ describe('ReviewForm Component', () => {
     await waitFor(() => {
       expect(consoleSpy).toHaveBeenCalledWith({
         review: 'This is a valid review with more than 15 characters.',
-        played: true,
+        consumed: true,
         userId: 1,
         rate: 2.5,
         gameId: mockGame.id,
@@ -119,7 +119,7 @@ describe('ReviewForm Component', () => {
     })
   })
 
-  it('toggles the played switch on and off', () => {
+  it('toggles the consumed switch on and off', () => {
     const { getByRole } = renderReviewForm()
 
     const switchElement = getByRole('checkbox')

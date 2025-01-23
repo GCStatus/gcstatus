@@ -49,21 +49,24 @@ function Footer() {
               href="https://github.com/felipebrsk/"
               target="_blank"
               className="animate-pulse"
-              data-qa="github-link">
+              data-qa="github-link"
+              rel="noopener noreferrer">
               <IoLogoGithub />
             </IconButton>
             <IconButton
               href="https://linkedin.com/in/felipe-luz-oliveira/"
               target="_blank"
               className="animate-pulse"
-              data-qa="linkedin-link">
+              data-qa="linkedin-link"
+              rel="noopener noreferrer">
               <IoLogoLinkedin />
             </IconButton>
             <IconButton
               href="https://wa.me/5579998677272/?text=Hello!"
               target="_blank"
               className="animate-pulse"
-              data-qa="whatsapp-link">
+              data-qa="whatsapp-link"
+              rel="noopener noreferrer">
               <IoLogoWhatsapp />
             </IconButton>
           </Grid2>
