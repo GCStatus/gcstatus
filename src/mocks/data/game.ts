@@ -29,9 +29,12 @@ export const MOCK_GAME_DETAILS: GameDetails = {
   is_free: false,
   crack: {
     id: 1,
-    status: 'uncracked',
+    status: {
+      id: 2,
+      name: 'uncracked',
+    },
     cracked_at: null,
-    by: null,
+    cracker: null,
     protection: {
       id: 1,
       name: 'Denuvo',
@@ -86,23 +89,23 @@ export const MOCK_GAME_DETAILS: GameDetails = {
     {
       id: 1,
       path: 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2358720/ss_86c4b7462bba219a0d0b89931a35812b9f188976.1920x1080.jpg?t=1725007201',
-      media_type: { id: 1, name: 'photo' },
+      type: { id: 1, name: 'photo' },
     },
     {
       id: 2,
       path: 'http://video.akamai.steamstatic.com/store_trailers/257048125/movie_max.mp4?t=1724238304',
-      media_type: { id: 2, name: 'video' },
+      type: { id: 2, name: 'video' },
     },
   ],
   reviews: [
     {
       id: 1,
-      played: true,
+      consumed: true,
       rate: 5,
       review: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat laudantium praesentium architecto quis iusto aut et non facere, incidunt quo corrupti? Quibusdam ipsum voluptate quaerat distinctio ea. Quasi, debitis maiores!
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat laudantium praesentium architecto quis iusto aut et non facere, incidunt quo corrupti? Quibusdam ipsum voluptate quaerat distinctio ea. Quasi, debitis maiores!
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat laudantium praesentium architecto quis iusto aut et non facere, incidunt quo corrupti? Quibusdam ipsum voluptate quaerat distinctio ea. Quasi, debitis maiores!`,
-      user: {
+      by: {
         id: 1,
         name: 'Player 1',
         email: 'dev@dev.com',
@@ -114,12 +117,12 @@ export const MOCK_GAME_DETAILS: GameDetails = {
     },
     {
       id: 2,
-      played: false,
+      consumed: false,
       rate: 3.5,
       review: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat laudantium praesentium architecto quis iusto aut et non facere, incidunt quo corrupti? Quibusdam ipsum voluptate quaerat distinctio ea. Quasi, debitis maiores!
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat laudantium praesentium architecto quis iusto aut et non facere, incidunt quo corrupti? Quibusdam ipsum voluptate quaerat distinctio ea. Quasi, debitis maiores!
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat laudantium praesentium architecto quis iusto aut et non facere, incidunt quo corrupti? Quibusdam ipsum voluptate quaerat distinctio ea. Quasi, debitis maiores!`,
-      user: {
+      by: {
         id: 2,
         name: 'Player 2',
         email: 'dev2@dev.com',
@@ -131,11 +134,11 @@ export const MOCK_GAME_DETAILS: GameDetails = {
     },
     {
       id: 3,
-      played: false,
+      consumed: false,
       rate: 2.5,
       review:
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat laudantium praesentium architecto quis iusto aut et non facere, incidunt quo corrupti? Quibusdam ipsum voluptate quaerat distinctio ea. Quasi, debitis maiores!',
-      user: {
+      by: {
         id: 3,
         name: 'Player 3',
         email: 'dev3@dev.com',
@@ -147,11 +150,11 @@ export const MOCK_GAME_DETAILS: GameDetails = {
     },
     {
       id: 4,
-      played: true,
+      consumed: true,
       rate: 2,
       review:
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat laudantium praesentium architecto quis iusto aut et non facere, incidunt quo corrupti? Quibusdam ipsum voluptate quaerat distinctio ea. Quasi, debitis maiores!',
-      user: {
+      by: {
         id: 4,
         name: 'Player 4',
         email: 'dev4@dev.com',
@@ -166,39 +169,45 @@ export const MOCK_GAME_DETAILS: GameDetails = {
     {
       id: 1,
       release_date: '2024-08-19',
-      name: 'Black Myth: Wukong Deluxe Edition Upgrade',
+      title: 'Black Myth: Wukong Deluxe Edition Upgrade',
+      categories: [],
+      developers: [],
+      genres: [],
+      publishers: [],
+      tags: [],
+      slug: 'black-myth-wukong-deluxe-edition-upgrade',
       cover:
         'https://cdn1.epicgames.com/spt-assets/ca9ef1bcf2f54043baac351366aec677/black-myth-wukong-1t5ca.jpg',
       galleries: [
         {
           id: 1,
           path: 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2672610/ss_fda62ee2e4ead7eac83ef0e825c6a644d6d38fa2.1920x1080.jpg?t=1725007043',
-          media_type: { id: 1, name: 'photo' },
+          type: { id: 1, name: 'photo' },
         },
         {
           id: 2,
           path: 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2672610/ss_86c4b7462bba219a0d0b89931a35812b9f188976.1920x1080.jpg?t=1725007043',
-          media_type: { id: 1, name: 'photo' },
+          type: { id: 1, name: 'photo' },
         },
         {
           id: 3,
           path: 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2672610/ss_fda62ee2e4ead7eac83ef0e825c6a644d6d38fa2.1920x1080.jpg?t=1725007043',
-          media_type: { id: 1, name: 'photo' },
+          type: { id: 1, name: 'photo' },
         },
         {
           id: 4,
           path: 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2672610/ss_86c4b7462bba219a0d0b89931a35812b9f188976.1920x1080.jpg?t=1725007043',
-          media_type: { id: 1, name: 'photo' },
+          type: { id: 1, name: 'photo' },
         },
         {
           id: 5,
           path: 'http://video.akamai.steamstatic.com/store_trailers/257048125/movie_max.mp4?t=1724238304',
-          media_type: { id: 2, name: 'video' },
+          type: { id: 2, name: 'video' },
         },
         {
           id: 6,
           path: 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2672610/ss_86c4b7462bba219a0d0b89931a35812b9f188976.1920x1080.jpg?t=1725007043',
-          media_type: { id: 1, name: 'photo' },
+          type: { id: 1, name: 'photo' },
         },
       ],
       platforms: [
@@ -356,7 +365,7 @@ export const MOCK_GAME_DETAILS: GameDetails = {
       os: 'Windows 10 64-bit',
       obs: 'HDD Supported, SSD Recommended. The above specifications were tested with DLSS/FSR/XeSS enabled.',
       network: 'Non necessary',
-      requirement_type: { id: 1, os: 'minimum', potential: 'windows' },
+      type: { id: 1, os: 'windows', potential: 'minimum' },
     },
     {
       id: 2,
@@ -368,17 +377,18 @@ export const MOCK_GAME_DETAILS: GameDetails = {
       os: 'Windows 10 64-bit',
       obs: 'SSD Required. The above specifications were tested with DLSS/FSR/XeSS enabled.',
       network: 'Non necessary',
-      requirement_type: { id: 2, os: 'recommended', potential: 'windows' },
+      type: { id: 2, os: 'windows', potential: 'recommended' },
     },
   ],
   torrents: [
     {
       id: 1,
-      posted_in: '2024-02-09T00:00:00.000Z',
+      posted_at: '2024-02-09T00:00:00.000Z',
       url: 'https://google.com',
       provider: {
         id: 1,
         name: 'FitGirl Repacks',
+        slug: 'fitgirl-repacks',
         url: 'https://google.com',
       },
     },

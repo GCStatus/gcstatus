@@ -84,7 +84,8 @@ function List() {
         <Link
           href="https://www.gamespot.com/api/documentation"
           className="underline text-theme-red-900 hover:text-red-400 transition-colors duration-500"
-          target="_blank">
+          target="_blank"
+          rel="noopener noreferrer">
           Docs
         </Link>
       </Typography>

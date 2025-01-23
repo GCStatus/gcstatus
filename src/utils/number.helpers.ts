@@ -1,4 +1,4 @@
-import { MissionRequirement, TitleRequirement } from '@/types'
+import { MissionRequirement } from '@/types'
 
 export const formatPrice = (value: number | undefined) => {
   if (!value) return '$ 0.00'
@@ -10,7 +10,7 @@ export const formatPrice = (value: number | undefined) => {
 }
 
 export const calculateOverallProgress = (
-  requirements: (MissionRequirement | TitleRequirement)[],
+  requirements: MissionRequirement[],
 ): number => {
   if (requirements.length === 0) return 0
 

@@ -1,4 +1,4 @@
-import { MissionRequirement, TitleRequirement } from '@/types'
+import { MissionRequirement } from '@/types'
 
 import { calculateOverallProgress, formatPrice } from './number.helpers'
 
@@ -21,7 +21,7 @@ describe('Utility Functions', () => {
 
   describe('calculateOverallProgress()', () => {
     it('calculates overall progress correctly with multiple requirements', () => {
-      const requirements: (MissionRequirement | TitleRequirement)[] = [
+      const requirements: MissionRequirement[] = [
         {
           id: 1,
           task: 'Fake task',
@@ -46,7 +46,7 @@ describe('Utility Functions', () => {
     })
 
     it('returns 100% if total progress meets or exceeds total goals', () => {
-      const requirements: (MissionRequirement | TitleRequirement)[] = [
+      const requirements: MissionRequirement[] = [
         {
           id: 1,
           task: 'Fake task',
@@ -71,13 +71,13 @@ describe('Utility Functions', () => {
     })
 
     it('returns 0% if no requirements are provided', () => {
-      const requirements: (MissionRequirement | TitleRequirement)[] = []
+      const requirements: MissionRequirement[] = []
 
       expect(calculateOverallProgress(requirements)).toBe(0)
     })
 
     it('calculates progress correctly with different goals and progress', () => {
-      const requirements: (MissionRequirement | TitleRequirement)[] = [
+      const requirements: MissionRequirement[] = [
         {
           id: 1,
           task: 'Fake task',

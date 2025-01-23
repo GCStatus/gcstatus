@@ -14,7 +14,7 @@ function Galleries(props: GalleriesProps) {
     <Swiper loop modules={[Navigation]} navigation>
       {galleries.map((gallery) => (
         <SwiperSlide key={gallery.id}>
-          {gallery.media_type.name === 'photo' ? (
+          {gallery.type.name === 'photo' ? (
             <img
               src={gallery.path}
               alt={`Gallery ${gallery.id}`}

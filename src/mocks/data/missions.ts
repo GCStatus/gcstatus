@@ -9,9 +9,9 @@ export const MOCK_MISSIONS: Mission[] = [
     coins: 10,
     experience: 50,
     created_at: faker.date.anytime().toISOString(),
-    frequency: 'one-time',
+    frequency: 'one_time',
     reset_time: faker.date.anytime().toISOString(),
-    user_mission: null,
+    progress: null,
     description:
       'Slay the dragon in the Dark Forest to earn rare rewards.',
     requirements: [
@@ -39,7 +39,10 @@ export const MOCK_MISSIONS: Mission[] = [
       },
     ],
     rewards: [],
-    status: 'available',
+    status: {
+      id: 1,
+      name: 'available',
+    },
   },
   {
     id: 2,
@@ -49,7 +52,7 @@ export const MOCK_MISSIONS: Mission[] = [
     created_at: faker.date.anytime().toISOString(),
     frequency: 'daily',
     reset_time: faker.date.anytime().toISOString(),
-    user_mission: null,
+    progress: null,
     description: 'Go to your profile and add a custom profile pic!',
     requirements: [
       {
@@ -65,7 +68,10 @@ export const MOCK_MISSIONS: Mission[] = [
       },
     ],
     rewards: [],
-    status: 'available',
+    status: {
+      id: 1,
+      name: 'available',
+    },
   },
   {
     id: 3,
@@ -75,7 +81,7 @@ export const MOCK_MISSIONS: Mission[] = [
     created_at: faker.date.anytime().toISOString(),
     frequency: 'monthly',
     reset_time: faker.date.anytime().toISOString(),
-    user_mission: {
+    progress: {
       completed: true,
       last_completed_at: faker.date.anytime().toISOString(),
     },
@@ -103,16 +109,23 @@ export const MOCK_MISSIONS: Mission[] = [
         updated_at: faker.date.anytime().toISOString(),
         title: {
           id: 1,
+          own: false,
           title: 'Gaming Senior',
           description: 'You are the gaming senior!',
           created_at: faker.date.anytime().toISOString(),
+          updated_at: faker.date.anytime().toISOString(),
           purchasable: false,
-          status: 'available',
-          requirements: [],
+          status: {
+            id: 1,
+            name: 'available',
+          },
         },
       },
     ],
-    status: 'available',
+    status: {
+      id: 1,
+      name: 'available',
+    },
   },
   {
     id: 4,
@@ -122,7 +135,7 @@ export const MOCK_MISSIONS: Mission[] = [
     created_at: '2024-10-01T00:00:00.000Z',
     frequency: 'monthly',
     reset_time: faker.date.anytime().toISOString(),
-    user_mission: null,
+    progress: null,
     description:
       'Go to the coins section and make a new transaction to spend your coins!',
     requirements: [
@@ -147,15 +160,22 @@ export const MOCK_MISSIONS: Mission[] = [
         updated_at: faker.date.anytime().toISOString(),
         title: {
           id: 1,
+          own: false,
           title: 'Gaming Senior',
           description: 'You are the gaming senior!',
           created_at: faker.date.anytime().toISOString(),
+          updated_at: faker.date.anytime().toISOString(),
           purchasable: false,
-          status: 'available',
-          requirements: [],
+          status: {
+            id: 1,
+            name: 'available',
+          },
         },
       },
     ],
-    status: 'available',
+    status: {
+      id: 1,
+      name: 'available',
+    },
   },
 ]

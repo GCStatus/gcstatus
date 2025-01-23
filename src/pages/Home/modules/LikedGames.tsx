@@ -14,7 +14,7 @@ function LikedGames(props: LikedGamesProps) {
   const { games } = props
 
   return (
-    <Box component="section" className="relative w-full h-[70vh] bg-black">
+    <Box component="section" className="relative w-full h-screen bg-black">
       <Swiper
         loop
         autoplay={{

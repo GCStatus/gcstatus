@@ -1,6 +1,6 @@
 export interface Notification {
   id: number
-  content: {
+  data: {
     title: string
     actionUrl: string
     icon: string

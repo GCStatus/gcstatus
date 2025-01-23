@@ -28,12 +28,10 @@ function Home() {
       {home.hot.length > 0 && <HotGames games={home.hot} />}
       {home.next_release && <HomeNextRelease game={home.next_release} />}
       {home.popular.length > 0 && <PopularGames games={home.popular} />}
-      {home.most_liked_games.length > 0 && (
-        <LikedGames games={home.most_liked_games} />
+      {home.most_liked.length > 0 && (
+        <LikedGames games={home.most_liked} />
       )}
-      {home.upcoming_games.length > 0 && (
-        <UpcomingGames games={home.upcoming_games} />
-      )}
+      {home.upcoming.length > 0 && <UpcomingGames games={home.upcoming} />}
     </Box>
   )
 }

@@ -8,9 +8,11 @@ import { SortField } from '../Search'
 
 interface FiltersProps {
   filters: {
-    Category?: string
-    Genre?: string
-    Platform?: string
+    Category: string
+    Genre: string
+    Platform: string
+    Crack: string
+    Protection: string
   }
   onFilterChange: (filters: any) => void
   sort: { field: string; order: 'asc' | 'desc' }
@@ -55,25 +57,25 @@ function Filters(props: FiltersProps) {
 
   const categories = Array.from(
     new Set(
-      games.flatMap((game) =>
-        game.categories.map((category) => category.name),
+      games.flatMap(({ categories }) =>
+        categories.map(({ name }) => name),
       ),
     ),
   )
 
   const platforms = Array.from(
     new Set(
-      games.flatMap((game) =>
-        game.platforms.map((platform) => platform.name),
-      ),
+      games.flatMap(({ platforms }) => platforms.map(({ name }) => name)),
     ),
   )
 
   const genres = Array.from(
-    new Set(
-      games.flatMap((game) => game.genres.map((genre) => genre.name)),
-    ),
+    new Set(games.flatMap(({ genres }) => genres.map(({ name }) => name))),
   )
+
+  const protections = Array.from(
+    new Set(games.flatMap(({ crack }) => crack?.protection.name)),
+  ).filter(Boolean)
 
   return (
     <Box className="flex flex-col gap-4 items-center justify-between w-full p-6 dark:bg-theme-dark-900 bg-gray-300 bg-opacity-30 rounded-xl shadow-xl transition-all duration-500 ease-in-out">
@@ -125,6 +127,37 @@ function Filters(props: FiltersProps) {
             ...platforms.map((c) => ({
               label: c,
               value: c,
+            })),
+          ]}
+        />
+      </Box>
+
+      <Box className="grid sm:grid-cols-2 grid-cols-1 gap-3 w-full">
+        <Select
+          isFull
+          label="Crack"
+          defaultValue={filters.Crack}
+          onChange={handleFilterChange}
+          options={[
+            { label: 'All', value: 'all' },
+            { label: 'Cracked', value: 'cracked' },
+            { label: 'Uncracked', value: 'uncracked' },
+          ]}
+        />
+
+        <Select
+          isFull
+          label="Protection"
+          defaultValue={filters.Protection}
+          onChange={handleFilterChange}
+          options={[
+            {
+              label: 'All',
+              value: 'all',
+            },
+            ...protections.map((c) => ({
+              label: c as string,
+              value: c as string,
             })),
           ]}
         />

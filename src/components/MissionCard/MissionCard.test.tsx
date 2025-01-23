@@ -61,7 +61,7 @@ describe('MissionCard', () => {
   it('renders the "Redeem Rewards" button when redeemable', async () => {
     const redeemableMission: Mission = {
       ...mockMission,
-      user_mission: {
+      progress: {
         completed: false,
         last_completed_at: new Date().toISOString(),
       },
@@ -90,7 +90,7 @@ describe('MissionCard', () => {
 
     const redeemableMission: Mission = {
       ...mockMission,
-      user_mission: {
+      progress: {
         completed: false,
         last_completed_at: subDays(new Date(), 1).toISOString(),
       },
@@ -125,7 +125,10 @@ describe('MissionCard', () => {
   it('displays "New" tag for missions created within the last week', () => {
     const recentMission: Mission = {
       ...(MOCK_MISSIONS.shift() as Mission),
-      status: 'available',
+      status: {
+        id: 1,
+        name: 'available',
+      },
       created_at: new Date().toISOString(),
     }
 
@@ -137,7 +140,10 @@ describe('MissionCard', () => {
   it('renders the correct status chip based on mission status', () => {
     const inProgressMission: Mission = {
       ...(MOCK_MISSIONS.shift() as Mission),
-      status: 'available',
+      status: {
+        id: 1,
+        name: 'available',
+      },
     }
 
     renderWithToaster(<MissionCard mission={inProgressMission} />)
@@ -146,7 +152,7 @@ describe('MissionCard', () => {
 
     const completedMission: Mission = {
       ...mockMission,
-      user_mission: {
+      progress: {
         completed: true,
         last_completed_at: new Date().toISOString(),
       },

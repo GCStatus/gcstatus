@@ -105,7 +105,8 @@ function MainDetails(props: MainDetailsProps) {
                   <Link
                     href={`/crackers/${game.crack.protection.slug}`}
                     className="hover:text-theme-red-900 transition-colors duration-300"
-                    target="_blank">
+                    target="_blank"
+                    rel="noopener noreferrer">
                     {game.crack.protection.name}
                   </Link>
                 ) : (
@@ -123,10 +124,11 @@ function MainDetails(props: MainDetailsProps) {
                 <Tooltip title="Check all games with this crack status">
                   <Link
                     href={`/games/cracks/${game.crack?.status}`}
-                    target="_blank">
+                    target="_blank"
+                    rel="noopener noreferrer">
                     <Chip
-                      label={mapCrack[game.crack.status]}
-                      className={`${game.crack.status === 'cracked' || game.crack.status === 'cracked-oneday' ? 'bg-green-500' : 'bg-red-500'} text-white`}
+                      label={mapCrack[game.crack.status.name]}
+                      className={`${['cracked', 'cracked-oneday'].includes(game.crack.status.name) ? 'bg-green-500' : 'bg-red-500'} text-white`}
                     />
                   </Link>
                 </Tooltip>
@@ -137,7 +139,7 @@ function MainDetails(props: MainDetailsProps) {
                 />
               )}
             </Box>
-            {game.crack && game.crack.by && (
+            {game.crack && game.crack.cracker && (
               <Box className="flex sm:flex-row flex-col items-center gap-1">
                 <Typography
                   component="span"
@@ -148,10 +150,11 @@ function MainDetails(props: MainDetailsProps) {
                   component="span"
                   className="font-bold dark:text-white text-gray-800 text-lg">
                   <Link
-                    href={`/crackers/${game.crack.by.slug}`}
+                    href={`/crackers/${game.crack.cracker.slug}`}
                     className="hover:text-theme-red-900 transition-colors duration-300"
-                    target="_blank">
-                    {game.crack.by.name}
+                    target="_blank"
+                    rel="noopener noreferrer">
+                    {game.crack.cracker.name}
                   </Link>
                 </Typography>
               </Box>
@@ -197,7 +200,8 @@ function MainDetails(props: MainDetailsProps) {
                   <Link
                     href={`/games/platforms/${platform.slug}`}
                     target="_blank"
-                    className="dark:text-gray-200 text-black dark:hover:text-theme-red-900 hover:text-theme-red-900 transition-colors duration-300">
+                    className="dark:text-gray-200 text-black dark:hover:text-theme-red-900 hover:text-theme-red-900 transition-colors duration-300"
+                    rel="noopener noreferrer">
                     {platform.name}
                   </Link>
                 </ListItem>
@@ -230,7 +234,8 @@ function MainDetails(props: MainDetailsProps) {
                   <Link
                     href={`/games/genres/${genre.slug}`}
                     target="_blank"
-                    className="dark:text-gray-200 text-black dark:hover:text-theme-red-900 hover:text-theme-red-900 transition-colors duration-300">
+                    className="dark:text-gray-200 text-black dark:hover:text-theme-red-900 hover:text-theme-red-900 transition-colors duration-300"
+                    rel="noopener noreferrer">
                     {genre.name}
                   </Link>
                 </ListItem>
@@ -267,7 +272,8 @@ function MainDetails(props: MainDetailsProps) {
                   <Link
                     href={`/games/tags/${tag.slug}`}
                     target="_blank"
-                    className="dark:text-gray-200 text-black dark:hover:text-theme-red-900 hover:text-theme-red-900 transition-colors duration-300">
+                    className="dark:text-gray-200 text-black dark:hover:text-theme-red-900 hover:text-theme-red-900 transition-colors duration-300"
+                    rel="noopener noreferrer">
                     {tag.name}
                   </Link>
                 </ListItem>
@@ -300,7 +306,8 @@ function MainDetails(props: MainDetailsProps) {
                   <Link
                     href={`/games/categories/${category.slug}`}
                     target="_blank"
-                    className="dark:text-gray-200 text-black dark:hover:text-theme-red-900 hover:text-theme-red-900 transition-colors duration-300">
+                    className="dark:text-gray-200 text-black dark:hover:text-theme-red-900 hover:text-theme-red-900 transition-colors duration-300"
+                    rel="noopener noreferrer">
                     {category.name}
                   </Link>
                 </ListItem>
@@ -337,7 +344,8 @@ function MainDetails(props: MainDetailsProps) {
                   <Link
                     href={`/games/publishers/${publisher.slug}`}
                     target="_blank"
-                    className="dark:text-gray-200 text-black dark:hover:text-theme-red-900 hover:text-theme-red-900 transition-colors duration-300">
+                    className="dark:text-gray-200 text-black dark:hover:text-theme-red-900 hover:text-theme-red-900 transition-colors duration-300"
+                    rel="noopener noreferrer">
                     {publisher.name}
                   </Link>
                 </ListItem>
@@ -370,7 +378,8 @@ function MainDetails(props: MainDetailsProps) {
                   <Link
                     href={`/games/developers/${developer.slug}`}
                     target="_blank"
-                    className="dark:text-gray-200 text-black dark:hover:text-theme-red-900 hover:text-theme-red-900 transition-colors duration-300">
+                    className="dark:text-gray-200 text-black dark:hover:text-theme-red-900 hover:text-theme-red-900 transition-colors duration-300"
+                    rel="noopener noreferrer">
                     {developer.name}
                   </Link>
                 </ListItem>

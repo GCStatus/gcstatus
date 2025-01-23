@@ -26,9 +26,10 @@ function Torrents(props: TorrentsProps) {
                   className="font-bold sm:text-2xl text-xl">
                   <Tooltip title={`Go to ${torrent.provider.name}`}>
                     <Link
-                      href={torrent.url}
+                      href={torrent.provider.url}
                       target="_blank"
-                      className="underline dark:text-gray-400 text-zinc-700">
+                      className="underline dark:text-gray-400 text-zinc-700"
+                      rel="noopener noreferrer">
                       {torrent.provider.name}
                     </Link>
                   </Tooltip>
@@ -37,7 +38,7 @@ function Torrents(props: TorrentsProps) {
                   component="p"
                   className="dark:text-gray-300 text-gray-700">
                   Posted at:{' '}
-                  {format(new Date(torrent.posted_in), 'LLL, dd yyyy')}
+                  {format(new Date(torrent.posted_at), 'LLL, dd yyyy')}
                 </Typography>
               </Box>
               <Link

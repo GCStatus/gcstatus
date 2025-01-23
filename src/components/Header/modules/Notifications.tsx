@@ -20,7 +20,6 @@ import {
   useDeleteAllNotificationsMutation,
   useDeleteNotificationMutation,
   useMarkAllNotificationsReadMutation,
-  useMarkAllNotificationsUnreadMutation,
   useMarkNotificationReadMutation,
   useMarkNotificationUnreadMutation,
 } from '@/services/api'
@@ -54,19 +53,11 @@ function Notifications(props: NotificationsProps) {
   const [
     readAll,
     {
-      data: unreadAllData,
+      data: readAllData,
       isLoading: loadingReadAll,
       isSuccess: successReadAll,
     },
   ] = useMarkAllNotificationsReadMutation()
-  const [
-    unreadAll,
-    {
-      data: readAllData,
-      isLoading: loadingUnreadAll,
-      isSuccess: successUnreadAll,
-    },
-  ] = useMarkAllNotificationsUnreadMutation()
   const [
     deleteAll,
     {
@@ -106,10 +97,6 @@ function Notifications(props: NotificationsProps) {
     await readAll()
   }
 
-  const handleUnreadAll = async () => {
-    await unreadAll()
-  }
-
   const handleDeleteAll = async () => {
     await deleteAll()
   }
@@ -119,19 +106,18 @@ function Notifications(props: NotificationsProps) {
 
     toggle()
 
-    if (notification.content.actionUrl.startsWith('https://')) {
-      window.open(notification.content.actionUrl, '_blank')
+    if (notification.data.actionUrl.startsWith('https://')) {
+      window.open(notification.data.actionUrl, '_blank')
       return
     }
 
-    go(notification.content.actionUrl)
+    go(notification.data.actionUrl)
   }
 
   useSuccess(successRead, readData?.message)
   useSuccess(successUnread, unreadData?.message)
   useSuccess(successRemove, removeData?.message)
   useSuccess(successReadAll, readAllData?.message)
-  useSuccess(successUnreadAll, unreadAllData?.message)
   useSuccess(successDeleteAll, deleteAllData?.message)
 
   const renderEmptyState = () => (
@@ -190,38 +176,7 @@ function Notifications(props: NotificationsProps) {
     </Box>
   )
 
-  const renderMarkAllAs = () => {
-    if (notifications.some(({ read_at }) => !read_at)) {
-      return (
-        <Button
-          className="mt-4"
-          onClick={handleReadAll}
-          isLoading={loadingReadAll}>
-          Mark all as read
-        </Button>
-      )
-    }
-
-    return (
-      <Button
-        className="mt-4"
-        onClick={handleUnreadAll}
-        isLoading={loadingUnreadAll}>
-        Mark all as unread
-      </Button>
-    )
-  }
-
-  const renderDeleteAll = () => {
-    return (
-      <Button
-        className="mt-4"
-        onClick={handleDeleteAll}
-        isLoading={loadingDeleteAll}>
-        Remove all
-      </Button>
-    )
-  }
+  const hasUnread = notifications.some(({ read_at }) => !read_at)
 
   return (
     <Stack
@@ -241,9 +196,24 @@ function Notifications(props: NotificationsProps) {
         <>
           {notifications.length > 0 ? (
             <>
-              <Box className="grid grid-cols-2 gap-4 xs:grid-cols-1">
-                {renderMarkAllAs()}
-                {renderDeleteAll()}
+              <Box
+                className={`grid gap-4 mt-4 ${
+                  hasUnread ? 'grid-cols-2' : 'grid-cols-1'
+                } xs:grid-cols-1`}>
+                {hasUnread && (
+                  <Button
+                    fullWidth
+                    onClick={handleReadAll}
+                    isLoading={loadingReadAll}>
+                    Mark all as read
+                  </Button>
+                )}
+                <Button
+                  fullWidth
+                  onClick={handleDeleteAll}
+                  isLoading={loadingDeleteAll}>
+                  Remove all
+                </Button>
               </Box>
               {groupedNotifications.map(({ date, notifications }) => (
                 <Box key={date.toISOString()}>
@@ -260,7 +230,7 @@ function Notifications(props: NotificationsProps) {
                         className={`focus:outline-none w-8 h-8 border rounded-full dark:border-gray-200 border-gray-700 flex items-center flex-shrink-0 justify-center ${!notification.read_at ? 'animate-pulse' : ''}`}>
                         <Icon
                           name={
-                            notification.content.icon as keyof typeof Icons
+                            notification.data.icon as keyof typeof Icons
                           }
                           className="dark:text-gray-400 text-gray-900"
                         />
@@ -269,13 +239,13 @@ function Notifications(props: NotificationsProps) {
                         <Box
                           component="span"
                           className="focus:outline-none text-sm leading-none flex flex-col gap-2">
-                          <Tooltip title={notification.content.title}>
+                          <Tooltip title={notification.data.title}>
                             <Link
                               onClick={() =>
                                 handleOpenNotification(notification)
                               }
                               className="dark:text-gray-300 text-gray-900 hover:text-yellow-400 transition-colors duration-300 hover:animate-pulse cursor-pointer">
-                              {s(notification.content.title, 70)}
+                              {s(notification.data.title, 70)}
                             </Link>
                           </Tooltip>
                           <Typography

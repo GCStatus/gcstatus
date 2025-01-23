@@ -1,33 +1,19 @@
-export interface TitleProgress {
-  id: number
-  progress: number
-  completed: boolean
-  created_at: string
-  updated_at: string
-}
+import { TitleRewardSource } from './rewards'
 
-export interface TitleRequirement {
+export interface TitleStatus {
   id: number
-  task: string
-  goal: number
-  description?: string
-  created_at: string
-  updated_at: string
-  progress?: TitleProgress
+  name: 'available' | 'unavailable' | 'canceled'
 }
 
 export interface Title {
   id: number
+  own: boolean
   cost?: number
   title: string
   description: string
   purchasable: boolean
-  status:
-    | 'available'
-    | 'unavailable'
-    | 'completed'
-    | 'canceled'
-    | 'progress'
+  status: TitleStatus
   created_at: string
-  requirements: TitleRequirement[]
+  updated_at: string
+  rewardable?: TitleRewardSource
 }

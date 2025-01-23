@@ -1,10 +1,10 @@
-import { Banner, GameList, NextRelease } from '.'
+import { GameBanner, GameList, NextRelease } from '.'
 
 export interface Home {
   hot: GameList[]
-  banners: Banner[]
   popular: GameList[]
+  banners: GameBanner[]
   next_release: NextRelease
-  upcoming_games: GameList[]
-  most_liked_games: GameList[]
+  upcoming: GameList[]
+  most_liked: GameList[]
 }

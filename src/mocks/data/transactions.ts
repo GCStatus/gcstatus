@@ -9,8 +9,11 @@ for (let i = 0; i < 20; i++) {
     id: 1,
     amount: faker.number.int(),
     description: faker.lorem.sentence(),
-    type: faker.helpers.arrayElement(['addition', 'subtraction']),
     created_at: faker.date.anytime().toISOString(),
+    type: {
+      id: 1,
+      type: faker.helpers.arrayElement(['addition', 'subtraction']),
+    },
   }
 
   const newTransaction: Transaction = {

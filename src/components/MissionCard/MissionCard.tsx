@@ -29,23 +29,23 @@ function MissionCard(props: MissionCardProps) {
     useCompleteMissionMutation()
 
   const shouldApplyOpacity = ['canceled', 'unavailable'].includes(
-    mission.status,
+    mission.status.name,
   )
 
   const overallProgress = c(mission.requirements)
 
-  const isRecurring = mission.frequency !== 'one-time'
+  const isRecurring = mission.frequency !== 'one_time'
   const resetTime = isRecurring
     ? `Resets at: ${formatRelative(new Date(mission.reset_time), new Date())}`
     : ''
 
   const rewardsRedeemable =
-    !(mission.user_mission && mission.user_mission.completed) &&
+    !(mission.progress && mission.progress.completed) &&
     overallProgress >= 100 &&
     !shouldApplyOpacity
 
   const renderNewTag =
-    mission.status === 'available' &&
+    mission.status.name === 'available' &&
     isWithinInterval(new Date(mission.created_at), {
       start: subWeeks(new Date(), 1),
       end: new Date(),
@@ -190,28 +190,28 @@ function MissionCard(props: MissionCardProps) {
         <Box className="mt-4">
           <Chip
             label={
-              mission.user_mission?.completed
+              mission.progress?.completed
                 ? 'Completed'
                 : overallProgress === 100
                   ? 'Redeemable'
-                  : mission.status === 'available'
+                  : mission.status.name === 'available'
                     ? 'In Progress'
-                    : mission.status.charAt(0).toUpperCase() +
-                      mission.status.slice(1)
+                    : mission.status.name.charAt(0).toUpperCase() +
+                      mission.status.name.slice(1)
             }
             className={`capitalize text-white px-4 py-1 rounded-full shadow-lg ${
-              mission.user_mission?.completed || overallProgress === 100
+              mission.progress?.completed || overallProgress === 100
                 ? 'bg-green-600'
-                : mission.status === 'available'
+                : mission.status.name === 'available'
                   ? 'bg-yellow-600'
                   : 'bg-theme-red-900'
             }`}
             icon={
-              mission.user_mission?.completed ? (
+              mission.progress?.completed ? (
                 <FaCheckCircle className="text-white" />
               ) : overallProgress === 100 ? (
                 <FaGift className="text-white" />
-              ) : mission.status === 'available' ? (
+              ) : mission.status.name === 'available' ? (
                 <FaPlayCircle className="text-white" />
               ) : (
                 <IoClose className="text-white" />

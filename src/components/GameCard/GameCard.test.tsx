@@ -78,7 +78,10 @@ describe('GameCard Component', () => {
         name: genre.name,
       })
 
-      expect(genreLink).toHaveAttribute('href', `/games/genres/${genre.slug}`)
+      expect(genreLink).toHaveAttribute(
+        'href',
+        `/games/genres/${genre.slug}`,
+      )
     })
   })
 

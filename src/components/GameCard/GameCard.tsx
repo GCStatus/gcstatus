@@ -150,8 +150,10 @@ function GameCard(props: GameCardProps) {
 
           {game.crack ? (
             <Box className="flex flex-col gap-2 relative">
-              {['cracked', 'cracked-oneday'].includes(game.crack.status) &&
-                game.crack.by && (
+              {['cracked', 'cracked-oneday'].includes(
+                game.crack.status.name,
+              ) &&
+                game.crack.cracker && (
                   <Box className="flex items-center gap-2">
                     <Typography
                       variant="body2"
@@ -165,10 +167,11 @@ function GameCard(props: GameCardProps) {
                       variant="body2"
                       className="font-bold dark:text-white text-gray-800">
                       <Link
-                        href={`/crackers/${game.crack.by.slug}`}
+                        href={`/crackers/${game.crack.cracker.slug}`}
                         className="hover:text-theme-red-900 transition-colors duration-300"
-                        target="_blank">
-                        {game.crack.by.name}
+                        target="_blank"
+                        rel="noopener noreferrer">
+                        {game.crack.cracker.name}
                       </Link>
                     </Typography>
                   </Box>
@@ -187,7 +190,8 @@ function GameCard(props: GameCardProps) {
                     <Link
                       href={`/games/protections/${game.crack.protection.slug}`}
                       className="hover:text-theme-red-900 transition-colors duration-300"
-                      target="_blank">
+                      target="_blank"
+                      rel="noopener noreferrer">
                       {game.crack.protection.name}
                     </Link>
                   </Typography>
@@ -195,22 +199,22 @@ function GameCard(props: GameCardProps) {
               )}
 
               <Chip
-                label={mapCrack[game.crack.status]}
+                label={mapCrack[game.crack.status.name]}
                 icon={
-                  game.crack.status === 'uncracked' ? (
+                  game.crack.status.name === 'uncracked' ? (
                     <IoCloseCircleOutline className="text-white" />
                   ) : (
                     <IoCheckmarkCircleOutline className="text-white" />
                   )
                 }
                 className={`font-bold px-3 py-1 rounded-md text-white ${
-                  game.crack.status === 'uncracked'
+                  game.crack.status.name === 'uncracked'
                     ? 'bg-theme-red-900 animate-pulse'
                     : 'bg-green-500'
                 }`}
                 style={{
                   boxShadow: `0 4px 10px ${
-                    game.crack.status === 'uncracked'
+                    game.crack.status.name === 'uncracked'
                       ? 'rgba(255, 77, 77, 0.5)'
                       : 'rgba(76, 175, 80, 0.5)'
                   }`,

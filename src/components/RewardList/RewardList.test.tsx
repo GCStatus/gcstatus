@@ -9,8 +9,6 @@ describe('RewardList Component', () => {
     const rewards: TitleReward[] = [
       {
         id: 1,
-        created_at: '2024-01-01',
-        updated_at: '2024-01-01',
         sourceable_type: 'game',
         rewardable_type: 'titles',
         title: {
@@ -35,8 +33,6 @@ describe('RewardList Component', () => {
     const rewards: BaseReward[] = [
       {
         id: 2,
-        created_at: '2024-01-01',
-        updated_at: '2024-01-01',
         sourceable_type: 'game',
         rewardable_type: 'unsupported_type',
       },

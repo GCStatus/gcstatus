@@ -113,7 +113,7 @@ function Details() {
                       </Box>
                       <Box
                         component="section"
-                        className="grid sm:grid-cols-2 grid-cols-1 gap-4">
+                        className={`grid gap-4 ${game.reviews.length === 1 ? 'grid-cols-1' : 'sm:grid-cols-2 grid-cols-1'}`}>
                         {game.reviews.map((review) => (
                           <ReviewCard key={review.id} review={review} />
                         ))}

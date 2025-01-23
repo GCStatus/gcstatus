@@ -22,7 +22,7 @@ export const MOCK_USER: User = {
   },
   wallet: {
     id: 1,
-    amount: faker.number.int(),
+    balance: faker.number.int(),
   },
 }
 
@@ -157,7 +157,7 @@ export const MOCK_TEAM_MEMBERS: TeamMember[] = [
       },
     ],
     image:
-      'https://media.licdn.com/dms/image/v2/D4D03AQEWxmd_PO-GQw/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1726190852644?e=1731542400&v=beta&t=sjM1wZFhdC_9XENTKpxO2MYNjLGAnC118zFKsosq470',
+      'https://media.licdn.com/dms/image/v2/D4D03AQEWxmd_PO-GQw/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1726190852644?e=1742428800&v=beta&t=wc_m4BoK2wccWmzEiwX-6oj7nW7n73ldxg2D_DStZyI',
     socials: {
       github: 'https://github.com/felipebrsk/',
       linkedin: 'https://linkedin.com/in/felipe-luz-oliveira/',

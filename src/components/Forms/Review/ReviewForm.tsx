@@ -21,7 +21,7 @@ export interface ReviewFormProps {
 
 function ReviewForm(props: ReviewFormProps) {
   const { game } = props
-  const [played, setPlayed] = useState<boolean>(false)
+  const [consumed, setConsumed] = useState<boolean>(false)
   const [rating, setRating] = useState<number | null>(null)
   const {
     register,
@@ -52,7 +52,7 @@ function ReviewForm(props: ReviewFormProps) {
 
     const payload: ReviewStore = {
       ...data,
-      played,
+      consumed,
       userId: 1,
       rate: rating,
       gameId: game.id,
@@ -109,9 +109,9 @@ function ReviewForm(props: ReviewFormProps) {
           </Typography>
           <Switch
             name="played"
-            value={played}
-            checked={played}
-            onChange={(_, v) => setPlayed(v)}
+            value={consumed}
+            checked={consumed}
+            onChange={(_, v) => setConsumed(v)}
             sx={{
               '& .MuiSwitch-switchBase': {
                 color: '#ff4d4d',

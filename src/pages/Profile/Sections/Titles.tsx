@@ -10,7 +10,6 @@ import { ChangeEvent, useState } from 'react'
 import { Tabs, TitleCard } from '@/components'
 import { useGetTitlesQuery } from '@/services/api'
 import { User } from '@/types'
-import { calculateOverallProgress as c } from '@/utils'
 
 interface TitlesProps {
   user: User
@@ -32,12 +31,8 @@ function Titles(props: TitlesProps) {
     setCurrentPage(value)
   }
 
-  const ownedTitles = titles.filter(
-    ({ requirements }) => c(requirements) === 100,
-  )
-  const availableTitles = titles.filter(
-    ({ requirements }) => c(requirements) < 100,
-  )
+  const ownedTitles = titles.filter(({ own }) => own)
+  const availableTitles = titles.filter(({ own }) => !own)
   const purchasableTitles = titles.filter(({ purchasable }) => purchasable)
 
   const getTitlesByTab = () => {
@@ -55,7 +50,7 @@ function Titles(props: TitlesProps) {
 
   const titlesForActiveTab = getTitlesByTab()
     .slice()
-    .sort((a) => (c(a.requirements) === 100 ? 1 : -1))
+    .sort((a) => (a.own ? 1 : -1))
 
   const displayedTitles = titlesForActiveTab.slice(
     (currentPage - 1) * titlesPerPage,

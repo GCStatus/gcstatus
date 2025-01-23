@@ -37,14 +37,14 @@ function DLCs(props: DLCsProps) {
         <Box className="flex flex-col sm:flex-row items-center gap-4 relative">
           <img
             src={dlc.cover}
-            alt={`${dlc.name} Cover`}
+            alt={`${dlc.title} Cover`}
             className="sm:w-48 w-full rounded-lg border-2 border-theme-red-900 shadow-md hover:shadow-red-500/50 hover:scale-105 transition-transform duration-300"
           />
           <Box className="flex-1">
             <Typography
               variant="h3"
               className="text-xl font-bold text-theme-red-900 dark:text-white dark:neon-text">
-              {dlc.name}
+              {dlc.title}
             </Typography>
             <Typography
               component="span"
@@ -83,14 +83,14 @@ function DLCs(props: DLCsProps) {
             Gallery
           </Typography>
           <Box className="flex flex-wrap gap-4">
-            {dlc.galleries.map(({ id, media_type, path }) => (
+            {dlc.galleries.map(({ id, type, path }) => (
               <Box
                 key={id}
                 className="relative group cursor-pointer p-1 rounded-lg sm:w-auto w-full"
                 onClick={() =>
-                  openModal(path, media_type.name as 'photo' | 'video')
+                  openModal(path, type.name as 'photo' | 'video')
                 }>
-                {media_type.name === 'photo' ? (
+                {type.name === 'photo' ? (
                   <img
                     src={path}
                     alt={`Gallery ${id}`}
