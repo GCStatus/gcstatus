@@ -12,7 +12,6 @@ function Protections() {
 
   const {
     games,
-    totalGames,
     currentPage,
     pageSize,
     sort,
@@ -34,7 +33,6 @@ function Protections() {
   return (
     <ModuledFilters
       games={games}
-      totalGames={totalGames}
       currentPage={currentPage}
       pageSize={pageSize}
       sort={sort}

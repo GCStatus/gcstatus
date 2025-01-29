@@ -313,11 +313,14 @@ const api = createApi({
     findGamesBy: builder.query<
       GameList[],
       {
-        by: FiltersClassifications
-        filterable: string
+        attribute: FiltersClassifications
+        value: string
       }
     >({
-      query: ({ by, filterable }) => `games/filters/${by}/${filterable}`,
+      query: ({ attribute, value }) => ({
+        url: 'games/filters',
+        params: { attribute, value },
+      }),
       transformResponse: (res: Res<GameList[]>) => res.data,
     }),
 

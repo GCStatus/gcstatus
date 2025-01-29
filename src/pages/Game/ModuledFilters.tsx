@@ -5,7 +5,7 @@ import {
   Pagination,
   Typography,
 } from '@mui/material'
-import { ChangeEvent } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import { MdViewList, MdViewModule } from 'react-icons/md'
 
 import { GameCard } from '@/components'
@@ -16,7 +16,6 @@ import { Filters } from './modules'
 
 interface ModuledFiltersProps {
   games: GameList[]
-  totalGames: number
   currentPage: number
   pageSize: number
   sort: SortState
@@ -31,7 +30,6 @@ interface ModuledFiltersProps {
 function ModuledFilters(props: ModuledFiltersProps) {
   const {
     games,
-    totalGames,
     currentPage,
     pageSize,
     sort,
@@ -42,11 +40,89 @@ function ModuledFilters(props: ModuledFiltersProps) {
     onPageSizeChange,
     onSortChange,
   } = props
+  const [totalGames, setTotalGames] = useState<number>(0)
+  const [displayedGames, setDisplayedGames] = useState<GameList[]>(games)
+  const [filters, setFilters] = useState<{
+    Crack: string
+    Protection: string
+  }>({
+    Crack: 'all',
+    Protection: 'all',
+  })
+
+  const applyFiltersAndSort = () => {
+    const { Crack, Protection } = filters
+
+    const isAll = (filter: string) => filter === 'all'
+
+    const filterMap: { [key: string]: (item: GameList) => boolean } = {
+      Crack: ({ crack }) => {
+        if (isAll(Crack)) return true
+
+        if (Crack === 'uncracked') {
+          return !crack || crack.status.name === 'uncracked'
+        }
+
+        if (Crack === 'cracked') {
+          return (
+            !!crack &&
+            ['cracked', 'cracked-oneday'].includes(crack.status.name)
+          )
+        }
+
+        return false
+      },
+      Protection: ({ crack }) =>
+        isAll(Protection) || crack?.protection.name === Protection,
+    }
+
+    const filteredGames = games.filter((game) =>
+      Object.values(filterMap).every((filterFn) => filterFn(game)),
+    )
+
+    const sortedGames = filteredGames.sort((a, b) => {
+      const aValue = a[sort.field]
+      const bValue = b[sort.field]
+
+      if (typeof aValue === 'string' && typeof bValue === 'string') {
+        return sort.order === 'asc'
+          ? aValue.localeCompare(bValue)
+          : bValue.localeCompare(aValue)
+      } else if (
+        typeof aValue === 'number' &&
+        typeof bValue === 'number'
+      ) {
+        return sort.order === 'asc' ? aValue - bValue : bValue - aValue
+      }
+
+      return 0
+    })
+
+    setTotalGames(sortedGames.length)
+    setDisplayedGames(
+      sortedGames.slice(
+        (currentPage - 1) * pageSize,
+        currentPage * pageSize,
+      ),
+    )
+  }
+
+  const handleFilterChange = (newFilters: any) => {
+    setFilters(newFilters)
+    onPageChange(undefined as unknown as ChangeEvent<unknown>, 1)
+  }
+
+  useEffect(() => {
+    applyFiltersAndSort()
+  }, [currentPage, pageSize, filters, sort, games])
 
   return (
     <Container maxWidth="xl" className="relative p-6 text-white">
       <Box className="flex flex-col justify-between items-center mb-6 gap-6">
         <Filters
+          filters={filters}
+          onFilterChange={handleFilterChange}
+          games={games}
           pageSize={pageSize}
           onPageSizeChange={onPageSizeChange}
           sort={sort}
@@ -76,8 +152,8 @@ function ModuledFilters(props: ModuledFiltersProps) {
             ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
             : 'grid-cols-1'
         }`}>
-        {games.length > 0 ? (
-          games.map((game) => (
+        {displayedGames.length > 0 ? (
+          displayedGames.map((game) => (
             <GameCard key={game.id} game={game} view={view} />
           ))
         ) : (
