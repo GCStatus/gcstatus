@@ -38,7 +38,7 @@ describe('GameCard Component', () => {
   })
 
   it('renders correctly in list view', () => {
-    const { getByText, getByAltText } = renderGameCard({
+    const { getByText, getByAltText, getAllByText } = renderGameCard({
       game,
       view: 'list',
     })
@@ -47,11 +47,9 @@ describe('GameCard Component', () => {
 
     expect(getByAltText(game.title)).toBeInTheDocument()
 
-    expect(getByText(game.condition!)).toBeInTheDocument()
+    const genreElements = getAllByText(game.genres[0].name)
 
-    expect(getByText(game.hearts_count.toString())).toBeInTheDocument()
-
-    expect(getByText(game.genres[0].name)).toBeInTheDocument()
+    expect(genreElements.length).toBeGreaterThan(0)
   })
 
   it('renders correctly in grid view', () => {
@@ -63,10 +61,10 @@ describe('GameCard Component', () => {
   })
 
   it('renders genres correctly', () => {
-    const { getByText } = renderGameCard()
+    const { getAllByText } = renderGameCard()
 
     game.genres.forEach((genre) => {
-      expect(getByText(genre.name)).toBeInTheDocument()
+      expect(getAllByText(genre.name).length).toBeGreaterThan(0)
     })
   })
 

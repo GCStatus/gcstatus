@@ -9,9 +9,9 @@ export interface Review {
 }
 
 export interface ReviewStore {
+  reviewable_id: number
+  reviewable_type: string
   rate: number
-  gameId: number
-  userId: number
   consumed: boolean
   review?: string
 }

@@ -2,6 +2,7 @@ import { fireEvent, render, waitFor } from '@testing-library/react'
 import toast from 'react-hot-toast'
 
 import { MOCK_GAME_DETAILS } from '@/mocks'
+import { ReviewStore } from '@/types'
 
 import ReviewForm, { ReviewFormProps } from './ReviewForm'
 
@@ -112,10 +113,10 @@ describe('ReviewForm Component', () => {
       expect(consoleSpy).toHaveBeenCalledWith({
         review: 'This is a valid review with more than 15 characters.',
         consumed: true,
-        userId: 1,
         rate: 2.5,
-        gameId: mockGame.id,
-      })
+        reviewable_id: mockGame.id,
+        reviewable_type: 'App\\Models\\GCStatus\\Game',
+      } as ReviewStore)
     })
   })
 

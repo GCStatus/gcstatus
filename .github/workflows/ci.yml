@@ -28,7 +28,7 @@ jobs:
 
       - name: Install dependencies
         if: steps.npm-cache.outputs.cache-hit != 'true'
-        run: npm ci
+        run: npm i
 
       - name: Lint code
         run: npm run lint

@@ -1,4 +1,5 @@
 import { Box, Chip, Link, Stack, Tooltip, Typography } from '@mui/material'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 import { Carousel } from 'react-responsive-carousel'
 
 import { GameBanner } from '@/types'
@@ -25,7 +26,7 @@ function HeaderCarousel(props: HeaderCarouselProps) {
       swipeScrollTolerance={50}>
       {banners.map(({ id, bannerable }) => (
         <Box className="relative h-screen" key={id}>
-          <img
+          <LazyLoadImage
             src={bannerable.cover}
             alt="Game Banner"
             className="w-full h-full object-cover"

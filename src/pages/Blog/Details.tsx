@@ -1,6 +1,6 @@
 import { Box, Container, Stack, Tooltip, Typography } from '@mui/material'
 import { formatRelative } from 'date-fns'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import {
   IoChatbubbleOutline,
   IoEyeOutline,
@@ -17,16 +17,18 @@ function Details() {
   const [heartPops, setHeartPops] = useState<number[]>([])
   const [hearts, setHearts] = useState<number>(post.hearts_count)
 
+  const heartPopElements = useMemo(
+    () =>
+      heartPops.map((delay, index) => (
+        <HeartsUp key={index} delay={delay} setHeartPops={setHeartPops} />
+      )),
+    [heartPops],
+  )
+
   return (
     <Box className="sm:p-6 p-2 dark:bg-theme-dark-900 bg-transparent flex flex-col justify-between sm:text-start text-center relative">
       <Box className="fixed inset-0 pointer-events-none">
-        {heartPops.map((delay, index) => (
-          <HeartsUp
-            key={index}
-            delay={delay}
-            setHeartPops={setHeartPops}
-          />
-        ))}
+        {heartPopElements}
       </Box>
 
       <Container maxWidth="xl">
@@ -121,7 +123,7 @@ function Details() {
           type="button"
           setHearts={setHearts}
           heartable_id={post.id}
-          heartable_type="blogs"
+          heartable_type="App\Models\Blog"
           isHearted={post.is_hearted}
           setHeartPops={setHeartPops}
         />

@@ -19,7 +19,7 @@ export interface HeartButtonProps {
   heartable_id: number
   type: 'button' | 'icon'
   setHearts: Dispatch<SetStateAction<number>>
-  heartable_type: 'games' | 'commentables' | 'blogs'
+  heartable_type: string
   setHeartPops: Dispatch<SetStateAction<number[]>>
   onHeartToggle?: () => void
 }

@@ -128,7 +128,7 @@ const api = createApi({
       UpdatePasswordInterface
     >({
       query: (body) => ({
-        url: 'profile/password',
+        url: 'profiles/password/update',
         method: 'PUT',
         body,
       }),
@@ -137,8 +137,8 @@ const api = createApi({
 
     updatePicture: builder.mutation<{ message: string }, FormData>({
       query: (body) => ({
-        url: 'profile/picture',
-        method: 'PUT',
+        url: 'profiles/picture/update/?_method=PUT',
+        method: 'POST',
         body,
       }),
       invalidatesTags: (_, error) => (!error ? ['user'] : []),
@@ -146,7 +146,7 @@ const api = createApi({
 
     updateSocials: builder.mutation<{ message: string }, Profile>({
       query: (body) => ({
-        url: 'profile/socials',
+        url: 'profiles/socials/update',
         method: 'PUT',
         body,
       }),
@@ -158,7 +158,7 @@ const api = createApi({
       UpdateUserNickAndEmailInterface
     >({
       query: (body) => ({
-        url: 'user/update/sensitive',
+        url: 'users/sensitive/update',
         method: 'PUT',
         body,
       }),
@@ -170,7 +170,7 @@ const api = createApi({
       UpdateUserBasicsInterface
     >({
       query: (body) => ({
-        url: 'user/update/basics',
+        url: 'users/basics/update',
         method: 'PUT',
         body,
       }),

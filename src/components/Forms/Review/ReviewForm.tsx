@@ -53,9 +53,9 @@ function ReviewForm(props: ReviewFormProps) {
     const payload: ReviewStore = {
       ...data,
       consumed,
-      userId: 1,
       rate: rating,
-      gameId: game.id,
+      reviewable_id: game.id,
+      reviewable_type: 'App\\Models\\GCStatus\\Game',
     }
 
     console.log(payload)

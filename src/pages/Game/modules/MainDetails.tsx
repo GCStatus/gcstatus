@@ -7,7 +7,7 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { IoEyeOutline } from 'react-icons/io5'
 
 import { HeartButton, HeartsUp } from '@/components'
@@ -23,16 +23,18 @@ function MainDetails(props: MainDetailsProps) {
   const [heartPops, setHeartPops] = useState<number[]>([])
   const [hearts, setHearts] = useState<number>(game.hearts_count)
 
+  const heartPopElements = useMemo(
+    () =>
+      heartPops.map((delay, index) => (
+        <HeartsUp key={index} delay={delay} setHeartPops={setHeartPops} />
+      )),
+    [heartPops],
+  )
+
   return (
     <>
       <Box className="fixed inset-0 pointer-events-none z-50">
-        {heartPops.map((delay, index) => (
-          <HeartsUp
-            key={index}
-            delay={delay}
-            setHeartPops={setHeartPops}
-          />
-        ))}
+        {heartPopElements}
       </Box>
       <Box
         component="span"
@@ -63,23 +65,25 @@ function MainDetails(props: MainDetailsProps) {
             </Box>
           </Box>
           <Box className="flex flex-col gap-4">
-            <Box className="flex sm:flex-row flex-col items-center gap-1">
-              <Typography
-                component="span"
-                className="inline-block font-bold dark:text-white text-black">
-                Website:
-              </Typography>
-              <Tooltip title="Go to game official website">
-                <Link
-                  href={game.website}
-                  target="_blank"
-                  rel="noopener noreferrer">
-                  <Typography className="text-theme-red-900 underline hover:opacity-70 transition-opacity duration-300 hover:text-red-500 break-all">
-                    {game.website}
-                  </Typography>
-                </Link>
-              </Tooltip>
-            </Box>
+            {game.website && (
+              <Box className="flex sm:flex-row flex-col items-center gap-1">
+                <Typography
+                  component="span"
+                  className="inline-block font-bold dark:text-white text-black">
+                  Website:
+                </Typography>
+                <Tooltip title="Go to game official website">
+                  <Link
+                    href={game.website}
+                    target="_blank"
+                    rel="noopener noreferrer">
+                    <Typography className="text-theme-red-900 underline hover:opacity-70 transition-opacity duration-300 hover:text-red-500 break-all">
+                      {game.website}
+                    </Typography>
+                  </Link>
+                </Tooltip>
+              </Box>
+            )}
             <Box className="flex sm:flex-row flex-col items-center gap-1">
               <Typography
                 component="span"
@@ -123,7 +127,7 @@ function MainDetails(props: MainDetailsProps) {
               {game.crack ? (
                 <Tooltip title="Check all games with this crack status">
                   <Link
-                    href={`/games/cracks/${game.crack?.status}`}
+                    href={`/games/cracks/${game.crack.status.name}`}
                     target="_blank"
                     rel="noopener noreferrer">
                     <Chip
@@ -165,7 +169,7 @@ function MainDetails(props: MainDetailsProps) {
                 type="icon"
                 setHearts={setHearts}
                 heartable_id={game.id}
-                heartable_type="games"
+                heartable_type="App\Models\GCStatus\Game"
                 isHearted={game.is_hearted}
                 setHeartPops={setHeartPops}
               />
