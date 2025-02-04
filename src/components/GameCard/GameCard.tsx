@@ -8,13 +8,14 @@ import {
   Typography,
 } from '@mui/material'
 import { format } from 'date-fns'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import {
   IoCheckmarkCircleOutline,
   IoCloseCircleOutline,
   IoEyeOutline,
   IoNotificationsOutline,
 } from 'react-icons/io5'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 import { GameList } from '@/types'
 import { mapCrack } from '@/utils'
@@ -26,28 +27,42 @@ export interface GameCardProps {
   view: 'list' | 'grid'
 }
 
-function GameCard(props: GameCardProps) {
-  const { game, view } = props
+function GameCard({ game, view }: GameCardProps) {
   const [heartPops, setHeartPops] = useState<number[]>([])
   const [hearts, setHearts] = useState<number>(game.hearts_count)
+
+  const crackStatus = useMemo(
+    () =>
+      game.crack
+        ? mapCrack[game.crack.status.name]
+        : 'Crack not available yet',
+    [game.crack],
+  )
+
+  const isUncracked = useMemo(
+    () => !game.crack || game.crack.status.name === 'uncracked',
+    [game.crack],
+  )
+
+  const heartPopElements = useMemo(
+    () =>
+      heartPops.map((delay, index) => (
+        <HeartsUp key={index} delay={delay} setHeartPops={setHeartPops} />
+      )),
+    [heartPops],
+  )
 
   return (
     <>
       <Box className="fixed inset-0 pointer-events-none z-50">
-        {heartPops.map((delay, index) => (
-          <HeartsUp
-            key={index}
-            delay={delay}
-            setHeartPops={setHeartPops}
-          />
-        ))}
+        {heartPopElements}
       </Box>
 
       <Stack
         className={`${
           view === 'grid' ? 'w-full' : 'w-full flex flex-col sm:flex-row'
         } dark:bg-theme-dark-900 bg-gray-50 text-white rounded-lg shadow-lg overflow-hidden transform hover:scale-[1.02] transition-transform duration-300 relative group`}
-        style={{
+        sx={{
           border: '2px solid #333',
           boxShadow: '0 0 20px rgba(0,0,0,0.8)',
         }}>
@@ -58,18 +73,23 @@ function GameCard(props: GameCardProps) {
             <Chip
               label={game.condition}
               className="absolute top-2 left-2 z-10 bg-gradient-to-r from-theme-red-900 to-yellow-500 text-sm font-bold text-white"
-              style={{
-                boxShadow: '0 0 10px rgba(255, 255, 255, 0.7)',
-              }}
+              sx={{ boxShadow: '0 0 10px rgba(255, 255, 255, 0.7)' }}
             />
           )}
+
           <Box className="relative h-full overflow-hidden">
-            <img
-              loading="lazy"
-              src={game.cover}
-              alt={game.title}
-              className={`object-cover w-full h-full transform group-hover:scale-110 transition-transform duration-500 ${view === 'grid' ? 'max-h-72' : 'sm:h-full h-auto'}`}
-            />
+            <Box className="relative w-full h-full flex">
+              <LazyLoadImage
+                src={
+                  game.cover ||
+                  'https://images.alphacoders.com/100/thumb-1920-100571.jpg'
+                }
+                alt={game.title}
+                effect="opacity"
+                className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+              />
+            </Box>
+
             <Box className="absolute bottom-0 left-0 w-full px-4 py-2 flex md:flex-row flex-col md:text-left text-center justify-between items-center backdrop-blur-sm bg-gradient-to-r from-red-400 via-black to-black opacity-85">
               <Link href={`/games/${game.slug}`}>
                 <Typography
@@ -84,7 +104,7 @@ function GameCard(props: GameCardProps) {
                     type="icon"
                     setHearts={setHearts}
                     heartable_id={game.id}
-                    heartable_type="games"
+                    heartable_type="App\Models\GCStatus\Game"
                     isHearted={game.is_hearted}
                     setHeartPops={setHeartPops}
                   />
@@ -98,6 +118,7 @@ function GameCard(props: GameCardProps) {
                 </Box>
               </Box>
             </Box>
+
             <IconButton
               aria-label="notifications"
               className="absolute top-1 right-1 z-10">
@@ -111,14 +132,13 @@ function GameCard(props: GameCardProps) {
 
         <Box
           padding={2}
-          className={`flex flex-col justify-between ${
-            view === 'list' ? 'sm:w-2/3' : ''
-          } h-full gap-4`}>
+          className={`flex flex-col justify-between ${view === 'list' ? 'sm:w-2/3' : ''} h-full gap-4`}>
+          <Typography variant="body2" className="text-gray-400">
+            Release Date:{' '}
+            {format(new Date(game.release_date), 'yyyy-MM-dd')}
+          </Typography>
+
           <Box className="flex flex-col flex-grow">
-            <Typography variant="body2" className="text-gray-400">
-              Release Date:{' '}
-              {format(new Date(game.release_date), 'yyyy-MM-dd')}
-            </Typography>
             <Box className="grid xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-2 grid-cols-1 items-center my-2 sm:gap-1 gap-2 w-full">
               {game.platforms.map((platform) => (
                 <Link
@@ -140,7 +160,7 @@ function GameCard(props: GameCardProps) {
             {game.genres.map((genre) => (
               <Link href={`/games/genres/${genre.slug}`} key={genre.id}>
                 <Chip
-                  className="font-bold border border-theme-red-900 dark:text-gray-300 text-gray-700 sm:w-auto w-full hover:bg-theme-red-900 hover:text-white hover:border-none hover:outline-none"
+                  className="font-bold border border-theme-red-900 dark:text-gray-300 text-gray-700 sm:w-auto w-full hover:bg-theme-red-900 hover:text-white"
                   label={genre.name}
                   variant="outlined"
                 />
@@ -148,7 +168,7 @@ function GameCard(props: GameCardProps) {
             ))}
           </Box>
 
-          {game.crack ? (
+          {game.crack && (
             <Box className="flex flex-col gap-2 relative">
               {['cracked', 'cracked-oneday'].includes(
                 game.crack.status.name,
@@ -167,7 +187,7 @@ function GameCard(props: GameCardProps) {
                       variant="body2"
                       className="font-bold dark:text-white text-gray-800">
                       <Link
-                        href={`/crackers/${game.crack.cracker.slug}`}
+                        href={`/games/crackers/${game.crack.cracker.slug}`}
                         className="hover:text-theme-red-900 transition-colors duration-300"
                         target="_blank"
                         rel="noopener noreferrer">
@@ -197,46 +217,37 @@ function GameCard(props: GameCardProps) {
                   </Typography>
                 </Box>
               )}
-
-              <Chip
-                label={mapCrack[game.crack.status.name]}
-                icon={
-                  game.crack.status.name === 'uncracked' ? (
-                    <IoCloseCircleOutline className="text-white" />
-                  ) : (
-                    <IoCheckmarkCircleOutline className="text-white" />
-                  )
-                }
-                className={`font-bold px-3 py-1 rounded-md text-white ${
-                  game.crack.status.name === 'uncracked'
-                    ? 'bg-theme-red-900 animate-pulse'
-                    : 'bg-green-500'
-                }`}
-                style={{
-                  boxShadow: `0 4px 10px ${
-                    game.crack.status.name === 'uncracked'
-                      ? 'rgba(255, 77, 77, 0.5)'
-                      : 'rgba(76, 175, 80, 0.5)'
-                  }`,
-                  transition: 'transform 0.3s ease-in-out',
-                }}
-              />
             </Box>
-          ) : (
+          )}
+
+          <Link
+            className="w-full"
+            href={`/games/cracks/${game.crack?.status.name || 'uncracked'}`}>
             <Chip
-              label="Crack not available yet"
-              icon={<IoCloseCircleOutline className="text-white" />}
-              className="font-bold px-3 py-1 rounded-md text-white bg-theme-red-900 animate-pulse"
-              style={{
-                boxShadow: '0 1px 4px rgba(255, 77, 77, 0.5)',
-                transition: 'transform 0.3s ease-in-out',
+              label={crackStatus}
+              icon={
+                game.crack?.status.name === 'uncracked' ? (
+                  <IoCloseCircleOutline className="text-white" />
+                ) : (
+                  <IoCheckmarkCircleOutline className="text-white" />
+                )
+              }
+              className={`font-bold w-full px-3 py-1 rounded-md text-white ${
+                isUncracked
+                  ? 'bg-theme-red-900'
+                  : 'bg-green-500 animate-pulse'
+              }`}
+              sx={{
+                boxShadow: isUncracked
+                  ? '0 4px 10px rgba(255, 77, 77, 0.5)'
+                  : '0 4px 10px rgba(76, 175, 80, 0.5)',
               }}
             />
-          )}
+          </Link>
 
           <Button
             fullWidth
-            className="bg-theme-red-900 dark:bg-opacity-10 dark:hover:bg-opacity-40 bg-opacity-60 hover:bg-opacity-80 text-white transition-all"
+            className="bg-theme-red-900 hover:bg-opacity-80 text-white transition-all duration-500"
             href={`/games/${game.slug}`}
             data-qa="more-btn">
             View more
@@ -245,10 +256,9 @@ function GameCard(props: GameCardProps) {
 
         <Box
           className="absolute inset-0 rounded-lg pointer-events-none"
-          style={{
+          sx={{
             background: 'linear-gradient(45deg, #ff1b6b, #45caff)',
             opacity: 0.1,
-            transition: 'opacity 0.5s',
           }}
         />
       </Stack>

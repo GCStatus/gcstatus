@@ -41,6 +41,14 @@ function Header(props: HeaderProps) {
 
   if (loadingHome) return <LoadingScreen />
 
+  const renderCarousel = () => {
+    if (!withCarousel || !home || home.banners.length === 0) {
+      return <Box className="pb-28 dark:bg-theme-dark-900 bg-white" />
+    }
+
+    return <HeaderCarousel banners={home.banners} />
+  }
+
   return (
     <Box component="header">
       <Navbar
@@ -49,11 +57,7 @@ function Header(props: HeaderProps) {
         loadingNotifications={isLoading}
       />
 
-      {withCarousel ? (
-        home && <HeaderCarousel banners={home.banners} />
-      ) : (
-        <Box className="pb-28 dark:bg-theme-dark-900 bg-white" />
-      )}
+      {renderCarousel()}
     </Box>
   )
 }

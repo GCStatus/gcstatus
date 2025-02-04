@@ -20,7 +20,7 @@ function GameChat(props: GameChatProps) {
       <Comments
         defaultComments={game.comments}
         commentableId={game.id}
-        commentableType="games"
+        commentableType="App\Models\GCStatus\Game"
       />
     </Stack>
   )

@@ -19,7 +19,7 @@ import { Select } from '@/components'
 import { useGetTransactionsQuery } from '@/services/api'
 import { shortenString as s } from '@/utils'
 
-const PAGE_SIZE_OPTIONS = [5, 10, 15, 20, 30, 50, 100]
+const PAGE_SIZE_OPTIONS = [10, 20, 30, 50, 100]
 
 function Transactions() {
   const { transactions, isLoading } = useGetTransactionsQuery(undefined, {
@@ -29,7 +29,7 @@ function Transactions() {
     }),
   })
   const [page, setPage] = useState<number>(1)
-  const [pageSize, setPageSize] = useState<number>(5)
+  const [pageSize, setPageSize] = useState<number>(10)
   const [type, setType] = useState<'add' | 'sub' | 'all'>('all')
 
   const filteredTransactions = transactions.filter(({ type: tType }) => {

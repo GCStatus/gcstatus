@@ -27,5 +27,5 @@ interface ResMeta {
 
 export interface HeartablePayload {
   heartable_id: number
-  heartable_type: 'games' | 'blogs' | 'commentables'
+  heartable_type: string
 }
