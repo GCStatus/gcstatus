@@ -2,9 +2,9 @@ import { fireEvent, render, waitFor } from '@testing-library/react'
 import toast from 'react-hot-toast'
 
 import { MOCK_GAME_DETAILS } from '@/mocks'
+import { ReviewStore } from '@/types'
 
 import ReviewForm, { ReviewFormProps } from './ReviewForm'
-import { ReviewStore } from '@/types'
 
 const mockGame = MOCK_GAME_DETAILS
 

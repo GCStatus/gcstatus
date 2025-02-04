@@ -1,16 +1,16 @@
-import toast from 'react-hot-toast'
-import { useMemo, useState } from 'react'
-import { enableMapSet, produce } from 'immer'
-import { useNavigate } from 'react-router-dom'
 import { Avatar, Box, List, ListItem } from '@mui/material'
+import { enableMapSet, produce } from 'immer'
+import { useMemo, useState } from 'react'
+import toast from 'react-hot-toast'
+import { useNavigate } from 'react-router-dom'
 
-import { Comment } from '@/types'
 import { HeartsUp } from '@/components'
 import { useAccount, useSuccess } from '@/hooks'
 import {
   useCreateCommentMutation,
   useDeleteCommentMutation,
 } from '@/services/api'
+import { Comment } from '@/types'
 
 import { Actions, Content, Input } from './modules'
 
@@ -80,7 +80,13 @@ function Comments(props: CommentsProps) {
 
     setLikedComments((prev) => {
       const newSet = new Set(prev)
-      wasLiked ? newSet.delete(itemId) : newSet.add(itemId)
+
+      if (wasLiked) {
+        newSet.delete(itemId)
+      } else {
+        newSet.add(itemId)
+      }
+
       return newSet
     })
 

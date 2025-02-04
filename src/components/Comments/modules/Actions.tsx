@@ -1,8 +1,8 @@
-import { Dispatch, memo, SetStateAction } from 'react'
 import { Box, IconButton, Tooltip, Typography } from '@mui/material'
+import { Dispatch, memo, SetStateAction } from 'react'
 
-import { Comment, User } from '@/types'
 import { ActionDialog, HeartButton, Icon } from '@/components'
+import { Comment, User } from '@/types'
 
 const HEARTABLE_TYPE = 'App\\Models\\GCStatus\\Commentable'
 
@@ -78,5 +78,7 @@ const Actions = memo(
     )
   },
 )
+
+Actions.displayName = 'CommentActions'
 
 export default Actions

@@ -1,6 +1,6 @@
-import { memo, useMemo } from 'react'
-import { formatRelative } from 'date-fns'
 import { ListItemText } from '@mui/material'
+import { formatRelative } from 'date-fns'
+import { memo, useMemo } from 'react'
 
 import { Comment, User } from '@/types'
 
@@ -37,5 +37,7 @@ const Content = memo(
     )
   },
 )
+
+Content.displayName = 'CommentContent'
 
 export default Content

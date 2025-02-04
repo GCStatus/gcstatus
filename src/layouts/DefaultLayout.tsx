@@ -18,7 +18,9 @@ function DefaultLayout(props: DefaultLayoutProps) {
     <Box>
       <Header withCarousel={withCarousel} />
       {enabled === 'yes' && <Sidebar />}
-      <Box component="main" className="dark:bg-zinc-900 bg-white min-h-screen">
+      <Box
+        component="main"
+        className="dark:bg-zinc-900 bg-white min-h-screen">
         <Outlet />
       </Box>
       <ScrollToTop />
