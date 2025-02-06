@@ -14,6 +14,8 @@ import { Button, Input } from '@/components'
 import { GameDetails, ReviewStore } from '@/types'
 
 import { validations } from './validations'
+import { useCreateReviewMutation } from '@/services/api'
+import { useSuccess } from '@/hooks'
 
 export interface ReviewFormProps {
   game: GameDetails
@@ -21,9 +23,11 @@ export interface ReviewFormProps {
 
 function ReviewForm(props: ReviewFormProps) {
   const { game } = props
+  const [trigger, { isLoading, isSuccess }] = useCreateReviewMutation()
   const [consumed, setConsumed] = useState<boolean>(false)
   const [rating, setRating] = useState<number | null>(null)
   const {
+    reset,
     register,
     handleSubmit,
     formState: { errors },
@@ -58,8 +62,15 @@ function ReviewForm(props: ReviewFormProps) {
       reviewable_type: 'App\\Models\\GCStatus\\Game',
     }
 
-    console.log(payload)
+    await trigger({
+      ...payload,
+      slug: game.slug,
+    })
+
+    reset()
   }
+
+  useSuccess(isSuccess, 'Your review was successfully submitted.')
 
   return (
     <Stack component="form" onSubmit={handleSubmit(onSubmit)}>
@@ -139,7 +150,7 @@ function ReviewForm(props: ReviewFormProps) {
         />
       </Grid2>
 
-      <Button>Submit</Button>
+      <Button isLoading={isLoading}>Submit</Button>
     </Stack>
   )
 }

@@ -24,6 +24,8 @@ import {
   RegisterCredentials,
   Res,
   ResetPasswordPayload,
+  Review,
+  ReviewStore,
   Title,
   Transaction,
   UpdatePasswordInterface,
@@ -330,6 +332,15 @@ const api = createApi({
       query: () => 'games/calendar',
       transformResponse: (res: Res<GameList[]>) => res.data,
     }),
+
+    createReview: builder.mutation<Review, ReviewStore & { slug: string }>({
+      query: ({ slug, ...body }) => ({
+        url: 'reviews',
+        method: 'POST',
+        body,
+      }),
+      invalidatesTags: (_, error, { slug }) => !error ? [{ id: slug, type: 'games' }] : [],
+    }),
   }),
 })
 
@@ -354,6 +365,7 @@ export const {
   useGetGameDetailsQuery,
   useLazyFindGamesByQuery,
   useGetTransactionsQuery,
+  useCreateReviewMutation,
   useLazySearchGamesQuery,
   useCreateCommentMutation,
   useDeleteCommentMutation,
